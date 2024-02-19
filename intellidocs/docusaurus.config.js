@@ -8,8 +8,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Intelli',
-  tagline: 'Dinosaurs are cool',
+  title: 'Open Source AI Framework',
+  tagline: 'Intellinode provides unified prompt, evaluation, and production integration to any large model.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -17,6 +17,7 @@ const config = {
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
+  staticDirectories: ['public', 'static'],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
