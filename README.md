@@ -3,7 +3,9 @@
 ## Setup
 Start the project:
 ```
-npx docusaurus start
+cd intellidocs
+npm install
+npm start
 ```
 
 Open `http://localhost:3000`
