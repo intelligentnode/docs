@@ -44,7 +44,7 @@ const config = {
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/intelligentnode/docs',
+          editUrl: 'https://github.com/intelligentnode/docs/edit/main/intellidocs',
         },
         blog: false,
         theme: {
@@ -66,7 +66,7 @@ const config = {
       navbar: {
         logo: {
           alt: 'Intelli Logo',
-          src: 'img/logo.png',
+          src: 'img/logo-dark.png',
         },
         items: [
           {
@@ -104,6 +104,10 @@ const config = {
         ],
       },
       footer: {
+        logo: {
+          alt: 'Intelli Logo',
+          src: 'img/logo-light.png',
+        },
         style: 'dark',
         links: [
           {
@@ -111,11 +115,11 @@ const config = {
             items: [
               {
                 label: 'Python',
-                to: '/docs/python',
+                to: '/docs/python/get-started/introduction',
               },
               {
                 label: 'NPM',
-                to: '/docs/npm',
+                to: '/docs/npm/get-started/introduction',
               },
             ],
           },
@@ -129,6 +133,19 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/intelligentnode',
+              },
+            ],
+          },
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'Stack Overflow',
+                href: 'https://stackoverflow.com/questions/tagged/intellinode',
+              },
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/intellinode',
               },
             ],
           },

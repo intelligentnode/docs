@@ -16,12 +16,6 @@ function Header() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg" href='https://www.intellinode.ai/#form-register'>
-            Early Cloud Access
-          </Link>
-        </div>
       </div>
     </header>
   );
