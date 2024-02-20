@@ -104,10 +104,6 @@ const config = {
         ],
       },
       footer: {
-        logo: {
-          alt: 'Intelli Logo',
-          src: 'img/logo-light.png',
-        },
         style: 'dark',
         links: [
           {
@@ -140,12 +136,12 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/intellinode',
+                label: 'Discord',
+                href: 'https://discord.gg/VYgCh2p3Ww',
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/intellinode',
+                label: 'LinkedIn',
+                href: 'https://www.linkedin.com/company/intellinode-inc',
               },
             ],
           },
