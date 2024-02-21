@@ -12,7 +12,7 @@ pip install intelli
 
 ## Chatbot
 Use the same call to try multiple chatbot providers.
-```bash
+```python
 from intelli.model.input.chatbot_input import ChatModelInput
 from intelli.function.chatbot import Chatbot
 
