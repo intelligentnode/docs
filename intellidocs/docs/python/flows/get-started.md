@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Get started
 
-Flows provide a structured approach to orchestrating complex tasks that involve multiple operations such as text, image, vision and speech. By leveraging the flow concept, you can execute a sequence of tasks efficiently.
+The flow provide a structured approach to orchestrating complex tasks that involve multiple operations such as text, image, vision and speech. By leveraging the flow concept, you can execute a sequence of tasks efficiently.
 
 ### Components
 The flow implementation is built around several key components:
