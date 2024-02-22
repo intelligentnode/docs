@@ -5,7 +5,7 @@ sidebar_position: 3
 # Model switching
 
 
-Switching between models is straightforward, as Intelli framework decouples your business logic from the underlying model implementation, ensuring minimal code changes.
+Switching between models is straightforward, as intelli framework decouples your business logic from the underlying model implementation, ensuring minimal code changes.
 
 ### Example
 
