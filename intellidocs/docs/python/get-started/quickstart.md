@@ -4,13 +4,13 @@ sidebar_position: 3
 
 # Quick start
 
-## Installation
+### Installation
 
 ```bash
 pip install intelli
 ```
 
-## Chatbot
+### Chatbot
 Use the same call to try multiple chatbot providers.
 ```python
 from intelli.model.input.chatbot_input import ChatModelInput
@@ -39,7 +39,7 @@ call_chatbot("gemini")
 
 ```
 
-## Vision
+### Vision
 Add a visual dimension to your AI interactions with Intelli's vision capabilities. 
 
 ```python
@@ -59,7 +59,7 @@ controller = RemoteVisionModel(openai_api_key, 'openai') # or gemini
 result = controller.image_to_text(vision_input)
 ```
 
-## Flow
+### Flow
 
 Example of a sequence flow for content creation pipeline.
 
