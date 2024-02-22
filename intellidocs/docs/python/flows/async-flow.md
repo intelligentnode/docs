@@ -11,6 +11,12 @@ The intelli framework supports asynchronous execution workflows, enabling you to
 - Complex workflows often necessitate changes, the intelli graph-based approach simplifies this process by automatically handling the tasks flow changes.
 - Visualizing the interaction between models.
 
+### Async Flow Parameters
+The parameters for controlling your workflows:
+- `tasks`: a dictionary to map your workflow tasks with names.
+- `map_paths`: a dictionary defining the dependencies between tasks in your workflow using the name.
+- `log`: a boolean flag (default: False) enabling logging functionality. 
+
 ### Example
 Imagine you are developing a blogging platform focused on environmental topics. To automate the related tasks, you will utilize various AI services such as language generation, image processing, and code generation models. Here is a simplified example of building and executing an asynchronous flow for content creation:
 
@@ -130,6 +136,6 @@ You can generate a visual image for the graph:
 flow.generate_graph_img(name='content_flow_graph', save_path='./temp')
 ```
 
-<img src="../../../../resources/flow_graph_img.png" alot="Flow Example"  width="750em"/>
+![Sequence Flow Example](../../../../resources/flow_graph_img.png)
 
 
