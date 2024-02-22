@@ -4,11 +4,11 @@ sidebar_position: 2
 
 # Installation
 
-## System Requirements
+### System Requirements
 - Python 3.6+.
 - pip (Python package installer).
 
-##  Installation Methods
+###  Installation Methods
 1. Using pip (Recommended):
 ```bash
 pip install intelli
@@ -23,7 +23,7 @@ Clone the Intelli repository.
 git clone https://github.com/intelligentnode/Intelli.git
 ```
 
-## Importing
+### Importing
 To use the library:
 ```python
 import intelli
