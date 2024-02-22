@@ -17,7 +17,7 @@ This downloads and installs the latest stable version along with dependencies.
 
 2. From Source:
 
-Clone the Intelli repository.
+Clone the intelli repository.
 
 ```bash
 git clone https://github.com/intelligentnode/Intelli.git
