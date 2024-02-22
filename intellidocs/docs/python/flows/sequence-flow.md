@@ -35,7 +35,7 @@ task2 = Task(TextTaskInput('Generate a short image description for the blog post
 task3 = Task(TextTaskInput('Generate a cartoon style image relevant to the blog post'), artist_agent, log=True)
 ```
 
-### Sequence Flow
+#### Sequence Flow
 
 The Sequence flow orchestrates the execution of the tasks in the defined order.
 
