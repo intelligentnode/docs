@@ -136,5 +136,5 @@ You can generate a visual image for the graph:
 flow.generate_graph_img(name='content_flow_graph', save_path='./temp')
 ```
 
-<img src="https://github.com/intelligentnode/docs/blob/804e1c5181f76694caaf1113282376a063492852/resources/flow_graph_img.png" width="750em"/>
+<img src="https://raw.githubusercontent.com/intelligentnode/docs/804e1c5181f76694caaf1113282376a063492852/resources/flow_graph_img.png" width="750em"/>
 
