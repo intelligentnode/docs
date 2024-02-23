@@ -130,7 +130,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-You can generate a visual image for the graph:
+To generate a visual graph for the flow:
 
 ```python
 flow.generate_graph_img(name='content_flow_graph', save_path='./temp')
