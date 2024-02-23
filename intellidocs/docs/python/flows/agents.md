@@ -10,7 +10,7 @@ An `Agent` is an executor of a specific action or task. It interfaces with AI mo
 
 When creating an `Agent`, you need to provide several parameters that define its behavior:
 
-- **agent_type**: Determines the kind of actions it can perform. Accepted types are defined in `AgentTypes` (e.g., `TEXT`, `IMAGE`, `VISION`).
+- **agent_type**: Determines the kind of actions it can perform. Accepted types are defined in `AgentTypes` (e.g., `text`, `image`, `vision`, `speech`).
 - **provider**: The name of the AI model or service provider (e.g., `openai`, `gemini`, `stability`).
 - **mission**: A mission statement guiding the agent's task. It often serves as the system input for AI models.
 - **model_params**: A dictionary containing the AI model parameters, such as API keys, model names, temperature, and any additional configuration needed for operation.
