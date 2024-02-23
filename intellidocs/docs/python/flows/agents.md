@@ -44,7 +44,7 @@ text_agent = Agent(
 
 #### Executing an Agent
 
-To execute an agent, you need to provide an input specific to the agent's type. The Intelli framework offers different input classes such as `TextAgentInput`and `ImageAgentInput`. Usually the task handle the agent execution, so **you don't have to set the input manually**.
+To execute an agent, you need to provide an input specific to the agent's type. The Intelli framework offers different input classes such as `TextAgentInput`and `ImageAgentInput`. Usually the task handle the agent execution, so **you don't have to execute manually**.
 
 
 Here's how to execute a text agent:
