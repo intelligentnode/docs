@@ -139,3 +139,5 @@ flow.generate_graph_img(name='content_flow_graph', save_path='./temp')
 ![Sequence Flow Example](../../../../resources/flow_graph_img.png)
 
 
+<img src="../../../../resources/flow_graph_img.png" width="200"/>
+
