@@ -23,18 +23,18 @@ from intelli.flow.sequence_flow import SequenceFlow
 from intelli.flow.input.task_input import TextTaskInput
 from intelli.flow.processors.basic_processor import TextProcessor
 
-# Define Agents
+# define Agents
 text_agent = Agent(agent_type=AgentTypes.TEXT.value, provider='openai', mission='you are a writing assistant', model_params={'key': YOUR_OPENAI_KEY, 'model': 'gpt-3'})
 image_agent = Agent(agent_type=AgentTypes.IMAGE.value, provider='stability', mission='Generate banner images for blog posts', model_params={'key': YOUR_STABILITY_KEY})
 
-# Define Tasks
+# define Tasks
 task1 = Task(TextTaskInput('Write a blog post about climate change.'), agent=text_processor_agent, log=True)
 task2 = Task(TextTaskInput('Generate image about the post topic'), agent=image_agent, log=True, pre_process=TextProcessor.text_head)
 
-# Setup Sequence Flow
+# setup Sequence Flow
 flow = SequenceFlow([task1, task2], log=True)
 
-# Execute the Flow
+# execute the Flow
 flow_output = flow.start()
 
 print(flow_output)
