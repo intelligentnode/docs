@@ -17,7 +17,7 @@ Specify these parameters to generate images:
 - **provider**: The name of the AI service provider (`openai` or `stability`).
 - **image_input**: This can be an instance of `ImageModelInput` containing the details of the image you want to generate, such as the prompt, dimensions, and model-specific parameters.
 
-## Example
+### Example
 
 Create an instance of the `RemoteImageModel` with your chosen provider and API key.
 
