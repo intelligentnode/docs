@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Agents
 
-An `Agent` is an executor of a specific action or task. It interfaces with AI models or providers, such as chatGPT, gemini, stable diffusion, or any other supported models, to perform operations like text generation, speech, image processing, or vision tasks.
+An `Agent` is an executor of a specific action. It interfaces with AI models or providers, such as chatGPT, gemini, stable diffusion, or any other supported models, to perform operations like text generation, speech, image processing, or vision.
 
 ### Parameters
 
