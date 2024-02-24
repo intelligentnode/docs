@@ -18,32 +18,8 @@ The parameters for controlling your workflows:
 - `log`: a boolean flag (default: False) enabling logging functionality. 
 
 ### Example
-Imagine you are developing a blogging platform focused on environmental topics. To automate the related tasks, you will utilize various AI services such as language generation, image processing, and code generation models. Here is a simplified example of building and executing an asynchronous flow for content creation:
 
-#### Step 1: Setting Up Your Environment
-
-Set up a `.env` file in your project's root directory with your API keys:
-
-```plaintext
-OPENAI_API_KEY=your_openai_api_key_here
-GEMINI_API_KEY=your_gemini_api_key_here
-STABILITY_API_KEY=your_stability_ai_key_here
-```
-
-Load these variables in your script using:
-
-```python
-from dotenv import load_dotenv
-import os
-
-load_dotenv() 
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-STABILITY_API_KEY = os.getenv("STABILITY_API_KEY")
-```
-
-#### Step 2: Creating Agent
+#### Step 1: Creating Agent
 
 Define the agents that correspond to the services your tasks will use. Each agent is responsible for a interface with a specific AI model or service.
 
@@ -57,7 +33,7 @@ image_desc_creator = Agent("text", "openai", "write image description", {"key": 
 image_processor = Agent("image", "stability", "generate logo with colorful style", {"key": STABILITY_API_KEY})
 ```
 
-#### Step 3: Creating Tasks
+#### Step 2: Creating Tasks
 
 Tasks are the units of work, here's how to define a simple task that uses one of the agents:
 
@@ -97,7 +73,7 @@ task5 = Task(
 )
 ```
 
-#### Step 4: Orchestrating the Flow
+#### Step 3: Orchestrating the Flow
 
 With agents and tasks defined, the next step is to create and execute a flow. The flow orchestrates task execution, managing dependencies and ensuring tasks are executed asynchronously where possible.
 
