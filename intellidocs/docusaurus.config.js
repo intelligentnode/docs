@@ -82,18 +82,13 @@ const config = {
             position: 'left'
           },
           {
-            href: 'https://intellinode.ai/getting-started',
-            label: 'Get started',
+            to: 'https://app.intellinode.ai',
+            label: 'Cloud',
             position: 'right',
           },
           {
-            href: 'https://show.intellinode.ai',
+            to: 'https://show.intellinode.ai',
             label: 'Showcase',
-            position: 'right',
-          },
-          {
-            href: 'https://intellinode.ai/#form-register',
-            label: 'Register',
             position: 'right',
           },
           {
