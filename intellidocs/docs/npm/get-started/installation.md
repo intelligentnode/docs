@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Installation
 
-IntelliNode simplifies the integration of a wide range of AI models into your javascript application.
+Intellinode simplifies the integration of a wide range of AI models into your javascript application.
 
 ### System Requirements
 - npm (Node Package Manager) or yarn.
