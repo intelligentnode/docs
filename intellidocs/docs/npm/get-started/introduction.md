@@ -43,26 +43,13 @@ Intellinode also provides a set of functions that offer higher-level abstraction
 
 ### Example
 
-Create chatbots using intellinode.
-```python
-const { Chatbot, ChatGPTInput } = require('intellinode');
-
-// set chatGPT system mode and the user message.
-const input = new ChatGPTInput('You are a helpful assistant.');
-input.addUserMessage('What is the distance between the Earth and the Moon?');
-
-// get chatGPT responses.
-const chatbot = new Chatbot(OPENAI_API_KEY, 'openai');
-const responses = await chatbot.chat(input);
-```
-
-Or use the gen function for one line AI integration.
+Use the gen function for one line AI integration.
 ```python
 const { Gen } = require('intellinode');
 
-// one line to generate html page code (openai gpt4 is default)
 text = 'a registration page with flat modern theme.'
-await Gen.save_html_page(text, folder, file_name, openaiKey);
+// one line to generate html page code (openai gpt4 is default)
+await Gen.save_html_page(text, save_folder_name, file_name, openaiKey);
 ```
 
 ## License
