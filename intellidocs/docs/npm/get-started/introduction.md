@@ -56,7 +56,7 @@ const chatbot = new Chatbot(OPENAI_API_KEY, 'openai');
 const responses = await chatbot.chat(input);
 ```
 
-Or you the gen function for one line AI model integration.
+Or use the gen function for one line AI integration.
 ```python
 const { Gen } = require('intellinode');
 
