@@ -42,7 +42,7 @@ The Sequence flow orchestrates the execution of the tasks in the defined order.
 ```python
 from intelli.flow.sequence_flow import SequenceFlow
 
-# Start sequence flow
+# start sequence flow
 flow = SequenceFlow([task1, task2, task3], log=True)
 final_result = flow.start()
 ```
