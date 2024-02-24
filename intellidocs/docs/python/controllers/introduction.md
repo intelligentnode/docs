@@ -7,7 +7,7 @@ Controllers are a foundational component of the Intelli framework to streamline 
 
 ### Controllers Types  
 Intelli framework includes several types of controllers, each tailored to a specific AI domain:
-- **Embedding Controller**: Manages the generation of text embeddings, useful for tasks such as semantic search, clustering, and similarity assessments.
+- **Embedding Controller**: Manages the generation of text embeddings, useful for semantic search and clustering tasks.
 - **Image Generation Controller**: Facilitates the creation of images from textual descriptions.
 - **Speech Synthesis Controller**: Converts text into spoken words, supporting various languages and voices.
 - **Vision Controller**: Analyzes images to generate descriptive texts, identify objects, or understand scenes.
