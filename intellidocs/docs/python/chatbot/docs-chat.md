@@ -18,16 +18,16 @@ Connecting the chatbot to external data enriches the conversation with context-s
 from intelli.model.input.chatbot_input import ChatModelInput
 from intelli.function.chatbot import Chatbot
 
-# Initialize the chatbot with your API key and the One Key
+# initialize the chatbot with your API key and the One Key
 chatbot = Chatbot(api_key=YOUR_API_KEY, provider="mistral", options={"one_key": INTELLI_ONE_KEY})
 
-# Prepare the input with attachment references
+# prepare the input with attachment references
 chat_input = ChatModelInput(system="You are a helpful assistant.", model="mistral-medium")
 chat_input.attach_reference = True
 chat_input.add_user_message("Explain the concept of relativity.")
 
 response = chatbot.chat(chat_input)
-# Parse the response
+# parse the response
 print("the responses: ", response["result"])
 print("the referenced documents: ", response["references"])
 ```
