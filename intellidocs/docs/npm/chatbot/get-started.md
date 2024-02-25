@@ -172,7 +172,7 @@ console.log('Chatbot response:' + response);
 
 ##### Prerequisite to Integrate AWS SageMaker and IntelliNode
 
-<img src="https://github.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s1_sagemaker.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s1_sagemaker.png" width="500em" />
 
 The steps to leverage AWS SageMaker for hosting the **Llama V2 model**:
 
