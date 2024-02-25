@@ -37,6 +37,6 @@ const embedModel = new RemoteEmbedModel('your_provider_api_key', 'openai');
 // prepare the input
 const textsToEmbed = ["This is a sentence.", "Exploring AI capabilities with IntelliNode."];
 
-// generate and peint embeddings
+// generate and print embeddings
 embedModel.getEmbeddings(textsToEmbed).then(embeddings => console.log(embeddings)).catch(err => console.error(err));
 ```
