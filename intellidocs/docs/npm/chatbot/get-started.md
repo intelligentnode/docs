@@ -58,13 +58,13 @@ const bot = new Chatbot(process.env.COHERE_API_KEY, SupportedChatModels.COHERE);
 ```
 3. Prepare the input with cohere web search extension:
 ```javascript
-const input = new CohereInput("You are a helpful computer programming assistant.", {web: true});
-input.addUserMessage("What is the difference between Python and Java?");
+const input = new CohereInput('You are a helpful computer programming assistant.', {web: true});
+input.addUserMessage('What is the difference between Python and Java?');
 ```
 4. Call the chatbot and parse the responses.
 ```javascript
 const responses = await bot.chat(input);
-responses.forEach((response) => console.log("- " + response));
+responses.forEach((response) => console.log('- ' + response));
 ```
 
 ### Mistral AI
