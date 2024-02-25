@@ -59,7 +59,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Controllers',
-      items: ['npm/controllers/introduction', 'npm/controllers/embedding', 'npm/controllers/fine-tuning', 'npm/controllers/image-generation', 'npm/controllers/language-generation', 'npm/controllers/speech'],
+      items: ['npm/controllers/introduction', 'npm/controllers/embedding', 'npm/controllers/fine-tuning', 'npm/controllers/image-generation', 'npm/controllers/speech'],
     },
     {
       type: 'category',
