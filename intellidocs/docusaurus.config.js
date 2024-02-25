@@ -106,11 +106,11 @@ const config = {
             items: [
               {
                 label: 'Python',
-                to: '/docs/python/get-started/introduction',
+                to: '/docs/python/',
               },
               {
                 label: 'NPM',
-                to: '/docs/npm/get-started/introduction',
+                to: '/docs/npm/',
               },
             ],
           },

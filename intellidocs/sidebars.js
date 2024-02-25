@@ -14,10 +14,11 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   pythonSidebar: [
+    'python/index',
     {
       type: 'category',
       label: 'Get Started',
-      items: ['python/get-started/introduction', 'python/get-started/installation', 'python/get-started/quickstart'],
+      items: ['python/get-started/installation', 'python/get-started/quickstart'],
     },
     {
       type: 'category',
@@ -43,13 +44,15 @@ const sidebars = {
       type: 'doc',
       id: "python/intellicloud"
     },
+    
   ],
 
   npmSidebar: [
+    'npm/index',
     {
       type: 'category',
       label: 'Get started',
-      items: ['npm/get-started/introduction', 'npm/get-started/installation', 'npm/get-started/quickstart'],
+      items: ['npm/get-started/installation', 'npm/get-started/quickstart'],
     },
     {
       type: 'category',
