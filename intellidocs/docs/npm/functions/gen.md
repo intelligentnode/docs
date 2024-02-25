@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Gen
 
-The `Gen` class is a high-level wrapper to simplify AI integration and content generation with one line call. It abstract complex multi-step workflows, allowing developers to seamlessly leverage various AI models for tasks like:
+The `Gen` class is a high-level wrapper to simplify AI integration and content generation with **one line call**. It abstract complex multi-step workflows, allowing developers to seamlessly leverage various AI models for tasks like:
 
 - Content creation (marketing descriptions, blog posts)
 - Image generation from text descriptions
