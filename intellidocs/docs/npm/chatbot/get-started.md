@@ -186,7 +186,7 @@ The steps to leverage AWS SageMaker for hosting the **Llama V2 model**:
 
 3. **Copy the Endpoint Name**: Once you have a model deployed, make sure to note the endpoint name, which is crucial for future steps.
 
-<img src="https://github.com/Barqawiz/IntelliNode/blob/main/images/llama_sagemaker/s3_endpoint.png" width="500em">
+<img src="https://github.com/Barqawiz/IntelliNode/blob/main/images/llama_sagemaker/s3_endpoint.png" width="500em" />
 
 4. **Create a Node.js Lambda Function**: AWS Lambda allows running the back-end code without managing servers. Create a Node.js lambda function to use for integrating the deployed model.
 
