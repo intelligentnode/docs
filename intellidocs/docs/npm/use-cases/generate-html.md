@@ -6,7 +6,7 @@ sidebar_position: 2
 
 Intellinode provides powerful functions like `generate_html_page()` and `save_html_page()` to create and store HTML pages with CSS and JavaScript. In this use case, we will demonstrate how to generate an HTML registration page using GPT-4.
 
-<img src="https://github.com/Barqawiz/IntelliNode/blob/main/images/model_output/register-page.png" width="400em"/>
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/model_output/register-page.png" width="400em"/>
 
 First import the Gen function
 
