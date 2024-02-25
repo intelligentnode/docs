@@ -3,27 +3,27 @@ sidebar_position: 3
 ---
 # Fine tuning
 
-Provide unified layer to fine tune LLMs. By training on a subset of your data, the model can produce more relevant and accurate outputs for your particular use cases.
+Provides a unified layer to fine tune LLMs. By training on a subset of your data, the model can produce more relevant and accurate outputs for your particular use cases.
 
 ### Supported Providers
 
-IntelliNode supports fine-tuning with openai provider in the current version.
+Intellinode supports fine-tuning with openai provider in the current version.
 
 ### Parameters
 
-To fine-tune a model for your application, you'll need to configuration parameters including:
+To fine-tune a model for your application, you'll need configuration parameters including:
 
 - **provider**: The AI service provider (`'openai'`).
-- **apiKey**: Your API key for accessing the provider's services.
+- **apiKey**: Your API key for accessing the provider.
 - **trainingData**: Your fine-tuning dataset, formatted as jsonl.
 - **model**: (Optional) The specific model you're fine-tuning if the provider supports multiple models.
 
-  ### Example
+### Example
 
-This node example demonstrates initiating a fine-tuning task using intellinode with an openai provider:
+This node example demonstrates initiating a fine-tuning task with openai provider:
 
 **Openai embedding**
-1. Prepare the imports
+1. Prepare the imports.
 ```javascript
 const { RemoteFineTuneModel, SupportedFineTuneModels, FineTuneInput } = require('intellinode');
 const { createReadStream } = require("fs");
@@ -55,8 +55,7 @@ const input = new FineTuneInput({
 
 const result = await tuner.generateFineTune(input)
 ```
-4. List fine tuning tasks and results.
-5. 
+4. List fine tuning tasks and results. 
 ```javascript
 const list = await tuner.listFineTune()
 
