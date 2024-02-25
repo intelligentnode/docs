@@ -3,7 +3,7 @@ sidebar_position: 3
 ---
 # Image generation
 
-The Image Generation Controller lets you create images based on text descriptions. This empowers developers to dynamically produce visuals for various applications.
+The Image generation controller lets you create images based on text descriptions. This empowers developers to dynamically produce visuals for various applications.
 
 ### Supported Providers
 
