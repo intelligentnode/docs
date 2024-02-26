@@ -4,7 +4,7 @@
 
 # Intellicloud
 
-Intellinode cloud streamlines the integration of your data with a variety of AI models, enabling the deployment of production-ready AI-powered apps. 
+Intellinode cloud streamlines the integration of your data with a variety of AI models, enabling the deployment of production-ready AI-powered apps in short time. 
 
 ### Get Started
 
