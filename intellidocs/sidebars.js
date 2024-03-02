@@ -28,7 +28,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Flows',
-      items: ['python/flows/get-started', 'python/flows/sequence-flow', 'python/flows/async-flow', 'python/flows/agents', 'python/flows/tasks', 'python/flows/processors', 'python/flows/templates'],
+      items: ['python/flows/get-started', 'python/flows/sequence-flow', 'python/flows/async-flow', 'python/flows/agent', 'python/flows/kagent', 'python/flows/tasks', 'python/flows/processors', 'python/flows/templates'],
     },
     {
       type: 'category',
