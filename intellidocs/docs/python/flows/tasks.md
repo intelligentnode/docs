@@ -21,7 +21,7 @@ Constructing a task requires providing these parameters:
 
 ```python
 from intelli.flow.tasks.task import Task
-from intelli.flow.input.agent_input import TextAgentInput
+from intelli.flow.input.task_input import TextTaskInput
 from intelli.flow.agents.agent import Agent
 
 # define an agent
@@ -33,7 +33,7 @@ text_agent = Agent(
 )
 
 # define a task input
-task_input = TextAgentInput(desc="Write a blog post about climate change.")
+task_input = TextTaskInput(desc="Write a blog post about climate change.")
 
 # create a task
 task = Task(task_input=task_input, agent=text_agent, log=True)
