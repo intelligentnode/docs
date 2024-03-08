@@ -38,7 +38,7 @@ Define the agents that correspond to the services your tasks will use. Each agen
 **Example of defining agents**:
 
 ```python
-from intelli.flow.agents import Agent
+from intelli.flow.agents.agent import Agent
 
 text_generator = Agent("text", "gemini", "write specifications", {"key": GEMINI_API_KEY, "model": "gemini"})
 task_creator = Agent("text", "openai", "create task list", {"key": OPENAI_API_KEY, "model": "gpt-3.5-turbo"})
@@ -52,8 +52,8 @@ image_processor = Agent("image", "stability", "generate logo with colorful style
 Tasks are the units of work managed by `intelli`. Here's how to define a simple task that uses one of the agents:
 
 ```python
-from intelli.flow.tasks import Task
-from intelli.flow.input import TextTaskInput
+from intelli.flow.tasks.task import Task
+from intelli.flow.input.task_input import TextTaskInput
 
 task1 = Task(
     TextTaskInput("Identify requirements for building a blogging website about the environment"),
