@@ -18,18 +18,20 @@ The intelli chatbot function connect with multiple leading AI models such as cha
 
 The python version support the following providers:
 
-- **Openai**: `provider='openai'`.
-- **Gemini**: `provider='gemini'`.
-- **Mistral**: `provider='mistral'`.
-- **Anthropic**: `provider='anthropic'`.
+- **Openai**.
+- **Gemini**.
+- **Mistral**.
+- **Anthropic**.
 - **Azure**.
+
+Use `ChatProvider` enum for selecting your chatbot model.
 
 ### Example
 
 ##### Imports
 ```python
 from intelli.model.input.chatbot_input import ChatModelInput
-from intelli.function.chatbot import Chatbot
+from intelli.function.chatbot import Chatbot, ChatProvider
 ```
 
 
@@ -41,6 +43,6 @@ chat_input.add_user_message("Explain the plot of the Inception movie in one line
 
 ##### Call the chatbot
 ```python
-chatbot = Chatbot(api_key=YOUR_API_KEY, provider="openai")
+chatbot = Chatbot(api_key=YOUR_API_KEY, provider=ChatProvider.OPENAI)
 response = chatbot.chat(chat_input)
 ```
