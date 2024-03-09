@@ -18,10 +18,11 @@ The intelli chatbot function connect with multiple leading AI models such as cha
 
 The python version support the following providers:
 
-- **Openai**.
-- **Gemini**.
-- **Mistral**.
-- **Azure**.
+- **Openai**: `provider='openai'`.
+- **Gemini**: `provider='gemini'`.
+- **Mistral**: `provider='mistral'`.
+- **Anthropic**: `provider='anthropic'`.
+- **Azure**: `provider=`'openai'.
 
 ### Example
 
