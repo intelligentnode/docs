@@ -11,7 +11,7 @@ Switching between models is straightforward, as intelli framework decouples your
 
 ```python
 from intelli.model.input.chatbot_input import ChatModelInput
-from intelli.function.chatbot import Chatbot
+from intelli.function.chatbot import Chatbot, ChatProvider
 
 def call_chatbot(provider, model=None):
     # prepare common input 
@@ -24,15 +24,15 @@ def call_chatbot(provider, model=None):
 
     return response
 
-# call openai
-call_chatbot("openai", "gpt-4")
+# call chatGPT
+call_chatbot(ChatProvider.OPENAI, "gpt-4")
 
 # call mistralai
-call_chatbot("mistral", "mistral-medium")
+call_chatbot(ChatProvider.MISTRAL, "mistral-medium")
+
+# call claude3
+call_chatbot(ChatProvider.ANTHROPIC, "claude-3-sonnet-20240229")
 
 # call google gemini
-call_chatbot("gemini")
-
-# call anthropic
-call_chatbot("anthropic", "claude-3-sonnet-20240229")
+call_chatbot(ChatProvider.GEMINI)
 ```
