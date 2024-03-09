@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Docs chat
+# Chat with docs
 
 Connecting the chatbot to external data enriches the conversation with context-specific knowledge, making responses more relevant to your usecase. The intellinode cloud facilitates this by indexing your documents and generating a One Key for secure access using the `Chatbot` functionality.
 
