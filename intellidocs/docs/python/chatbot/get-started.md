@@ -37,7 +37,7 @@ from intelli.function.chatbot import Chatbot, ChatProvider
 
 ##### Prepare the input
 ```python
-chat_input = ChatModelInput(system="You are a helpful assistant.", model="gpt-3.5")
+chat_input = ChatModelInput(system="You are a helpful assistant.", model="gpt-4")
 chat_input.add_user_message("Explain the plot of the Inception movie in one line.")
 ```
 
