@@ -22,7 +22,7 @@ The python version support the following providers:
 - **Gemini**: `provider='gemini'`.
 - **Mistral**: `provider='mistral'`.
 - **Anthropic**: `provider='anthropic'`.
-- **Azure**: `provider=`'openai'.
+- **Azure**.
 
 ### Example
 
