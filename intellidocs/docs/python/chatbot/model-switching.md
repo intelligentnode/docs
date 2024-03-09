@@ -32,4 +32,7 @@ call_chatbot("mistral", "mistral-medium")
 
 # call google gemini
 call_chatbot("gemini")
+
+# call anthropic
+call_chatbot("anthropic", "claude-3-sonnet-20240229")
 ```
