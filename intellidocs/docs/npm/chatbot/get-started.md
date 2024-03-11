@@ -80,12 +80,33 @@ const mistralBot = new Chatbot(apiKey, SupportedChatModels.MISTRAL);
 ```
 3. Prepare the input and select your preferred mistral model like `mistral-tiny` or `mistral-medium`.
 ```javascript
-const input = new MistralInput('You are an art expert.', {model: 'mistral-tiny'});
+const input = new MistralInput('You are an art expert.', {model: 'mistral-medium'});
 input.addUserMessage('Who painted the Mona Lisa?');
 ```
 4. Call the chatbot and parse the responses.
 ```javascript
 const responses = await mistralBot.chat(input);
+```
+
+### Anthropic
+Anthropic provide models with large context window like claude 3.
+
+1. Import the `Chatbot` and `AnthropicInput`  modules.
+```javascript
+const { Chatbot, AnthropicInput, SupportedChatModels } = require('intellinode');
+```
+2. Initiate the chatbot object with a valid api key from (console.anthropic.com).
+```javascript
+const bot = new Chatbot(apiKey, SupportedChatModels.ANTHROPIC);
+```
+3. Prepare the input and select your preferred claude model.
+```javascript
+const input = new AnthropicInput('You are an art expert.', {model: 'claude-3-sonnet-20240229'});
+input.addUserMessage('Who painted the Mona Lisa?');
+```
+4. Call the chatbot and parse the responses.
+```javascript
+const responses = await bot.chat(input);
 ```
 
 ### Llama V2 Model 
