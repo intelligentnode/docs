@@ -31,7 +31,7 @@ input = ChatModelInput("You are a helpful assistant.", model)
 input.add_user_message("What is the capital of France?")
 
 # creating chatbot instance
-openai_bot = Chatbot(YOUR_API_KEY, provider)
+openai_bot = Chatbot(YOUR_MISTRAL_API_KEY, provider)
 response = openai_bot.chat(input)
 ```
 
