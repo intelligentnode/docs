@@ -38,7 +38,7 @@ image_input = ImageModelInput(
     prompt=prompt,
     width=1024,
     height=1024,
-    model_name="dall-e-3"
+    model="dall-e-3"
 )
 
 # Generate the image
