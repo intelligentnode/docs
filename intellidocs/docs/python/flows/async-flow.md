@@ -24,7 +24,7 @@ The parameters for controlling your workflows:
 Define the agents that correspond to the services your tasks will use. Each agent is responsible for a interface with a specific AI model or service.
 
 ```python
-from intelli.flow.agents.agent import Agent
+from intelli.flow import Agent
 
 text_generator = Agent("text", "gemini", "write specifications", {"key": GEMINI_API_KEY, "model": "gemini"})
 task_creator = Agent("text", "openai", "create task list", {"key": OPENAI_API_KEY, "model": "gpt-3.5-turbo"})
@@ -38,8 +38,7 @@ image_processor = Agent("image", "stability", "generate logo with colorful style
 Tasks are the units of work, here's how to define a simple task that uses one of the agents:
 
 ```python
-from intelli.flow.tasks.task import Task
-from intelli.flow.input.task_input import TextTaskInput
+from intelli.flow import Task, TextTaskInput
 
 task1 = Task(
     TextTaskInput("Identify requirements for building a blogging website about the environment"),
@@ -78,7 +77,7 @@ task5 = Task(
 With agents and tasks defined, the next step is to create and execute a flow. The flow orchestrates task execution, managing dependencies and ensuring tasks are executed asynchronously where possible.
 
 ```python
-from intelli.flow.flow import Flow
+from intelli.flow import Flow
 import asyncio
 
 async def main():
