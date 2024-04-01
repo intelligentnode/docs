@@ -4,8 +4,16 @@
 Start the project:
 ```
 cd intellidocs
+```
+- NPM:
+```
 npm install
 npm start
+```
+- Yarn:
+```
+yarn
+yarn start
 ```
 
 Open `http://localhost:3000`
