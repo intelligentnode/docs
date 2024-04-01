@@ -3,13 +3,15 @@ import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+const terminalGif = require('@site/static/img/terminal_small.gif').default;
+
 const FeatureList = [
   {
     title: 'Any Model Access',
     imgSrc: require('@site/static/img/any-model-access.png').default,
     description: (
       <>
-        Connect various AI models, such as OpenAI, Cohere, LLaMa v2, Google Gemini using a unified input layer with minimum change.
+        Connect various AI models using a unified input layer with minimum change.
       </>
     ),
   },
@@ -18,16 +20,16 @@ const FeatureList = [
     imgSrc: require('@site/static/img/evaluation.png').default,
     description: (
       <>
-        Run continuous evaluation across multiple models with metrics and select the suitable one for your use cases.
+        Run continuous evaluation across multiple models with metrics.
       </>
     ),
   },
   {
     title: 'Optimized Workflow',
-    imgSrc: require('@site/static/img/optimized-workflow.png').default,
+    imgSrc: require('@site/static/img/neural.png').default,
     description: (
       <>
-        Manage the relations between multiple AI models as a graph to build advanced tasks.
+        Manage the relations between multiple AI models as a graph of tasks.
       </>
     ),
   },
@@ -55,6 +57,13 @@ export default function Features() {
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
+        </div>
+        <div className="row" style={{paddingTop: '20px'}}> 
+          <div className="col col--12"> 
+            <div className="text--center">
+              <img src={terminalGif} alt="Terminal" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
