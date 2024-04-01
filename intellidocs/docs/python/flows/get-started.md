@@ -17,11 +17,7 @@ The flow implementation is built around several key components:
 To begin working with Flows you need to define your workflow agents and tasks. Here's a simple example to demonstrate how to set up a basic Flow:
 ```python
 from intelli.flow.types import *
-from intelli.flow.agents.agent import Agent
-from intelli.flow.tasks.task import Task
-from intelli.flow.sequence_flow import SequenceFlow
-from intelli.flow.input.task_input import TextTaskInput
-from intelli.flow.processors.basic_processor import TextProcessor
+from intelli.flow import Agent, Task, SequenceFlow, TextTaskInput, TextProcessor
 
 # define Agents
 text_agent = Agent(agent_type=AgentTypes.TEXT.value, provider='openai', mission='you are a writing assistant', model_params={'key': YOUR_OPENAI_KEY, 'model': 'gpt-3'})
