@@ -16,7 +16,7 @@ Let's build a content creation pipeline to show the capability of the `SequenceF
 Let's define an intelli agent for each step, each of the agents will interface different model provider.
 
 ```python
-from intelli.flow.agents.agent import Agent
+from intelli.flow import Agent
 
 blog_agent = Agent(agent_type='text', provider='openai', mission='write blog posts', model_params={'key': YOUR_OPENAI_API_KEY, 'model': 'gpt-4'})
 copy_agent = Agent(agent_type='text', provider='gemini', mission='generate description', model_params={'key': YOUR_GEMINI_API_KEY, 'model': 'gemini'})
@@ -40,7 +40,7 @@ task3 = Task(TextTaskInput('Generate a cartoon style image relevant to the blog 
 The Sequence flow orchestrates the execution of the tasks in the defined order.
 
 ```python
-from intelli.flow.sequence_flow import SequenceFlow
+from intelli.flow import SequenceFlow
 
 # start sequence flow
 flow = SequenceFlow([task1, task2, task3], log=True)
