@@ -18,7 +18,7 @@ All other models require only Kaggle license approval. However, accessing Llama 
 1. Request access to Llama models. It is recommended to use a professional or educational email: [Llama Downloads](https://llama.meta.com/llama-downloads/)
 2. Create an account on Kaggle with the same email used for Meta access.
 3. Go to the [model page](https://www.kaggle.com/models/keras/llama3) and approve the license.
-4. Generate your username and password by clicking on your profile image, then 'Settings,' and then the 'Create New Token' button.
+4. Generate your access token by clicking on your profile image, then 'Settings,' and then the 'Create New Token' button.
 
 These credentials will be used once to download the model. After that, all subsequent steps will run offline.
 
