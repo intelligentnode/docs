@@ -18,7 +18,7 @@ It is recommended to use the instruct versions as they adhere more closely to yo
 To start, you'll need to download the model from Kaggle. Follow these steps:
 1. Create an account on Kaggle.
 2. Go to the [model page](https://www.kaggle.com/models/keras/gemma2) and approve the license.
-3. Generate your username and password by clicking on your profile image, then 'Settings', and then the 'Create New Token' button.
+3. Generate your access token by clicking on your profile image, then 'Settings', and then the 'Create New Token' button.
 
 These credentials will be used once to download the model. After that, all subsequent steps will run offline.
 
