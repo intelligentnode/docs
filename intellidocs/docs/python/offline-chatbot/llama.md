@@ -73,7 +73,7 @@ Intellinode allows you to upload your documents for free and generate a key to p
 ### Setting Up RAG
 1. Go to [Intellinode cloud](https://app.intellinode.ai/).
 2. Start a new project with the default settings.
-3. Upload any PDF (preferred), JSON, Word, image, code, or CSV file.
+3. Upload any PDF (preferred), JSON, word, image, code, or CSV file.
 4. After the document is uploaded successfully, copy the provided one key for RAG integration.
 
 ### Updating the Chatbot with RAG
