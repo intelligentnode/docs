@@ -87,8 +87,8 @@ Prepare the input instructions:
 
 ```python
 input = ChatModelInput("Answer only from the context.")
-input.max_tokens = 1500
-input.search_k = 1 # number of returned pages
+input.max_tokens = 2000
+input.search_k = 2 # number of returned pages
 input.add_user_message("What is the red planet?")
 ```
 
