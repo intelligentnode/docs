@@ -4,11 +4,11 @@ sidebar_position: 2
 
 # Mistral
 You can use any of the latest released Mistral models offline:
-- `mistral_0.2_instruct_7b_en`.
 - `mistral_7b_en`.
 - `mistral_instruct_7b_en`.
+- `mistral_0.2_instruct_7b_en`.
 
-It is recommended to use the instruct versions as they adhere more closely to your commands.
+It is recommended to use the **instruct** versions as they adhere more closely to your commands.
 
 ## Setup
 
