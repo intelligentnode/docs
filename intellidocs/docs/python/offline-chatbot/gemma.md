@@ -6,8 +6,8 @@ sidebar_position: 1
 You can use any of the latest released Gemma models offline:
 - `gemma2_9b_en`.
 - `gemma2_27b_en`.
-- `gemma2_instruct_27b_en`.
 - `gemma2_instruct_9b_en`.
+- `gemma2_instruct_27b_en`.
 
 It is recommended to use the instruct versions as they adhere more closely to your commands.
 
