@@ -97,10 +97,10 @@ response = mistral_bot.chat(input)
 ```
 
 ### RAG Notes
-1. Increase the number of max tokens when increasing the number of search tokens. The model generates both the input and output with each iteration. If the input contains too many pages and the max tokens is too low, the model may only regenerate the input without leaving space for the output.
+1. Increase the number of max tokens when increasing the number of searched pages (search_k). The model generates both the input and output with each iteration, If the input contains too many pages and the max tokens is too low, the model may only regenerate the input without leaving space for the output.
 
-2. Increasing the max tokens can impact the model's response time and may require higher computational resources.
+2. Increasing the max tokens can impact the model's response time and require higher computational resources.
 
-3. Increasing the number of pages can improve the accuracy but requires to increase the max tokens.
+3. Increasing the number of returned pages (search_k) improves the accuracy, but requires an increase in the max tokens.
 
 4. Use instructions like `ChatModelInput("Answer only from the context.")` to guide the model to strict responses based on the provided documents.
