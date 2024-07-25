@@ -68,7 +68,7 @@ response = llama_bot.chat(input)
 
 ## Retrieval-Augmented Generation (RAG)
 
-Intellinode allows you to upload your documents for free and generate a key to provide RAG capabilities to any open-source chatbot, enhancing the model's ability to answer questions using your data.
+Intellinode allows uploading your documents for free and generates a key to provide RAG capabilities to any open-source chatbot, enhancing the model's ability to answer questions using your data.
 
 ### Setting Up RAG
 1. Go to [Intellinode cloud](https://app.intellinode.ai/).
