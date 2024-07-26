@@ -3,7 +3,7 @@ sidebar_position: 4
 ---
 
 # Llama
-You can use any of the latest released Mistral models offline:
+You can use any of the latest released Llama models offline:
 - `llama3_8b_en`.
 - `llama3_instruct_8b_en`.
 
