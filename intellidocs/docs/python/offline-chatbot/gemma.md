@@ -3,7 +3,7 @@ sidebar_position: 1
 ---
 
 # Gemma
-You can use any of the latest released Gemma models offline:
+You can use any of the latest Gemma models offline:
 - `gemma2_9b_en`.
 - `gemma2_27b_en`.
 - `gemma2_instruct_9b_en`.
@@ -66,7 +66,7 @@ Execute the chatbot:
 response = gemma_bot.chat(input)
 ```
 
-## Retrieval-Augmented Generation (RAG)
+## Retrieval Augmented Generation (RAG)
 
 Intellinode allows you to upload your documents for free and generate a key to provide RAG capabilities to any open-source chatbot, enhancing the model's ability to answer questions using your data.
 
