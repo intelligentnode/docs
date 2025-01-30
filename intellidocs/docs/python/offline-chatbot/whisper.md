@@ -53,6 +53,8 @@ audio_data, sample_rate = sf.read(test_file)
 ```
 Run the Inference
 ```python
+wrapper = KerasWrapper(model_name="whisper_large_multi_v2")
+
 result = wrapper.transcript(
     audio_data=audio_data,
     sample_rate=sample_rate,            # e.g., 16000
