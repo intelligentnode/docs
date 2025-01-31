@@ -30,9 +30,7 @@ You can use Whisper models offline for speech recognition. They work entirely on
 
 Make sure to install the necessary packages:
 ```bash
-pip install keras-nlp
-pip install --upgrade keras>=3
-pip install --upgrade intelli
+pip install --upgrade intelli["offline"]
 ```
 
 ### Importing
