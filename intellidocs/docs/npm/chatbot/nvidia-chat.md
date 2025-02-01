@@ -9,8 +9,6 @@ With minimal code changes, you can switch between NVIDIA, OpenAI, and other prov
 
 ## Supported Models
 
-## Supported NVIDIA Models
-
 | Model Name                  | 
 |-----------------------------|
 | deepseek-ai/deepseek-r1     |
@@ -19,14 +17,17 @@ With minimal code changes, you can switch between NVIDIA, OpenAI, and other prov
 
 ## Get Started
 
-To use NVIDIA Chat, import the required modules:
+### API Key
+Visit [https://build.nvidia.com/](https://build.nvidia.com/models) to get your NVIDIA API key.
+
+
+### Chat Code
 
 ```javascript
 const { Chatbot, NvidiaInput, SupportedChatModels } = require("intellinode");
 ```
 
-Provide your NVIDIA API key and create a chatbot instance.  
-**Note:** Visit [https://build.nvidia.com/](https://build.nvidia.com/) to get your NVIDIA API key.
+Provide your NVIDIA API key and create a chatbot instance:
 
 ```javascript
 const nvidiaBot = new Chatbot(NVIDIA_API_KEY, SupportedChatModels.NVIDIA);
