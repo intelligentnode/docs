@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Nvidia Chat
+# Nvidia Models
 
 Intellinode supports NVIDIA’s latest language models—**Deepseek** and **Llama**—via a unified chatbot interface. 
 With minimal code changes, you can switch between NVIDIA, OpenAI, and other providers.
