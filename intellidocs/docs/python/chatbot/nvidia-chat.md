@@ -35,7 +35,7 @@ input_obj.add_user_message("Which number is larger, 9.11 or 9.8?")
 response = nvidia_bot.chat(input_obj)
 ```
 
-### Stream
+## Stream
 ```python
 import asyncio
 
