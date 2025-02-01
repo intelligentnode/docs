@@ -6,7 +6,7 @@ sidebar_position: 1
 
 Intellinode module provides various language models, including **OpenAI's ChatGPT** and **Llama V2 model** from Replicate or AWS SageMaker.
 
-We will demonstrate the setup for OpenAI's ChatGPT, followed by the two methods of integrating the Llama V2 model - through Replicate's API or AWS SageMaker dedicated deployment. All the models are available with the unified chatbot interface with a minimum code change when switching between models.
+We will demonstrate the setup for OpenAI's ChatGPT, followed by the two methods of integrating the Llama model - through Replicate's API or AWS SageMaker dedicated deployment. All the models are available with the unified chatbot interface with a minimum code change when switching between models.
 
 ### ChatGPT Model
 

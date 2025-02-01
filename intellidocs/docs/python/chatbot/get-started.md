@@ -23,6 +23,8 @@ The python version support the following providers:
 - **Mistral**.
 - **Anthropic**.
 - **Azure**.
+- **DeepSeek**.
+- **Llama3**.
 
 Use `ChatProvider` enum for selecting your chatbot model.
 
