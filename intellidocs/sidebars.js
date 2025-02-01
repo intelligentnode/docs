@@ -23,7 +23,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Chatbot',
-      items: ['python/chatbot/get-started', 'python/chatbot/multiple-messages', 'python/chatbot/model-switching', 'python/chatbot/docs-chat'],
+      items: ['python/chatbot/get-started', 'python/chatbot/multiple-messages', 'python/chatbot/model-switching', 'python/chatbot/nvidia-chat', 'python/chatbot/docs-chat'],
     },
     {
       type: 'category',
