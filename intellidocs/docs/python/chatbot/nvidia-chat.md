@@ -2,10 +2,9 @@
 sidebar_position: 4
 ---
 
-# NVIDIA – DeepSeek & Llama
+# DeepSeek & Llama
 
-Integrate NVIDIA’s latest language models **Deepseek** and **Llama**— via a unified chatbot interface.
-With minimal code changes, you can switch between NVIDIA, OpenAI, and other providers.
+Integrate NVIDIA’s latest language models **Deepseek** and **Llama**— via a unified chatbot interface. With minimal code changes, you can switch between NVIDIA, OpenAI, and other providers.
 
 ## Supported Models
 
