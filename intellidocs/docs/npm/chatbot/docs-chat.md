@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Docs chat
+# Chat with docs
 
 Intellinode cloud allows you to connect your data to various chatbot engines, including OpenAI ChatGPT, Google Gemini, and LLama V2. This integration enables a tailored chatbot agent experience, providing tuned responses to the context of your uploaded documents or diagram images. 
 
