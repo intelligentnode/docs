@@ -13,6 +13,7 @@ With minimal code changes, you can switch between NVIDIA, OpenAI, and other prov
 |-----------------------------|
 | deepseek-ai/deepseek-r1     |
 | meta/llama-3.3-70b-instruct |
+| tiiuae/falcon3-7b-instruct |
 
 
 ## Get Started
