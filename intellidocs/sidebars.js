@@ -81,6 +81,10 @@ const sidebars = {
     },
     {
       type: 'doc',
+      id: "npm/frontend"
+    },
+    {
+      type: 'doc',
       id: "npm/intellicloud"
     },
   ],
