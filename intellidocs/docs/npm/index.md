@@ -7,6 +7,11 @@ title: Introduction
 
 Intellinode is a framework to streamline the interactions with diverse AI capabilities. It provides a unified layer to access multiple models such as speech, image, and text.
 
+```sh
+npm i intellinode
+```
+
+
 ### Core Components
 
 * **The wrapper layer** provides low-level access to the latest AI models and libraries.
@@ -45,7 +50,7 @@ Intellinode also provides a set of functions that offer higher-level abstraction
 ### Example
 
 Use the gen function for one line AI integration.
-```python
+```node
 const { Gen } = require('intellinode');
 
 text = 'a registration page with flat modern theme.'
