@@ -6,7 +6,7 @@ title: Frontend JS
 
 This guide shows how to integrate IntelliNode on your browser. You can load **intellinode.min.js** via CDN and quickly call AI models such as **OpenAI** or **Cohere** from the browser.
 
-## 1. Include IntelliNode via CDN
+## 1. Include Intellinode via CDN
 
 Add a `<script>` tag in your HTML:
 ```HTML
@@ -80,6 +80,14 @@ const cohereKey = "<YOUR_COHERE_KEY>";
 const cohereResult = await callCohere(cohereKey, "What are the latest trends in AI?");
 console.log("Cohere says:", cohereResult);
 ```
+
+## HTML Sample
+For html example, check out: 
+📂 [GitHub Samples Repository](https://github.com/intelligentnode/IntelliNode/tree/main/samples/frontend)
+
+
+
+
 
 
 ## Notes
