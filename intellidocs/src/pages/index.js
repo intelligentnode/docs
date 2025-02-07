@@ -15,7 +15,18 @@ function Header() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+          {siteConfig.tagline}
+          <br />
+          <Link
+            to="https://medium.com/towards-data-science/graph-theory-to-harmonize-model-integration-e11b4827135a"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.articleLink}
+          >
+            As mentioned in Towards Data Science
+          </Link>
+        </p>
       </div>
     </header>
   );
