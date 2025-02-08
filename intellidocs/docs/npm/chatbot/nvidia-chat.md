@@ -110,9 +110,7 @@ Update your client to point to your local endpoint:
 const { Chatbot, NvidiaInput, SupportedChatModels } = require("intellinode");
 
 // provide your NVIDIA key and local host url
-const nvidiaBot = new Chatbot(NVIDIA_API_KEY, SupportedChatModels.NVIDIA, null, {
-  nvidiaOptions: { baseUrl: 'http://0.0.0.0:8000' }
-});
+const nvidiaBot = new Chatbot(NVIDIA_API_KEY, SupportedChatModels.NVIDIA, null, { baseUrl: 'http://0.0.0.0:8000'});
 
 // construct a chat input using the `NvidiaInput`
 const input = new NvidiaInput("You are a helpful assistant.", {
