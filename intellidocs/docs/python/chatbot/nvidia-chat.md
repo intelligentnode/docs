@@ -123,7 +123,7 @@ from intelli.model.input.chatbot_input import ChatModelInput
 
 # Create a chatbot using the local NIM URL.
 nvidia_bot = Chatbot('YOUR_NVIDIA_API_KEY', ChatProvider.NVIDIA.value,
-                     options={'nvidiaOptions': {'baseUrl': 'http://localhost:8000'}})
+                     options={'baseUrl': 'http://localhost:8000'})
 
 # Prepare chat input
 input_obj = ChatModelInput('You are a helpful assistant.',
