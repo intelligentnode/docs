@@ -15,7 +15,6 @@ Sample of supported models with much more available using Intellinode Nvidia con
 | deepseek-ai/deepseek-r1     |
 | meta/llama-3.3-70b-instruct |
 | tiiuae/falcon3-7b-instruct |
-| meta/llama-3.1-8b-instruct |
 
 
 ## Get Started
@@ -117,10 +116,13 @@ const nvidiaBot = new Chatbot(NVIDIA_API_KEY, SupportedChatModels.NVIDIA, null, 
 
 // construct a chat input using the `NvidiaInput`
 const input = new NvidiaInput("You are a helpful assistant.", {
-  model: 'meta/llama-3.1-8b-instruct1'
+  model: 'meta/llama-3.3-70b-instruct'
 });
 input.addUserMessage("Which number is larger, 9.11 or 9.8?");
 
 // call the chatbot
 const response = await nvidiaBot.chat(input);
 ```
+
+Check available NIM models in NVIDIA's [model catalog](https://build.nvidia.com/models?filters=nimType%3Anim_type_run_anywhere). Open any model and follow the setup instructions under the Docker tab to deploy.
+
