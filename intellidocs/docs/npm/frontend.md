@@ -85,10 +85,7 @@ console.log("Cohere says:", cohereResult);
 For html example, check out: 
 📂 [GitHub Samples Repository](https://github.com/intelligentnode/IntelliNode/tree/main/samples/frontend)
 
-
-
-
-
-
 ## Notes
-1. Avoid embedding your raw API keys in front-end code for production use.  
+1. Avoid embedding raw API keys directly in your front-end code, and let the user enter their keys.
+2. This browser-based approach has been tested with OpenAI and Cohere models.
+3. Some models, such as Anthropic, do not support client-side connections.
