@@ -108,3 +108,34 @@ input_obj = ChatModelInput("You are a helpful assistant.", model="deepseek-ai/de
 input_obj.add_user_message("List the key features of our new digital platform.")
 responses = nvidia_bot.chat(input_obj)
 ```
+
+
+
+## NVIDIA NIM
+Nvidia NIM provide optimized way to host models locally.
+Download NVIDIA NIM as instructed in [Nvidia documentation](https://docs.nvidia.com/nim/large-language-models/latest/getting-started.html#option-1-from-api-catalog).
+
+Update your client to point to your local endpoint:
+
+```python
+from intelli.function.chatbot import Chatbot, ChatProvider
+from intelli.model.input.chatbot_input import ChatModelInput
+
+# Create a chatbot using the local NIM URL.
+nvidia_bot = Chatbot('YOUR_NVIDIA_API_KEY', ChatProvider.NVIDIA.value,
+                     options={'nvidiaOptions': {'baseUrl': 'http://localhost:8000'}})
+
+# Prepare chat input
+input_obj = ChatModelInput('You are a helpful assistant.',
+                           model='meta/llama-3.1-8b-instruct',
+                           max_tokens=512,
+                           temperature=0.6)
+input_obj.add_user_message('Which number is larger, 9.11 or 9.8?')
+
+# Get the chat response
+response = nvidia_bot.chat(input_obj)
+```
+
+Check available NIM models in NVIDIA's [model catalog](https://build.nvidia.com/models?filters=nimType%3Anim_type_run_anywhere). Open any model and follow the setup instructions under the Docker tab to deploy.
+
+
