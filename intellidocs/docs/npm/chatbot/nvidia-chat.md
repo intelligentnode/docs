@@ -9,17 +9,19 @@ With minimal code changes, you can switch between NVIDIA, OpenAI, and other prov
 
 ## Supported Models
 
+Sample of supported models with much more available using Intellinode Nvidia connector:
 | Model Name                  | 
 |-----------------------------|
 | deepseek-ai/deepseek-r1     |
 | meta/llama-3.3-70b-instruct |
 | tiiuae/falcon3-7b-instruct |
+| meta/llama-3.1-8b-instruct |
 
 
 ## Get Started
 
 ### API Key
-Visit [https://build.nvidia.com/](https://build.nvidia.com/models) to get your NVIDIA API key.
+Visit NVIDIA [model catelog](https://build.nvidia.com/models) to get your API key.
 
 
 ### Chat Code
@@ -52,7 +54,7 @@ const response = await nvidiaBot.chat(input);
 console.log(response); // Returns a plain text response with any <think> tags removed
 ```
 
-## Multiple Messages
+### Multiple Messages
 
 Nvidia Chat supports multi-turn conversations just like other chatbot models:
 
@@ -69,7 +71,7 @@ const responses = await nvidiaBot.chat(input);
 responses.forEach(resp => console.log("- " + resp));
 ```
 
-## Docs Chat Integration with NVIDIA
+### Docs Chat Integration with NVIDIA
 
 Intellinode Cloud allows you to connect your data to various chatbot engines—including NVIDIA Chat—to tailor responses based on your uploaded documents or images.
 
@@ -79,7 +81,8 @@ Intellinode Cloud allows you to connect your data to various chatbot engines—i
 3. Upload your documents or images (PDF, DOC, DOCX, PNG, JPG, etc.).
 4. Copy the generated **One Key**; this key connects NVIDIA Chat to your data.
 
-### Example: NVIDIA Chat with One Key
+#### Example: NVIDIA Chat with One Key
+One Key provides a unified approach to connect to your data from any model.
 
 Import the necessary modules and use your One Key:
 
@@ -97,4 +100,27 @@ const input = new NvidiaInput("You are a helpful assistant.", {
 input.addUserMessage("List the key features of our new vector database.");
 const responses = await nvidiaBot.chat(input);
 responses.forEach(response => console.log("- " + response));
+```
+
+## NVIDIA NIM
+Nvidia NIM provide optimized way to host models locally.
+Download NVIDIA NIM as instructed in [Nvidia documentation](https://docs.nvidia.com/nim/large-language-models/latest/getting-started.html#option-1-from-api-catalog).
+
+Update your client to point to your local endpoint:
+```javascript
+const { Chatbot, NvidiaInput, SupportedChatModels } = require("intellinode");
+
+// provide your NVIDIA key and local host url
+const nvidiaBot = new Chatbot(NVIDIA_API_KEY, SupportedChatModels.NVIDIA, null, {
+  nvidiaOptions: { baseUrl: 'http://0.0.0.0:8000' }
+});
+
+// construct a chat input using the `NvidiaInput`
+const input = new NvidiaInput("You are a helpful assistant.", {
+  model: 'meta/llama-3.1-8b-instruct1'
+});
+input.addUserMessage("Which number is larger, 9.11 or 9.8?");
+
+// call the chatbot
+const response = await nvidiaBot.chat(input);
 ```
