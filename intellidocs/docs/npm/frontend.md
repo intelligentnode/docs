@@ -81,6 +81,40 @@ const cohereResult = await callCohere(cohereKey, "What are the latest trends in 
 console.log("Cohere says:", cohereResult);
 ```
 
+## 3. Call the Style Function
+
+### Stability Style Code
+```Javascript
+async function applyStyle(stabilityKey, imageFile, stylePrompt) {
+  try {
+    // Create a style wrapper for "stability"
+    const stability = new IntelliNode.StabilityAIWrapper(stabilityKey);
+
+    // Call the controlStyle function with the image file and style prompt
+    const rawResult = await stability.controlStyle({
+      imagePath: imageFile,
+      prompt: stylePrompt,
+      output_format: 'png',
+      accept: 'image/*'
+    });
+
+    // Convert the binary result into an image URL
+    const blob = new Blob([rawResult], { type: 'image/png' });
+    return URL.createObjectURL(blob);
+  } catch (err) {
+    return 'Stability Error: ' + err.message;
+  }
+}
+```
+Use example
+```
+const stabilityKey = "<YOUR_STABILITY_KEY>";
+const imageFile = document.getElementById('imageInput').files[0];
+const stylePrompt = "Vintage oil painting style";
+const styledImageUrl = await applyStyle(stabilityKey, imageFile, stylePrompt);
+document.getElementById('styledImage').src = styledImageUrl;
+```
+
 ## HTML Sample
 For html example, check out: 
 📂 [GitHub Samples Repository](https://github.com/intelligentnode/IntelliNode/tree/main/samples/frontend)
