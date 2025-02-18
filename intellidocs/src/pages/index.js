@@ -23,7 +23,7 @@ function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.articleLink}
-            style={{ fontSize: '1rem' }}
+            style={{ fontSize: '1.1rem' }}
           >
             As mentioned in Towards Data Science
           </Link>
