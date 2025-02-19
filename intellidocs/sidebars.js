@@ -28,7 +28,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Offline Chatbot',
-      items: ['python/offline-chatbot/gemma', 'python/offline-chatbot/mistral', 'python/offline-chatbot/llama', 'python/offline-chatbot/whisper'],
+      items: ['python/offline-chatbot/gemma', 'python/offline-chatbot/mistral', 'python/offline-chatbot/llama', 'python/offline-chatbot/whisper', 'python/offline-chatbot/llamacpp'],
     },
     {
       type: 'category',
