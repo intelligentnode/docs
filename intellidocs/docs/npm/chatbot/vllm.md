@@ -127,7 +127,8 @@ const chatbot = new Chatbot(
   null,
   {
     baseUrl: 'http://localhost:8000', 
-    oneKey: intelliKey
+    oneKey: intelliKey,
+    //intelliBase: 'self hosted inellicloud'
   }
 );
 
