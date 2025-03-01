@@ -18,8 +18,6 @@ Examples of commonly used vLLM models include:
 
 > **Note:** vLLM supports many other models hosted locally or remotely.
 
----
-
 ## Setup & Usage
 
 ### Chat Completion
