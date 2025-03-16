@@ -1,12 +1,20 @@
 ---
 sidebar_position: 4
 ---
-
 # Agent
 
 An `Agent` is an executor of a specific action. It interfaces with AI models or providers, such as chatGPT, gemini, stable diffusion, or any other supported models, to perform operations like text generation, speech, image processing, or vision.
 
-### Parameters
+## Latest Improvements
+
+The Agent implementation has been significantly enhanced with:
+
+- **Modular Handler Architecture**: Each agent type now uses specialized handlers, improving maintainability and extensibility
+- **Improved Provider Compatibility**: Better support across different AI model providers
+- **Enhanced Error Handling**: More robust error detection and recovery
+- **Optimized Execution**: Streamlined processing of different input and output formats
+
+## Parameters
 
 When creating an `Agent`, you need to provide several parameters that define its behavior:
 
@@ -16,24 +24,26 @@ When creating an `Agent`, you need to provide several parameters that define its
 - **model_params**: A dictionary containing the AI model parameters, such as API keys, model names, temperature, and any additional configuration needed for operation.
 - **options** (optional): Additional options that may affect the agent's execution or interaction with the AI model/service.
 
-
-### Agent Types
+## Agent Types
 
 The Intelli framework currently supports the following agent types:
 
 - `'text'`: Agents that generate or manipulate text.
 - `'image'`: Agents designed for image generation tasks.
 - `'vision'`: Agents that perform image to text tasks.
+- `'speech'`: Agents that convert text to audio.
+- `'recognition'`: Agents that convert speech to text.
+- `'embed'`: Agents that generate text embeddings.
+- `'search'`: Agents that perform semantic search operations.
 
-### Example
+## Example
 
-#### Creating an Agent
+### Creating an Agent
 
 Instantiate the `Agent` class with the appropriate parameters:
 
 ```python
 from intelli.flow.agents.agent import Agent
-
 text_agent = Agent(
     agent_type='text',
     provider='openai',
@@ -42,20 +52,16 @@ text_agent = Agent(
 )
 ```
 
-#### Executing an Agent
+### Executing an Agent
 
 To execute an agent, you need to provide an input specific to the agent's type. The Intelli framework offers different input classes such as `TextAgentInput`and `ImageAgentInput`. Usually the task handle the agent execution, so **you don't have to execute manually**.
-
 
 Here's how to execute a text agent:
 
 ```python
 from intelli.flow.input.agent_input import TextAgentInput
-
 # creating a text input
 agent_input = TextAgentInput(desc="What is the capital of France?")
-
 # Executing the agent
 result = text_agent.execute(agent_input)
 ```
-
