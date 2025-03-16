@@ -219,9 +219,3 @@ local_agent = KerasAgent(
     log=True
 )
 ```
-
-## Conclusion
-
-Multi-model integration with Intelli allows you to build sophisticated AI applications that leverage the best capabilities of different models and providers. By designing workflows that combine text, image, speech, and vision processing, you can create end-to-end solutions that would be impossible with a single model.
-
-The flow-based architecture makes it easy to experiment with different combinations of models and to adapt your application as new AI capabilities become available.
