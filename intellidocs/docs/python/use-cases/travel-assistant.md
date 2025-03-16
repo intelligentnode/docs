@@ -102,7 +102,7 @@ image_prompt_task = Task(
     TextTaskInput(
         "Create a short, specific image generation prompt for Rome showing the iconic Colosseum"
     ),
-    itinerary_agent,  # Reusing the text agent for a different purpose
+    itinerary_agent,
     log=True
 )
 
