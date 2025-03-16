@@ -43,7 +43,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Use cases',
-      items: ['python/use-cases/content-platform'],
+      items: ['python/use-cases/content-platform', 'python/use-cases/travel-assistant.md'],
     },
     {
       type: 'doc',
