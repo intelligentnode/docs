@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-## Multi Model: Travel Assistant
+# Multi Model: Travel Assistant
 
 Let's explore a practical example: a travel assistant that plan trips by generating itineraries, creating visual previews, and providing audio guides.
 
