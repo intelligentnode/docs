@@ -2,9 +2,10 @@
 sidebar_position: 2
 ---
 
-# Multi Model: Travel Assistant
+# Multi Model Assistant
 
-Let's explore a practical example: a travel assistant that plan trips by generating itineraries, creating visual previews, and providing audio guides.
+Let's explore a practical example: a travel assistant that plans trips by generating itineraries, creating visual previews, and providing audio guides. 
+This demonstrates integration with speech, image, and text models with minimal effort.
 
 ### Setting Up the Environment
 
