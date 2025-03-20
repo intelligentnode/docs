@@ -7,6 +7,9 @@ sidebar_position: 2
 Let's explore a practical example: a travel assistant that plans trips by generating itineraries, creating visual previews, and providing audio guides. 
 This demonstrates integration with speech, image, and text models with minimal effort.
 
+![Travel Assistant Flow Diagram](https://raw.githubusercontent.com/intelligentnode/Intelli/refs/heads/main/assets/samples/travel_assistant_flow.png)
+
+
 ### Setting Up the Environment
 
 ```python
