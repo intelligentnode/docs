@@ -37,13 +37,14 @@ itinerary_agent = Agent(
 )
 
 # Speech synthesis agent for audio guides
+voice_id = "9BWtsMINqrJLrRacOk9x"  # Replace with your preferred voice ID
 speech_agent = Agent(
     agent_type=AgentTypes.SPEECH.value,
     provider="elevenlabs",
     mission="Convert travel information to speech",
     model_params={
         "key": ELEVENLABS_KEY,
-        "voice": "9BWtsMINqrJLrRacOk9x",  # Replace with your preferred voice ID
+        "voice": voice_id,
         "model": "eleven_multilingual_v2"
     }
 )
