@@ -43,7 +43,7 @@ speech_agent = Agent(
     mission="Convert travel information to speech",
     model_params={
         "key": ELEVENLABS_KEY,
-        "voice": "Antoni",  # Replace with your preferred voice ID
+        "voice": "9BWtsMINqrJLrRacOk9x",  # Replace with your preferred voice ID
         "model": "eleven_multilingual_v2"
     }
 )
