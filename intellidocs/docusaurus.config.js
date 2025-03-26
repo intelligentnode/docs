@@ -91,11 +91,6 @@ const config = {
             position: 'right',
           },
           {
-            to: 'https://show.intellinode.ai',
-            label: 'Showcase',
-            position: 'right',
-          },
-          {
             href: 'https://github.com/intelligentnode',
             label: 'GitHub',
             position: 'right',
