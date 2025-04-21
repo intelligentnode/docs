@@ -38,6 +38,8 @@ The framework provides several pre-built routing utilities in `intelli.flow.util
 
 This example routes content to different processors based on its length:
 
+![Dynamic Workflow](https://raw.githubusercontent.com/intelligentnode/Intelli/refs/heads/main/assets/samples/length_based_routing.png)
+
 ```python
 from intelli.flow import Agent, Task, Flow, TextTaskInput
 from intelli.flow.types import AgentTypes
