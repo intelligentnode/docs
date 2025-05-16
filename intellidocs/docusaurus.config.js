@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Open Source AI Framework',
-  tagline: 'Intellinode provides unified prompt, evaluation, and production integration to any large model.',
+  tagline: 'Intellinode provides unified prompt, evaluation, and MCP integration to any large model.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
