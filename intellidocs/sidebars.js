@@ -37,6 +37,11 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'MCP',
+      items: ['python/mcp/get-started', 'python/mcp/server', 'python/mcp/client'],
+    },
+    {
+      type: 'category',
       label: 'Controllers',
       items: ['python/controllers/introduction', 'python/controllers/embedding', 'python/controllers/image-generation', 'python/controllers/speech', 'python/controllers/vision'],
     },
