@@ -49,7 +49,11 @@ calc_task = Task(
 )
 
 # Create a flow
-flow = Flow({"calc": calc_task}, {"calc": []}, log=True)
+flow = Flow(
+    tasks={"calc": Task(TextTaskInput("Calculate"), http_mcp_agent)}, 
+    map_paths={"calc": []},                # Empty list = No outgoing connections from this task
+    log=True
+)
 
 # Run the flow and print the result
 if __name__ == "__main__":
