@@ -80,7 +80,7 @@ flow = Flow({"calc": calc_task}, {"calc": []}, log=True)
 
 # Run it
 result = asyncio.run(flow.start())
-print("Answer:", result["calc"]["output"])   # -> 15
+print("Answer:", result["calc"]["output"])
 ```
 
 Run this with:
