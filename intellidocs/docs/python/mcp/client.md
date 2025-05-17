@@ -104,11 +104,11 @@ graph_path = flow.generate_graph_img(
 ## Building More Complex Flows
 
 In real applications, you'll often:
-1. Use an LLM to interpret user requests
-2. Extract operation and parameters
-3. Call the appropriate MCP tool
-4. Present results back to the user
+1. Use an LLM to interpret user requests.
+2. Extract operation and parameters.
+3. Call the appropriate MCP tool.
+4. Present results back to the user.
 
 A complete example that does this:
-🔗 [`sample/mcp/math_flow_client.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/math_flow_client.py) (local version)  
-🔗 [`sample/mcp/http_math_flow_client.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/http_math_flow_client.py) (HTTP version)
+🔗 [`Http(s) Server`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/http_mcp_calculator_server.py)
+🔗 [`Http(s) Client`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/http_math_flow_client.py)
