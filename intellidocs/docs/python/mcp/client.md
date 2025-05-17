@@ -8,10 +8,10 @@ Once you've created an MCP server with your custom tools, you need a way to call
 ## How It Works
 
 The process follows these steps:
-1. Your flow creates an MCP agent that knows how to talk to your server
-2. The agent calls a specific tool with parameters (like "add" with numbers 7 and 8)
-3. The server processes the request and returns a result (like 15)
-4. Your flow continues with that result
+1. Your flow creates an MCP agent that knows how to talk to your server.
+2. The agent calls a specific tool with parameters.
+3. The server processes the request and returns a result.
+4. Your flow continues with that result.
 
 ## Creating a Basic Client
 
@@ -48,7 +48,7 @@ calc_task = Task(
     log=True
 )
 
-# Create a simple flow with just this task
+# Create a flow
 flow = Flow({"calc": calc_task}, {"calc": []}, log=True)
 
 # Run the flow and print the result
@@ -91,6 +91,14 @@ http_mcp_agent = Agent(
 )
 
 # ... (rest is the same - create task, flow, etc.) ...
+```
+
+## Generate flow visualization
+```python
+graph_path = flow.generate_graph_img(
+    name="math_flow_graph",               # Base name for the output file
+    save_path="./temp/graphs",            # Directory to save the image
+)
 ```
 
 ## Building More Complex Flows
