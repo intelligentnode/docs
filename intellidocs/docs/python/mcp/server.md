@@ -45,7 +45,8 @@ if __name__ == "__main__":
     mcp.run(transport="stdio")
 ```
 
-Check the client section for details how to run the server.
+Check the MCP client section for details on how to connect to the server.
+
 
 ## Serving over HTTP (Preferred)
 
