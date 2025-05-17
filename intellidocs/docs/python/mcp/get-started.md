@@ -91,4 +91,6 @@ python simple_mcp_client.py
 That's all it takes! Your flow now calls your custom math function.
 
 
-Check the richer example at: 🔗 [`sample/mcp/math_flow_client.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/math_flow_client.py) 
+Check the richer example at: 
+🔗 [`Http(s) Server`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/http_mcp_calculator_server.py)
+🔗 [`Http(s) Client`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/http_math_flow_client.py)
