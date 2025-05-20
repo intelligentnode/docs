@@ -114,5 +114,5 @@ In real applications, you'll often:
 4. Present results back to the user.
 
 A complete example that does this:
-🔗 [`Http(s) Server`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/http_mcp_calculator_server.py)
-🔗 [`Http(s) Client`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/http_math_flow_client.py)
+🔗 [`Http(s) Server`](https://github.com/intelligentnode/Intelli/blob/main/sample/http_mcp/http_mcp_calculator_server.py)
+🔗 [`Http(s) Client`](https://github.com/intelligentnode/Intelli/blob/main/sample/http_mcp/http_math_flow_client.py)
