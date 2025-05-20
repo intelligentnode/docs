@@ -92,5 +92,5 @@ That's all it takes! Your flow now calls your custom math function.
 
 
 Check the richer example at: 
-🔗 [`Http(s) Server/Client`](https://github.com/intelligentnode/Intelli/tree/main/sample/http_mcp)
+🔗 [`Remote Server/Client`](https://github.com/intelligentnode/Intelli/tree/main/sample/http_mcp)
 🔗 [`Dataframe MCP Server`](https://github.com/intelligentnode/Intelli/tree/main/sample/http_dataframe_mcp)
