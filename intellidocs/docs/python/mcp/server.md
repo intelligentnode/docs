@@ -87,4 +87,4 @@ You'll see a message confirming it's running, and it will keep running until you
 
 Full working examples:  
 🔗 [`sample/mcp/mcp_math_server.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/basic_mcp/mcp_math_server.py) (stdio version)  
-🔗 [`sample/mcp/http_mcp_calculator_server.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/http_dataframe_mcp/http_mcp_calculator_server.py) (HTTP version)
+🔗 [`sample/mcp/http_mcp_calculator_server.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/http_mcp/http_mcp_calculator_server.py) (HTTP version)
