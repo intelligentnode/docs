@@ -86,5 +86,5 @@ python http_mcp_calculator_server.py
 You'll see a message confirming it's running, and it will keep running until you stop it (Ctrl+C).
 
 Full working examples:  
-🔗 [`sample/mcp/mcp_math_server.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/mcp_math_server.py) (stdio version)  
-🔗 [`sample/mcp/http_mcp_calculator_server.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/mcp/http_mcp_calculator_server.py) (HTTP version)
+🔗 [`sample/mcp/mcp_math_server.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/basic_mcp/mcp_math_server.py) (stdio version)  
+🔗 [`sample/mcp/http_mcp_calculator_server.py`](https://github.com/intelligentnode/Intelli/blob/main/sample/http_dataframe_mcp/http_mcp_calculator_server.py) (HTTP version)
