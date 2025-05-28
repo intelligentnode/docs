@@ -54,7 +54,7 @@ If you want to run your server separately and access it over HTTP:
 
 ```python
 # http_mcp_calculator_server.py
-from intelli.flow.utils import MCPServerBuilder
+from intelli.mcp import MCPServerBuilder
 
 # Create a server with HTTP support
 server = MCPServerBuilder("Calculator", stateless_http=True)
