@@ -173,8 +173,6 @@ For these tools to work, you'll need the MCP math server file:
 
 **Download**: [mcp_math_server.py](https://github.com/intelligentnode/Intelli/blob/main/intelli/test/integration/mcp_math_server.py)
 
-**Learn More**: For MCP documentation, see [Get Started with MCP](https://docs.intellinode.ai/docs/python/mcp/get-started)
-
 #### 2. Create Agents
 
 Create agents for LLM decisions, MCP math processing, and direct responses.
@@ -592,4 +590,8 @@ The connector detects these LLM response formats:
 ### Direct Text Response
 ```python
 "Machine learning is a method of data analysis..."
-``` 
+```
+
+
+**Learn More**: For MCP documentation, see [Get Started with MCP](https://docs.intellinode.ai/docs/python/mcp/get-started)
+
