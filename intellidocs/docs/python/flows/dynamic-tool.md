@@ -339,11 +339,13 @@ The key difference is that Anthropic uses `input_schema` instead of `parameters`
 
 ### Custom Decision Functions
 
+The Custom Decision Functions feature allows you to create sophisticated routing logic that goes beyond the basic "tool called" vs "no tool" detection. 
+
 Create custom routing logic beyond simple tool detection:
 
 ```python
 def custom_routing_logic(output, output_type):
-    """Simple custom decision function"""
+    """Routes based on tool usage and error detection in responses"""
     
     # Check for tool responses
     if isinstance(output, dict):
@@ -356,7 +358,7 @@ def custom_routing_logic(output, output_type):
     
     return "direct_response"
 
-# Simple custom connector
+# Custom connector with error handling and tool processing
 advanced_connector = ToolDynamicConnector(
     decision_fn=custom_routing_logic,
     destinations={
