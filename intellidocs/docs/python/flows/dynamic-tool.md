@@ -46,7 +46,6 @@ This example demonstrates how to create a flow where the LLM decides whether to 
 First, define the function schema that the LLM can call. This tells the LLM what tools are available and how to use them.
 
 ```python
-# math_calculator_flow.py
 import asyncio
 from intelli.flow import Flow, Task, Agent, ToolDynamicConnector
 from intelli.flow.input.task_input import TextTaskInput
