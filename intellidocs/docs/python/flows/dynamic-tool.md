@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
 ---
-# Dynamic Tool Routing
+# Tool Routing
 
 Dynamic Tool Routing enables flows to automatically route based on LLM tool/function call decisions. Instead of hardcoded routing logic, the flow examines LLM output and routes to different tasks based on whether tools were invoked.
 
