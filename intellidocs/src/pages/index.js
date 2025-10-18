@@ -36,6 +36,7 @@ function Header() {
         <div id="mc_embed_signup_scroll">
             <div class="indicates-required">Get latest updates</div>
             <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+<div hidden=""><input type="hidden" name="tags" value="14568642,14568643,14568645"></div>
         <div id="mce-responses" class="clear">
             <div class="response" id="mce-error-response" style="display: none;"></div>
             <div class="response" id="mce-success-response" style="display: none;"></div>
