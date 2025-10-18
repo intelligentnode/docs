@@ -11,16 +11,7 @@ const config = {
   title: 'Open Source AI Framework',
   tagline: 'Intellinode provides unified prompt, evaluation, and MCP integration to any large model.',
   favicon: 'img/favicon.ico',
-
-  headTags: [
-    {
-      tagName: 'script',
-      attributes: {
-        id: 'mcjs',
-      },
-      innerHTML: '!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/bfbc78f1a195b85e6d516404b/6c108a01a7760743798896ac0.js");',
-    },
-  ],
+  
   // Set the production url of your site here
   url: 'https://docs.intellinode.ai',
   // Set the /<baseUrl>/ pathname under which your site is served
