@@ -30,7 +30,7 @@ async function callOpenAI(apiKey, userPrompt) {
 
     // Prepare ChatGPT input (avoid maxTokens if using O-series models)
     const input = new IntelliNode.ChatGPTInput("You are a helpful assistant.", {
-      model: "gpt-4o",
+      model: "gpt-5",
       temperature: 0.7
     });
     input.addUserMessage(userPrompt);
@@ -61,7 +61,7 @@ async function callCohere(apiKey, userPrompt) {
 
     // Prepare Cohere input
     const input = new IntelliNode.CohereInput("You are a helpful assistant.", {
-      model: "command-r"
+      model: "command-a-03-2025"
     });
     input.addUserMessage(userPrompt);
 
