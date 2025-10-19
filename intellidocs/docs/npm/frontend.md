@@ -271,9 +271,15 @@ async function applyStructure(stabilityKey, imageFile, prompt) {
 - Minimum dimensions: 64x64 pixels.
 - Supported formats: JPEG, PNG, WebP.
 
-## HTML Sample
-For html example, check out: 
-📂 [GitHub Samples Repository](https://github.com/intelligentnode/IntelliNode/tree/main/samples/frontend)
+## HTML Samples
+
+IntelliNode provides ready-to-use frontend samples:
+
+1. **Chat Playground** (`index.html`): Multi-provider chat interface.
+2. **Stability Control Studio** (`style_studio.html`): Image transformation with Style, Sketch, and Structure control methods.
+3. **HTML Generator** (`html_generator.html`): AI-powered website generator using LLMs with live preview and download.
+
+📂 [Open GitHub Samples](https://github.com/intelligentnode/IntelliNode/tree/main/samples/frontend)
 
 ## Notes
 1. Avoid embedding raw API keys directly in your front-end code, and let the user enter their keys.
