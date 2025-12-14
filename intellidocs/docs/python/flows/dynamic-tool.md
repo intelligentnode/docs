@@ -8,7 +8,8 @@ Dynamic Tool Routing enables flows to automatically route based on LLM tool/func
 ## Installation
 
 ```bash
-pip install "intelli[mcp]"
+pip install intelli          # tool routing
+pip install "intelli[mcp]"   # only if you will call MCP servers
 ```
 
 ## Overview
@@ -54,10 +55,14 @@ Agent(
     model_params={
         "key": "api_key",
         "model": "gpt-4o",             # Model supporting function calling
-        "tools": tool_definitions      # Required: Available tools/functions
+        "tools": tool_definitions,     # Required: Available tools/functions
+        # Optional (OpenAI): force a specific tool
+        # "tool_choice": {"type": "function", "function": {"name": "add"}},
     }
 )
 ```
+
+> **Gemini note:** Intelli forwards `tools` to Gemini text models too. Use the same OpenAI-style `tools` schema above when provider is `"gemini"`.
 
 ### MCP Agent
 
@@ -68,7 +73,8 @@ Agent(
     provider="mcp",
     model_params={
         "command": "python",           # Command to run server
-        "args": ["server_file.py"]     # Server file path
+        "args": ["server_file.py"],    # Server file path
+        # "tool": "tool_name",         # Set this here or set dynamically via a preprocessor
     }
 )
 
