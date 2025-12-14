@@ -25,7 +25,7 @@ def call_chatbot(provider, model=None):
     return response
 
 # call chatGPT
-call_chatbot(ChatProvider.OPENAI, "gpt-4")
+call_chatbot(ChatProvider.OPENAI, "gpt-5.2")
 
 # call mistralai
 call_chatbot(ChatProvider.MISTRAL, "mistral-medium")
