@@ -33,7 +33,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Flows',
-      items: ['python/flows/get-started', 'python/flows/sequence-flow', 'python/flows/async-flow', 'python/flows/agent', 'python/flows/kagent', 'python/flows/tasks', 'python/flows/dynamic-path', 'python/flows/dynamic-tool', 'python/flows/processors', 'python/flows/templates', 'python/flows/loop'],
+      items: ['python/flows/get-started', 'python/flows/sequence-flow', 'python/flows/async-flow', 'python/flows/agent', 'python/flows/search-agent', 'python/flows/kagent', 'python/flows/tasks', 'python/flows/dynamic-path', 'python/flows/dynamic-tool', 'python/flows/processors', 'python/flows/templates', 'python/flows/loop'],
     },
     {
       type: 'category',
