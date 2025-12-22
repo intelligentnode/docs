@@ -47,7 +47,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Controllers',
-      items: ['python/controllers/introduction', 'python/controllers/embedding', 'python/controllers/image-generation', 'python/controllers/speech', 'python/controllers/vision'],
+      items: ['python/controllers/introduction', 'python/controllers/embedding', 'python/controllers/image-generation', 'python/controllers/speech', 'python/controllers/recognition', 'python/controllers/vision'],
     },
     {
       type: 'category',

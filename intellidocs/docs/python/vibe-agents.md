@@ -5,7 +5,13 @@ sidebar_position: 1
 # Vibe Agents
 
 
-`VibeFlow` allows you to build and execute complex multi-modal AI flows using **natural language descriptions**. Instead of manually defining tasks and dependencies, you describe your goal, and `VibeFlow` handles the orchestration.
+`VibeFlow` allows you to build and execute complex multi-modal AI flows using 
+**natural language descriptions**. Instead of manually defining tasks and 
+dependencies, you describe your goal, and Vibe Flow handles the orchestration using LLMs.
+
+:::info
+VibeFlow is beta supported starting from version **1.4.0** as we work toward AGI where agents generate agents.
+:::
 
 ### How it works
 
