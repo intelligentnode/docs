@@ -7,7 +7,7 @@ sidebar_position: 1
 
 `VibeFlow` allows you to build and execute multi-modal flows using natural language descriptions. Instead of manually defining tasks and dependencies, you describe your intent, and Vibe Flow handles the orchestration using LLMs.
 
-Your intent is compiled into execution graph, each node represents an agent or tool action, and each edge encodes dependencies and data flow.
+Your intent is compiled into **execution graph**, each node represents an agent or tool action, and each edge encodes dependencies and data flow.
 
 :::info
 VibeFlow is beta supported starting from version **1.4.0** as we work toward AGI where agents generate agents.
