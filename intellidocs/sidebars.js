@@ -36,8 +36,15 @@ const sidebars = {
       items: ['python/flows/get-started', 'python/flows/sequence-flow', 'python/flows/async-flow', 'python/flows/agent', 'python/flows/search-agent', 'python/flows/kagent', 'python/flows/tasks', 'python/flows/dynamic-path', 'python/flows/dynamic-tool', 'python/flows/processors', 'python/flows/templates', 'python/flows/loop'],
     },
     {
-      type: 'doc',
-      id: 'python/vibe-agents',
+      type: 'category',
+      label: 'Vibe Agents',
+      link: {
+        type: 'doc',
+        id: 'python/vibe-agents/index',
+      },
+      items: [
+        'python/vibe-agents/advanced-concepts',
+      ],
     },
     {
       type: 'category',
