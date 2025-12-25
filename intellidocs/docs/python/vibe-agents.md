@@ -67,12 +67,6 @@ flow = await vf.build(description)
 results = await flow.start()
 ```
 
-### Key Features
-
-- **Environment Variables**: Use `${ENV:VARIABLE_NAME}` in your prompts, and VibeAgent will automatically resolve them from your `.env` file.
-- **Save & Load**: Use `save_bundle(save_dir)` to export the generated flow spec and a graph image visualization for future use.
-- **Edit Mode**: Call `vf.edit(spec_path, "add a translation step")` to modify an existing flow using natural language.
-
 ### Auto-Saving Outputs
 
 VibeAgent can automatically save generated images and audio to a specific directory:
@@ -107,3 +101,15 @@ Supported preference parameters:
 - `speech_model`
 - `recognition_model`
 
+
+### Key Features
+
+- Environment Variables: Use ${ENV:VARIABLE_NAME} in your prompts, and VibeAgent will automatically resolve them from your .env file (secrets stay hidden).
+- **Save & Load**: Use `save_bundle(save_dir)` to export the generated flow spec and a graph image visualization for future use.
+- **Edit Mode**: Call `vf.edit(spec_path, "add a translation step")` to modify an existing flow using natural language.
+
+
+### Detailed Example
+For a working end-to-end example (search → analyze → image generation + auto-saving), see: 
+
+[sample/vibeagent_research_factory.py](https://github.com/intelligentnode/Intelli/blob/main/sample/vibeagent_research_factory.py)
