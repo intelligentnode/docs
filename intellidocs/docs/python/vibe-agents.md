@@ -110,6 +110,5 @@ Supported preference parameters:
 
 
 ### Detailed Example
-For a working end-to-end example (search → analyze → image generation + auto-saving), see: 
-
+For a working end-to-end example (search → analyze → image generation + auto-saving), see: <br/>
 [sample/vibeagent_research_factory.py](https://github.com/intelligentnode/Intelli/blob/main/sample/vibeagent_research_factory.py)
