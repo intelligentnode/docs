@@ -104,7 +104,7 @@ Supported preference parameters:
 
 ### Key Features
 
-- Environment Variables: Use ${ENV:VARIABLE_NAME} in your prompts, and VibeAgent will automatically resolve them from your .env file (secrets stay hidden).
+- Environment Variables: Use `${ENV:VARIABLE_NAME}` in your prompts, and VibeAgent will automatically resolve them from your .env file (secrets stay hidden).
 - **Save & Load**: Use `save_bundle(save_dir)` to export the generated flow spec and a graph image visualization for future use.
 - **Edit Mode**: Call `vf.edit(spec_path, "add a translation step")` to modify an existing flow using natural language.
 
