@@ -20,7 +20,7 @@ function Header() {
           {siteConfig.tagline}
           <br />
           <Link
-            to="https://towardsdatascience.com/graph-theory-to-harmonize-model-integration-e11b4827135a/"
+            to="https://towardsdatascience.com/agents-that-write-agents/?source=intellidoc"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.articleLink}
