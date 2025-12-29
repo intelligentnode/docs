@@ -86,7 +86,7 @@ const config = {
             position: 'left'
           },
           {
-            to: 'https://intellinode.ai/contact',
+            to: 'https://www.intellinode.ai/contact-user-use-case',
             label: 'Contact Us',
             position: 'right',
           },
