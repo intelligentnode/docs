@@ -86,12 +86,17 @@ const config = {
             position: 'left'
           },
           {
-            to: 'https://app.intellinode.ai',
-            label: 'Cloud',
+            to: 'https://intellinode.ai/contact',
+            label: 'Contact Us',
             position: 'right',
           },
           {
-            href: 'https://github.com/intelligentnode',
+            to: 'https://app.intellinode.ai',
+            label: 'Try Cloud',
+            position: 'right',
+          },
+          {
+            href: 'https://github.com/intelligentnode/Intelli',
             label: 'GitHub',
             position: 'right',
           },
