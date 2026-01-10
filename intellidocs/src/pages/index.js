@@ -34,7 +34,7 @@ function Header() {
 <div id="mc_embed_signup">
     <form action="https://intellinode.us10.list-manage.com/subscribe/post?u=bfbc78f1a195b85e6d516404b&amp;id=049ef7077e&amp;f_id=00cf54e4f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
         <div id="mc_embed_signup_scroll">
-            <div class="indicates-required">Get latest updates</div>
+            <div class="indicates-required">Join the community of AI builders</div>
             <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
 <div hidden=""><input type="hidden" name="tags" value="14568642,14568643,14568645"></div>
         <div id="mce-responses" class="clear">
@@ -62,15 +62,28 @@ export default function Home() {
       <Head>
         <style>{`
           #mc_embed_signup {
-            background: #fff !important;
+            /* Blend with hero header - subtle light container */
+            background: rgba(255, 255, 255, 0.5) !important;
+            color: #222 !important;
             clear: both !important;
             font: 14px Helvetica, Arial, sans-serif !important;
             width: 600px !important;
             max-width: 100% !important;
             margin: 0 auto !important;
             padding: 30px 20px 15px 20px !important;
-            border-radius: 8px;
+            border-radius: 12px;
             box-sizing: border-box !important;
+            border: none !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+          }
+
+          /* Dark mode adaptation */
+          [data-theme='dark'] #mc_embed_signup {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: none !important;
+            color: #eee !important;
           }
           
           #mc_embed_signup form {
@@ -100,17 +113,26 @@ export default function Home() {
             margin-bottom: 6px !important;
             font-weight: 500 !important;
             font-size: 14px !important;
+            color: inherit !important;
           }
           
           #mc_embed_signup .mc-field-group input[type="email"] {
             width: 100% !important;
             padding: 12px !important;
             font-size: 16px !important;
-            border: 1px solid #ccc !important;
-            border-radius: 4px !important;
+            background: #fff !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            border-radius: 6px !important;
             box-sizing: border-box !important;
             display: block !important;
             margin: 0 !important;
+            color: #000 !important;
+          }
+
+          [data-theme='dark'] #mc_embed_signup .mc-field-group input[type="email"] {
+            background: rgba(0, 0, 0, 0.3) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #fff !important;
           }
           
           #mc_embed_signup .clear {
@@ -137,7 +159,7 @@ export default function Home() {
             background: #000 !important;
             color: #fff !important;
             border: none !important;
-            border-radius: 4px !important;
+            border-radius: 6px !important;
             cursor: pointer !important;
             transition: background-color 0.3s !important;
             display: inline-block !important;
@@ -147,12 +169,26 @@ export default function Home() {
             text-align: center !important;
             height: auto !important;
             white-space: nowrap !important;
+            font-weight: 600 !important;
+          }
+
+          [data-theme='dark'] #mc_embed_signup input.button,
+          [data-theme='dark'] #mc_embed_signup input[type="submit"] {
+            background-color: #fff !important;
+            background: #fff !important;
+            color: #000 !important;
           }
           
           #mc_embed_signup input.button:hover,
           #mc_embed_signup input[type="submit"]:hover {
             background-color: #333 !important;
             background: #333 !important;
+          }
+          
+          [data-theme='dark'] #mc_embed_signup input.button:hover,
+          [data-theme='dark'] #mc_embed_signup input[type="submit"]:hover {
+            background-color: #eee !important;
+            background: #eee !important;
           }
           
           #mc_embed_signup .indicates-required {
@@ -163,6 +199,7 @@ export default function Home() {
             margin-bottom: 15px !important;
             font-size: 16px !important;
             order: -1 !important;
+            color: inherit !important;
           }
           
           #mc_embed_signup .asterisk {
