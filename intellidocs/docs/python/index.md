@@ -13,7 +13,7 @@ Intelli is a Python framework to streamline the interactions with diverse AI cap
 ## Installation
 
 ```bash
-pip install "intelli[mcp]"
+pip install intelli
 ```
 
 ## Core Components
