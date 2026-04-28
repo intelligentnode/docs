@@ -86,13 +86,8 @@ const config = {
             position: 'left'
           },
           {
-            to: 'https://www.intellinode.ai/contact-user-use-case',
-            label: 'Contact Us',
-            position: 'right',
-          },
-          {
-            to: 'https://app.intellinode.ai',
-            label: 'Try Cloud',
+            to: 'https://www.intellinode.ai/',
+            label: 'Newsletter',
             position: 'right',
           },
           {
