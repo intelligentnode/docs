@@ -86,11 +86,6 @@ const config = {
             position: 'left'
           },
           {
-            to: 'https://www.intellinode.ai/',
-            label: 'Newsletter',
-            position: 'right',
-          },
-          {
             href: 'https://github.com/intelligentnode/Intelli',
             label: 'GitHub',
             position: 'right',
