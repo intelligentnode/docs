@@ -111,10 +111,7 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'Articles',
-                to: 'https://intellinode.ai/articles',
-              },
+              
               {
                 label: 'GitHub',
                 href: 'https://github.com/intelligentnode',
