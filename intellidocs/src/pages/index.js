@@ -7,6 +7,7 @@ import Features from '@site/src/components/features';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 import KitSubscribe from '@site/src/components/KitSubscribe';
+import KickwiseBanner from '@site/src/components/KickwiseBanner';
 
 function Header() {
   const {siteConfig} = useDocusaurusContext();
@@ -47,6 +48,7 @@ export default function Home() {
       <main>
         <Features />
       </main>
+      <KickwiseBanner />
     </Layout>
   );
 }

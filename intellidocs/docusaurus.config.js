@@ -111,10 +111,14 @@ const config = {
           {
             title: 'More',
             items: [
-              
+
               {
                 label: 'GitHub',
                 href: 'https://github.com/intelligentnode',
+              },
+              {
+                label: 'Sport AI',
+                href: 'https://kickwise.ai/',
               },
             ],
           },
