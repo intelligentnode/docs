@@ -118,7 +118,8 @@ const config = {
               },
               {
                 label: 'Sport AI',
-                href: 'https://kickwise.ai/',
+                // Tagged so Kickwise's analytics can count doc-footer referrals separately.
+                href: 'https://kickwise.ai/?utm_source=intellinode&utm_medium=referral&utm_campaign=docs&utm_content=footer',
               },
             ],
           },

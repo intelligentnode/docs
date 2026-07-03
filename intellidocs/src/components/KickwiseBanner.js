@@ -7,7 +7,9 @@ import styles from './KickwiseBanner.module.css';
 // snoozes it for 24 hours so it doesn't nag, then it returns.
 const STORAGE_KEY = 'kickwise_banner_snoozed_until';
 const SNOOZE_MS = 24 * 60 * 60 * 1000; // 24 hours
-const KICKWISE_URL = 'https://kickwise.ai/';
+// utm_source tags the click so Kickwise's PostHog can count visitors arriving from these docs
+// (utm_content tells the popup apart from the footer link).
+const KICKWISE_URL = 'https://kickwise.ai/?utm_source=intellinode&utm_medium=referral&utm_campaign=docs&utm_content=popup';
 
 export default function KickwiseBanner() {
   const [visible, setVisible] = useState(false);
