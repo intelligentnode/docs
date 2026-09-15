@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+title: "AI Code Review, Fixes and Unit Tests in Node.js"
+sidebar_label: "Review & Fix Code"
+description: "Use IntelliNode Gen helpers in Node.js to generate unit tests, review, fix, explain, and convert code with Jest, Vitest, Mocha, or pytest."
+keywords: ["intellinode code review","node.js generate unit tests","node.js fix code ai","intellinode gen functions","generate commit message node.js","ai code explanation node.js"]
 ---
 
 # Review & Fix Code

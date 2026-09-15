@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Quick Start: AI Chatbot and Gen in Node.js"
+sidebar_label: "Quick start"
+description: "Install IntelliNode in Node.js and try chatbots, Gen helpers, and semantic search with OpenAI, Anthropic, and Gemini examples."
+keywords: ["intellinode quick start","intellinode node.js","npm install intellinode","node.js chatbot library","openai anthropic gemini node.js","semantic search node.js"]
 ---
 
 # Quick start

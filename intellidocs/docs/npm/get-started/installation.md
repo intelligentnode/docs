@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "Install IntelliNode for Node.js"
+sidebar_label: "Installation"
+description: "Install the IntelliNode Node.js package with npm or yarn, import it in JavaScript or TypeScript, and run the CLI for MCP server setup."
+keywords: ["install intellinode","intellinode npm install","node.js ai library install","intellinode typescript import","intellinode cli mcp","javascript ai package"]
 ---
 
 # Installation

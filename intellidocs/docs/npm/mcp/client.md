@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "MCP Client for Node.js Chatbots"
+sidebar_label: "MCP Client"
+description: "Use IntelliNode MCPClient to connect Node.js chatbots to MCP servers over stdio or Streamable HTTP, call tools, set timeouts, and load configs."
+keywords: ["intellinode mcp client","node.js mcp client","mcp stdio transport","mcp streamable http","node.js chatbot tools","model context protocol tools"]
 ---
 
 # MCP Client

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "Install Intelli for Python"
+sidebar_label: "Installation"
+description: "Install the Intelli Python library with pip or from source. Add optional extras for MCP, computer use, speech, offline models, and llama.cpp."
+keywords: ["install intelli python","pip install intelli","intelli python library","intelli optional extras","intelli mcp install","intelli llama.cpp"]
 ---
 
 # Installation

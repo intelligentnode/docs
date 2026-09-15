@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "MCP Server for Claude Code, Cursor and VS Code"
+sidebar_label: "MCP Server"
+description: "Run the IntelliNode MCP server with npx to give Claude Code, Cursor and VS Code AI tools on OpenAI, Anthropic, Gemini, Ollama and more."
+keywords: ["intellinode mcp server","node.js mcp server","mcp server coding assistant","intellinode npm mcp","openai anthropic gemini mcp","ollama mcp tools"]
 ---
 
 # MCP Server

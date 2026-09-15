@@ -1,5 +1,8 @@
 ---
-title: Frontend JS
+title: "AI in the Browser with Frontend JavaScript"
+sidebar_label: "Frontend JS"
+description: "Use IntelliNode in the browser via CDN to call AI chat, streaming, JSON, tools, and image APIs from OpenAI, Anthropic, Cohere, Gemini, and more."
+keywords: ["intellinode frontend javascript","intellinode browser cdn","javascript ai chat api","openai anthropic browser ai","stability ai image generation","browser llm streaming"]
 ---
 
 # Frontend Javascript

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "Generate APIs, SQL and Mock Data with AI in Node.js"
+sidebar_label: "Build APIs & SQL"
+description: "Generate API endpoints, SQL, JSON Schema, mock data, regex, and OpenAPI specs in Node.js using IntelliNode providers and framework options."
+keywords: ["node.js api code generation","intellinode generate sql","generate openapi spec node.js","generate json schema node.js","generate mock data node.js","ai regex generator javascript"]
 ---
 
 # Build APIs & SQL

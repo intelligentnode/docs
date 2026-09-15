@@ -1,5 +1,9 @@
 ---
 sidebar_position: 11
+title: "Input Templates for Python AI Flows"
+sidebar_label: "Templates"
+description: "Learn how to create and use Intelli flow templates in Python to format task input for agents, including TextInputTemplate with OpenAI text agents."
+keywords: ["python intelli templates","intelli flow templates","textinputtemplate python","intelli task template","python agent input template","openai text agent template"]
 ---
 
 # Templates

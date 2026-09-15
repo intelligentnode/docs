@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "MCP Client for Python Flows"
+sidebar_label: "MCP Client"
+description: "Learn how to call MCP tools from Intelli Python flows using local servers, HTTP endpoints, headers, SSE transport, timeouts, and tool parameters."
+keywords: ["python mcp client","intelli mcp agent","mcp tools python flow","mcp http client","mcp sse transport","intelli flow mcp"]
 ---
 # MCP Client
 

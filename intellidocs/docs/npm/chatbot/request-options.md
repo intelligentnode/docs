@@ -1,5 +1,9 @@
 ---
 sidebar_position: 6
+title: "Retries, Timeouts and Cancellation in Node.js"
+sidebar_label: "Retries & Timeouts"
+description: "Configure IntelliNode request timeouts, retries with backoff, AbortSignal cancellation, global defaults, and HTTP error handling in Node.js."
+keywords: ["intellinode request options","node.js chatbot retries","node.js request timeout","abortsignal intellinode","intellinode error handling","fetchclient configure"]
 ---
 
 # Retries & Timeouts

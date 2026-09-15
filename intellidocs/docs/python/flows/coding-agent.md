@@ -1,5 +1,9 @@
 ---
 sidebar_position: 14
+title: "AI Coding Agent in Python"
+sidebar_label: "Coding Agent"
+description: "Learn to run Intelli's Python coding agent on a workspace, edit files, run tests, and use coder agents in flows with OpenAI, Anthropic, or Gemini."
+keywords: ["intelli python coding agent","python ai coding agent","intelli coder flow","workspace file editing agent","run tests with ai agent","openai anthropic gemini agent"]
 ---
 # Coding Agent
 

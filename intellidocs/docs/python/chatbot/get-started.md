@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "AI Chatbot for OpenAI, Gemini and Mistral in Python"
+sidebar_label: "Get started"
+description: "Set up the Python chatbot with ChatModelInput and Chatbot. Use provider selection, default models, and GPT-5 options for OpenAI, Gemini, and Mistral."
+keywords: ["intelli python chatbot","python chatbot openai gemini","chatmodelinput intelli","intelli chatbot providers","gpt-5 python chatbot","pip install intelli"]
 ---
 
 # Get started

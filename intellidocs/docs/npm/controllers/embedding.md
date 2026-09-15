@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Text Embeddings in Node.js"
+sidebar_label: "Embedding"
+description: "Generate text embeddings in Node.js with IntelliNode. Use OpenAI, Cohere, Gemini, Nvidia, Replicate, vLLM, Ollama, and compatible providers."
+keywords: ["node.js embeddings","intellinode embedding","generate text embeddings","openai embeddings node.js","ollama embeddings node.js","cohere embeddings"]
 ---
 # Embedding
 

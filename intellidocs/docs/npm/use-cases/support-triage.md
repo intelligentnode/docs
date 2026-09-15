@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "AI Support Ticket Triage in Node.js"
+sidebar_label: "Support ticket triage"
+description: "Build support ticket triage with IntelliNode in Node.js using JSON Schema, tool calls, OpenAI, Claude, or private models to classify and escalate tickets."
+keywords: ["node.js support ticket triage","intellinode support automation","ai ticket classification node.js","openai support triage","claude ticket triage","json schema ai classification"]
 ---
 
 # Support ticket triage

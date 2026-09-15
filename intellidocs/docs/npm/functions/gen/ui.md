@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "Generate Web UI Components with AI in Node.js"
+sidebar_label: "Build Web UI"
+description: "Generate frontend components, forms, CSS, page sections, HTML pages, email templates, SVG icons, palettes, and design tokens with IntelliNode."
+keywords: ["intellinode web ui","node.js frontend generation","generate react component node.js","generate html page node.js","ai css generation","design tokens generator"]
 ---
 
 # Build Web UI

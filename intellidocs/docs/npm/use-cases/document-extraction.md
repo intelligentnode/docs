@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+title: "AI Document Data Extraction in Node.js"
+sidebar_label: "Document data extraction"
+description: "Extract invoice and contract data as validated JSON in Node.js using IntelliNode structured output, JSON Schema, OpenAI, summaries, and risk flags."
+keywords: ["node.js document extraction","intellinode structured output","extract invoice data json","json schema openai node.js","contract data extraction","npm intellinode"]
 ---
 
 # Document data extraction

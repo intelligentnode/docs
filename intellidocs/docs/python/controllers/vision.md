@@ -1,5 +1,9 @@
 ---
 sidebar_position: 6
+title: "Image Understanding with Vision Models in Python"
+sidebar_label: "Vision"
+description: "Learn how to use Intelli's Python Vision controller to generate image descriptions with OpenAI or Gemini using RemoteVisionModel and VisionModelInput."
+keywords: ["python vision controller","intelli image to text","openai vision python","gemini vision python","remotevisionmodel","visionmodelinput"]
 ---
 # Vision
 

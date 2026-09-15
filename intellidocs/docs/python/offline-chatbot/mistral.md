@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Run Mistral Offline in Python"
+sidebar_label: "Mistral"
+description: "Build an offline Mistral chatbot in Python with Intelli, Keras NLP, and Kaggle models. Add document based RAG using an IntelliNode key."
+keywords: ["python mistral chatbot","offline mistral python","intelli python library","keras nlp mistral","kaggle mistral model","mistral rag chatbot"]
 ---
 
 # Mistral

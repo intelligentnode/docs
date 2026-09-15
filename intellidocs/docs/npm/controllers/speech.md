@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+title: "Text to Speech in Node.js"
+sidebar_label: "Speech"
+description: "Convert text to speech in Node.js with IntelliNode using Google or OpenAI TTS. Configure language, gender, model, voice, and save audio files."
+keywords: ["node.js text to speech","intellinode speech synthesis","google text to speech node.js","openai tts node.js","node.js tts api","save speech audio node.js"]
 ---
 # Speech
 

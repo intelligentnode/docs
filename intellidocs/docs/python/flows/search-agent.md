@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+title: "Web and Semantic Search Agent in Python"
+sidebar_label: "Search Agent"
+description: "Use the Intelli Python Search Agent to add Google web search or Intellicloud semantic search to flows with query input and result settings."
+keywords: ["intelli python search agent","python ai search flow","google custom search python agent","intellicloud semantic search","intelli flow agents","python document search agent"]
 ---
 
 # Search Agent

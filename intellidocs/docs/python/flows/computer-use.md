@@ -1,5 +1,9 @@
 ---
 sidebar_position: 13
+title: "Computer Use Agent in Python"
+sidebar_label: "Computer Use"
+description: "Learn how to run Intelli computer use agents in Python with Playwright browser environments, Anthropic or OpenAI tools, safety hooks, and flows."
+keywords: ["python computer use agent","intelli computer agent","anthropic computer use python","openai computer use python","playwright browser agent","intelli flows computer use"]
 ---
 # Computer Use
 

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 6
+title: "Generate Marketing Copy and SEO Tags in Node.js"
+sidebar_label: "Write Marketing Copy"
+description: "Generate marketing descriptions, blog posts, landing copy, FAQs, SEO meta, translations, images, and speech using the IntelliNode Node.js library."
+keywords: ["intellinode marketing copy","node.js ai copy generation","generate seo meta node.js","ai landing page copy","node.js text to speech","generate image from description"]
 ---
 
 # Write Marketing Copy

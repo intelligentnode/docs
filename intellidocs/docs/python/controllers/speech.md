@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "Text to Speech in Python"
+sidebar_label: "Speech"
+description: "Generate text to speech audio in Python with Intelli using RemoteSpeechModel and Text2SpeechInput. Covers Google and OpenAI TTS providers."
+keywords: ["python text to speech","intelli speech controller","remote speech model","text2speechinput","google tts python","openai tts python"]
 ---
 # Speech
 

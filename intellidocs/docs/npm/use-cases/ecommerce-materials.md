@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "AI Ecommerce Product Content in Node.js"
+sidebar_label: "Ecommerce materials"
+description: "Generate ecommerce product descriptions, image prompts, images, and speech in Node.js using IntelliNode with OpenAI, Cohere, Stability, and Google."
+keywords: ["intellinode ecommerce materials","node.js product description ai","node.js ai image generation","intellinode text to speech","openai cohere stability google ai"]
 ---
 
 # Ecommerce materials
@@ -21,7 +25,7 @@ The `generateProductDescription()` function utilizes the `RemoteLanguageModel` c
 ```javascript
 async function generateProductDescription(textInput, apiKey, modelBackend) {
   // available models: OPENAI or COHERE
-  const modelName = (modelBackend === IntelliNode.SupportedLangModels.OPENAI) ? 'text-davinci-003' : 'command';
+  const modelName = (modelBackend === IntelliNode.SupportedLangModels.OPENAI) ? 'gpt-3.5-turbo-instruct' : 'command-a-03-2025';
   const langModel = new IntelliNode.RemoteLanguageModel(apiKey, modelBackend);
   const results = await langModel.generateText(new IntelliNode.LanguageModelInput({
     prompt: textInput,
@@ -38,7 +42,7 @@ The `getImageDescription()` function uses the `Chatbot` class to generate tuned 
 ```javascript
 async function getImageDescription(textInput, openaiKey) {
   const chatbot = new IntelliNode.Chatbot(openaiKey);
-  const input = new IntelliNode.ChatGPTInput('generate image description from paragraph to use it as prompt to generate image from DALL·E or stable diffusion image model. return only the image description to use it as direct input');
+  const input = new IntelliNode.ChatGPTInput('generate image description from paragraph to use it as prompt to generate image from gpt-image-2 or stable diffusion image model. return only the image description to use it as direct input');
   input.addUserMessage(textInput);
   const responses = await chatbot.chat(input);
   return responses[0].trim();
@@ -46,7 +50,7 @@ async function getImageDescription(textInput, openaiKey) {
 ```
 
 ### 3. Generate images 
-The `generateImage()` function uses the `RemoteImageModel` class, which generates images from the description text. The generated images use stable diffusion or DALL·E models.
+The `generateImage()` function uses the `RemoteImageModel` class, which generates images from the description text. The generated images use stable diffusion or OpenAI gpt-image-2 models.
 
 ```javascript
 async function generateImage(imageText, apiKey, modelBackend) {

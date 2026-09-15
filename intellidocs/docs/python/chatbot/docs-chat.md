@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+title: "Chat With Your Documents in Python"
+sidebar_label: "Chat with docs"
+description: "Learn how to connect Intelli Python Chatbot to indexed documents using IntelliNode One Key, Mistral, and attach_reference for source references."
+keywords: ["intelli python chatbot docs","python chatbot document references","intellinode one key","chatbot with external documents","mistral chatbot python","attach_reference intelli"]
 ---
 
 # Chat with docs

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "Compare and Evaluate LLMs in Node.js"
+sidebar_label: "LLM evaluation"
+description: "Learn to compare LLM responses in Node.js with IntelliNode using cosine similarity and Euclidean distance across OpenAI, Cohere, Replicate, and Gemini."
+keywords: ["node.js llm evaluation","intellinode llm evaluation","compare llm responses","cosine similarity llm","euclidean distance llm","openai cohere replicate gemini"]
 ---
 
 # LLM evaluation

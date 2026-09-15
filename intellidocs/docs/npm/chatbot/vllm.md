@@ -1,5 +1,9 @@
 ---
 sidebar_position: 8
+title: "Self-Hosted vLLM Models in Node.js"
+sidebar_label: "vLLM Integration"
+description: "Learn how to connect IntelliNode to self-hosted vLLM servers for chat completions, DeepSeek examples, embeddings, and RAG with One Key."
+keywords: ["intellinode vllm","node.js vllm integration","vllm chat completion","vllm embeddings node.js","self hosted vllm chatbot","deepseek vllm example"]
 ---
 
 # vLLM Integration

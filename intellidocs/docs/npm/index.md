@@ -1,6 +1,9 @@
 ---
 slug: /npm
-title: Introduction
+title: "Open Source AI Library for Node.js"
+sidebar_label: "Introduction"
+description: "Open source Node.js AI library with one API for OpenAI, Claude, Gemini, Mistral and local models, plus tool calling, a coding agent and an MCP server."
+keywords: ["intellinode node.js","npm intellinode","node.js ai framework","openai claude gemini node.js","mcp server node.js","ai chatbot node.js"]
 ---
 
 # Introduction

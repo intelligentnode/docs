@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "Structured JSON Output from LLMs in Node.js"
+sidebar_label: "Structured output"
+description: "Use IntelliNode chatJson to request parsed JSON with JSON Schema validation across OpenAI, Anthropic, Gemini, Mistral, Cohere and compatible APIs."
+keywords: ["node.js structured output","intellinode chatjson","json schema llm response","openai json schema node.js","anthropic json output","gemini structured output"]
 ---
 
 # Structured output

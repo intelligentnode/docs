@@ -1,5 +1,9 @@
 ---
 sidebar_position: 9
+title: "Chat With Your Documents in Node.js"
+sidebar_label: "Chat with docs"
+description: "Build document-aware chatbots in Node.js with IntelliNode One Key, connecting your uploaded files to OpenAI, Gemini, Mistral or Llama."
+keywords: ["intellinode chatbot docs","node.js chat with documents","openai document chatbot","gemini document chatbot","mistral chatbot node.js","llama chatbot node.js"]
 ---
 
 # Chat with docs

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "Gen: One-Line AI Functions for Node.js"
+sidebar_label: "Gen"
+description: "One-line AI functions for Node.js: generate UI components, APIs, SQL, unit tests, code reviews and marketing copy with any provider using IntelliNode Gen."
+keywords: ["intellinode gen","node.js ai generation","node.js openai helpers","ai code generation node.js","llm content generation","intellinode npm"]
 ---
 
 # Gen

@@ -1,10 +1,14 @@
 ---
 sidebar_position: 7
+title: "NVIDIA DeepSeek and Llama Chat in Node.js"
+sidebar_label: "DeepSeek & Llama"
+description: "Build NVIDIA chatbots with IntelliNode in Node.js using DeepSeek and Llama models, multi-turn messages, and One Key document integration."
+keywords: ["intellinode nvidia chat","node.js deepseek chatbot","node.js llama chatbot","nvidia nim node.js","nvidia chatbot api","intellinode one key"]
 ---
 
 # DeepSeek & Llama
 
-Intellinode supports NVIDIA’s latest language models—**Deepseek** and **Llama**—via a unified chatbot interface. 
+Intellinode supports NVIDIA’s latest language models, **Deepseek** and **Llama**, via a unified chatbot interface. 
 With minimal code changes, you can switch between NVIDIA, OpenAI, and other providers.
 
 ## Supported Models
@@ -72,7 +76,7 @@ responses.forEach(resp => console.log("- " + resp));
 
 ### Docs Chat Integration with NVIDIA
 
-Intellinode Cloud allows you to connect your data to various chatbot engines—including NVIDIA Chat—to tailor responses based on your uploaded documents or images.
+Intellinode Cloud allows you to connect your data to various chatbot engines, including NVIDIA Chat, to tailor responses based on your uploaded documents or images.
 
 **How to set up Intellinode Cloud with your data:**
 1. Visit the **[IntelliNode App](https://app.intellinode.ai/)**.

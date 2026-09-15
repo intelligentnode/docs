@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Multi-Model AI Travel Assistant in Python"
+sidebar_label: "Multi Model Assistant"
+description: "Build a multi-model travel assistant in Python with Intelli agents for itineraries, images, vision and speech across OpenAI, Mistral and Stability."
+keywords: ["python travel assistant","intelli multi model assistant","python ai agents","openai mistral stability elevenlabs","multimodal ai python","intelli flow example"]
 ---
 
 # Multi Model Assistant

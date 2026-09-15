@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "AI Coding Agent for Node.js"
+sidebar_label: "Coding Agent"
+description: "Use the IntelliNode CodingAgent in Node.js to edit a workspace, run tests, and automate code fixes with OpenAI, Anthropic, Gemini, Mistral, Cohere, or Ollama."
+keywords: ["intellinode coding agent","node.js coding agent","npm intellinode agent","automated code fixes node.js","workspace toolkit node.js","ai agent run tests"]
 ---
 
 # Coding Agent

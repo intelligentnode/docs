@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "AI Image Generation in Python"
+sidebar_label: "Image generation"
+description: "Generate images from text prompts with Intelli for Python. Configure RemoteImageModel and ImageModelInput for OpenAI or Stability providers."
+keywords: ["python image generation","intelli image generation","remoteimagemodel python","openai image generation python","stability image generation","imagemodelinput"]
 ---
 # Image generation
 

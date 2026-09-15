@@ -1,5 +1,9 @@
 ---
 sidebar_position: 6
+title: "LLM Routing and Provider Fallbacks in Node.js"
+sidebar_label: "Model routing and resilience"
+description: "Build Node.js chatbot routing with fallbacks, retries, timeouts, and cancellation using IntelliNode across OpenAI, Anthropic, OpenRouter, and Ollama."
+keywords: ["node.js model routing","intellinode chatbot fallback","llm provider fallback","openai anthropic routing","openrouter ollama node.js","node.js ai resilience"]
 ---
 
 # Model routing and resilience

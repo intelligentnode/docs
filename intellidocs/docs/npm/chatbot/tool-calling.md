@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "LLM Tool Calling in Node.js"
+sidebar_label: "Tool calling"
+description: "Learn how to define tools and run tool loops in the IntelliNode Node.js chatbot library for OpenAI, Anthropic, Gemini, Mistral, Nvidia, and local models."
+keywords: ["intellinode tool calling","node.js chatbot tools","runtools intellinode","openai function calling node.js","anthropic tool use node.js","gemini tool calling node.js"]
 ---
 
 # Tool calling

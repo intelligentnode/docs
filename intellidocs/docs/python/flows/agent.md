@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "AI Agents in Python Flows"
+sidebar_label: "Agent"
+description: "Create Intelli agents in Python for text, image, vision, speech, embeddings, search, MCP, coding and computer use tasks in one flow."
+keywords: ["intelli python agent","python ai agent executor","intelli agent types","openai gemini stability python","python mcp agent","intelli flow agent"]
 ---
 # Agent
 

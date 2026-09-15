@@ -1,6 +1,10 @@
 ---
 sidebar_position: 1
 slug: /python/vibe-agents
+title: "Vibe Agents: AI Flows from Natural Language"
+sidebar_label: "Vibe Agents"
+description: "Build Intelli VibeAgent flows from natural language in Python. Use OpenAI, Gemini, or Anthropic planners for text, image, audio, and tool tasks."
+keywords: ["python vibeagent","intelli vibe agents","ai flow orchestration python","natural language agents","multimodal ai agents","openai gemini anthropic agents"]
 ---
 
 # Vibe Agents

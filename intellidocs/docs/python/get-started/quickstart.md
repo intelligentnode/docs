@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Quick Start: AI Chatbot and Flows in Python"
+sidebar_label: "Quick start"
+description: "Install the Intelli Python library and run examples for chatbots, vision, and sequence flows using OpenAI, Mistral, Gemini, and Stability."
+keywords: ["intelli python quickstart","pip install intelli","python ai chatbot library","intelli vision python","intelli sequence flow","openai mistral gemini python"]
 ---
 
 # Quick start

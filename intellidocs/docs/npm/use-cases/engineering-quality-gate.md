@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "AI Code Review Quality Gate for CI in Node.js"
+sidebar_label: "Engineering quality gate"
+description: "Build a CI quality gate with IntelliNode for PR review, Jest test generation, coding agent fixes, commit messages, and release notes."
+keywords: ["node.js quality gate","intellinode ci workflow","ai pull request review","generate jest tests","coding agent test fixes","ai commit message generation"]
 ---
 
 # Engineering quality gate

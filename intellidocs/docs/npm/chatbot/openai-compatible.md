@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+title: "OpenAI-Compatible APIs in Node.js: OpenRouter, Ollama"
+sidebar_label: "OpenAI-compatible providers"
+description: "Use IntelliNode with OpenRouter, Groq, DeepSeek, xAI, Together, Ollama, LM Studio, or custom OpenAI chat completions endpoints."
+keywords: ["intellinode openai compatible","node.js openai compatible api","openrouter node.js chatbot","ollama node.js chat completions","groq deepseek xai together node.js","lm studio node.js embeddings"]
 ---
 
 # OpenAI-compatible providers

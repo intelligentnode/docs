@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+title: "Speech Recognition in Python"
+sidebar_label: "Recognition"
+description: "Use Intelli in Python to convert audio to text with OpenAI, offline Keras Whisper, ElevenLabs, or Speechmatics speech recognition providers."
+keywords: ["python speech recognition","intelli recognition controller","audio to text python","openai whisper transcription","keras whisper offline","speechmatics python"]
 ---
 
 # Recognition

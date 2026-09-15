@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "AI Controllers for Python"
+sidebar_label: "Introduction"
+description: "Learn how Intelli controllers provide a unified Python interface for AI services including embeddings, image generation, speech synthesis, and vision."
+keywords: ["python intelli controllers","intelli framework controllers","python ai controllers","text embeddings python","image generation controller","speech synthesis python"]
 ---
 # Introduction
 

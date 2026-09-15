@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Ask Any AI Model for Text or JSON in Node.js"
+sidebar_label: "Ask Any Model"
+description: "Use IntelliNode Gen in Node.js to generate text, parse JSON with schemas, and update outputs across providers like OpenAI, Anthropic, and Cohere."
+keywords: ["intellinode gen node.js","node.js generate text ai","generate json schema ai","openai anthropic cohere node.js","intellinode generate_json","intellinode generate_text"]
 ---
 
 # Ask Any Model

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "Get Started with MCP in Node.js"
+sidebar_label: "Get Started with MCP"
+description: "Set up IntelliNode MCP servers and clients in Node.js. Connect Claude Code, Cursor, VS Code, chatbots, and cross-provider AI tools."
+keywords: ["intellinode mcp","node.js mcp client","node.js mcp server","model context protocol node.js","claude code mcp setup","cursor vscode mcp"]
 ---
 
 # Get Started with MCP

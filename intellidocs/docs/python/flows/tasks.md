@@ -1,5 +1,9 @@
 ---
 sidebar_position: 7
+title: "Tasks in Python AI Flows"
+sidebar_label: "Tasks"
+description: "Define and configure Intelli workflow tasks in Python with agent inputs, pre and post processing, templates, logging, and model parameters."
+keywords: ["python intelli tasks","intelli workflow tasks","python ai workflow task","intelli task preprocessing","intelli agent task configuration"]
 ---
 # Tasks
 
