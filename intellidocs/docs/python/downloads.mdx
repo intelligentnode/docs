@@ -15,11 +15,6 @@ Only the `pip` and `uv` installers are counted. Mirror traffic and crawlers pull
 the wheel and the source archive in equal pairs, which would otherwise dominate
 the numbers.
 
-Two things to keep in mind when reading this. A download is not a user, since one
-CI pipeline can install the package many times a day. Country reflects where the
-machine sits, so runners hosted in a cloud region show up as that region rather
-than the country of the developer.
-
 The data comes from the public PyPI dataset that ClickHouse hosts. To run the same
 query yourself:
 
