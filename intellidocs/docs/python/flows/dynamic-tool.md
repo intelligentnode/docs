@@ -62,7 +62,7 @@ Agent(
 )
 ```
 
-> **Gemini note:** Intelli forwards `tools` to Gemini text models too. Use the same OpenAI-style `tools` schema above when provider is `"gemini-2.5-flash"`.
+> **Gemini note:** Intelli forwards `tools` to Gemini text models too. Use the same OpenAI-style `tools` schema above when provider is `"gemini"`.
 
 ### MCP Agent
 

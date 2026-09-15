@@ -35,7 +35,7 @@ call_chatbot("openai", "gpt-5.5")
 call_chatbot("mistral", "mistral-large-latest")
 
 # call google gemini
-call_chatbot("gemini-2.5-flash")
+call_chatbot("gemini", "gemini-2.5-flash")
 
 ```
 

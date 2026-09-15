@@ -97,6 +97,45 @@ http_mcp_agent = Agent(
 # ... (rest is the same - create task, flow, etc.) ...
 ```
 
+## Connecting to a Third Party Server
+
+Most hosted MCP servers need an API key, and some of them expose the SSE transport instead of the streamable HTTP one. Pass those options in the same `model_params`:
+
+```python
+remote_agent = Agent(
+    agent_type=AgentTypes.MCP.value,
+    provider="mcp",
+    mission="Call a hosted tool",
+    model_params={
+        "url": "https://tools.example.com/mcp",
+        "headers": {"Authorization": f"Bearer {API_TOKEN}"},
+        "transport": "sse",        # use it when the server exposes /sse
+        "timeout": 30,             # seconds allowed per call
+        "tool": "search",
+        "arg_query": "intelli framework",
+    }
+)
+```
+
+The same options are available on the wrapper when you call tools directly:
+
+```python
+from intelli.wrappers.mcp_wrapper import MCPWrapper
+from intelli.wrappers.mcp_config import http_server_config, sse_server_config
+
+wrapper = MCPWrapper(http_server_config(
+    "https://tools.example.com/mcp",
+    headers={"Authorization": f"Bearer {API_TOKEN}"},
+    timeout=30,
+))
+
+with wrapper.connect():
+    tools = wrapper.discover_tools()
+    result = wrapper.execute_tool("search", {"query": "intelli framework"})
+```
+
+Use `sse_server_config` with the same arguments for the SSE transport, and `websocket_server_config` for a WebSocket server.
+
 ## Generate flow visualization
 ```python
 graph_path = flow.generate_graph_img(

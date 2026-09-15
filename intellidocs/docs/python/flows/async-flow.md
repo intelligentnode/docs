@@ -26,7 +26,7 @@ Define the agents that correspond to the services your tasks will use. Each agen
 ```python
 from intelli.flow import Agent
 
-text_generator = Agent("text", "gemini-2.5-flash", "write specifications", {"key": GEMINI_API_KEY, "model": "gemini"})
+text_generator = Agent("text", "gemini", "write specifications", {"key": GEMINI_API_KEY, "model": "gemini-2.5-flash"})
 task_creator = Agent("text", "openai", "create task list", {"key": OPENAI_API_KEY, "model": "gpt-5.5"})
 ux_designer = Agent("text", "openai", "user experience and designer", {"key": OPENAI_API_KEY, "model": "gpt-5.5"})
 image_desc_creator = Agent("text", "openai", "write image description", {"key": OPENAI_API_KEY, "model": "gpt-5.5"})
