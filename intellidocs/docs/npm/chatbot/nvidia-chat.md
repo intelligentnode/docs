@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 7
 ---
 
 # DeepSeek & Llama
@@ -12,7 +12,7 @@ With minimal code changes, you can switch between NVIDIA, OpenAI, and other prov
 Sample of supported models with much more available using Intellinode Nvidia connector:
 | Model Name                  | 
 |-----------------------------|
-| deepseek-ai/deepseek-r1     |
+| deepseek-ai/deepseek-v4-flash-0731 |
 | meta/llama-3.3-70b-instruct |
 | tiiuae/falcon3-7b-instruct |
 
@@ -39,7 +39,7 @@ Construct a chat input using the `NvidiaInput` class and add your message(s):
 
 ```javascript
 const input = new NvidiaInput("You are a helpful assistant.", {
-  model: 'deepseek-ai/deepseek-r1', // Use Deepseek or NVIDIA Llama model
+  model: 'deepseek-ai/deepseek-v4-flash-0731', // Use Deepseek or NVIDIA Llama model
   maxTokens: 512,
   temperature: 0.6
 });
@@ -59,7 +59,7 @@ Nvidia Chat supports multi-turn conversations just like other chatbot models:
 
 ```javascript
 const input = new NvidiaInput("You are an insightful assistant.", {
-  model: 'deepseek-ai/deepseek-r1',
+  model: 'deepseek-ai/deepseek-v4-flash-0731',
   maxTokens: 512,
   temperature: 0.6
 });
@@ -92,7 +92,7 @@ const intelliKey = '<generated_one_key>';
 const nvidiaBot = new Chatbot(NVIDIA_API_KEY, SupportedChatModels.NVIDIA, null, { oneKey: intelliKey });
 
 const input = new NvidiaInput("You are a helpful assistant.", {
-  model: 'deepseek-ai/deepseek-r1',
+  model: 'deepseek-ai/deepseek-v4-flash-0731',
   maxTokens: 512,
   temperature: 0.6
 });

@@ -7,7 +7,8 @@ sidebar_position: 1
 Intellinode simplifies the integration of a wide range of AI models into your javascript application.
 
 ### System Requirements
-- npm (Node Package Manager) or yarn.
+- Node.js 18 or newer.
+- npm (Node Package Manager), pnpm or yarn.
 
 ### Installation Methods
 
@@ -34,3 +35,24 @@ Import intellinode into your project to start leveraging the wide array of AI ca
 const { Chatbot, Gen, SemanticSearch } = require('intellinode');
 ```
 
+### TypeScript
+
+The package ships its own declarations (`index.d.ts`), so every class, input and `Gen` function is typed without an extra `@types` package:
+
+```typescript
+import { Chatbot, ChatGPTInput, Gen } from 'intellinode';
+```
+
+### Browser
+
+The same library is available as a single file for the browser, see the [Frontend JS](../frontend) page.
+
+### Command line
+
+The package installs the `intellinode` command, used to start the MCP server for coding assistants:
+
+```bash
+npx intellinode mcp
+```
+
+See the [MCP](../mcp/get-started) section for the details.

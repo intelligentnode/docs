@@ -82,7 +82,26 @@ const sidebars = {
     {
       type: 'category',
       label: 'Chatbot',
-      items: ['npm/chatbot/get-started', 'npm/chatbot/multiple-messages', 'npm/chatbot/nvidia-chat', 'npm/chatbot/vllm', 'npm/chatbot/docs-chat', ],
+      items: ['npm/chatbot/get-started', 'npm/chatbot/multiple-messages', 'npm/chatbot/tool-calling', 'npm/chatbot/structured-output', 'npm/chatbot/openai-compatible', 'npm/chatbot/request-options', 'npm/chatbot/nvidia-chat', 'npm/chatbot/vllm', 'npm/chatbot/docs-chat'],
+    },
+    {
+      type: 'category',
+      label: 'Gen',
+      link: {
+        type: 'doc',
+        id: 'npm/functions/gen/index',
+      },
+      items: ['npm/functions/gen/text', 'npm/functions/gen/ui', 'npm/functions/gen/backend', 'npm/functions/gen/code', 'npm/functions/gen/content'],
+    },
+    {
+      type: 'category',
+      label: 'Agents',
+      items: ['npm/agents/coding-agent'],
+    },
+    {
+      type: 'category',
+      label: 'MCP',
+      items: ['npm/mcp/get-started', 'npm/mcp/server', 'npm/mcp/client'],
     },
     {
       type: 'category',
@@ -92,7 +111,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Functions',
-      items: ['npm/functions/gen', 'npm/functions/semantic-search', 'npm/functions/text-analyzer', 'npm/functions/llm-evaluation'],
+      items: ['npm/functions/semantic-search', 'npm/functions/text-analyzer', 'npm/functions/llm-evaluation'],
     },
     {
       type: 'category',

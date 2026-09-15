@@ -4,14 +4,15 @@ title: Frontend JS
 
 # Frontend Javascript
 
-This guide shows how to integrate IntelliNode on your browser. You can load **intellinode.min.js** via CDN and quickly call AI models such as **OpenAI**, **Cohere**, **Mistral**, **Gemini**, **Nvidia**, and **Stability AI** directly from the browser without backend infrastructure.
+This guide shows how to integrate IntelliNode on your browser. You can load **intellinode.min.js** via CDN and quickly call AI models such as **OpenAI**, **Anthropic**, **Cohere**, **Mistral**, **Gemini**, **Nvidia**, **OpenRouter** and **Stability AI** directly from the browser without backend infrastructure.
 
 **Key Features:**
-- 🤖 **Multi-Provider Support**: Unified API for multiple AI providers.
-- 💬 **Chat Models**: GPT-5, Command-A, Mistral, and more.
+- 🤖 **Multi-Provider Support**: Unified API for multiple AI providers, including the OpenAI-compatible services.
+- 💬 **Chat Models**: GPT-5.5, Claude Sonnet 5, Command A, Mistral, and more.
+- 🛠️ **Tool calling and JSON**: `runTools` and `chatJson` work in the browser as in Node.
 - 🎨 **Image Generation & Transformation**: Stability AI integration with style controls.
 - 🔄 **Streaming Support**: Real-time response streaming for chat models.
-- 📦 **Zero Dependencies**: Self-contained browser library.
+- 📦 **Zero Dependencies**: Self-contained browser library (the Node-only pieces, the MCP server and the coding agent, are left out).
 
 ## 1. Include Intellinode via CDN
 
@@ -22,7 +23,7 @@ Add a `<script>` tag in your HTML:
 
 *Alternative mirror link:*
 ```HTML
-<script src="https://unpkg.com/intellinode@2.2.1/front/intellinode.min.js"></script>
+<script src="https://unpkg.com/intellinode@latest/front/intellinode.min.js"></script>
 ```
 
 Once loaded, all IntelliNode classes are available under the global `IntelliNode` namespace.
@@ -33,7 +34,7 @@ The `Chatbot` class provides a unified interface for interacting with multiple A
 
 ### OpenAI Code
 
-OpenAI models including GPT-5, GPT-4o, and o3-mini are supported.
+OpenAI models including GPT-5.5 (default), GPT-5.4 and GPT-4.1 are supported.
 
 ```Javascript
 async function callOpenAI(apiKey, userPrompt) {
@@ -43,7 +44,7 @@ async function callOpenAI(apiKey, userPrompt) {
 
     // Prepare ChatGPT input with optional parameters
     const input = new IntelliNode.ChatGPTInput("You are a helpful assistant.", {
-      model: "gpt-5",
+      model: "gpt-5.5",
     });
     input.addUserMessage(userPrompt);
 
@@ -66,12 +67,35 @@ console.log("OpenAI says:", openaiResult);
 **Multi-turn Conversation:**
 ```Javascript
 const input = new IntelliNode.ChatGPTInput("You are a helpful assistant.", {
-  model: "gpt-4o"
+  model: "gpt-5.5"
 });
 input.addUserMessage("What is the capital of France?");
 input.addAssistantMessage("The capital of France is Paris.");
 input.addUserMessage("What's the population?");
 // Continue the conversation with context
+```
+
+### Anthropic Code
+
+Claude models work from the browser; the library sends the header Anthropic requires for direct browser access.
+
+```Javascript
+async function callClaude(apiKey, userPrompt) {
+  try {
+    const chatbot = new IntelliNode.Chatbot(apiKey, "anthropic");
+
+    const input = new IntelliNode.AnthropicInput("You are a helpful assistant.", {
+      model: "claude-sonnet-5",     // or claude-opus-5, claude-fable-5-1, claude-haiku-4-5
+      maxTokens: 2048
+    });
+    input.addUserMessage(userPrompt);
+
+    const responses = await chatbot.chat(input);
+    return responses[0] || "(No response)";
+  } catch (err) {
+    return "Anthropic Error: " + err.message;
+  }
+}
 ```
 
 ### Cohere Code
@@ -86,7 +110,7 @@ async function callCohere(apiKey, userPrompt) {
 
     // Prepare Cohere input with optional parameters
     const input = new IntelliNode.CohereInput("You are a helpful assistant.", {
-      model: "command-a-03-2025",  // Supported: command-a-03-2025, command-r7b-12-2024
+      model: "command-a-03-2025",  // Supported: command-a-03-2025, command-a-plus-05-2026, command-r7b-12-2024
       temperature: 0.7,             // Control creativity
       max_tokens: 1000              // Maximum response length
     });
@@ -118,7 +142,7 @@ async function callMistral(apiKey, userPrompt) {
     const chatbot = new IntelliNode.Chatbot(apiKey, "mistral");
     
     const input = new IntelliNode.MistralInput("You are a helpful assistant.", {
-      model: "mistral-large",       // Supported: mistral-tiny, mistral-medium, mistral-large
+      model: "mistral-medium-latest",  // Supported: mistral-medium-latest, mistral-small-latest, magistral-medium-latest
       temperature: 0.7,
       max_tokens: 1000
     });
@@ -142,7 +166,7 @@ async function callNvidia(apiKey, userPrompt) {
     const chatbot = new IntelliNode.Chatbot(apiKey, "nvidia");
     
     const input = new IntelliNode.NvidiaInput("You are a helpful assistant.", {
-      model: "meta/llama-3.3-70b-instruct",  // or deepseek-ai/deepseek-r1
+      model: "deepseek-ai/deepseek-v4-flash-0731",  // or another model from build.nvidia.com
       temperature: 0.7,
       max_tokens: 1024
     });
@@ -166,7 +190,7 @@ async function callGemini(apiKey, userPrompt) {
     const chatbot = new IntelliNode.Chatbot(apiKey, "gemini");
     
     const input = new IntelliNode.GeminiInput("You are a helpful assistant.", {
-      model: "gemini-pro",
+      model: "gemini-3.6-flash",
       temperature: 0.7
     });
     input.addUserMessage(userPrompt);
@@ -178,6 +202,33 @@ async function callGemini(apiKey, userPrompt) {
   }
 }
 ```
+
+### Tool calling and JSON output
+
+The tool loop and the structured output work in the browser too:
+
+```Javascript
+const tools = [{
+  name: "get_weather",
+  description: "Current weather for a city",
+  parameters: { type: "object", properties: { city: { type: "string" } }, required: ["city"] },
+  handler: async ({ city }) => ({ city, tempC: 22 }),
+}];
+
+const chatbot = new IntelliNode.Chatbot(apiKey, "openai");
+const input = new IntelliNode.ChatGPTInput("You are a weather assistant.");
+input.addUserMessage("What is the weather in Paris?");
+
+const { text } = await chatbot.runTools(input, tools);
+
+const jsonInput = new IntelliNode.ChatGPTInput("Answer as JSON.", {
+  responseSchema: { type: "object", properties: { city: { type: "string" } } }
+});
+jsonInput.addUserMessage("Where is the Eiffel Tower?");
+const data = await chatbot.chatJson(jsonInput);   // { city: "Paris" }
+```
+
+OpenRouter and the other OpenAI-compatible services that allow browser requests work through `new IntelliNode.Chatbot(key, "openrouter")` with `IntelliNode.OpenAICompatibleInput`.
 
 ## 3. Image Generation & Transformation
 
@@ -283,5 +334,5 @@ IntelliNode provides ready-to-use frontend samples:
 
 ## Notes
 1. Avoid embedding raw API keys directly in your front-end code, and let the user enter their keys.
-2. This browser-based approach has been tested with OpenAI and Cohere models.
-3. Some models, such as Anthropic, do not support client-side connections.
+2. This browser-based approach has been tested with OpenAI, Anthropic and Cohere models.
+3. Some providers block browser requests with CORS; a small backend or the `openai_compatible` provider pointed at your own proxy solves that.
