@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "AI Chatbot for OpenAI, Claude and Gemini in Node.js"
+sidebar_label: "Get started"
+description: "Set up the IntelliNode Node.js chatbot interface for OpenAI, Claude, Gemini, Mistral, Cohere, NVIDIA, vLLM, and compatible providers."
+keywords: ["intellinode chatbot node.js","npm intellinode get started","node.js ai chatbot library","openai claude gemini node.js","unified chatbot api","openai compatible providers"]
 ---
 
 # Get started
@@ -207,21 +211,21 @@ console.log('Chatbot response:' + response);
 
 ##### Prerequisite to Integrate AWS SageMaker and IntelliNode
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s1_sagemaker.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s1_sagemaker.png" alt="AWS SageMaker console" width="500em" />
 
 The steps to leverage AWS SageMaker for hosting the **Llama model**:
 
 1. **Create a SageMaker Domain**: Begin by setting up a domain on your AWS SageMaker. This step establishes a controlled space for your SageMaker operations.
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/step_domain.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/step_domain.png" alt="Create a SageMaker domain" width="500em" />
 
 2. **Deploy the Llama Model**: Utilize SageMaker JumpStart to deploy the Llama model you plan to integrate.
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s2_jumpstart.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s2_jumpstart.png" alt="Deploy the Llama model with SageMaker JumpStart" width="500em" />
 
 3. **Copy the Endpoint Name**: Once you have a model deployed, make sure to note the endpoint name, which is crucial for future steps.
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s3_endpoint.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s3_endpoint.png" alt="SageMaker endpoint name" width="500em" />
 
 4. **Create a Node.js Lambda Function**: AWS Lambda allows running the back-end code without managing servers. Create a Node.js lambda function to use for integrating the deployed model.
 
@@ -231,8 +235,8 @@ The steps to leverage AWS SageMaker for hosting the **Llama model**:
 
 7. **API Gateway Configuration**: Click on the "Add trigger" option on the Lambda function page, and select "API Gateway" from the list of available triggers.
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s4_lambda_trigger.png" width="500em" />
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s5_gateway.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s4_lambda_trigger.png" alt="Add an API Gateway trigger to the Lambda function" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s5_gateway.png" alt="API Gateway trigger settings" width="500em" />
 
 8. **Lambda Function Settings**: Update the lambda role to grant necessary permissions to access SageMaker endpoints. Additionally, the function's timeout period should be extended to accommodate the processing time. Make these adjustments in the "Configuration" tab of your Lambda function.
 

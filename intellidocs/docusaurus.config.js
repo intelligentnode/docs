@@ -6,14 +6,74 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 
+// The site is served from the root domain; docs.intellinode.ai and intellinode.ai redirect here.
+const siteUrl = 'https://www.intellinode.ai';
+const siteDescription = 'Open source AI framework for Python and Node.js: one API for OpenAI, Anthropic, Gemini and local models, with agents, MCP and model evaluation.';
+
+// Structured data for search engines: the organization, the site name and the two libraries.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: 'IntelliNode',
+      url: siteUrl,
+      logo: `${siteUrl}/img/logo-dark.png`,
+      sameAs: [
+        'https://github.com/intelligentnode',
+        'https://www.linkedin.com/company/intellinode-inc',
+        'https://www.npmjs.com/package/intellinode',
+        'https://pypi.org/project/intelli/',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      name: 'IntelliNode',
+      url: siteUrl,
+      description: siteDescription,
+      inLanguage: 'en',
+      publisher: {'@id': `${siteUrl}/#organization`},
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      name: 'Intelli',
+      description: 'Open source Python framework for AI agents, multi-model flows, MCP and chatbots across OpenAI, Anthropic, Gemini and local models.',
+      url: `${siteUrl}/docs/python`,
+      codeRepository: 'https://github.com/intelligentnode/Intelli',
+      programmingLanguage: 'Python',
+      license: 'https://www.apache.org/licenses/LICENSE-2.0',
+      publisher: {'@id': `${siteUrl}/#organization`},
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      name: 'IntelliNode',
+      description: 'Open source Node.js library with one API for every AI model, tool calling, structured output, a coding agent and an MCP server.',
+      url: `${siteUrl}/docs/npm`,
+      codeRepository: 'https://github.com/intelligentnode/IntelliNode',
+      programmingLanguage: 'JavaScript',
+      runtimePlatform: 'Node.js',
+      license: 'https://www.apache.org/licenses/LICENSE-2.0',
+      publisher: {'@id': `${siteUrl}/#organization`},
+    },
+  ],
+};
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Open Source AI Framework',
+  // used as the suffix of every page title: "<page> | IntelliNode"
+  title: 'IntelliNode',
   tagline: 'Intellinode provides unified prompt, evaluation, and MCP integration to any large model.',
   favicon: 'img/favicon.ico',
+
+  headTags: [
+    {tagName: 'link', attributes: {rel: 'apple-touch-icon', sizes: '180x180', href: '/img/apple-touch-icon.png'}},
+    {tagName: 'script', attributes: {type: 'application/ld+json'}, innerHTML: JSON.stringify(structuredData)},
+  ],
   
   // Set the production url of your site here
-  url: 'https://docs.intellinode.ai',
+  url: siteUrl,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -66,7 +126,18 @@ const config = {
         defaultMode: "light",
         disableSwitch: true,
       },
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/intellinode-social-card.png',
+      metadata: [
+        {name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1'},
+        {name: 'author', content: 'IntelliNode'},
+        {name: 'theme-color', content: '#2992FE'},
+        {property: 'og:site_name', content: 'IntelliNode'},
+        {property: 'og:type', content: 'website'},
+        {property: 'og:image:width', content: '1200'},
+        {property: 'og:image:height', content: '630'},
+        {property: 'og:image:alt', content: 'IntelliNode, the open source AI framework for Python and Node.js'},
+        {name: 'twitter:creator', content: '@BarqawiTechno'},
+      ],
       navbar: {
         logo: {
           alt: 'Intelli Logo',
