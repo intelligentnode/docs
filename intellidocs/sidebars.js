@@ -63,6 +63,10 @@ const sidebars = {
     },
     {
       type: 'doc',
+      id: "python/downloads"
+    },
+    {
+      type: 'doc',
       id: "python/intellicloud"
     },
     

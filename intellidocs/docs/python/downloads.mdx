@@ -1,0 +1,28 @@
+---
+sidebar_position: 9
+---
+
+import DownloadStats from '@site/src/components/DownloadStats';
+
+# Downloads
+
+Where the `intelli` package is installed from, over the last 6 months. The table
+is live, so it updates on its own.
+
+<DownloadStats />
+
+Only the `pip` and `uv` installers are counted. Mirror traffic and crawlers pull
+the wheel and the source archive in equal pairs, which would otherwise dominate
+the numbers.
+
+Two things to keep in mind when reading this. A download is not a user, since one
+CI pipeline can install the package many times a day. Country reflects where the
+machine sits, so runners hosted in a cloud region show up as that region rather
+than the country of the developer.
+
+The data comes from the public PyPI dataset that ClickHouse hosts. To run the same
+query yourself:
+
+```bash
+curl -s 'https://sql-clickhouse.clickhouse.com/?user=demo' --data-binary "SELECT c.name AS country, sum(d.count) AS downloads FROM pypi.pypi_downloads_per_day_by_version_by_installer_by_type_by_country AS d LEFT JOIN pypi.countries AS c ON c.code = toString(d.country_code) WHERE d.project = 'intelli' AND d.date >= today() - 180 AND d.installer IN ('pip','uv') GROUP BY country ORDER BY downloads DESC LIMIT 20 FORMAT PrettyCompact"
+```
