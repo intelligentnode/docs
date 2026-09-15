@@ -54,7 +54,7 @@ Agent(
     mission="Tool usage instructions", # Guide LLM when to use tools
     model_params={
         "key": "api_key",
-        "model": "gpt-4o",             # Model supporting function calling
+        "model": "gpt-5.5",             # Model supporting function calling
         "tools": tool_definitions,     # Required: Available tools/functions
         # Optional (OpenAI): force a specific tool
         # "tool_choice": {"type": "function", "function": {"name": "add"}},
@@ -191,7 +191,7 @@ llm_agent = Agent(
     mission="Math assistant. Use add, subtract, or multiply tools for calculations.",
     model_params={
         "key": "your-openai-api-key",
-        "model": "gpt-4o",
+        "model": "gpt-5.5",
         "tools": tools
     }
 )
@@ -215,7 +215,7 @@ direct_agent = Agent(
     mission="Provide direct responses for non-mathematical queries",
     model_params={
         "key": "your-openai-api-key",
-        "model": "gpt-3.5-turbo"
+        "model": "gpt-5.5"
     }
 )
 ```
@@ -333,7 +333,7 @@ claude_agent = Agent(
     mission="Data analysis assistant. Use analyze_data tool for CSV files.",
     model_params={
         "key": "your-anthropic-api-key",
-        "model": "claude-3-7-sonnet-20250219",
+        "model": "claude-sonnet-5",
         "tools": anthropic_tools
     }
 )

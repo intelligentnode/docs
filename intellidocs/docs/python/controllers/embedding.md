@@ -23,6 +23,10 @@ You need to specify several parameters to tailor the embedding generation to you
 - **texts**: A list of texts for which you want to generate embeddings. Each item in the list can be a word, sentence, or paragraph.
 - **model** (optional): The specific model you wish to use for embedding generation.
 
+### Default Models
+
+When you do not pass a model, the controller uses the current default of the provider, `gemini-embedding-001` for gemini and `mistral-embed` for mistral.
+
 ### Example
 
 Initialize the Embedding controller with your chosen provider and API key:

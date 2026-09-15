@@ -35,7 +35,7 @@ async def main():
     vf = VibeAgent(
         planner_provider="gemini",
         planner_api_key=os.getenv("GEMINI_API_KEY"),
-        planner_model="gemini-2.0-flash"
+        planner_model="gemini-2.5-flash"
     )
     
     # 2. Describe the flow you want

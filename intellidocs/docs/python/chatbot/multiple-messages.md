@@ -11,7 +11,7 @@ Intelli chatbot understand the conversation flow using the passed hisoty message
 ```python
 from intelli.model.input.chatbot_input import ChatModelInput
 
-chat_input = ChatModelInput(system="You are a helpful assistant.", model="mistral-tiny")
+chat_input = ChatModelInput(system="You are a helpful assistant.", model="mistral-large-latest")
 # add the messages hisoty
 chat_input.add_user_message("What's the scientific name for a tomato?")
 chat_input.add_assistant_message("The scientific name for a tomato is Solanum lycopersicum.")

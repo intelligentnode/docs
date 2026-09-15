@@ -5,7 +5,7 @@ sidebar_position: 1
 # Installation
 
 ### System Requirements
-- Python 3.6+.
+- Python 3.10+.
 - pip (Python package installer).
 
 ###  Installation Methods
@@ -14,6 +14,22 @@ sidebar_position: 1
 pip install intelli
 ```
 This downloads and installs the latest stable version along with dependencies.
+
+The extras add the optional capabilities:
+
+```bash
+pip install intelli[mcp]        # MCP servers and clients
+pip install intelli[computer]   # computer use and browser agent
+pip install intelli[speech]     # speech recognition providers
+pip install intelli[offline]    # offline models through keras
+pip install intelli[llamacpp]   # GGUF models
+```
+
+The computer use agent also needs a browser:
+
+```bash
+python -m playwright install chromium
+```
 
 2. From Source:
 

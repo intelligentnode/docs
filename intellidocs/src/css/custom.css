@@ -39,3 +39,23 @@
   height: 70%;
   margin-top: 4px;
 }
+
+/* Footer link that carries an inline icon, used for the X account */
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  line-height: var(--ifm-line-height-base);
+  color: var(--ifm-footer-link-color);
+  transition: color var(--ifm-transition-fast) ease;
+}
+
+.footer__social-link:hover,
+.footer__social-link:focus-visible {
+  color: var(--ifm-footer-link-hover-color);
+  text-decoration: none;
+}
+
+.footer__social-link svg {
+  flex-shrink: 0;
+}

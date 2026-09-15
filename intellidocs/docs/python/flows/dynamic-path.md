@@ -53,7 +53,7 @@ query_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="anthropic",
         mission="Generate text of varying length",
-        model_params={"key": ANTHROPIC_API_KEY, "model": "claude-3-7-sonnet-20250219"},
+        model_params={"key": ANTHROPIC_API_KEY, "model": "claude-sonnet-5"},
     ),
     log=True,
 )
@@ -64,7 +64,7 @@ short_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="openai",
         mission="Process short text",
-        model_params={"key": OPENAI_API_KEY, "model": "gpt-4o"},
+        model_params={"key": OPENAI_API_KEY, "model": "gpt-5.5"},
     ),
     log=True,
 )
@@ -75,7 +75,7 @@ medium_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="openai",
         mission="Process medium text",
-        model_params={"key": OPENAI_API_KEY, "model": "gpt-4o"},
+        model_params={"key": OPENAI_API_KEY, "model": "gpt-5.5"},
     ),
     log=True,
 )
@@ -86,7 +86,7 @@ long_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="openai",
         mission="Process long text",
-        model_params={"key": OPENAI_API_KEY, "model": "gpt-4o"},
+        model_params={"key": OPENAI_API_KEY, "model": "gpt-5.5"},
     ),
     log=True,
 )
@@ -155,7 +155,7 @@ initial_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="openai",
         mission="Generate initial content",
-        model_params={"key": OPENAI_API_KEY, "model": "gpt-4o"},
+        model_params={"key": OPENAI_API_KEY, "model": "gpt-5.5"},
     ),
     log=True,
 )
@@ -166,7 +166,7 @@ analyzer_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="openai",
         mission="Analyze content complexity",
-        model_params={"key": OPENAI_API_KEY, "model": "gpt-4o"},
+        model_params={"key": OPENAI_API_KEY, "model": "gpt-5.5"},
     ),
     log=True,
 )
@@ -177,7 +177,7 @@ simplifier_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="openai",
         mission="Simplify complex content",
-        model_params={"key": OPENAI_API_KEY, "model": "gpt-4o"},
+        model_params={"key": OPENAI_API_KEY, "model": "gpt-5.5"},
     ),
     log=True,
 )
@@ -188,7 +188,7 @@ expander_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="openai",
         mission="Expand on the topic",
-        model_params={"key": OPENAI_API_KEY, "model": "gpt-4o"},
+        model_params={"key": OPENAI_API_KEY, "model": "gpt-5.5"},
     ),
     log=True,
 )
@@ -199,7 +199,7 @@ formatter_task = Task(
         agent_type=AgentTypes.TEXT.value,
         provider="mistral",
         mission="Format content",
-        model_params={"key": MISTRAL_API_KEY, "model": "mistral-medium"},
+        model_params={"key": MISTRAL_API_KEY, "model": "mistral-medium-latest"},
     ),
     log=True,
 )

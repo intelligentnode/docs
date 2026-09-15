@@ -36,7 +36,7 @@ itinerary_agent = Agent(
     agent_type=AgentTypes.TEXT.value,
     provider="openai",
     mission="Create a detailed travel itinerary",
-    model_params={"key": OPENAI_KEY, "model": "gpt-3.5-turbo"}
+    model_params={"key": OPENAI_KEY, "model": "gpt-5.5"}
 )
 
 # Speech synthesis agent for audio guides
@@ -77,7 +77,7 @@ guide_agent = Agent(
     agent_type=AgentTypes.TEXT.value,
     provider="mistral",
     mission="Create comprehensive travel guides",
-    model_params={"key": MISTRAL_KEY, "model": "mistral-medium"}
+    model_params={"key": MISTRAL_KEY, "model": "mistral-medium-latest"}
 )
 ```
 
@@ -192,14 +192,14 @@ def create_text_agent():
             agent_type=AgentTypes.TEXT.value,
             provider="anthropic",
             mission="Generate detailed text content",
-            model_params={"key": os.getenv("ANTHROPIC_API_KEY"), "model": "claude-3-opus-20240229"}
+            model_params={"key": os.getenv("ANTHROPIC_API_KEY"), "model": "claude-opus-5"}
         )
     else:
         return Agent(
             agent_type=AgentTypes.TEXT.value,
             provider="openai",
             mission="Generate detailed text content",
-            model_params={"key": os.getenv("OPENAI_API_KEY"), "model": "gpt-4"}
+            model_params={"key": os.getenv("OPENAI_API_KEY"), "model": "gpt-5.5"}
         )
 ```
 
@@ -213,7 +213,7 @@ cloud_agent = Agent(
     agent_type=AgentTypes.TEXT.value,
     provider="openai",
     mission="Generate initial content",
-    model_params={"key": OPENAI_KEY, "model": "gpt-3.5-turbo"}
+    model_params={"key": OPENAI_KEY, "model": "gpt-5.5"}
 )
 
 # Local Keras-based agent for private processing

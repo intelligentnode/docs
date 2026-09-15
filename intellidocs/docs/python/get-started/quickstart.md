@@ -29,13 +29,13 @@ def call_chatbot(provider, model=None):
     return response
 
 # call openai
-call_chatbot("openai", "gpt-4")
+call_chatbot("openai", "gpt-5.5")
 
 # call mistralai
-call_chatbot("mistral", "mistral-medium")
+call_chatbot("mistral", "mistral-large-latest")
 
 # call google gemini
-call_chatbot("gemini")
+call_chatbot("gemini", "gemini-2.5-flash")
 
 ```
 

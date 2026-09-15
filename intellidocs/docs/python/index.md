@@ -33,7 +33,7 @@ from intelli.function.chatbot import Chatbot
 
 # selected model
 provider = "mistral"
-model = "mistral-medium"
+model = "mistral-large-latest"
 
 # prepare common input 
 input = ChatModelInput("You are a helpful assistant.", model)

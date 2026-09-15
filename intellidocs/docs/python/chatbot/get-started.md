@@ -39,7 +39,7 @@ from intelli.function.chatbot import Chatbot, ChatProvider
 
 ##### Prepare the input
 ```python
-chat_input = ChatModelInput(system="You are a helpful assistant.", model="gpt-4")
+chat_input = ChatModelInput(system="You are a helpful assistant.", model="gpt-5.5")
 chat_input.add_user_message("Explain the plot of the Inception movie in one line.")
 ```
 
@@ -48,3 +48,32 @@ chat_input.add_user_message("Explain the plot of the Inception movie in one line
 chatbot = Chatbot(api_key=YOUR_API_KEY, provider=ChatProvider.OPENAI)
 response = chatbot.chat(chat_input)
 ```
+
+### Default Models
+
+When you omit the model, intelli picks a current default for the provider:
+
+| Provider | Default model |
+| -------- | ------------- |
+| Openai | `gpt-5.5` |
+| Anthropic | `claude-sonnet-5` |
+| Gemini | `gemini-2.5-flash` |
+| Mistral | `mistral-large-latest` |
+
+Use `claude-opus-5` for the larger Anthropic model. The Claude 5 family and Opus 4.7 and above dropped the sampling parameters, so intelli omits `temperature` for those models and they work without any change on your side.
+
+### GPT-5 Parameters
+
+The GPT-5 family runs on the responses API, and the input accepts its parameters:
+
+```python
+chat_input = ChatModelInput(
+    system="You are a helpful assistant.",
+    model="gpt-5.5",
+    reasoning_effort="low",   # low, medium, high, xhigh, none
+    verbosity="medium",       # low, medium, high
+    max_tokens=512,           # sent as max_output_tokens
+)
+```
+
+`tool_choice` is available as well, on both the openai and the anthropic paths. To force the classic chat completions endpoint for a GPT-5 deployment, add `:chat` to the model id, for example `gpt-5.5:chat`.

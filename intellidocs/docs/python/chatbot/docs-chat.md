@@ -22,7 +22,7 @@ from intelli.function.chatbot import Chatbot
 chatbot = Chatbot(api_key=YOUR_API_KEY, provider="mistral", options={"one_key": INTELLI_ONE_KEY})
 
 # prepare the input with attachment references
-chat_input = ChatModelInput(system="You are a helpful assistant.", model="mistral-medium")
+chat_input = ChatModelInput(system="You are a helpful assistant.", model="mistral-large-latest")
 chat_input.attach_reference = True
 chat_input.add_user_message("Explain the concept of relativity.")
 

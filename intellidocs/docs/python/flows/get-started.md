@@ -38,7 +38,7 @@ text_agent = Agent(
     mission='you are a writing assistant', 
     model_params={
         'key': YOUR_OPENAI_KEY, 
-        'model': 'gpt-4o'
+        'model': 'gpt-5.5'
     }
 )
 
