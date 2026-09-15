@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "Fine-Tune OpenAI Models in Node.js"
+sidebar_label: "Fine tuning"
+description: "Learn how to upload JSONL training data and start, list, and inspect OpenAI fine tuning jobs with the IntelliNode Node.js library."
+keywords: ["intellinode fine tuning","node.js openai fine tuning","openai fine tuning jsonl","npm intellinode","remote fine tune model"]
 ---
 # Fine tuning
 

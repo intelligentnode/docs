@@ -1,10 +1,14 @@
 ---
 sidebar_position: 4
+title: "NVIDIA DeepSeek and Llama Chat in Python"
+sidebar_label: "DeepSeek & Llama"
+description: "Use Intelli in Python to call NVIDIA DeepSeek and Llama chat models, stream responses, handle message history, and create Llama embeddings."
+keywords: ["python nvidia chatbot","intelli deepseek python","llama python chatbot","nvidia deepseek api","python llama embeddings","intelli nvidia chat"]
 ---
 
 # DeepSeek & Llama
 
-Integrate NVIDIA’s latest language models **Deepseek** and **Llama**— via a unified chatbot interface. With minimal code changes, you can switch between NVIDIA, OpenAI, and other providers.
+Integrate NVIDIA’s latest language models **Deepseek** and **Llama** via a unified chatbot interface. With minimal code changes, you can switch between NVIDIA, OpenAI, and other providers.
 
 ## Supported Models
 
@@ -88,7 +92,7 @@ print("Embedding result:", result)
 
 ## Docs Chat Integration with NVIDIA
 
-Intellinode Cloud allows you to connect your data to various chatbot engines—including NVIDIA Chat—to tailor responses based on your uploaded documents or images.
+Intellinode Cloud allows you to connect your data to various chatbot engines, including NVIDIA Chat, to tailor responses based on your uploaded documents or images.
 
 1. Visit the [IntelliNode App](https://app.intellinode.ai/).
 2. Start a project using the **Document** option.

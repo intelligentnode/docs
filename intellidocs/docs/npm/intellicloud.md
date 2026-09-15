@@ -1,5 +1,9 @@
 ---
 
+title: "Intellicloud for Node.js"
+sidebar_label: "Intellicloud"
+description: "Intellicloud is no longer available because IntelliNode is now fully open source. Contact the team for access to the vector project."
+keywords: ["intellicloud node.js","intellinode intellicloud","intellinode cloud service","intellinode vector project","npm intellinode"]
 ---
 
 # Intellicloud

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Semantic Search with Embeddings in Node.js"
+sidebar_label: "Semantic search"
+description: "Learn how to run semantic search in Node.js with IntelliNode using embeddings, cosine similarity, OpenAI or Cohere, plus paging for larger datasets."
+keywords: ["node.js semantic search","intellinode semanticsearch","semantic search embeddings","openai semantic search node.js","cohere semantic search","vector search node.js"]
 ---
 
 # Semantic search

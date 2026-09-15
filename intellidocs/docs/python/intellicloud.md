@@ -1,5 +1,9 @@
 ---
 
+title: "Intellicloud for Python"
+sidebar_label: "Intellicloud"
+description: "Intellicloud is no longer available. Use the open source Intelli Python library for chatbots, flows, computer use and coding agents instead."
+keywords: ["python intellicloud","intelli python library","intellicloud unavailable","intellinode open source","python chatbot flows"]
 ---
 
 # Intellicloud

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "Get Started with MCP in Python"
+sidebar_label: "Get Started with MCP"
+description: "Install Intelli with MCP support and build a Python flow that calls tools from local stdio or remote HTTP/WebSocket MCP servers."
+keywords: ["python mcp intelli","model context protocol python","intelli mcp agent","mcp server stdio python","python mcp tools","intelli mcp wrapper"]
 ---
  
 # Get Started with MCP

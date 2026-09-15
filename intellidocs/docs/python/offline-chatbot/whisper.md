@@ -1,5 +1,9 @@
 ---
 sidebar_position: 5
+title: "Offline Whisper Speech Recognition in Python"
+sidebar_label: "Whisper"
+description: "Use Intelli with offline Whisper models for local speech recognition in Python, including multilingual variants, long audio, and user prompts."
+keywords: ["python whisper offline","intelli whisper","offline speech recognition python","whisper transcription python","keras wrapper whisper","local audio transcription"]
 ---
 
 # Whisper

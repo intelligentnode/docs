@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Multi-Turn Chat Conversations in Python"
+sidebar_label: "Multiple messages"
+description: "Learn how to pass conversation history to Intelli Python chatbots with ChatModelInput, adding user and assistant messages for context and few shot behavior."
+keywords: ["intelli python chatbot messages","chatmodelinput conversation history","python chatbot multiple messages","intelli add user message","intelli add assistant message","few shot chatbot context"]
 ---
 
 # Multiple messages

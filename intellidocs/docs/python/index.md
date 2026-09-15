@@ -1,6 +1,9 @@
 ---
 slug: /python
-title: Introduction
+title: "Open Source AI Framework for Python"
+sidebar_label: "Introduction"
+description: "Open source Python AI framework with one API for OpenAI, Anthropic, Gemini and Mistral, plus multi-model flows, vibe agents, MCP and computer use."
+keywords: ["intelli python","pip install intelli","python ai framework","ai model orchestration python","mistral python chatbot","multimodal ai agents"]
 ---
 
 

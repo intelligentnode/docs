@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Sequential AI Task Flows in Python"
+sidebar_label: "Sequence flow"
+description: "Learn to run Intelli SequenceFlow tasks in order, passing outputs between OpenAI, Gemini, and Stability agents in a Python content pipeline."
+keywords: ["python sequenceflow","intelli sequence flow","ordered ai tasks python","openai gemini stability workflow","intelli flow tasks"]
 ---
 
 # Sequence flow

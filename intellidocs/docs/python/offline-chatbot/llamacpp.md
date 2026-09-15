@@ -1,5 +1,9 @@
 ---
 sidebar_position: 6
+title: "Run llama.cpp GGUF Models in Python"
+sidebar_label: "Llama CPP"
+description: "Use Intelli with llama.cpp to run local GGUF chat and code models in Python, including TinyLlama, DeepSeek, Gemma, and Qwen Coder."
+keywords: ["python llama cpp","intelli llamacpp","local gguf chatbot","llama.cpp python chatbot","offline ai chatbot python","hugging face gguf models"]
 ---
 
 # Llama CPP

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "Run Llama Offline in Python"
+sidebar_label: "Llama"
+description: "Run Llama 3 models offline with Intelli using Keras NLP and Kaggle credentials. Add RAG from uploaded documents with a one key integration."
+keywords: ["python llama offline chatbot","intelli llama 3","keras nlp llama python","llama rag python","kaggle llama 3 setup"]
 ---
 
 # Llama

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "Automate Supplier Portals with AI in Python"
+sidebar_label: "Portal operations"
+description: "Automate supplier portal reading with Intelli for Python using Anthropic computer agents, OpenAI text agents, action guards, and scheduled flows."
+keywords: ["python portal automation","intelli computer agent","supplier portal scraping","anthropic computer use python","openai structured data extraction","portal operations workflow"]
 ---
 
 # Portal operations

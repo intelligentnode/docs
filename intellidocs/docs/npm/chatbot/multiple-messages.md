@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Multi-Turn Chat Conversations in Node.js"
+sidebar_label: "Multiple messages"
+description: "Build a conversation style flow with multiple user and assistant messages using the IntelliNode Node.js chatbot framework and ChatGPTInput."
+keywords: ["intellinode multiple messages","node.js chatbot messages","chatgptinput add user message","chatgptinput add assistant message","intellinode chatbot framework"]
 ---
 
 # Multiple messages

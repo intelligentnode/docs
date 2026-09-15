@@ -1,5 +1,9 @@
 ---
 sidebar_position: 12
+title: "Loop Tasks in Python AI Flows"
+sidebar_label: "Loop"
+description: "Use LoopTask in Intelli Python flows to repeat task steps until a stop condition or max loops, with optional iteration history in memory."
+keywords: ["intelli python looptask","python flow loops","intelli loop task","loop task stop condition","max loops python flow","intelli flow memory"]
 ---
 
 # Loop

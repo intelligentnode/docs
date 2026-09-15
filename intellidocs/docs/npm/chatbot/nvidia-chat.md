@@ -1,10 +1,14 @@
 ---
-sidebar_position: 3
+sidebar_position: 7
+title: "NVIDIA DeepSeek and Llama Chat in Node.js"
+sidebar_label: "DeepSeek & Llama"
+description: "Build NVIDIA chatbots with IntelliNode in Node.js using DeepSeek and Llama models, multi-turn messages, and One Key document integration."
+keywords: ["intellinode nvidia chat","node.js deepseek chatbot","node.js llama chatbot","nvidia nim node.js","nvidia chatbot api","intellinode one key"]
 ---
 
 # DeepSeek & Llama
 
-Intellinode supports NVIDIA’s latest language models—**Deepseek** and **Llama**—via a unified chatbot interface. 
+Intellinode supports NVIDIA’s latest language models, **Deepseek** and **Llama**, via a unified chatbot interface. 
 With minimal code changes, you can switch between NVIDIA, OpenAI, and other providers.
 
 ## Supported Models
@@ -12,7 +16,7 @@ With minimal code changes, you can switch between NVIDIA, OpenAI, and other prov
 Sample of supported models with much more available using Intellinode Nvidia connector:
 | Model Name                  | 
 |-----------------------------|
-| deepseek-ai/deepseek-r1     |
+| deepseek-ai/deepseek-v4-flash-0731 |
 | meta/llama-3.3-70b-instruct |
 | tiiuae/falcon3-7b-instruct |
 
@@ -39,7 +43,7 @@ Construct a chat input using the `NvidiaInput` class and add your message(s):
 
 ```javascript
 const input = new NvidiaInput("You are a helpful assistant.", {
-  model: 'deepseek-ai/deepseek-r1', // Use Deepseek or NVIDIA Llama model
+  model: 'deepseek-ai/deepseek-v4-flash-0731', // Use Deepseek or NVIDIA Llama model
   maxTokens: 512,
   temperature: 0.6
 });
@@ -59,7 +63,7 @@ Nvidia Chat supports multi-turn conversations just like other chatbot models:
 
 ```javascript
 const input = new NvidiaInput("You are an insightful assistant.", {
-  model: 'deepseek-ai/deepseek-r1',
+  model: 'deepseek-ai/deepseek-v4-flash-0731',
   maxTokens: 512,
   temperature: 0.6
 });
@@ -72,7 +76,7 @@ responses.forEach(resp => console.log("- " + resp));
 
 ### Docs Chat Integration with NVIDIA
 
-Intellinode Cloud allows you to connect your data to various chatbot engines—including NVIDIA Chat—to tailor responses based on your uploaded documents or images.
+Intellinode Cloud allows you to connect your data to various chatbot engines, including NVIDIA Chat, to tailor responses based on your uploaded documents or images.
 
 **How to set up Intellinode Cloud with your data:**
 1. Visit the **[IntelliNode App](https://app.intellinode.ai/)**.
@@ -92,7 +96,7 @@ const intelliKey = '<generated_one_key>';
 const nvidiaBot = new Chatbot(NVIDIA_API_KEY, SupportedChatModels.NVIDIA, null, { oneKey: intelliKey });
 
 const input = new NvidiaInput("You are a helpful assistant.", {
-  model: 'deepseek-ai/deepseek-r1',
+  model: 'deepseek-ai/deepseek-v4-flash-0731',
   maxTokens: 512,
   temperature: 0.6
 });

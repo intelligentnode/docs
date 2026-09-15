@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "Get Started with AI Flows in Python"
+sidebar_label: "Get Started"
+description: "Learn how to create Python Intelli flows with agents, tasks, processors, SequenceFlow, OpenAI text generation, Stability image output, and file helpers."
+keywords: ["python intelli flows","intelli flow get started","python ai workflow orchestration","intelli sequenceflow","openai stability ai python","intelli flow agents tasks"]
 ---
 # Get Started
 

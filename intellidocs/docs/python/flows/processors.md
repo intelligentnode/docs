@@ -1,5 +1,9 @@
 ---
 sidebar_position: 10
+title: "Input and Output Processors in Python Flows"
+sidebar_label: "Processors"
+description: "Learn how to use Intelli processors to transform task inputs and agent outputs in Python flows with pre-processing and post-processing functions."
+keywords: ["intelli python processors","python flow processors","intelli pre processing","intelli post processing","ai workflow data processing"]
 ---
 
 # Processors

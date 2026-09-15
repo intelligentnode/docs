@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Build an MCP Server in Python"
+sidebar_label: "MCP Server"
+description: "Create a Python MCP server that exposes custom functions as Intelli tools. Covers FastMCP stdio servers and Intelli HTTP MCP servers."
+keywords: ["python mcp server","intelli mcp server","fastmcp python tools","mcp server stdio","streamable http mcp","python mcp tools"]
 ---
 # MCP Server
 

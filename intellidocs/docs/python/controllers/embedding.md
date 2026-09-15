@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Text Embeddings in Python"
+sidebar_label: "Embedding"
+description: "Generate text embeddings in Python with Intelli using OpenAI, Mistral, or Gemini providers. Configure texts, API keys, and optional models."
+keywords: ["python text embeddings","intelli embedding controller","openai embeddings python","mistral embeddings python","gemini embeddings python","remote embed model"]
 ---
 # Embedding
 

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 4
+title: "AI Image Generation in Node.js"
+sidebar_label: "Image generation"
+description: "Generate images from text prompts in Node.js with IntelliNode using OpenAI gpt-image-2 or Stability AI, and control the size and image count."
+keywords: ["node.js image generation","intellinode image generation","openai gpt-image-2 node.js","stable diffusion node.js","text to image api","npm intellinode images"]
 ---
 # Image generation
 
@@ -13,7 +17,7 @@ Intellinode supports image generation with the following providers: openai, stab
 
 Specify the following parameters when initiating an image generation controller:
 
-- **provider**: Identifier for the chosen AI service provider (`'openai'` for DALL·E, `'stability'` for Stable Diffusion).
+- **provider**: Identifier for the chosen AI service provider (`'openai'` for gpt-image-2, `'stability'` for Stable Diffusion).
 - **apiKey**: Your API key for accessing the selected provider's services.
 - **prompt**: The text description based on which the image will be generated.
 - **model**: The specific model variant to use.
@@ -27,7 +31,7 @@ Import
 const { RemoteImageModel, ImageModelInput } = require('intellinode');
 ```
 
-Genetate image using stable diffusion.
+Generate an image using stable diffusion.
 
 ```javascript
 
@@ -54,20 +58,20 @@ async function generateImageWithStability() {
 generateImageWithStability();
 ```
 
-Genetate image using dall·e 3.
+Generate an image using OpenAI `gpt-image-2`, the default OpenAI image model.
 
 ```javascript
 
 const openaiKey = 'your_openai_api_key';
 
-async function generateImageWithDallE3() {
+async function generateImageWithOpenAI() {
     const prompt = "A photorealistic painting of an astronaut riding a horse in space";
 
     try {
         const imageGenerator = new RemoteImageModel(openaiKey, "openai");
         const images = await imageGenerator.generateImages(new ImageModelInput({
           prompt,
-          model: 'dall-e-3',
+          model: 'gpt-image-2',
           numberOfImages: 1
         }));
 
@@ -77,5 +81,7 @@ async function generateImageWithDallE3() {
     }
 }
 
-generateImageWithDallE3();
+generateImageWithOpenAI();
 ```
+
+The gpt-image models return base64 images; save one with `fs.writeFileSync('image.png', Buffer.from(images[0], 'base64'))`.

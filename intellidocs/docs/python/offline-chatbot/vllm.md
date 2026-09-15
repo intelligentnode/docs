@@ -1,5 +1,9 @@
 ---
 sidebar_position: 7
+title: "Self-Hosted vLLM Models in Python"
+sidebar_label: "vLLM Integration"
+description: "Use Intelli Python with self-hosted vLLM models for chat completions, streaming responses, DeepSeek examples, and RAG with One Key."
+keywords: ["python vllm integration","intelli python vllm","self hosted vllm chatbot","vllm streaming responses","deepseek vllm python","vllm rag one key"]
 ---
 
 # vLLM Integration

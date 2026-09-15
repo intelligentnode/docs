@@ -61,7 +61,7 @@ export default function Features() {
         <div className="row" style={{paddingTop: '20px'}}> 
           <div className="col col--12"> 
             <div className="text--center">
-              <img src={terminalGif} alt="Terminal" />
+              <img src={terminalGif} alt="Terminal demo of an IntelliNode script calling AI models" />
             </div>
           </div>
         </div>

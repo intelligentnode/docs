@@ -1,5 +1,9 @@
 ---
 sidebar_position: 8
+title: "Dynamic Workflow Routing in Python"
+sidebar_label: "Dynamic Path"
+description: "Learn to route Intelli workflows at runtime with DynamicConnector, decision functions, and utilities for text length, content, sentiment, errors, and types."
+keywords: ["python dynamic workflow routing","intelli dynamicconnector","intelli flow dynamic path","python ai workflow routing","intelli routing utilities","dynamic connector python"]
 ---
 # Dynamic Path
 

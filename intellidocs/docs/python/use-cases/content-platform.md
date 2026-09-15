@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "AI Content Platform Workflow in Python"
+sidebar_label: "Content platform"
+description: "Build a Python Intelli flow for a blog content platform using agents and tasks with OpenAI, Gemini, and Stability AI for text, code, and images."
+keywords: ["python ai content platform","intelli python flow","ai blog generation python","openai gemini stability ai","python ai agents tasks"]
 ---
 
 # Content platform

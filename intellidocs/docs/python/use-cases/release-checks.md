@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "AI Release Smoke Checks in Python"
+sidebar_label: "Release checks"
+description: "Build Python release smoke checks with Intelli computer agents, Playwright browser environments, Anthropic models, action guards and flow summaries."
+keywords: ["python release checks","intelli computer agent","playwright browser automation","ai smoke tests","anthropic browser agent","intelli flow tasks"]
 ---
 
 # Release checks

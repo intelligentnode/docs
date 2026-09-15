@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "Switch Between LLM Providers in Python"
+sidebar_label: "Model switching"
+description: "Switch chatbot models in the Intelli Python library with minimal code changes. Covers OpenAI, Mistral, Anthropic Claude, and Google Gemini providers."
+keywords: ["python chatbot model switching","intelli python chatbot","switch llm providers python","openai mistral anthropic gemini","python chatprovider examples"]
 ---
 
 # Model switching

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: "Text Summaries and Sentiment Analysis in Node.js"
+sidebar_label: "Text analyzer"
+description: "Use IntelliNode TextAnalyzer in Node.js to summarize text and run sentiment analysis with OpenAI or Cohere language models."
+keywords: ["intellinode text analyzer","node.js text summarization","node.js sentiment analysis","openai text analyzer","cohere sentiment analysis"]
 ---
 
 # Text analyzer

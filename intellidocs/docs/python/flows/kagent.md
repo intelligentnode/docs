@@ -1,5 +1,9 @@
 ---
 sidebar_position: 6
+title: "Local Keras Models as Agents in Python"
+sidebar_label: "Keras Agent"
+description: "Use KerasAgent in Intelli Python flows to load local Keras models, run Gemma, Mistral, and Whisper agents, and combine them with cloud tasks."
+keywords: ["python kerasagent","intelli keras agent","keras local models","gemma mistral whisper","python ai flows","intelli sequenceflow"]
 ---
 # Keras Agent
 

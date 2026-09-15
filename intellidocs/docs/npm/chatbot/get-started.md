@@ -1,14 +1,18 @@
 ---
 sidebar_position: 1
+title: "AI Chatbot for OpenAI, Claude and Gemini in Node.js"
+sidebar_label: "Get started"
+description: "Set up the IntelliNode Node.js chatbot interface for OpenAI, Claude, Gemini, Mistral, Cohere, NVIDIA, vLLM, and compatible providers."
+keywords: ["intellinode chatbot node.js","npm intellinode get started","node.js ai chatbot library","openai claude gemini node.js","unified chatbot api","openai compatible providers"]
 ---
 
 # Get started
 
-Intellinode module provides various language models, including **OpenAI's ChatGPT** and **Llama V2 model** from Replicate or AWS SageMaker.
+Intellinode provides one chatbot interface for **OpenAI**, **Anthropic Claude**, **Google Gemini**, **Mistral**, **Cohere**, **NVIDIA**, self-hosted **vLLM**, every **OpenAI-compatible** service (OpenRouter, Groq, DeepSeek, xAI, Together, Ollama, LM Studio) and **Llama** through Replicate or AWS SageMaker.
 
-We will demonstrate the setup for OpenAI's ChatGPT, followed by the two methods of integrating the Llama model - through Replicate's API or AWS SageMaker dedicated deployment. All the models are available with the unified chatbot interface with a minimum code change when switching between models.
+All the models are available with the unified chatbot interface with a minimum code change when switching between models. The pages that follow cover [multi-turn conversations](./multiple-messages), [tool calling](./tool-calling), [structured JSON output](./structured-output), the [OpenAI-compatible providers](./openai-compatible) and the [retries & timeouts](./request-options).
 
-### ChatGPT Model
+### OpenAI
 
 1. Import the necessary modules from IntelliNode. This will include the `Chatbot`, `ChatGPTInput`, and `ChatGPTMessage` classes.
 ```javascript
@@ -20,10 +24,10 @@ const { Chatbot, ChatGPTInput, ChatGPTMessage } = require('intellinode');
 const chatbot = new Chatbot(OPENAI_API_KEY, 'openai');
 ```
 
-3. Construct a chat input instance and add user messages:
+3. Construct a chat input instance and add user messages. GPT-5.5 is the default model; gpt-5 and newer models are sent to the Responses API with a reasoning effort of `low` unless you set one:
 ```javascript
 const system = 'You are a helpful assistant.';
-const input = new ChatGPTInput(system);
+const input = new ChatGPTInput(system, { model: 'gpt-5.5', effort: 'medium' });   // effort: none, low, medium, high, xhigh
 input.addUserMessage('Explain the plot of the Inception movie in one line.');
 ```
 4. Use the `chatbot` instance to send chat input:
@@ -32,66 +36,28 @@ const responses = await chatbot.chat(input);
 
 responses.forEach(response => console.log('- ', response));
 ```
-#### ChatGPT Streaming
 
-To use the ChatGPT streaming with IntelliNodese, call `chatbot.stream` method to send the chat input and receive a stream of responses:
+Older chat-completions models keep working with the same input, for example `new ChatGPTInput(system, { model: 'gpt-4.1', temperature: 0.7, maxTokens: 500 })`.
+
+#### Streaming
+
+Call `chatbot.stream` to receive the answer as it is generated:
 
 ```javascript
 let response = '';
 for await (const contentText of chatbot.stream(input)) {
   response += contentText;
-  console.log('Received chunk:', contentText);
+  process.stdout.write(contentText);
 }
 ```
 
-By using the `chatbot.stream`, you can receive a stream of responses from ChatGPT instead of waiting for the entire conversation to complete. The stream function supported for openai provider only.
-
-### Cohere Model
-Initiate the chatbot with cohere coral model and web search capabilities.
-1. Import the necessary modules.
-```javascript
-const { Chatbot, CohereInput, SupportedChatModels } = require('intellinode');
-```
-2. Initiate the chatbot object with a valid api key from (cohere.com).
-```javascript
-const bot = new Chatbot(process.env.COHERE_API_KEY, SupportedChatModels.COHERE); 
-```
-3. Prepare the input with cohere web search extension:
-```javascript
-const input = new CohereInput('You are a helpful computer programming assistant.', {web: true});
-input.addUserMessage('What is the difference between Python and Java?');
-```
-4. Call the chatbot and parse the responses.
-```javascript
-const responses = await bot.chat(input);
-responses.forEach((response) => console.log('- ' + response));
-```
-
-### Mistral AI
-Mistral provide open source mixer of experts models.
-
-1. Import the `Chatbot` and `MistralInput`  modules.
-```javascript
-const { Chatbot, MistralInput, SupportedChatModels } = require('intellinode');
-```
-2. Initiate the chatbot object with a valid api key from (mistral.ai).
-```javascript
-const mistralBot = new Chatbot(apiKey, SupportedChatModels.MISTRAL);
-```
-3. Prepare the input and select your preferred mistral model like `mistral-tiny` or `mistral-medium`.
-```javascript
-const input = new MistralInput('You are an art expert.', {model: 'mistral-medium'});
-input.addUserMessage('Who painted the Mona Lisa?');
-```
-4. Call the chatbot and parse the responses.
-```javascript
-const responses = await mistralBot.chat(input);
-```
+The stream function is supported for openai, anthropic, mistral, cohere, nvidia, vllm and the OpenAI-compatible providers.
 
 ### Anthropic
-Anthropic provide models with large context window like claude 3.
 
-1. Import the `Chatbot` and `AnthropicInput`  modules.
+Claude Sonnet 5 is the default model; use `claude-opus-5`, `claude-fable-5-1` or `claude-haiku-4-5` to switch.
+
+1. Import the `Chatbot` and `AnthropicInput` modules.
 ```javascript
 const { Chatbot, AnthropicInput, SupportedChatModels } = require('intellinode');
 ```
@@ -101,7 +67,7 @@ const bot = new Chatbot(apiKey, SupportedChatModels.ANTHROPIC);
 ```
 3. Prepare the input and select your preferred claude model.
 ```javascript
-const input = new AnthropicInput('You are an art expert.', {model: 'claude-3-sonnet-20240229'});
+const input = new AnthropicInput('You are an art expert.', { model: 'claude-sonnet-5', maxTokens: 4096 });
 input.addUserMessage('Who painted the Mona Lisa?');
 ```
 4. Call the chatbot and parse the responses.
@@ -109,9 +75,75 @@ input.addUserMessage('Who painted the Mona Lisa?');
 const responses = await bot.chat(input);
 ```
 
-### Llama V2 Model 
+The Claude 5 models think adaptively and the thinking counts toward `maxTokens` (default 2048), so raise it for long answers.
 
-Integration with Llama V2 is attainable via two options, using:
+### Google Gemini
+1. Import the `Chatbot` and `GeminiInput` modules.
+```javascript
+const { Chatbot, GeminiInput, SupportedChatModels } = require('intellinode');
+```
+2. Initiate the chatbot object with a key from Google AI Studio.
+```javascript
+const geminiBot = new Chatbot(apiKey, SupportedChatModels.GEMINI);
+```
+3. Prepare the input (Gemini 3.6 Flash is the default model).
+```javascript
+const input = new GeminiInput('You are a helpful assistant.', { model: 'gemini-3.6-flash' });
+input.addUserMessage('Who painted the Mona Lisa?');
+```
+4. Call the chatbot and parse the responses.
+```javascript
+const responses = await geminiBot.chat(input);
+```
+
+### Mistral AI
+1. Import the `Chatbot` and `MistralInput` modules.
+```javascript
+const { Chatbot, MistralInput, SupportedChatModels } = require('intellinode');
+```
+2. Initiate the chatbot object with a valid api key from (mistral.ai).
+```javascript
+const mistralBot = new Chatbot(apiKey, SupportedChatModels.MISTRAL);
+```
+3. Prepare the input and select your preferred mistral model like `mistral-medium-latest` (default), `mistral-small-latest` or `magistral-medium-latest`.
+```javascript
+const input = new MistralInput('You are an art expert.', { model: 'mistral-medium-latest' });
+input.addUserMessage('Who painted the Mona Lisa?');
+```
+4. Call the chatbot and parse the responses.
+```javascript
+const responses = await mistralBot.chat(input);
+```
+
+### Cohere
+1. Import the necessary modules.
+```javascript
+const { Chatbot, CohereInput, SupportedChatModels } = require('intellinode');
+```
+2. Initiate the chatbot object with a valid api key from (cohere.com).
+```javascript
+const bot = new Chatbot(process.env.COHERE_API_KEY, SupportedChatModels.COHERE);
+```
+3. Prepare the input; Command A (`command-a-03-2025`) is the default model.
+```javascript
+const input = new CohereInput('You are a helpful computer programming assistant.');
+input.addUserMessage('What is the difference between Python and Java?');
+```
+4. Call the chatbot and parse the responses.
+```javascript
+const responses = await bot.chat(input);
+responses.forEach((response) => console.log('- ' + response));
+```
+
+### NVIDIA, vLLM and OpenAI-compatible services
+
+- NVIDIA hosted models and local NIM: see [DeepSeek & Llama](./nvidia-chat).
+- Self-hosted vLLM: see [vLLM Integration](./vllm).
+- OpenRouter, Groq, DeepSeek, xAI, Together, Ollama and LM Studio: see [OpenAI-compatible providers](./openai-compatible).
+
+### Llama Model
+
+Integration with Llama is attainable via two options, using:
 1. **Replicate's API**: simple integration.
 2. **AWS SageMaker**: hosted in your account for extra privacy and control ([SageMaker steps](https://github/.com/Barqawiz/IntelliNode/wiki/ChatBot#aws-sagemaker-integration)).
 
@@ -122,7 +154,7 @@ Integration with Llama V2 is attainable via two options, using:
 ```javascript
 const { Chatbot, LLamaReplicateInput, SupportedChatModels } = require('intellinode');
 ```
-2. You'll need a valid API key. This time, it should be for replicate.com. 
+2. You'll need a valid API key. This time, it should be for replicate.com.
 ```javascript
 const chatbot = new Chatbot(REPLICATE_API_KEY, SupportedChatModels.REPLICATE);
 ```
@@ -139,23 +171,9 @@ const response = await chatbot.chat(input);
 console.log('- ', response);
 ```
 
-**Advanced Settings**
-
-You can create the input with the desired model name:
-
-```javascript
-// import the config loader
-const {Config2} = require('intellinode');
-
-// llama 13B model (default)
-const input = new LLamaReplicateInput(system, {model: Config2.getInstance().getProperty('models.replicate.llama.13b')});
-// llama 70B model 
-const input = new LLamaReplicateInput(system, {model: Config2.getInstance().getProperty('models.replicate.llama.70b')});
-```
-
 #### AWS SageMaker Integration
 
-Integration with the **Llama V2 model** via AWS SageMaker, providing an additional layer of control, is achievable through IntelliNode.
+Integration with the **Llama model** via AWS SageMaker, providing an additional layer of control, is achievable through IntelliNode.
 
 ##### IntelliNode Integration
 
@@ -193,21 +211,21 @@ console.log('Chatbot response:' + response);
 
 ##### Prerequisite to Integrate AWS SageMaker and IntelliNode
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s1_sagemaker.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s1_sagemaker.png" alt="AWS SageMaker console" width="500em" />
 
-The steps to leverage AWS SageMaker for hosting the **Llama V2 model**:
+The steps to leverage AWS SageMaker for hosting the **Llama model**:
 
 1. **Create a SageMaker Domain**: Begin by setting up a domain on your AWS SageMaker. This step establishes a controlled space for your SageMaker operations.
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/step_domain.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/step_domain.png" alt="Create a SageMaker domain" width="500em" />
 
 2. **Deploy the Llama Model**: Utilize SageMaker JumpStart to deploy the Llama model you plan to integrate.
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s2_jumpstart.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s2_jumpstart.png" alt="Deploy the Llama model with SageMaker JumpStart" width="500em" />
 
 3. **Copy the Endpoint Name**: Once you have a model deployed, make sure to note the endpoint name, which is crucial for future steps.
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s3_endpoint.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s3_endpoint.png" alt="SageMaker endpoint name" width="500em" />
 
 4. **Create a Node.js Lambda Function**: AWS Lambda allows running the back-end code without managing servers. Create a Node.js lambda function to use for integrating the deployed model.
 
@@ -217,9 +235,9 @@ The steps to leverage AWS SageMaker for hosting the **Llama V2 model**:
 
 7. **API Gateway Configuration**: Click on the "Add trigger" option on the Lambda function page, and select "API Gateway" from the list of available triggers.
 
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s4_lambda_trigger.png" width="500em" />
-<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s5_gateway.png" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s4_lambda_trigger.png" alt="Add an API Gateway trigger to the Lambda function" width="500em" />
+<img src="https://raw.githubusercontent.com/Barqawiz/IntelliNode/main/images/llama_sagemaker/s5_gateway.png" alt="API Gateway trigger settings" width="500em" />
 
 8. **Lambda Function Settings**: Update the lambda role to grant necessary permissions to access SageMaker endpoints. Additionally, the function's timeout period should be extended to accommodate the processing time. Make these adjustments in the "Configuration" tab of your Lambda function.
 
-Once you complete these steps, your AWS SageMaker will be ready to host and run the Llama V2 model, and you can easily integrate it with IntelliNode.
+Once you complete these steps, your AWS SageMaker will be ready to host and run the Llama model, and you can easily integrate it with IntelliNode.

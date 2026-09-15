@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
+import Head from '@docusaurus/Head';
 import Features from '@site/src/components/features';
 
 import Heading from '@theme/Heading';
@@ -17,7 +18,7 @@ function Header() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          {siteConfig.title}
+          Open Source AI Framework
         </Heading>
         <p className="hero__subtitle">
           {siteConfig.tagline}
@@ -44,8 +45,11 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Create chatbots and AI workflows using intellinode.">
+      title="Open Source AI Framework for Python and Node.js"
+      description="IntelliNode is an open source AI framework for Python and Node.js: one API for OpenAI, Claude, Gemini and local models, with agents and MCP.">
+      <Head>
+        <meta name="keywords" content="intellinode, intelli, open source ai framework, llm framework, python ai library, node.js ai library, ai agents, mcp server, openai, anthropic claude, gemini" />
+      </Head>
       <Header />
       <main>
         <Features />

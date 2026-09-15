@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: "Run Gemma Offline in Python"
+sidebar_label: "Gemma"
+description: "Use Intelli in Python to run Gemma 2 models offline with Keras NLP, Kaggle setup, Chatbot inputs, and optional RAG document context."
+keywords: ["intelli python gemma","offline gemma chatbot","gemma 2 keras nlp","python rag chatbot","kaggle gemma setup","intellinode chatbot"]
 ---
 
 # Gemma

@@ -1,5 +1,9 @@
 ---
 sidebar_position: 2
+title: "Vibe Agents Advanced Features"
+sidebar_label: "Vibe Features"
+description: "Configure Intelli VibeAgent planners, generated blueprints, flow persistence, environment variable injection, and multi-agent workflow execution."
+keywords: ["python vibeagent","intelli vibe features","multi agent workflow python","vibe agent blueprint","intelli flow persistence","python ai agent planner"]
 ---
 
 # Vibe Features
