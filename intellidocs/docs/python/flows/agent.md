@@ -35,6 +35,9 @@ The Intelli framework currently supports the following agent types:
 - `'recognition'`: Agents that convert speech to text.
 - `'embed'`: Agents that generate text embeddings.
 - `'search'`: Agents that perform semantic search operations.
+- `'mcp'`: Agents that call tools exposed by an MCP server.
+- `'coder'`: Agents that edit a workspace and run its tests, check the [coding agent page](coding-agent).
+- `'computer'`: Agents that operate a screen or a browser, check the [computer use page](computer-use).
 
 ## Example
 
@@ -48,7 +51,7 @@ text_agent = Agent(
     agent_type='text',
     provider='openai',
     mission='write a blog post',
-    model_params={'key': 'YOUR_OPENAI_API_KEY', 'model': 'gpt-3.5-turbo'}
+    model_params={'key': 'YOUR_OPENAI_API_KEY', 'model': 'gpt-5.5'}
 )
 ```
 

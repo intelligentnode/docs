@@ -25,13 +25,13 @@ def call_chatbot(provider, model=None):
     return response
 
 # call chatGPT
-call_chatbot(ChatProvider.OPENAI, "gpt-5.2")
+call_chatbot(ChatProvider.OPENAI, "gpt-5.5")
 
 # call mistralai
-call_chatbot(ChatProvider.MISTRAL, "mistral-medium")
+call_chatbot(ChatProvider.MISTRAL, "mistral-large-latest")
 
-# call claude3
-call_chatbot(ChatProvider.ANTHROPIC, "claude-3-sonnet-20240229")
+# call claude
+call_chatbot(ChatProvider.ANTHROPIC, "claude-sonnet-5")
 
 # call google gemini
 call_chatbot(ChatProvider.GEMINI)

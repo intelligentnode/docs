@@ -33,9 +33,9 @@ from intelli.flow import VibeAgent
 async def main():
     # 1. Setup the planner (requires an API key)
     vf = VibeAgent(
-        planner_provider="gemini",
+        planner_provider="gemini-2.5-flash",
         planner_api_key=os.getenv("GEMINI_API_KEY"),
-        planner_model="gemini-2.0-flash"
+        planner_model="gemini-2.5-flash"
     )
     
     # 2. Describe the flow you want
@@ -86,7 +86,7 @@ You can specify preferred model details as strings when initializing `VibeAgent`
 
 ```python
 vf = VibeAgent(
-    planner_provider="gemini",
+    planner_provider="gemini-2.5-flash",
     planner_api_key=os.getenv("GEMINI_API_KEY"),
     # Specify specific model versions as descriptive strings
     text_model="openai gpt-5.2-mini",

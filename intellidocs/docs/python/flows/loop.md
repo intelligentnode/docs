@@ -31,7 +31,7 @@ agent = Agent(
     agent_type="text",
     provider="openai",
     mission="Summarize and expand the input",
-    model_params={"key": "YOUR_API_KEY", "model": "gpt-4o"}
+    model_params={"key": "YOUR_API_KEY", "model": "gpt-5.5"}
 )
 task = Task(TextTaskInput("Generate an expanded summary"), agent)
 

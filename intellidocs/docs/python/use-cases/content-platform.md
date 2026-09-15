@@ -40,10 +40,10 @@ Define the agents that correspond to the services your tasks will use. Each agen
 ```python
 from intelli.flow import Agent
 
-text_generator = Agent("text", "gemini", "write specifications", {"key": GEMINI_API_KEY, "model": "gemini"})
-coder_agent = Agent("text", "openai", "write python code", {"key": OPENAI_API_KEY, "model": "gpt-3.5-turbo"})
-ux_designer = Agent("text", "openai", "user experience and designer", {"key": OPENAI_API_KEY, "model": "gpt-3.5-turbo"})
-image_desc_creator = Agent("text", "openai", "write image description", {"key": OPENAI_API_KEY, "model": "gpt-3.5-turbo"})
+text_generator = Agent("text", "gemini", "write specifications", {"key": GEMINI_API_KEY, "model": "gemini-2.5-flash"})
+coder_agent = Agent("text", "openai", "write python code", {"key": OPENAI_API_KEY, "model": "gpt-5.5"})
+ux_designer = Agent("text", "openai", "user experience and designer", {"key": OPENAI_API_KEY, "model": "gpt-5.5"})
+image_desc_creator = Agent("text", "openai", "write image description", {"key": OPENAI_API_KEY, "model": "gpt-5.5"})
 image_processor = Agent("image", "stability", "generate logo with colorful style", {"key": STABILITY_API_KEY})
 ```
 

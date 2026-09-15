@@ -33,7 +33,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Flows',
-      items: ['python/flows/get-started', 'python/flows/sequence-flow', 'python/flows/async-flow', 'python/flows/agent', 'python/flows/search-agent', 'python/flows/kagent', 'python/flows/tasks', 'python/flows/dynamic-path', 'python/flows/dynamic-tool', 'python/flows/processors', 'python/flows/templates', 'python/flows/loop'],
+      items: ['python/flows/get-started', 'python/flows/sequence-flow', 'python/flows/async-flow', 'python/flows/agent', 'python/flows/search-agent', 'python/flows/kagent', 'python/flows/tasks', 'python/flows/dynamic-path', 'python/flows/dynamic-tool', 'python/flows/processors', 'python/flows/templates', 'python/flows/loop', 'python/flows/computer-use', 'python/flows/coding-agent'],
     },
     {
       type: 'category',
@@ -59,7 +59,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Use cases',
-      items: ['python/use-cases/content-platform', 'python/use-cases/travel-assistant'],
+      items: ['python/use-cases/content-platform', 'python/use-cases/travel-assistant', 'python/use-cases/release-checks', 'python/use-cases/portal-operations'],
     },
     {
       type: 'doc',

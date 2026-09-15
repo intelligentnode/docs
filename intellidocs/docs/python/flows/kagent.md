@@ -132,7 +132,7 @@ cloud_agent = Agent(
     agent_type="text",
     provider="openai",
     mission="polish and refine content",
-    model_params={"key": OPENAI_API_KEY, "model": "gpt-4o"}
+    model_params={"key": OPENAI_API_KEY, "model": "gpt-5.5"}
 )
 
 # Create tasks

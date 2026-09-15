@@ -38,9 +38,27 @@ image_input = ImageModelInput(
     prompt=prompt,
     width=1024,
     height=1024,
-    model="dall-e-3"
+    model="gpt-image-2"
 )
 
 # Generate the image
 images = image_model.generate_images(image_input)
 ```
+
+### Openai Image Parameters
+
+`gpt-image-2` is the default openai model, and the gpt-image family returns base64 images. It accepts additional parameters:
+
+```python
+image_input = ImageModelInput(
+    prompt=prompt,
+    model="gpt-image-2",
+    quality="low",              # low, medium, high, auto
+    background="transparent",
+    output_format="webp",       # png, jpeg, webp
+    output_compression=80,      # jpeg and webp only
+    moderation="auto",
+)
+```
+
+The older `dall-e-3` model was retired by openai. If your code still passes the parameters of that era, intelli maps them for you, so `quality="standard"` becomes `medium`, `quality="hd"` becomes `high`, and `response_format` and `style` are dropped.
