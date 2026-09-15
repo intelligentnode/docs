@@ -116,7 +116,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Use cases',
-      items: ['npm/use-cases/ecommerce-materials', 'npm/use-cases/generate-html'],
+      items: ['npm/use-cases/support-triage', 'npm/use-cases/engineering-quality-gate', 'npm/use-cases/document-extraction', 'npm/use-cases/model-routing', 'npm/use-cases/ecommerce-materials', 'npm/use-cases/generate-html'],
     },
     {
       type: 'doc',
