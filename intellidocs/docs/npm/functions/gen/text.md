@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Text and JSON
+# Ask Any Model
 
 The building blocks behind every other `Gen` function: one call for text, one call for parsed JSON.
 

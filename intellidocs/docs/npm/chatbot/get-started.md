@@ -6,7 +6,7 @@ sidebar_position: 1
 
 Intellinode provides one chatbot interface for **OpenAI**, **Anthropic Claude**, **Google Gemini**, **Mistral**, **Cohere**, **NVIDIA**, self-hosted **vLLM**, every **OpenAI-compatible** service (OpenRouter, Groq, DeepSeek, xAI, Together, Ollama, LM Studio) and **Llama** through Replicate or AWS SageMaker.
 
-All the models are available with the unified chatbot interface with a minimum code change when switching between models. The pages that follow cover [multi-turn conversations](./multiple-messages), [tool calling](./tool-calling), [structured JSON output](./structured-output), the [OpenAI-compatible providers](./openai-compatible) and the [request options](./request-options).
+All the models are available with the unified chatbot interface with a minimum code change when switching between models. The pages that follow cover [multi-turn conversations](./multiple-messages), [tool calling](./tool-calling), [structured JSON output](./structured-output), the [OpenAI-compatible providers](./openai-compatible) and the [retries & timeouts](./request-options).
 
 ### OpenAI
 

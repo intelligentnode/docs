@@ -74,7 +74,7 @@ const custom = new Chatbot(MY_API_KEY, 'openai_compatible', null, {
 
 ### Everything else works the same
 
-Streaming, the [tool loop](./tool-calling), [structured output](./structured-output), the [request options](./request-options) and every `Gen` function accept these providers:
+Streaming, the [tool loop](./tool-calling), [structured output](./structured-output), the [retries & timeouts](./request-options) and every `Gen` function accept these providers:
 
 ```javascript
 const { Gen } = require('intellinode');

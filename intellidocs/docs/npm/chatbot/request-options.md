@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# Timeouts, retries and cancellation
+# Retries & Timeouts
 
 Every request made by intellinode goes through one HTTP layer with a timeout, retries with backoff and `AbortSignal` support. The options are the same for every provider.
 

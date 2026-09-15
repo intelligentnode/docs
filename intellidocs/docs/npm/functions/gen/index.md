@@ -27,20 +27,20 @@ Common options:
 | `maxTokens`, `temperature` | Tune the generation. |
 | `system` | Override the system message. |
 | `baseUrl`, `headers` | For `openai_compatible` and the presets. |
-| `timeout`, `retries`, `retryDelay`, `signal` | The [request options](../../chatbot/request-options). |
+| `timeout`, `retries`, `retryDelay`, `signal` | The [retries & timeouts](../../chatbot/request-options). |
 | `customProxyHelper` | Azure OpenAI or a proxy. |
 
 Code functions return the code as a string (no markdown fences); structured functions return parsed objects. The output parser removes the reasoning of models that return it inline and repairs common JSON slips.
 
 ### Categories
 
-| Page | Functions |
+| Page | What you get |
 | --- | --- |
-| [Text and JSON](./text) | `generate_text`, `generate_json`, `instructUpdate` |
-| [UI and pages](./ui) | `generate_component`, `generate_form`, `generate_page_section`, `generate_css`, `improve_accessibility`, `generate_email_template`, `generate_svg_icon`, `generate_color_palette`, `generate_design_tokens`, `generate_html_page`, `save_html_page`, `generate_dashboard` |
-| [Backend and data](./backend) | `generate_api_endpoint`, `generate_sql`, `generate_json_schema`, `generate_mock_data`, `generate_regex`, `generate_openapi_spec` |
-| [Code quality](./code) | `generate_unit_tests`, `review_code`, `fix_code`, `explain_code`, `convert_code`, `generate_commit_message`, `generate_readme`, `generate_release_notes` |
-| [Content and marketing](./content) | `get_marketing_desc`, `get_blog_post`, `generate_landing_copy`, `generate_faq`, `generate_seo_meta`, `translate_ui_strings`, `generate_image_from_desc`, `generate_speech_synthesis` |
+| [Ask Any Model](./text) | Text or ready-to-use JSON from any provider: `generate_text`, `generate_json`, `instructUpdate` |
+| [Build Web UI](./ui) | Components, forms, CSS, icons, design tokens and full pages: `generate_component`, `generate_form`, `generate_page_section`, `generate_css`, `improve_accessibility`, `generate_email_template`, `generate_svg_icon`, `generate_color_palette`, `generate_design_tokens`, `generate_html_page`, `save_html_page`, `generate_dashboard` |
+| [Build APIs & SQL](./backend) | Endpoints, SQL, schemas, mock data, regex and OpenAPI specs: `generate_api_endpoint`, `generate_sql`, `generate_json_schema`, `generate_mock_data`, `generate_regex`, `generate_openapi_spec` |
+| [Review & Fix Code](./code) | Code reviews, bug fixes, unit tests, commits and release notes: `generate_unit_tests`, `review_code`, `fix_code`, `explain_code`, `convert_code`, `generate_commit_message`, `generate_readme`, `generate_release_notes` |
+| [Write Marketing Copy](./content) | Landing copy, SEO tags, FAQs, translations, images and speech: `get_marketing_desc`, `get_blog_post`, `generate_landing_copy`, `generate_faq`, `generate_seo_meta`, `translate_ui_strings`, `generate_image_from_desc`, `generate_speech_synthesis` |
 
 ### Example
 

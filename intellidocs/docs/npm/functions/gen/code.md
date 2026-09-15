@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Code quality
+# Review & Fix Code
 
 Tests, reviews, fixes and the documents around a change. Have a different model write the tests than the one that wrote the code.
 

@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# UI and pages
+# Build Web UI
 
 Generate frontend code and complete pages. Code functions return the source as a string, ready to save to a file.
 

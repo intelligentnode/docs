@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# Content and marketing
+# Write Marketing Copy
 
 Copy, metadata, translations, images and speech.
 
