@@ -1,36 +1,37 @@
 ---
 sidebar_position: 1
-title: "AI Chatbot for OpenAI, Gemini and Mistral in Python"
+title: "AI Chatbot for OpenAI, Anthropic, Gemini and Mistral in Python"
 sidebar_label: "Get started"
-description: "Set up the Python chatbot with ChatModelInput and Chatbot. Use provider selection, default models, and GPT-5 options for OpenAI, Gemini, and Mistral."
-keywords: ["intelli python chatbot","python chatbot openai gemini","chatmodelinput intelli","intelli chatbot providers","gpt-5 python chatbot","pip install intelli"]
+description: "Set up the Python chatbot with ChatModelInput and Chatbot. Covers providers, default models, streaming, GPT-5 options, Azure OpenAI and request timeouts."
+keywords: ["intelli python chatbot","python chatbot openai gemini","chatmodelinput intelli","intelli chatbot providers","gpt-5 python chatbot","python chatbot streaming"]
 ---
 
 # Get started
 
-The intelli chatbot function connect with multiple leading AI models such as chatGPT, gemini, and mistral. It allows developers to build chat systems capable of handling complex dialogues and chat with your docs. One of the key features of the intelli chatbot is its ability to switch between different AI providers, offering flexibility based on the needs of the application and ability to upgrade to latest models without code changes in your apps.
+The intelli chatbot function connects with the leading AI models such as GPT, Claude, Gemini and Mistral through one input. You can switch between providers, or upgrade to the latest models, without changing the code of your app.
 
 ### Core Components
 
+**ChatModelInput:** This class provides a unified entry to all chatbot providers. It holds the system message, the model, the message history, and model parameters like temperature and max tokens.
 
-**ChatModelInput:** This class provide unified entry to all chatbot providers. It encapsulates details such as the chat system, model preference, message history, and various AI model-specific parameters like temperature, max tokens, and more. 
+**Chatbot:** The primary class that interfaces with the AI providers. It takes the API key, the provider name, and optional settings such as a timeout, a proxy or a server URL.
 
-**Chatbot:** The primary class that interfaces with different AI providers. It requires API credentials, the provider name. You can extend the functionality using optional parameters for proxies and search capabilities via intellibode cloud.
+### Available Providers
 
+Use the `ChatProvider` enum, or its string value, to select the provider:
 
-### Available Models and Capabilities
+| Provider | `ChatProvider` | Value |
+| -------- | -------------- | ----- |
+| OpenAI and Azure OpenAI | `ChatProvider.OPENAI` | `openai` |
+| Anthropic | `ChatProvider.ANTHROPIC` | `anthropic` |
+| Google Gemini | `ChatProvider.GEMINI` | `gemini` |
+| Mistral | `ChatProvider.MISTRAL` | `mistral` |
+| NVIDIA (DeepSeek, Llama and NIM) | `ChatProvider.NVIDIA` | `nvidia` |
+| Self-hosted vLLM | `ChatProvider.VLLM` | `vllm` |
+| Offline llama.cpp | `ChatProvider.LLAMACPP` | `llamacpp` |
+| Offline Keras (Gemma, Llama, Mistral) | `ChatProvider.KERAS` | `keras` |
 
-The python version support the following providers:
-
-- **Openai**.
-- **Gemini**.
-- **Mistral**.
-- **Anthropic**.
-- **Azure**.
-- **DeepSeek**.
-- **Llama3**.
-
-Use `ChatProvider` enum for selecting your chatbot model.
+See [DeepSeek & Llama](/docs/python/chatbot/nvidia-chat), [vLLM](/docs/python/offline-chatbot/vllm), [llama.cpp](/docs/python/offline-chatbot/llamacpp) and [Gemma](/docs/python/offline-chatbot/gemma) for the provider specific setup.
 
 ### Example
 
@@ -39,7 +40,6 @@ Use `ChatProvider` enum for selecting your chatbot model.
 from intelli.model.input.chatbot_input import ChatModelInput
 from intelli.function.chatbot import Chatbot, ChatProvider
 ```
-
 
 ##### Prepare the input
 ```python
@@ -51,7 +51,10 @@ chat_input.add_user_message("Explain the plot of the Inception movie in one line
 ```python
 chatbot = Chatbot(api_key=YOUR_API_KEY, provider=ChatProvider.OPENAI)
 response = chatbot.chat(chat_input)
+print(response[0])
 ```
+
+`chat` returns a list of replies. When the model calls a tool, the item is a dictionary instead of text, see [Tool calling](/docs/python/chatbot/tool-calling).
 
 ### Default Models
 
@@ -65,6 +68,21 @@ When you omit the model, intelli picks a current default for the provider:
 | Mistral | `mistral-large-latest` |
 
 Use `claude-opus-5` for the larger Anthropic model. The Claude 5 family and Opus 4.7 and above dropped the sampling parameters, so intelli omits `temperature` for those models and they work without any change on your side.
+
+### Streaming
+
+`stream` yields the reply as it is generated. It is available for openai, anthropic, nvidia, vllm and llamacpp.
+
+```python
+chat_input = ChatModelInput("You are a helpful assistant.", model="claude-sonnet-5")
+chat_input.add_user_message("Write a short poem about the sea.")
+
+chatbot = Chatbot(YOUR_ANTHROPIC_KEY, ChatProvider.ANTHROPIC)
+for chunk in chatbot.stream(chat_input):
+    print(chunk, end="", flush=True)
+```
+
+The GPT-5 family runs on the responses API, which intelli calls through `chat` only. To stream from openai, use a chat completions model such as `gpt-4.1`, or add the `:chat` suffix described below.
 
 ### GPT-5 Parameters
 
@@ -81,3 +99,36 @@ chat_input = ChatModelInput(
 ```
 
 `tool_choice` is available as well, on both the openai and the anthropic paths. To force the classic chat completions endpoint for a GPT-5 deployment, add `:chat` to the model id, for example `gpt-5.5:chat`.
+
+### Chatbot Options
+
+Pass the optional settings in `options`:
+
+| Option | Providers | Description |
+| ------ | --------- | ----------- |
+| `timeout` | all remote providers | Request timeout in seconds, default 180. |
+| `proxy_helper` | openai | Route the calls to Azure OpenAI or another proxy. |
+| `baseUrl` | nvidia, vllm | The URL of your NIM or vLLM server. |
+| `model_path`, `model_params` | llamacpp | The local GGUF file and its parameters. |
+| `model_name`, `model_params` | keras | The Keras model and the Kaggle credentials. |
+
+```python
+chatbot = Chatbot(YOUR_API_KEY, ChatProvider.OPENAI, options={"timeout": 60})
+```
+
+### Azure OpenAI
+
+Set your Azure resource in `ProxyHelper`, then pass the deployment name as the model:
+
+```python
+from intelli.utils.proxy_helper import ProxyHelper
+
+proxy_helper = ProxyHelper()
+proxy_helper.set_azure_openai(YOUR_AZURE_RESOURCE)
+
+azure_bot = Chatbot(YOUR_AZURE_API_KEY, ChatProvider.OPENAI, options={"proxy_helper": proxy_helper})
+
+chat_input = ChatModelInput("You are a helpful assistant.", model=YOUR_DEPLOYMENT_NAME)
+chat_input.add_user_message("What is the capital of France?")
+response = azure_bot.chat(chat_input)
+```

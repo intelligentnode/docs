@@ -1,170 +1,68 @@
 ---
 sidebar_position: 9
-title: "Chat With Your Documents in Node.js"
-sidebar_label: "Chat with docs"
-description: "Build document-aware chatbots in Node.js with IntelliNode One Key, connecting your uploaded files to OpenAI, Gemini, Mistral or Llama."
-keywords: ["intellinode chatbot docs","node.js chat with documents","openai document chatbot","gemini document chatbot","mistral chatbot node.js","llama chatbot node.js"]
+title: "Chat UI for Any Model With Your Own Keys"
+sidebar_label: "Chat UI"
+description: "IntelliChat is an open source chat UI built on IntelliNode. Pick a provider and a model, paste your own key, and chat with OpenAI, Claude, Gemini or local models."
+keywords: ["intellinode chat ui","intellichat","open source chatbot ui","chat with your own api key","node.js chatbot ui","local llm chat ui"]
 ---
 
-# Chat with docs
+# Chat UI
 
-Intellinode cloud allows you to connect your data to various chatbot engines, including OpenAI ChatGPT, Google Gemini, and LLama V2. This integration enables a tailored chatbot agent experience, providing tuned responses to the context of your uploaded documents or diagram images. 
+The One Key document service is no longer available, see [Intellicloud](/docs/npm/intellicloud). As a UI alternative, **[IntelliChat](https://chat.intellinode.ai/)** lets you connect any supported model with your own key, and chat with it from the browser without writing code. It is open source and built on the same `Chatbot` you use in code.
 
-**How setupt intellinode cloud with your data**
-1. Visit the **[IntelliNode App](https://app.intellinode.ai/)**.
-2. Start a project using the **Document** option.
-3. Upload your documents or images, such as PDF, DOC, DOCX, PNG, JPG, and code files.
-4. Copy the generated **One Key**; this key will be used to connect IntelliNode's chatbot to your uploaded data.
+### Connect a Model
 
-### Implementation of Chatbot Models
-The setup code is identical for all bots, making it easy to switch between them. You can employ your **One Key** with different language models as shown in the examples below:
+1. Open **[chat.intellinode.ai](https://chat.intellinode.ai/)** and open the settings.
+2. Choose the **Chat**, **Images**, **Voice** or **Code** tab.
+3. Select the provider and the model.
+4. Paste your API key and save.
 
-First, import the necessary modules:
+Each tab keeps its own key, so you can chat with one provider and generate images or voice with another.
 
-```javascript
-const { Chatbot, SupportedChatModels } = require("intellinode");
-const intelliKey = '<generated_one_key>';
+### Supported Providers
+
+| Group | Providers |
+| ----- | --------- |
+| Cloud | OpenAI, Anthropic, Google Gemini, Cohere, Mistral, Replicate (Llama), Azure OpenAI |
+| OpenAI-compatible | OpenRouter, Groq, DeepSeek |
+| Local and self-hosted | Ollama, LM Studio, vLLM |
+
+### Features
+
+- Stream replies and stop them at any time.
+- Generate images with the image button or `/image`.
+- Attach an image and ask about it.
+- Dictate messages with the microphone and listen to the replies.
+- Paste a GitHub link to ask about a repo, file, issue or pull request.
+- Connect a GitHub repo, or a local folder when running locally, and the assistant reads the code and shows each step.
+
+### Run It Locally
+
+Run IntelliChat on your machine to use local models such as Ollama, LM Studio or a vLLM server, or to load your keys from a `.env` file:
+
+```bash
+git clone https://github.com/intelligentnode/IntelliChat.git
+cd IntelliChat/intellichat
+npm install
+npm run dev
 ```
 
-Assuming that your data set includes software contracts, you can ask the chatbots details about the contract using this code:
+Open `http://localhost:3000`. Optionally copy `.env.example` to `.env` and add your keys, or add them from the settings.
+
+### The Same Chat in Code
+
+The UI settings map to the `Chatbot` arguments, so you can move from the UI to your app with the same provider and model:
 
 ```javascript
-let query = "List to me the included features in the vector database contract";
-```
+const { Chatbot, ChatGPTInput } = require("intellinode");
 
-#### OpenAI ChatGPT
+const bot = new Chatbot(openaiKey, "openai");
 
-Incorporate the **One Key** with chatGPT in the following way:
+const input = new ChatGPTInput("You are a helpful assistant.", { model: "gpt-5.5" });
+input.addUserMessage("List the included features in the vector database contract.");
 
-```javascript
-const openaiBot = new Chatbot(openaiKey, SupportedChatModels.OPENAI, null, {oneKey: intelliKey});
-```
-
-You can ask the ChatGPT bot details about the data using this code:
-
-```javascript 
-const { ChatGPTInput } = require("intellinode");
-
-const input = new ChatGPTInput();
-input.addUserMessage(query);
-
-const responses = await openaiBot.chat(input);
+const responses = await bot.chat(input);
 responses.forEach(response => console.log("- " + response));
 ```
 
-#### Google Gemini
-
-To configure **Google Gemini**, use the **One Key** in this way:
-
-```javascript
-const geminiBot = new Chatbot(geminiApiKey, SupportedChatModels.GEMINI, null, {oneKey: intelliKey});
-```
-
-You can interact with the Gemini bot using this code:
-
-```javascript
-const { GeminiInput } = require("intellinode");
-
-const input = new GeminiInput();
-input.addUserMessage(query);
-
-const responses = await geminiBot.chat(input);
-responses.forEach(response => console.log("- " + response));
-```
-
-
-#### Mistral AI
-
-To configure the **Mistral** open source model with your data, use the **One Key**:
-
-```javascript
-const mistralBot = new Chatbot(mistralApiKey, SupportedChatModels.MISTRAL, null, {oneKey: intelliKey});
-```
-
-You can interact with the Mistral bot using this code:
-
-```javascript
-const { MistralInput } = require("intellinode");
-
-const input = new MistralInput();
-input.addUserMessage(query);
-
-const responses = await mistralBot.chat(input);
-responses.forEach(response => console.log("- " + response));
-```
-
-
-#### LLama V2 - Replicate
-
-To implement **LLama V2 - Replicate Bot** with the **One Key**, use:
-
-```javascript
-const replicateBot = new Chatbot(replicateApiKey, SupportedChatModels.REPLICATE, null, {oneKey: intelliKey});
-```
-
-Interact with the LLama V2 bot with the following code:
-
-```javascript
-const { LLamaReplicateInput } = require("intellinode");
-
-const input = new LLamaReplicateInput("You are a helpful assistant!");
-input.addUserMessage(query);
-
-const responses = await replicateBot.chat(input);
-responses.forEach(response => console.log("- " + response));
-```
-
-### Advanced Options
-Improve your chatbot responses with additional customization through optional parameters:
-- `searchK`: specifies the number of references for the semantic search step.
-- `attachReference`: includes the names of reference documents with the chatbot's responses.
-
-**Example Incorporating Advanced Options with OpenAI ChatGPT**
-
-Here's how to utilize these advanced options in an OpenAI ChatGPT integration:
-
-```javascript
-
-// initiate the chatbot
-const openaiBot = new Chatbot(openaiKey, SupportedChatModels.OPENAI, null, {oneKey: intelliKey});
-
-// setup the input with the advanced options
-const input = new ChatGPTInput("you are helpful assistant", { searchK: 4, attachReference: true });
-input.addUserMessage(query);
-
-// when sending attachReference you should use result to get the content
-const responses = await openaiBot.chat(input);
-responses.result.forEach(response => console.log("- " + response));
-
-// get the referenced documents
-console.log('### the chatbot references ###')
-console.log(Object.keys(responses.references))
-
-```
-
-
-**Example Incorporating Advanced Options with Gemini**
-
-Here's how to utilize these advanced options in an OpenAI ChatGPT integration:
-
-```javascript
-
-// initiate the chatbot
-const geminiBot = new Chatbot(openaiKey, SupportedChatModels.GEMINI, null, {oneKey: intelliKey});
-
-// setup the input with the advanced options
-let query = "List to me the included features in the vector database contract";
-const input = new GeminiInput("you are helpful assistant", { searchK: 4, attachReference: true });
-input.addUserMessage(query);
-
-// when sending attachReference you should use result to get the content
-const responses = await geminiBot.chat(input);
-responses.result.forEach(response => console.log("- " + response));
-
-// get the referenced documents
-console.log('### the chatbot references ###')
-console.log(Object.keys(responses.references))
-
-```
-
-This example demonstrates how to activate document references (`attachReference: true`) and set the number of references (`searchK: 5`). This approach can be adapted to any supported chatbot model, enhancing the contextual understanding.
+See [Get started](/docs/npm/chatbot/get-started) for every provider, and [OpenAI-compatible](/docs/npm/chatbot/openai-compatible) for OpenRouter, Groq, DeepSeek and local servers.

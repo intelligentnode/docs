@@ -2,8 +2,8 @@
 sidebar_position: 7
 title: "NVIDIA DeepSeek and Llama Chat in Node.js"
 sidebar_label: "DeepSeek & Llama"
-description: "Build NVIDIA chatbots with IntelliNode in Node.js using DeepSeek and Llama models, multi-turn messages, and One Key document integration."
-keywords: ["intellinode nvidia chat","node.js deepseek chatbot","node.js llama chatbot","nvidia nim node.js","nvidia chatbot api","intellinode one key"]
+description: "Build NVIDIA chatbots with IntelliNode in Node.js using DeepSeek and Llama models, multi-turn messages, and local NVIDIA NIM endpoints."
+keywords: ["intellinode nvidia chat","node.js deepseek chatbot","node.js llama chatbot","nvidia nim node.js","nvidia chatbot api","deepseek chat ui"]
 ---
 
 # DeepSeek & Llama
@@ -24,7 +24,7 @@ Sample of supported models with much more available using Intellinode Nvidia con
 ## Get Started
 
 ### API Key
-Visit NVIDIA [model catelog](https://build.nvidia.com/models) to get your API key.
+Visit NVIDIA [model catalog](https://build.nvidia.com/models) to get your API key.
 
 
 ### Chat Code
@@ -74,36 +74,9 @@ const responses = await nvidiaBot.chat(input);
 responses.forEach(resp => console.log("- " + resp));
 ```
 
-### Docs Chat Integration with NVIDIA
+### Try DeepSeek From the UI
 
-Intellinode Cloud allows you to connect your data to various chatbot engines, including NVIDIA Chat, to tailor responses based on your uploaded documents or images.
-
-**How to set up Intellinode Cloud with your data:**
-1. Visit the **[IntelliNode App](https://app.intellinode.ai/)**.
-2. Start a project using the **Document** option.
-3. Upload your documents or images (PDF, DOC, DOCX, PNG, JPG, etc.).
-4. Copy the generated **One Key**; this key connects NVIDIA Chat to your data.
-
-#### Example: NVIDIA Chat with One Key
-One Key provides a unified approach to connect to your data from any model.
-
-Import the necessary modules and use your One Key:
-
-```javascript
-const { Chatbot, NvidiaInput, SupportedChatModels } = require("intellinode");
-const intelliKey = '<generated_one_key>';
-
-const nvidiaBot = new Chatbot(NVIDIA_API_KEY, SupportedChatModels.NVIDIA, null, { oneKey: intelliKey });
-
-const input = new NvidiaInput("You are a helpful assistant.", {
-  model: 'deepseek-ai/deepseek-v4-flash-0731',
-  maxTokens: 512,
-  temperature: 0.6
-});
-input.addUserMessage("List the key features of our new vector database.");
-const responses = await nvidiaBot.chat(input);
-responses.forEach(response => console.log("- " + response));
-```
+To chat with DeepSeek models without code, open [IntelliChat](https://chat.intellinode.ai/), select the **DeepSeek** provider and paste your DeepSeek key. See [Chat UI](/docs/npm/chatbot/docs-chat) for the setup.
 
 ## NVIDIA NIM
 Nvidia NIM provide optimized way to host models locally.

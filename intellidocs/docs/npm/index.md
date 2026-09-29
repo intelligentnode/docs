@@ -35,7 +35,6 @@ The wrapper layer in intellinode include:
 * **StabilityAIWrapper**: Interaction with the stable diffusion image models.
 * **HuggingWrapper**: The Hugging Face inference capability with endless open-source models.
 * **ReplicateWrapper**: Access to Llama chat models.
-* **IntellicloudWrapper**: Connect any AI model with your data using intellinode one key.
 
 The controller layer include:
 

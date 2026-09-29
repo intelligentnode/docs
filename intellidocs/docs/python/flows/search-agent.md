@@ -1,26 +1,25 @@
 ---
 sidebar_position: 5
-title: "Web and Semantic Search Agent in Python"
+title: "Web Search Agent in Python"
 sidebar_label: "Search Agent"
-description: "Use the Intelli Python Search Agent to add Google web search or Intellicloud semantic search to flows with query input and result settings."
-keywords: ["intelli python search agent","python ai search flow","google custom search python agent","intellicloud semantic search","intelli flow agents","python document search agent"]
+description: "Use the Intelli Python Search Agent to add live Google web search to flows, then pass the results to a model task for analysis."
+keywords: ["intelli python search agent","python ai search flow","google custom search python agent","intelli flow agents","python web search agent"]
 ---
 
 # Search Agent
 
-The Search Agent enables flows to retrieve information from external sources. It supports two primary search modes: live web search and semantic search over your private documents.
-
-### Providers
-
-The agent routes its execution based on the parameters provided in `model_params`:
-
-1.  **Google**: Live web search using the Google Custom Search JSON API.
-2.  **Intellicloud**: Semantic search over data indexed in the Intellicloud platform.
+The Search Agent enables flows to retrieve live information from the web, using the Google Custom Search JSON API.
 
 ### Parameters
 
-- **k**: Number of search results to return (default: 5 for Google, 3 for Intellicloud).
-- **as_text**: (Google only) If `True`, returns a formatted string. If `False`, returns a structured list of results.
+The agent reads its settings from `model_params`:
+
+- **google_api_key**: your Google API key.
+- **google_cse_id**: your Custom Search Engine ID (CX).
+- **k**: number of search results to return (default: 5).
+- **as_text**: if `True`, returns a formatted string. If `False`, returns a structured list of results.
+- **safe**: the Google safe search level (default: `active`).
+- **timeout**: request timeout in seconds (default: 20).
 
 ---
 
@@ -55,27 +54,6 @@ flow = SequenceFlow([task])
 result = flow.start()
 
 print(result["task1"])
-```
-
----
-
-### Example: Intellicloud Semantic Search
-
-This mode searches through your own documents previously indexed via Intellicloud.
-
-```python
-# Define the Intellicloud Search Agent
-search_agent = Agent(
-    agent_type=AgentTypes.SEARCH.value,
-    provider="intellicloud",
-    mission="search in my documentation",
-    model_params={
-        "one_key": "YOUR_INTELLICLOUD_ONE_KEY",
-        "k": 3
-    }
-)
-
-# Execution follows the same pattern as above
 ```
 
 ### Notes

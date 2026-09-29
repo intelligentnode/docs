@@ -2,13 +2,13 @@
 sidebar_position: 7
 title: "Self-Hosted vLLM Models in Python"
 sidebar_label: "vLLM Integration"
-description: "Use Intelli Python with self-hosted vLLM models for chat completions, streaming responses, DeepSeek examples, and RAG with One Key."
-keywords: ["python vllm integration","intelli python vllm","self hosted vllm chatbot","vllm streaming responses","deepseek vllm python","vllm rag one key"]
+description: "Use Intelli Python with self-hosted vLLM models for chat completions, streaming responses and DeepSeek examples."
+keywords: ["python vllm integration","intelli python vllm","self hosted vllm chatbot","vllm streaming responses","deepseek vllm python"]
 ---
 
 # vLLM Integration
 
-Intelli Python provide integration with **self-hosted vLLM models**.
+Intelli Python provides integration with **self-hosted vLLM models**. Point the chatbot to your server URL and keep the same `ChatModelInput` you use with the hosted providers.
 
 ## Supported Models
 
@@ -101,43 +101,3 @@ for chunk in chatbot.stream(stream_input):
     sys.stdout.flush()  # Ensure output is displayed immediately
 print()  # Final newline
 ```
-
-## Connect Self-Hosted vLLM with RAG
-
-Intelli Python supports connecting your self-hosted vLLM models with Retrieval-Augmented Generation (RAG) using a unified "One Key." 
-This enables your chatbot to reference your uploaded documents or knowledge bases seamlessly.
-
-### How it works:
-
-- **Upload documents** or knowledge base via IntelliNode Cloud.
-- Get a **One Key** that connects your vLLM chatbot directly to your documents.
-- Enjoy **personalized responses** powered by your data.
-
-See the [IntelliCloud Docs](https://docs.intellinode.ai/docs/python/intellicloud) for detailed instructions.
-
-### Example: vLLM + One Key
-
-```python
-intelli_key = "<your_one_key>"
-chatbot = Chatbot(
-    api_key=None,
-    provider=ChatProvider.VLLM,
-    options={
-        "baseUrl": "http://localhost:8000",
-        "one_key": intelli_key,
-        # "api_base": "self hosted intellicloud URL" (optional)
-    }
-)
-
-input_obj = ChatModelInput(
-    system="You are a helpful assistant.",
-    model="meta-llama/Llama-3.1-8B-Instruct",
-    max_tokens=200,
-    temperature=0.5
-)
-input_obj.add_user_message("Summarize the key points from our uploaded annual report.")
-response = chatbot.chat(input_obj)
-print("Personalized response:", response)
-```
-
-This integration allows your chatbot to deliver accurate and context-aware responses derived directly from your own data sources.

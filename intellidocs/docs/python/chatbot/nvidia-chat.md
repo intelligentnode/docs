@@ -29,7 +29,7 @@ Visit [https://build.nvidia.com/models](https://build.nvidia.com/models) to get 
 from intelli.function.chatbot import Chatbot, ChatProvider
 from intelli.model.input.chatbot_input import ChatModelInput
 
-# Create a chatbot sing your API key.
+# Create a chatbot using your API key.
 nvidia_bot = Chatbot("YOUR_NVIDIA_API_KEY", ChatProvider.NVIDIA.value)
 
 # Prepare chat input
@@ -89,31 +89,6 @@ embed_input = EmbedInput(
 result = embed_model.get_embeddings(embed_input)
 print("Embedding result:", result)
 ```
-
-## Docs Chat Integration with NVIDIA
-
-Intellinode Cloud allows you to connect your data to various chatbot engines, including NVIDIA Chat, to tailor responses based on your uploaded documents or images.
-
-1. Visit the [IntelliNode App](https://app.intellinode.ai/).
-2. Start a project using the **Document** option.
-3. Upload your documents or images (PDF, DOC, DOCX, PNG, JPG, etc.).
-4. Copy the generated **One Key**; this key connects NVIDIA Chat to your data.
-
-#### Example: NVIDIA Chat with One Key
-
-```python
-from intelli.function.chatbot import Chatbot, ChatProvider
-from intelli.model.input.chatbot_input import ChatModelInput
-
-intelli_key = "<YOUR_ONE_KEY>"
-nvidia_bot = Chatbot("YOUR_NVIDIA_API_KEY", ChatProvider.NVIDIA.value, options={"one_key": intelli_key})
-
-input_obj = ChatModelInput("You are a helpful assistant.", model="deepseek-ai/deepseek-r1", max_tokens=512, temperature=0.6)
-input_obj.add_user_message("List the key features of our new digital platform.")
-responses = nvidia_bot.chat(input_obj)
-```
-
-
 
 ## NVIDIA NIM
 Nvidia NIM provide optimized way to host models locally.

@@ -2,7 +2,7 @@
 sidebar_position: 8
 title: "Self-Hosted vLLM Models in Node.js"
 sidebar_label: "vLLM Integration"
-description: "Learn how to connect IntelliNode to self-hosted vLLM servers for chat completions, DeepSeek examples, embeddings, and RAG with One Key."
+description: "Learn how to connect IntelliNode to self-hosted vLLM servers for chat completions, DeepSeek examples, embeddings, and a chat UI."
 keywords: ["intellinode vllm","node.js vllm integration","vllm chat completion","vllm embeddings node.js","self hosted vllm chatbot","deepseek vllm example"]
 ---
 
@@ -108,45 +108,11 @@ console.log('Embeddings:', embeddings);
 
 ---
 
-## Connect Self-Hosted vLLM with RAG using One Key
+## Chat With Your vLLM Server From the UI
 
-IntelliNode supports connecting your self-hosted vLLM models with Retrieval-Augmented Generation (RAG) using a unified "One Key." This enables your chatbot to reference your uploaded documents or knowledge bases seamlessly.
+[IntelliChat](https://chat.intellinode.ai/) connects to vLLM from the browser, with the same `Chatbot` behind it:
 
-### How it works:
-
-- **Upload documents** or knowledge base via IntelliNode Cloud.
-- Get a **One Key** that connects your vLLM chatbot directly to your documents.
-- Enjoy **personalized responses** powered by your data.
-
-See the [IntelliCloud Docs](https://docs.intellinode.ai/docs/npm/intellicloud) for detailed instructions.
-
-### Example: vLLM + One Key
-
-```javascript
-const intelliKey = '<your_one_key>';
-
-const chatbot = new Chatbot(
-  null,
-  SupportedChatModels.VLLM,
-  null,
-  {
-    baseUrl: 'http://localhost:8000', 
-    oneKey: intelliKey,
-    //intelliBase: 'self hosted inellicloud'
-  }
-);
-
-const input = new VLLMInput('You are a helpful assistant.', {
-  model: 'meta-llama/Llama-3.1-8B-Instruct',
-  maxTokens: 200,
-  temperature: 0.5
-});
-
-input.addUserMessage('Summarize the key points from our uploaded annual report.');
-
-const response = await chatbot.chat(input);
-console.log('Personalized response:', response);
-```
-
-This integration allows your chatbot to deliver accurate and context-aware responses derived directly from your own data sources.
-
+1. Run IntelliChat locally, as described in [Chat UI](/docs/npm/chatbot/docs-chat#run-it-locally), so it can reach your server.
+2. Open the settings and select **vLLM (self-hosted)**.
+3. Enter your server URL, for example `http://localhost:8000`.
+4. Load the served models, or type a model id such as `meta-llama/Llama-3.1-8B-Instruct`.
