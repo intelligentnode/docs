@@ -106,7 +106,29 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/intelligentnode/docs/edit/main/intellidocs',
         },
-        blog: false,
+        blog: {
+          path: 'blog',
+          routeBasePath: 'articles',
+          blogTitle: 'AI Agent Articles and Guides',
+          blogDescription: 'Guides and use cases for building AI agents, tool calling and multi-model apps with Intelli for Python and IntelliNode for Node.js.',
+          blogSidebarTitle: 'All articles',
+          blogSidebarCount: 'ALL',
+          postsPerPage: 'ALL',
+          showReadingTime: true,
+          feedOptions: {
+            type: ['rss', 'atom'],
+            title: 'IntelliNode Articles',
+            description: 'Guides and use cases for building AI agents with Intelli and IntelliNode.',
+            copyright: `Copyright © ${new Date().getFullYear()} IntelliNode.`,
+          },
+        },
+        // Tag and archive pages only list links, so the sitemap keeps the pages that carry content.
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/articles/tags/**', '/articles/archive'],
+          filename: 'sitemap.xml',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -157,6 +179,11 @@ const config = {
             position: 'left'
           },
           {
+            to: '/articles',
+            label: 'Articles',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/intelligentnode/Intelli',
             label: 'GitHub',
             position: 'right',
@@ -176,6 +203,10 @@ const config = {
               {
                 label: 'NPM',
                 to: '/docs/npm/',
+              },
+              {
+                label: 'Articles',
+                to: '/articles',
               },
             ],
           },

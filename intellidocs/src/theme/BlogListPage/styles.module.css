@@ -1,0 +1,192 @@
+.page {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  max-width: 1140px;
+}
+
+.header {
+  max-width: 760px;
+  margin-bottom: 1.75rem;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.filterButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--ifm-transition-fast) ease, border-color var(--ifm-transition-fast) ease,
+    color var(--ifm-transition-fast) ease;
+}
+
+.filterButton:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.filterButton:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.filterButtonActive,
+.filterButtonActive:hover {
+  background: var(--ifm-color-primary-darker);
+  border-color: var(--ifm-color-primary-darker);
+  color: #fff;
+}
+
+.count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-800);
+}
+
+.filterButtonActive .count {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 1.5rem;
+}
+
+.gridItem[hidden] {
+  display: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 14px;
+  background: var(--ifm-background-surface-color);
+  transition: box-shadow var(--ifm-transition-fast) ease, transform var(--ifm-transition-fast) ease;
+}
+
+.card:hover {
+  box-shadow: 0 12px 32px rgba(20, 40, 90, 0.12);
+  transform: translateY(-2px);
+}
+
+.cardImageLink {
+  display: block;
+  aspect-ratio: 1200 / 630;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.cardImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.25rem 1.35rem 1.4rem;
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.65rem;
+}
+
+.chip {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+}
+
+.chip_python {
+  background: #e6f0ff;
+  color: #1a50a0;
+}
+
+.chip_nodejs {
+  background: #efe8fd;
+  color: #5b3aa8;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin-bottom: 0.6rem;
+}
+
+.cardTitle a {
+  color: var(--ifm-heading-color);
+}
+
+.cardTitle a:hover {
+  color: var(--ifm-color-primary-darker);
+  text-decoration: none;
+}
+
+.cardDescription {
+  color: var(--ifm-color-emphasis-800);
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.readMore {
+  font-weight: 600;
+  color: var(--ifm-color-primary-darker);
+}
+
+.empty {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
