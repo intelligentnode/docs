@@ -208,7 +208,9 @@ mcp_agent = Agent(
     model_params={
         "command": "python",
         "args": ["mcp_math_server.py"]
-        # Note: tool and input_arg will be set dynamically based on LLM choice
+        # ToolDynamicConnector only routes to this task when the LLM calls a tool.
+        # It does not set "tool" or the arguments: add them here, or copy them from
+        # the LLM tool call with a pre_process that returns "update_model_params".
     }
 )
 

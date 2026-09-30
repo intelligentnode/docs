@@ -82,7 +82,7 @@ for chunk in chatbot.stream(chat_input):
     print(chunk, end="", flush=True)
 ```
 
-The GPT-5 family runs on the responses API, which intelli calls through `chat` only. To stream from openai, use a chat completions model such as `gpt-4.1`, or add the `:chat` suffix described below.
+The GPT-5 family runs on the responses API, which intelli calls through `chat` only. To stream a GPT-5 model, add the `:chat` suffix described below, for example `gpt-5.5:chat`, and intelli sends the call to chat completions instead. A chat completions model such as `gpt-4.1` streams as is.
 
 ### GPT-5 Parameters
 
@@ -98,7 +98,17 @@ chat_input = ChatModelInput(
 )
 ```
 
-`tool_choice` is available as well, on both the openai and the anthropic paths. To force the classic chat completions endpoint for a GPT-5 deployment, add `:chat` to the model id, for example `gpt-5.5:chat`.
+`tool_choice` is available as well, on both the openai and the anthropic paths.
+
+To use the classic chat completions endpoint with a GPT-5 model, add `:chat` to the model id, for example `gpt-5.5:chat`. intelli removes the suffix before it sends the model id, and both `chat` and `stream` work on this path. The parameters above belong to the responses API, so on chat completions intelli does not send `reasoning_effort` or `verbosity`, OpenAI accepts only the default `temperature` of 1, and it rejects `max_tokens`. Cap the output with `max_completion_tokens` instead:
+
+```python
+chat_input = ChatModelInput(
+    system="You are a helpful assistant.",
+    model="gpt-5.5:chat",
+    max_completion_tokens=512,
+)
+```
 
 ### Chatbot Options
 
