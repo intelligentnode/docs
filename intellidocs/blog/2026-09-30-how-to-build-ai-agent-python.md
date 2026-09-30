@@ -6,29 +6,33 @@ keywords: ["how to build an ai agent in python", "python ai agent example", "llm
 tags: [{label: "Python", permalink: "/python"}, "AI Agents", "Tool Calling", "Tutorial"]
 authors: [intellinode]
 image: /img/articles/how-to-build-ai-agent-python.jpg
-image_alt: "Glowing core circled by orbit rings and small bodies, showing a Python AI agent loop that calls tools and returns"
+image_alt: "Blue core circled by orbit rings and small bodies, showing a Python AI agent loop that calls tools and returns"
 date: 2026-09-30T09:00:00Z
 ---
 
-Here is how to build an AI agent in Python without a big framework: give a model a short list of functions, run a loop that executes the calls it asks for, send the results back, and stop after a fixed number of steps. That loop is the agent. Everything else is guardrails.
+Picture the support inbox at an online retailer on a Monday morning. Ticket after ticket asks the same thing: where is my order? Each one means a rep checks the order, then the carrier, then types a reply.
 
-In this guide you will build an order status agent in under 100 lines of plain Python on top of the Intelli `Chatbot`. The same code runs on OpenAI, Claude or a local Ollama model by changing one constructor and the model name, and you will see exactly where a tiny local model falls short.
+A plain chatbot can't help. It doesn't know your orders, so it guesses. An AI agent can look things up on its own and hand anything risky to a person. This guide shows how to build an AI agent in Python for that job, without a big framework.
 
-![Glowing core circled by orbit rings and small bodies, showing a Python AI agent loop that calls tools and returns](/img/articles/how-to-build-ai-agent-python.jpg)
+You'll start with the idea, write the agent in one file, run it on a hosted model and on a free one on your laptop, then add the checks you'd want before customers see it. Along the way, a tiny local model shows where things quietly go wrong.
+
+![Blue core circled by orbit rings and small bodies, showing a Python AI agent loop that calls tools and returns](/img/articles/how-to-build-ai-agent-python.jpg)
 
 <!-- truncate -->
 
 ## What an AI agent is made of
 
-An agent has four parts: a model, a set of tools, a loop and a stop rule. The model decides which tool to call. Your code runs the tool. The loop repeats until the model answers in plain text or hits the step limit.
+Strip away the hype and an agent is a small pattern: give a model a short list of functions, run a loop that executes the calls it asks for, send the results back, and stop after a fixed number of steps. That loop is the agent. Everything else is guardrails.
 
-Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) describes agents the same way: models using tools in a loop, with stopping conditions such as a maximum number of iterations. It also recommends starting with LLM APIs directly before adopting a framework, which is the path taken here.
+That gives an agent four parts: a model, a set of tools, a loop and a stop rule. A tool is just a function of yours the model may request. The model decides which tool to call. Your code runs the tool. The loop repeats until the model answers in plain text or hits the step limit.
 
-The business case: an online retailer gets a steady stream of "where is my order" tickets, and each one takes a support rep two lookups, the order system and then the carrier. A chatbot without tools guesses. An agent with tools looks it up, and hands anything involving money to a human.
+Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) describes agents the same way: models using tools in a loop, with stopping conditions such as a maximum number of iterations. It also recommends starting with large language model (LLM) APIs directly before adopting a framework, which is the path taken here.
+
+Back to that support inbox. Each "where is my order" ticket takes a rep two lookups, the order system and then the carrier. An agent with tools does both lookups itself and hands anything involving money to a human. Those two lookups become its first two tools.
 
 ## How to build an AI agent in Python in four steps
 
-Every agent loop, in any framework, repeats the same four steps:
+Wired together, those parts form a cycle. Every agent loop, in any framework, repeats the same four steps:
 
 1. **Ask.** Send the conversation and the tool list to the model.
 2. **Check.** If the reply is text, you are done. If it is a tool call, keep going.
@@ -39,15 +43,23 @@ The OpenAI [function calling guide](https://developers.openai.com/api/docs/guide
 
 The stop rule is the part most tutorials skip. Every pass is a full model call that resends the whole conversation. At 1,000 tickets a day and three calls per ticket you pay for 3,000 calls a day, and one confused conversation without a cap can burn twenty on its own. A `max_steps` cap keeps the bill bounded.
 
+Here is the whole cycle in one picture, with the stop rule underneath:
+
+![Diagram of the AI agent loop in Python: the model either calls a tool, whose result goes back into the conversation, or answers the customer](pathname:///img/articles/diagrams/how-to-build-ai-agent-python-loop.svg)
+
+*The agent loop. The model asks, your code runs the tool, and the result goes back until the model answers in plain text or reaches the step cap.*
+
+None of the four steps cares who made the model, so the same code will run on OpenAI, Claude or a local Ollama model (which runs open models on your own machine) by changing one constructor and the model name.
+
 ## Step 1: Install Intelli and define your tools
 
-You need Python 3.10 or newer.
+Now for code. You'll build the order status agent in under 100 lines of plain Python on top of the `Chatbot` class from Intelli, a library that puts several model providers behind one interface. You need Python 3.10 or newer.
 
 ```bash
 pip install intelli
 ```
 
-Keep your data access in normal Python functions and describe each one with a JSON schema. The model reads the descriptions to decide what to call, so write them for a new colleague, not for a linter.
+Keep your data access in normal Python functions and describe each one with a JSON schema, a short description of the function and its arguments. The model reads the descriptions to decide what to call, so write them for a new colleague, not for a linter. Part 1 of `order_agent.py` holds stand-in data, both lookups, their descriptions and a small converter.
 
 ```python
 # order_agent.py (part 1)
@@ -106,13 +118,13 @@ def tools_for(provider, model):
     return [{"type": "function", "function": t} for t in TOOL_SPECS]
 ```
 
-Intelli passes your tool list to the provider as given, and the APIs expect different shapes: OpenAI chat completions nests the schema under `function`, GPT-5 models on the Responses API use a flat format, and Anthropic wants `input_schema`. The [tool calling docs](/docs/python/chatbot/tool-calling) show each one.
+The converter, `tools_for`, exists because Intelli passes your tool list to the provider as given, and the APIs expect different shapes: OpenAI's chat completions API nests the schema under `function`, GPT-5 models on its newer Responses API use a flat format, and Anthropic wants `input_schema`. The [tool calling docs](/docs/python/chatbot/tool-calling) show each one.
 
-`tools_for` keeps one `TOOL_SPECS` list and converts at the edge, so adding a tool is one new entry. It uses `is_reasoning_model`, the same check Intelli uses to route a model to the Responses API.
+It keeps one `TOOL_SPECS` list and converts at the edge, so adding a tool is one new entry. It uses `is_reasoning_model`, the same check Intelli uses to route a model to the Responses API.
 
 ## Step 2: Write the agent loop
 
-This is the whole agent. It stays the same no matter which provider you use.
+The four steps now become one function. This is the whole agent, and it stays the same no matter which provider you use.
 
 ```python
 # order_agent.py (part 2)
@@ -159,16 +171,16 @@ def run_agent(bot, model, question, max_steps=5):
 Why the loop looks like this:
 
 - `bot.chat(chat)` always returns a list. When the model wants a tool, the first item is a dict with `"type": "tool_response"` and a `tool_calls` list, each call carrying `function.name` and `function.arguments` as a JSON string. The shape is the same for OpenAI chat completions, the GPT-5 Responses API and Anthropic, so the loop has no provider branches.
-- The inner loop over `tool_calls` matters. Claude can ask for several lookups in one turn, such as two order ids in one question, and Intelli collects every `tool_use` block into that list. Read only the first call and you silently drop work.
-- Results go back as a user message, because `ChatModelInput` has no tool role message with a `tool_call_id`. You lose native tool result threading. In exchange the history is plain text on every provider, and removing tools on the last step cannot orphan a tool call.
+- The inner loop over `tool_calls` matters. Claude can ask for several lookups in one turn, such as two order ids in one question, and Intelli collects every `tool_use` block (Anthropic's term for a tool request) into that list. Read only the first call and you silently drop work.
+- Results go back as a user message, because `ChatModelInput` has no tool role message with a `tool_call_id`, the field some APIs use to tie a result to its call. You lose native tool result threading. In exchange the history is plain text on every provider, and removing tools on the last step cannot orphan a tool call.
 - On the final step, `chat.tools = None` forces a text answer, so the customer always gets a reply.
 - `run_tool` returns errors as data. A wrong order id becomes a message the model can react to instead of an exception that kills the request.
 
-`temperature=0` is safe across providers. Intelli leaves it out for GPT-5 models and for the Claude 5 family, which reject sampling parameters.
+Temperature sets how much the output varies, and 0 makes it as repeatable as possible. `temperature=0` is safe across providers. Intelli leaves it out for GPT-5 models and for the Claude 5 family, which reject sampling parameters.
 
 ## Step 3: Run the agent
 
-Read keys from environment variables, never from source files.
+You have tools and a loop, so all that's missing is a model and its API key. Read keys from environment variables, never from source files.
 
 ```python
 # main.py
@@ -185,7 +197,7 @@ Each tool call prints a line, so you can watch the agent work. The intended path
 
 ## Run the same agent on OpenAI, Claude or a local model
 
-Provider choice keeps changing for business reasons: price, rate limits, data residency, or a new model that is better at your task. The loop does not know which provider it talks to, so switching is a constructor change.
+That run used OpenAI, and you won't always want it to. Provider choice keeps changing for business reasons: price, rate limits, data residency, or a new model that is better at your task. The loop does not know which provider it talks to, so switching is a constructor change.
 
 ```python
 # switch.py
@@ -216,13 +228,13 @@ A few things happen behind those three calls:
 
 - `gpt-5.5` goes to the Responses API with the flat tool format. On that path Intelli merges all messages into one input string, so role structure is lost in long chats. GPT-5 models also accept `reasoning_effort` and `verbosity` on `ChatModelInput`.
 - For Claude, `tools_for` switches to `input_schema`, and parallel calls arrive in the same `tool_calls` list.
-- The local bot is the OpenAI provider pointed at Ollama through a fresh `ProxyHelper`, with a dummy key. Ollama supports tools on its OpenAI-compatible endpoint, as its [tool support announcement](https://ollama.com/blog/tool-support) explains. Keep the model id from starting with `gpt-5` (that routes to the Responses API), and skip Intelli's `vllm` provider here, because it does not forward tools.
+- The local bot is the OpenAI provider pointed at Ollama through a fresh `ProxyHelper`, with a dummy key. Ollama's OpenAI-compatible endpoint accepts the same requests as OpenAI's API and supports tools, as its [tool support announcement](https://ollama.com/blog/tool-support) explains. Keep the model id from starting with `gpt-5` (that routes to the Responses API), and skip Intelli's `vllm` provider here, because it does not forward tools.
 
 The [model switching page](/docs/python/chatbot/model-switching) covers the other providers for plain chat.
 
 ### What a 0.5B local model did in our tests
 
-We ran this exact loop against `qwen2.5:0.5b` on a laptop through Ollama. The results are a useful warning.
+Switching is easy. Whether the new model can still do the job is another matter. We ran this exact loop against `qwen2.5:0.5b`, a model with half a billion parameters, on a laptop through Ollama. The results are a useful warning.
 
 - The first lookup worked in all 35 runs: the model called `get_order_status` with `A-1001` and replied sensibly.
 - It never made the second hop. Across all 35 runs and three different follow-up messages, it never called `get_shipment_eta`, so it never had a real delivery date.
@@ -235,7 +247,7 @@ Use a local model for development, CI and demos where you pay nothing per token,
 
 ## Add guardrails before you ship
 
-The loop already has a step cap and a text-only last step. The remaining checks belong in `run_tool`, the one place where model output turns into real actions. Add this to `order_agent.py` and delete the first `run_tool`:
+That invented date is the lesson: the model only suggests, and your code decides what actually happens. The loop already has a step cap and a text-only last step. The remaining checks belong in `run_tool`, the one place where model output turns into real actions. Add this to `order_agent.py` and delete the first `run_tool`:
 
 ```python
 # order_agent.py (guardrails, replaces the first run_tool)
@@ -297,7 +309,7 @@ One gap to plan for: the Chatbot returns message content only, not the provider'
 
 ## When one agent is not enough
 
-A single loop handles one job well. Real processes chain jobs: look up the order, then write the customer email in your brand voice, maybe on a different model. Intelli flows let you wrap the loop you already wrote as one step.
+You now have one guarded loop that does one job well. Real processes chain jobs: look up the order, then write the customer email in your brand voice, maybe on a different model. Intelli flows cover that: a flow wires tasks together so one task's output feeds the next, and you can wrap the loop you already wrote as one step.
 
 ```python
 # flow.py
@@ -337,13 +349,15 @@ print(result["email"]["output"])
 
 `CustomAgent` turns any Python code into a flow step, so your tested loop runs unchanged inside it. The flow passes the lookup answer into the writer's prompt, and `result` holds one entry per task with its `output`. Here the lookup runs on GPT-5.5 and the email on Claude, a split you might pick when one model is cheaper for tool use and another writes better copy. The [Agent docs](/docs/python/flows/agent) list the built-in agent types.
 
-Where you go next depends on your tools. If they already live behind an MCP server (the [Model Context Protocol](https://modelcontextprotocol.io) is an open standard for connecting AI apps to tools and data), `ToolDynamicConnector` can send the flow to an MCP task when the model calls a tool, and a small `pre_process` step maps the call's name and arguments onto that task. See [dynamic tool routing](/docs/python/flows/dynamic-tool) and the [MCP client](/docs/python/mcp/client). If you need branching, loops and parallel steps, read [Agentic Workflows in Python Without LangGraph](/articles/agentic-workflow-python).
+Where you go next depends on your tools. If they already live behind an MCP server (the [Model Context Protocol](https://modelcontextprotocol.io) is an open standard for connecting AI apps to tools and data), `ToolDynamicConnector` can send the flow to an MCP task when the model calls a tool, and a small `pre_process` step maps the call's name and arguments onto that task. See [dynamic tool routing](/docs/python/flows/dynamic-tool) and the [MCP client](/docs/python/mcp/client). If you need branching, loops and parallel steps, read [Agentic Workflows in Python Without LangGraph](/articles/agentic-workflow-python). LangGraph, a framework for building agents as graphs, comes up next.
 
 ## Write your own loop or adopt a framework
 
-**The raw provider SDK is enough** if you are committed to one provider and have a couple of tools. You can write this loop against the OpenAI or Anthropic SDK in an afternoon. The hard part of shipping an agent is the tools and the test questions, not the loop.
+You've seen what a hand-written agent needs and where it gets thin. That leaves the real decision: keep your own loop, or adopt a framework.
 
-**Intelli earns its place** when you want to keep provider choice open: one reply shape across OpenAI, Anthropic and OpenAI-compatible servers, one constructor to switch, and a path from a single loop to flows and MCP without a rewrite. Your team writes plain Python functions, not a graph DSL.
+**The raw provider SDK is enough** if you are committed to one provider and have a couple of tools. That's each vendor's official client library, and you can write this loop against the OpenAI or Anthropic SDK in an afternoon. The hard part of shipping an agent is the tools and the test questions, not the loop.
+
+**Intelli earns its place** when you want to keep provider choice open: one reply shape across OpenAI, Anthropic and OpenAI-compatible servers, one constructor to switch, and a path from a single loop to flows and MCP without a rewrite. Your team writes plain Python functions, not a graph DSL (a special syntax for wiring agents into graphs).
 
 **Know the limits.** Tool calls are parsed for OpenAI (chat completions and Responses), Anthropic and OpenAI-compatible endpoints. Intelli forwards tools to Gemini and Mistral but does not turn their tool calls into `tool_response` today, so this loop will not work on them yet. There is no native tool result message, replies carry no token usage, and the community is far smaller: `openai-agents` alone had about 12 million PyPI downloads in the last 30 days, according to [pypistats](https://pypistats.org/packages/openai-agents) on September 30, 2026.
 
@@ -373,7 +387,7 @@ Each step is one model call that resends the growing conversation, so a two-tool
 
 ## Start building
 
-Install the package and copy `order_agent.py` from this article:
+To try it on your own inbox, install the package and copy `order_agent.py` from this article:
 
 ```bash
 pip install intelli

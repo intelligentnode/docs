@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 656" width="720" height="656" role="img" aria-labelledby="t d">
+<title id="t">How to choose a Node.js LLM library</title>
+<desc id="d">A decision flow. Streaming chat into a web UI points to the Vercel AI SDK. One vendor fixed for a year points to that vendor's SDK. Stateful workflows with approvals and tracing point to LangGraph.js, Mastra or the OpenAI Agents SDK. Data that must stay on your hardware points to a library where local models share the cloud code path. A Python team next door points to Intelli with IntelliNode. Otherwise, one small API across cloud and local models is where IntelliNode fits.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#091434"/><stop offset="1" stop-color="#1E164E"/>
+  </linearGradient>
+  <marker id="head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#9DB8FF"/>
+  </marker>
+  <marker id="head-start" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#9DB8FF"/>
+  </marker>
+</defs>
+<rect width="720" height="656" rx="18" fill="url(#bg)"/>
+<rect x="20" y="30" width="430" height="76" rx="14" fill="#2992FE" fill-opacity="0.14" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="235" y="62" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">Do you stream chat into a web UI,</text>
+<text x="235" y="84.95" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">such as React, Vue or Svelte?</text>
+<path d="M 452 68 L 518 68" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="485" y="58" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#B9C6EE" text-anchor="middle">yes</text>
+<rect x="520" y="36" width="180" height="64" rx="32" fill="#B8A0F5" fill-opacity="0.2" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="610" y="74" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#F3F6FF" text-anchor="middle">Vercel AI SDK</text>
+<path d="M 235 106 L 235 132" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="250" y="124" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#B9C6EE" text-anchor="start">no</text>
+<rect x="20" y="134" width="430" height="76" rx="14" fill="#2992FE" fill-opacity="0.14" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="235" y="166" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">Is one vendor fixed</text>
+<text x="235" y="188.95" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">for the next year?</text>
+<path d="M 452 172 L 518 172" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="485" y="162" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#B9C6EE" text-anchor="middle">yes</text>
+<rect x="520" y="140" width="180" height="64" rx="32" fill="#2992FE" fill-opacity="0.2" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="610" y="178" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#F3F6FF" text-anchor="middle">That vendor's SDK</text>
+<path d="M 235 210 L 235 236" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="250" y="228" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#B9C6EE" text-anchor="start">no</text>
+<rect x="20" y="238" width="430" height="76" rx="14" fill="#2992FE" fill-opacity="0.14" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="235" y="270" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">Do you need stateful workflows,</text>
+<text x="235" y="292.95" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">approval pauses and tracing?</text>
+<path d="M 452 276 L 518 276" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="485" y="266" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#B9C6EE" text-anchor="middle">yes</text>
+<rect x="520" y="244" width="180" height="64" rx="32" fill="#F0ABFC" fill-opacity="0.2" stroke="#F0ABFC" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="610" y="271" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#F3F6FF" text-anchor="middle">LangGraph.js, Mastra</text>
+<text x="610" y="289.225" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#F3F6FF" text-anchor="middle">or OpenAI Agents SDK</text>
+<path d="M 235 314 L 235 340" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="250" y="332" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#B9C6EE" text-anchor="start">no</text>
+<rect x="20" y="342" width="430" height="76" rx="14" fill="#2992FE" fill-opacity="0.14" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="235" y="374" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">Must some data stay</text>
+<text x="235" y="396.95" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">on your own hardware?</text>
+<path d="M 452 380 L 518 380" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="485" y="370" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#B9C6EE" text-anchor="middle">yes</text>
+<rect x="520" y="348" width="180" height="64" rx="32" fill="#2DD4BF" fill-opacity="0.2" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="610" y="375" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#F3F6FF" text-anchor="middle">Local models on the</text>
+<text x="610" y="393.225" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#F3F6FF" text-anchor="middle">cloud code path</text>
+<path d="M 235 418 L 235 444" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="250" y="436" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#B9C6EE" text-anchor="start">no</text>
+<rect x="20" y="446" width="430" height="76" rx="14" fill="#2992FE" fill-opacity="0.14" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="235" y="478" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">Is there a Python team</text>
+<text x="235" y="500.95" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#F3F6FF" text-anchor="middle">next to you?</text>
+<path d="M 452 484 L 518 484" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="485" y="474" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#B9C6EE" text-anchor="middle">yes</text>
+<rect x="520" y="452" width="180" height="64" rx="32" fill="#B8A0F5" fill-opacity="0.2" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="610" y="490" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#F3F6FF" text-anchor="middle">Intelli + IntelliNode</text>
+<path d="M 235 522 L 235 548" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="250" y="540" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#B9C6EE" text-anchor="start">no</text>
+<rect x="20" y="550" width="680" height="72" rx="14" fill="#2DD4BF" fill-opacity="0.1" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5" stroke-dasharray="6 6"/>
+<text x="360" y="580" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">None of these? One small API across cloud and local models,</text>
+<text x="360" y="600.925" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">with fewer layers to maintain: that is where IntelliNode fits.</text>
+</svg>

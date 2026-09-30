@@ -6,34 +6,48 @@ keywords: ["agentic workflow python", "langgraph alternatives python", "multi ag
 tags: [{label: "Python", permalink: "/python"}, "AI Agents", "Agentic Workflows", "Orchestration"]
 authors: [intellinode]
 image: /img/articles/agentic-workflow-python.jpg
-image_alt: "Blue and lavender ribbons of light crossing and merging from left to right, like steps in an agentic workflow"
+image_alt: "Blue and lavender ribbons crossing and merging from left to right, like steps in an agentic workflow"
 date: 2026-09-30T10:00:00Z
 ---
 
-An agentic workflow in Python is a set of model calls, tools and plain functions wired into a fixed shape: a chain, a fan-out, a router or a loop. The model makes decisions inside each step, but your code decides which steps exist. You do not need LangGraph for that. You need a graph runner, a clean handoff between steps, and a way to call different providers.
+Most teams build their first agentic workflow in Python almost by accident. A script sends support tickets to a model, the demo sorts twenty of them nicely, and then the real queue shows up. Soon one prompt has become five jobs: read the ticket, pull out the facts, spot customers who might leave, draft a reply, and have someone check it before it goes out.
 
-This guide builds each common AI agent orchestration pattern with Intelli, an Apache 2.0 Python library for multi-model agent flows. The examples mix OpenAI, Claude and Gemini in one flow and can run on a local Ollama model. It closes by comparing Intelli with LangGraph, CrewAI and plain code, including where each of them wins.
+Now the hard part is the wiring, not the prompt: what runs first, what can run side by side, what happens when a step breaks, and what it all costs each month. It's tempting to grab the biggest framework you've heard of. Often you don't need it.
 
-![Blue and lavender ribbons of light crossing and merging from left to right, like steps in an agentic workflow](/img/articles/agentic-workflow-python.jpg)
+This guide builds the few shapes that nearly every multi-step AI process takes, from ticket triage to content work to research briefs, in short readable code. Then it helps you decide whether a lighter tool can carry your process or a heavier framework is worth the weight.
+
+![Blue and lavender ribbons crossing and merging from left to right, like steps in an agentic workflow](/img/articles/agentic-workflow-python.jpg)
 
 <!-- truncate -->
 
 ## Workflow or agent: how much autonomy you need
 
+Before any code, it helps to name what you're building, since that decides how much freedom the model gets.
+
+An agentic workflow in Python is a set of model calls, tools and plain functions wired into a fixed shape: a chain (one step after another), a fan-out (several at once), a router (one path chosen) or a loop (repeat until good enough). The model makes decisions inside each step, but your code decides which steps exist.
+
 Anthropic's engineering team draws a useful line in [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents). In a workflow, models and tools follow predefined code paths. In an agent, the model directs its own process and chooses its tools. The post recommends adding autonomy only when simpler setups fall short.
 
-For most business processes the workflow wins on cost and audits. Take a SaaS support team handling 12,000 tickets a month. A workflow that triages, extracts facts and risks in parallel, and drafts a reply makes four model calls per ticket, every time. That is 48,000 calls a month, a number finance can budget and QA can test. An autonomous agent might use 3 calls on one ticket and 25 on the next.
+For most business processes the workflow wins on cost and audits. Say the queue from the opening belongs to a SaaS support team handling 12,000 tickets a month. A workflow that triages, extracts facts and risks in parallel, and drafts a reply makes four model calls per ticket, every time. That is 48,000 calls a month, a number finance can budget and QA can test. An autonomous agent might use 3 calls on one ticket and 25 on the next.
 
-Fix the known steps in code and give the model freedom only inside a step. If you have not built a single tool calling agent yet, start with [How to Build an AI Agent in Python](/articles/how-to-build-ai-agent-python) and come back when one step is not enough.
+So fix the known steps in code and give the model freedom only inside a step. For that you don't need LangGraph, the graph framework from the LangChain team. You need a graph runner that executes steps in order, a clean handoff between steps, and a way to call different providers (the services or local servers that host the models). If you have not built a single tool calling agent yet, start with [How to Build an AI Agent in Python](/articles/how-to-build-ai-agent-python) and come back when one step is not enough.
 
 ## The building blocks of an agentic workflow in Python
+
+The rest of this guide builds each common AI agent orchestration pattern with Intelli, an Apache 2.0 Python library for multi-model agent flows that covers those three needs. The examples mix OpenAI, Claude and Gemini in one flow and can run on a local Ollama model (Ollama runs open models on your own machine). The guide closes by comparing Intelli with LangGraph, CrewAI and plain code, including where each of them wins.
 
 For AI agent orchestration in Python, Intelli gives you four pieces:
 
 - `Agent`: one model or tool, with a mission (the system prompt), a provider and model settings.
-- `Task`: one unit of work for an agent, with optional `pre_process` and `post_process` hooks.
+- `Task`: one unit of work for an agent, with optional `pre_process` and `post_process` hooks that reshape its input and output.
 - `SequenceFlow`: runs tasks in a straight line.
 - `Flow`: runs a graph of tasks. `map_paths` says which task feeds which, independent tasks run in parallel, and connectors add routing.
+
+Those four pieces combine into six shapes, and each one gets its own section below. Here they are side by side, so you can see where the guide is heading:
+
+![Diagram of six agentic workflow patterns in Python: sequential chain, parallel fan-out and merge, classifier routing, a review loop, tool calls to an MCP server, and a human approval step](pathname:///img/articles/diagrams/agentic-workflow-python-patterns.svg)
+
+*The six patterns, with the Intelli class that builds each one.*
 
 Each agent picks its own provider, so a cheap fast model can classify while a stronger one writes. Install with `pip install intelli`, then put the provider setup in one file so the pattern examples stay short:
 
@@ -60,11 +74,11 @@ def local(mission, **params):
                  options={"baseUrl": "http://localhost:11434"})
 ```
 
-This file is also your insurance against vendor lock-in: moving a step from Claude to Gemini is a one-word change.
+This file is also your insurance against vendor lock-in: moving a step from Claude to Gemini is a one-word change. You'll meet `local()` again near the end, for running flows in CI at no token cost.
 
 ## Pattern 1: the sequential chain
 
-Anthropic's post calls this prompt chaining: each step works on the previous step's output. Here GPT writes release notes from commit messages, and Claude turns them into a two-sentence banner for the app.
+With providers sorted, start with the simplest shape, a straight line. Anthropic's post calls this prompt chaining: each step works on the previous step's output. Here GPT writes release notes from commit messages, and Claude turns them into a two-sentence banner for the app.
 
 ```python
 from intelli.flow import Task, SequenceFlow, TextTaskInput, TextProcessor
@@ -88,7 +102,7 @@ Two details matter. `TextProcessor.text_head` trims the handoff to 800 character
 
 ## Pattern 2: parallel fan-out and merge
 
-When two steps do not depend on each other, run them at the same time. This support flow extracts facts with Gemini and churn risks with GPT in parallel, then Claude writes the reply from both.
+A chain runs one step at a time. When two steps do not depend on each other, like pulling facts and churn risks (signs the customer might leave) out of the same support ticket, run them at the same time. This support flow extracts facts with Gemini and churn risks with GPT in parallel, then Claude writes the reply from both. It uses `Flow` rather than `SequenceFlow`, since the steps now form a graph.
 
 ```python
 import asyncio
@@ -116,13 +130,13 @@ print(flow.errors)                        # {} when every step worked
 saved = flow.memory.retrieve("final_reply")
 ```
 
-`initial_input` goes to every root task, so both analysts see the ticket. The reply step waits for both parents and receives their outputs joined. Because its mission contains "synthesize", Intelli wraps each parent's output in a labeled block, so the writer can tell facts from risks. `output_memory_map` copies the reply into `flow.memory`.
+`initial_input` goes to every root task (one that no other task feeds), so both analysts see the ticket. The reply step waits for both parents and receives their outputs joined. Because its mission contains "synthesize", Intelli wraps each parent's output in a labeled block, so the writer can tell facts from risks. `output_memory_map` copies the reply into `flow.memory`.
 
 `max_workers` caps how many tasks run at once, and Intelli also limits each provider to 10 concurrent tasks, which helps with rate limits. A `Flow` returns `output` and `type` for each task name. The [async flow docs](/docs/python/flows/async-flow) walk through a larger graph.
 
 ## Pattern 3: routing with a classifier
 
-A cheap Gemini call classifies inbound email, and a `DynamicConnector` sends it to the billing, bug or sales desk. Only the chosen branch runs, so you pay for one specialist instead of three.
+In a fan-out every branch runs. Routing runs only the branch that fits the input, so you pay for one specialist instead of three. Here a cheap Gemini call classifies inbound email, and a `DynamicConnector`, which picks the next task at run time with a function you write, sends it to the billing, bug or sales desk.
 
 ```python
 import asyncio
@@ -168,7 +182,7 @@ A few rules that matter in production:
 
 - A destination receives its parent's output, here the one-word label. The desks read the full email from `flow.memory` through `memory_key`.
 - A connector supports at most 4 destinations. For more, route in two levels.
-- `text_content_router` falls back to the first key when nothing matches, so list your safest desk first.
+- `text_content_router`, a keyword matcher, falls back to the first key when nothing matches, so list your safest desk first.
 - An unknown key stops the branch. The `Error` check uses that on purpose: without it, a failed classifier returns text containing "error" and lands on the bug desk. We hit exactly this in testing.
 - A shared step fed by all three desks never runs, because a `Flow` task waits for all of its parents. Give each branch its own follow-up step.
 
@@ -176,7 +190,7 @@ Length, sentiment, error and type routers are in the [dynamic path docs](/docs/p
 
 ## Pattern 4: loops for self-review
 
-Some outputs need a few passes, such as a subject line that must fit in 60 characters. `LoopTask` repeats its steps until a stop condition passes or `max_loops` is reached.
+Every step so far runs once. Some outputs need a few passes, such as a subject line that must fit in 60 characters. `LoopTask` repeats its steps until a stop condition passes or `max_loops` is reached.
 
 ```python
 import asyncio
@@ -201,11 +215,11 @@ for step in flow.memory.retrieve("subject_history"):
 
 The stop check is plain Python, which is free and deterministic. You can add a reviewer model to `steps`, but `LoopTask` returns the last step's output, so you would get the review instead of the draft. `max_loops=4` doubles as a cost ceiling.
 
-`Flow` requires an acyclic graph and raises `ValueError` on a cycle, so repetition lives inside one node and the graph stays easy to review. The [loop docs](/docs/python/flows/loop) cover the stop condition and history.
+`Flow` requires an acyclic graph, meaning no task can feed back into an earlier one, and raises `ValueError` on a cycle. So repetition lives inside one node and the graph stays easy to review. The [loop docs](/docs/python/flows/loop) cover the stop condition and history.
 
 ## Pattern 5: tool calls routed to MCP servers
 
-Here the model decides whether it needs data, and the flow runs the tool. First, a small MCP server with one tool (install the extra with `pip install "intelli[mcp]"`):
+Pattern 3 routed on what the model wrote. Here the model decides whether it needs data, and the flow runs the tool. The tool lives on an MCP server. MCP, the Model Context Protocol, is an open standard for exposing tools to models. First, a small MCP server with one tool (install the extra with `pip install "intelli[mcp]"`):
 
 ```python
 # order_server.py
@@ -223,7 +237,7 @@ if __name__ == "__main__":
     server.run(transport="stdio", print_info=False)  # stdout carries the MCP protocol
 ```
 
-If GPT calls `lookup_order`, a `ToolDynamicConnector` routes to an MCP task that runs the tool. If it answers in text, the flow sends that answer to a direct step.
+If GPT calls `lookup_order`, a `ToolDynamicConnector`, which checks the reply for a tool call, routes to an MCP task that runs the tool. If it answers in text, the flow sends that answer to a direct step.
 
 ```python
 import asyncio, json, sys
@@ -274,7 +288,7 @@ See the [dynamic tool docs](/docs/python/flows/dynamic-tool) for the connector a
 
 ## Pattern 6: your own code and approval steps
 
-Not every step should be a model. A `CustomAgent` wraps your own Python, such as a CRM lookup, and sits in the graph like any other agent. The same shape works as a human approval gate before an action.
+So far every step has been a model or a tool the model asked for. Not every step should be a model. A `CustomAgent` wraps your own Python, such as a CRM lookup, and sits in the graph like any other agent. The same shape works as a human approval gate before an action, the "have someone check it" step from the opening.
 
 ```python
 import asyncio
@@ -322,7 +336,7 @@ The approval logic is your application code. `input()` works for a CLI or an int
 
 ## Intelli flows vs LangGraph, CrewAI and plain code
 
-If you are comparing LangGraph alternatives in Python, be precise about what each tool is built for. Sources, checked on September 30, 2026: LangGraph's [persistence](https://docs.langchain.com/oss/python/langgraph/persistence) and [graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) docs and [GitHub repo](https://github.com/langchain-ai/langgraph), and CrewAI's [Flows](https://docs.crewai.com/en/concepts/flows) and [LLM](https://docs.crewai.com/en/concepts/llms) docs and [GitHub repo](https://github.com/crewAIInc/crewAI). Star counts change daily.
+That gap makes this a good moment to put Intelli next to the alternatives. If you are comparing LangGraph alternatives in Python, be precise about what each tool is built for. Sources, checked on September 30, 2026: LangGraph's [persistence](https://docs.langchain.com/oss/python/langgraph/persistence) and [graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) docs and [GitHub repo](https://github.com/langchain-ai/langgraph), and CrewAI's [Flows](https://docs.crewai.com/en/concepts/flows) and [LLM](https://docs.crewai.com/en/concepts/llms) docs and [GitHub repo](https://github.com/crewAIInc/crewAI). Star counts change daily. In the table, DAG stands for directed acyclic graph, the no-cycles shape from pattern 4, and A2A is the Agent2Agent protocol for agents that talk to each other.
 
 | | Intelli flows | LangGraph | CrewAI | Plain Python |
 |---|---|---|---|---|
@@ -334,11 +348,13 @@ If you are comparing LangGraph alternatives in Python, be precise about what eac
 | Ecosystem | Small, fewer integrations | 42.5k GitHub stars, LangSmith tracing, JS version | 59.2k GitHub stars, MCP and A2A support | None needed |
 | Concepts to learn | Agent, Task, Flow, connectors | State, nodes, edges, checkpointers, threads | Agents with roles, tasks, crews, flows | None, but you write retries and fan out |
 
-**Choose Intelli flows** when the steps are known, you want a different provider per step or local models in CI, and your team would rather learn four classes than a new state model. **Choose LangGraph** when runs are long, must survive crashes, or pause for a person and resume hours later. Its [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) use a checkpointer and a thread ID, exactly the machinery Intelli lacks. It works without LangChain, and its [README](https://github.com/langchain-ai/langgraph) lists durable execution as a core feature.
+**Choose Intelli flows** when the steps are known, you want a different provider per step or local models in CI, and your team would rather learn four classes than a new state model. **Choose LangGraph** when runs are long, must survive crashes, or pause for a person and resume hours later. Its [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) use a checkpointer, which saves the run's state as it goes, and a thread ID that names the run to resume, exactly the machinery Intelli lacks. It works without LangChain, and its [README](https://github.com/langchain-ai/langgraph) lists durable execution as a core feature.
 
 **Choose CrewAI** when the problem maps to roles and goals, or you like decorator-style [Flows](https://docs.crewai.com/en/concepts/flows) with persistence built in. **Write plain code** for two or three calls with no branching. Anthropic's post says the same: start with direct API calls, since framework layers can hide the prompts you debug.
 
 ## From prototype to production
+
+Whichever tool you pick, getting from demo to production comes down to failures, visibility and cost. Here's how each looks in Intelli, plus a quicker way to draft new flows.
 
 **Check `flow.errors` before you use any output.** Agent failures come back as `Error: ...` strings, not exceptions, and downstream steps still run on that text. In our test with a dead endpoint on the risks step, the reply step wrote the customer an apology about a connection problem. MCP tasks are the exception: a failed tool call returns text such as `Error from MCP tool ...`, which `flow.errors` does not record, so check that output too.
 
@@ -359,7 +375,7 @@ Send those tickets to a retry or a manual queue, not the customer.
 
 **Log and draw the graph.** `log=True` on a `Task` prints the start of its input and output, and on a `Flow` it logs routing decisions and soft errors. `generate_graph_img` writes a PNG with every node labeled by agent type and provider, handy when security asks which vendor sees which data. It needs `pip install "intelli[visual]"`.
 
-**Draft flows from plain language.** Vibe Agents turn a description into a flow spec that you can review, commit and rebuild without calling the planner again.
+**Draft flows from plain language.** Vibe Agents ask a planner model to turn a description into a flow spec, a JSON file you can review, commit and rebuild from without calling the planner again.
 
 ```python
 import asyncio, os
@@ -400,6 +416,8 @@ Small local models are good for testing wiring and error handling, not for judgi
 
 ## FAQ
 
+Here are short answers to the questions teams ask most when weighing these options.
+
 ### Is an agentic workflow the same as a multi-agent system?
 
 Close, but not the same. A multi-agent system in Python is any setup where several agents with different jobs cooperate. An agentic workflow fixes how they cooperate in code: the graph sets the order, and each agent decides only within its step. Intelli flows are a multi-agent framework in Python built around that idea.
@@ -422,7 +440,7 @@ The failed task's output becomes an `Error: ...` string, and its name appears in
 
 ## Start with one pattern
 
-Pick the pattern closest to a process you already run, usually the chain or the router, and get it working on a local model before you add hosted providers.
+You don't need all six patterns on day one. Pick the pattern closest to a process you already run, usually the chain or the router, and get it working on a local model before you add hosted providers.
 
 ```bash
 pip install intelli

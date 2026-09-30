@@ -6,27 +6,39 @@ keywords: ["build ai agents node js", "node js ai agent tutorial", "nodejs opena
 tags: [{label: "Node.js", permalink: "/nodejs"}, "AI Agents", "Tool Calling", "MCP"]
 authors: [intellinode]
 image: /img/articles/build-ai-agents-nodejs.jpg
-image_alt: "Glowing hub with thin spokes to round and square endpoints, like one Node.js AI agent wired to many tools"
+image_alt: "Blue hub with thin spokes to round and square endpoints, like one Node.js AI agent wired to many tools"
 date: 2026-09-30T11:00:00Z
 ---
 
-To build AI agents in Node.js you need three parts: tools the model can call, a loop that runs those tools and feeds the results back, and a model that is good at deciding when to call them. Memory stores, graphs and dashboards are optional, and most first agents skip them.
+Picture an online store with a small support team. Much of the inbox is some version of "where is my order", and every answer means opening the order system and copying a status into a reply. You've used ChatGPT, maybe called an AI API once, and now the team wants an agent to take that first pass.
 
-This guide builds one support agent end to end with the `intellinode` npm package. It answers order questions with a plain JavaScript tool, gets the same tool from an MCP server, waits for a person before it issues a refund, and falls back to another provider when one is down. You develop on a local Ollama model with no API key, then move to OpenAI, Claude or Gemini by changing one line.
+This guide shows you how to build AI agents in Node.js by building that one, a piece at a time. By the end it looks orders up by itself, asks a person before it gives money back, and keeps answering when an AI service goes down. You start on your laptop with no API key and move to a hosted model when you're ready.
 
-Every snippet was run on Node.js 20 against Ollama with `qwen2.5:0.5b`. Where the tiny model got things wrong, we say so: those failures are worth seeing before you ship.
+We ran every example on a deliberately tiny model and show you where it got things wrong. Those mistakes are much cheaper to meet here than in front of a customer.
 
-![Glowing hub with thin spokes to round and square endpoints, like one Node.js AI agent wired to many tools](/img/articles/build-ai-agents-nodejs.jpg)
+![Blue hub with thin spokes to round and square endpoints, like one Node.js AI agent wired to many tools](/img/articles/build-ai-agents-nodejs.jpg)
 
 <!-- truncate -->
 
 ## What you need to build AI agents in Node.js
 
-Picture an online store with a small support team. Much of the inbox is some version of "where is my order", and every answer means opening the order system and copying a status into a reply. That is a good first agent: the data lives in your system, the question is narrow, and a wrong answer is easy to catch. Refunds are different. They move money, so a person approves them.
+That order inbox makes a good first agent: the data lives in your system, the question is narrow, and a wrong answer is easy to catch. Refunds are different. They move money, so a person approves them.
 
-You will build it in small files: tools, a loop, a provider switch, an MCP server and client, a refund approval step and a production wrapper. This follows Anthropic's advice in [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents): start with direct LLM calls and add layers only when the simple version falls short.
+An agent needs less than the word suggests. To build AI agents in Node.js you need three parts: tools the model can call, a loop that runs those tools and feeds the results back, and a model that is good at deciding when to call them. A tool is a function of yours, like an order lookup, that the model can ask to run. The model is a large language model (LLM), the kind behind ChatGPT. Memory stores, graphs and dashboards are optional, and most first agents skip them.
+
+Here's the plan. This guide builds one support agent end to end with the `intellinode` npm package, in small files: a plain JavaScript tool that answers order questions, a loop, a provider switch, an MCP server and client that serve the same tool, a refund approval step that waits for a person, and a production wrapper that falls back to another provider when one is down. This follows Anthropic's advice in [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents): start with direct LLM calls and add layers only when the simple version falls short.
+
+Two terms from that list will keep coming up. A provider is whoever runs the model for you, and MCP (the Model Context Protocol) is an open standard for sharing tools between AI apps. You develop on a local Ollama model with no API key (Ollama runs open models on your own machine), then move to OpenAI, Claude or Gemini by changing one line.
+
+By the end of the guide, the pieces fit together like this:
+
+![Diagram of the Node.js support agent: a runTools loop calls models through fallback lanes and tools from functions or an MCP server, while refunds wait for a person](pathname:///img/articles/diagrams/build-ai-agents-nodejs-architecture.svg)
+
+*The finished agent. Order lookups run inside the loop, the model lanes take over for each other when a provider fails, and refunds wait for a person outside the loop.*
 
 ## Install IntelliNode and pick a model
+
+The files that follow all need two things: the library and a model to talk to.
 
 You need Node.js 18 or newer. The package has three runtime dependencies and its own TypeScript types (see the [installation page](/docs/npm/get-started/installation)).
 
@@ -38,13 +50,15 @@ ollama pull qwen2.5:0.5b   # about 400 MB, fine for wiring things up
 ollama pull qwen3:8b       # 5.2 GB, a better fit for real tool use
 ```
 
-The 0.5B model runs on any laptop, which is why we tested with it. It is also poor at deciding when to call a tool, so you meet the failure modes early. For anything a customer reads, use a larger local model such as [qwen3](https://ollama.com/library/qwen3), which Ollama lists with tool support, or a cloud model.
+Every snippet was run on Node.js 20 against Ollama with `qwen2.5:0.5b`. The 0.5B in its name means about half a billion parameters, a rough measure of size. A model that small runs on any laptop, which is why we tested with it. It is also poor at deciding when to call a tool, so you meet the failure modes early. For anything a customer reads, use a larger local model such as [qwen3](https://ollama.com/library/qwen3), which Ollama lists with tool support, or a cloud model.
 
 Cloud keys go in environment variables on your server: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY` and `GEMINI_API_KEY`. Never put them in a browser bundle, where anyone can read them.
 
 ## Define the tools the model can call
 
-A tool is a name, a description, a JSON Schema for its arguments and a handler. The model never sees the handler. The name, description and schema alone decide whether it calls the tool and with what arguments.
+With a model running, start on the first of the three parts: the order lookup your team does by hand today.
+
+In code, a tool is a name, a description, a JSON Schema for its arguments and a handler. JSON Schema is a standard way to describe JSON data, here the arguments and their types, and the handler is the function that does the work. The model never sees the handler. The name, description and schema alone decide whether it calls the tool and with what arguments.
 
 ```javascript
 // order-tools.js: plain functions the agent can call
@@ -83,7 +97,9 @@ Wording matters more than you would expect. With `qwen2.5:0.5b`, "What is the st
 
 ## Run the LLM tool calling loop with runTools
 
-By hand, the loop is: send the messages and tool definitions, run the tools the reply asks for, append calls and results in the provider's format, and repeat until the model answers with text. Every provider formats tool calls differently, and the loop needs a step cap. `runTools` handles both.
+The model can't run your tool itself. It can only reply with a request, in effect "call `get_order_status` with A-1001", and the second part, the loop, does the running.
+
+By hand, the loop is: send the messages and tool definitions, run the tools the reply asks for, append calls and results in the provider's format, and repeat until the model answers with text. Every provider formats tool calls differently, and the loop needs a step cap. IntelliNode's `runTools` handles both. Below, `Chatbot` talks to the local Ollama model and `OpenAICompatibleInput` holds the conversation: the system prompt (the agent's standing instructions) and the customer's message.
 
 ```javascript
 // agent.js
@@ -129,7 +145,7 @@ One caveat: `runTools` appends the tool calls and results to the input you pass 
 
 ### TypeScript
 
-Top-level await needs an ES module, so use an `.mts` file or set `"type": "module"` in `package.json`.
+In TypeScript, the same agent uses the package's own types. Top-level await needs an ES module, so use an `.mts` file or set `"type": "module"` in `package.json`.
 
 ```typescript
 // agent.mts
@@ -152,6 +168,10 @@ console.log(result.text, result.toolCalls);
 ```
 
 ## Switch from Ollama to OpenAI, Claude or Gemini
+
+The agent works on your laptop. For customers you'll want a stronger hosted model, and this is where the one line change comes in.
+
+That one line matters for a business reason: lock-in. Most Node.js tutorials on OpenAI function calling (OpenAI's name for tool calling) are written against one vendor's SDK (its own client library), so moving means rewriting the loop. Here the loop, tools and tests stay put, and you can price one workload on three vendors in an afternoon.
 
 The agent above is tied to Ollama by one line and one input class. Put both behind a small factory and the provider becomes a config value:
 
@@ -184,13 +204,15 @@ answer('What is the status of order A-1002?').then(console.log);
 
 `Chatbot.createInput` picks the matching input class. The same tool definition is converted for each API, and so are the calls and results: function call items for the OpenAI Responses API, `tool_use` blocks for Claude and `functionCall` parts for Gemini. `LLM_PROVIDER=anthropic node switch.js` is the whole migration.
 
-The current defaults are `gpt-5.5`, `claude-sonnet-5` and `gemini-3.6-flash`. Pin a model in production with `model` in the third argument of `createInput`, so a library upgrade never changes your bill. On Claude, `maxTokens` defaults to 2048 and thinking counts toward it, so raise it if answers get cut.
+The current defaults are `gpt-5.5`, `claude-sonnet-5` and `gemini-3.6-flash`. Pin a model in production with `model` in the third argument of `createInput`, so a library upgrade never changes your bill. On Claude, `maxTokens` defaults to 2048 and thinking (Claude's reasoning before it answers) counts toward it, so raise it if answers get cut.
 
-The business reason is lock-in. Most Node.js tutorials on OpenAI function calling are written against one vendor's SDK, so moving means rewriting the loop. Here the loop, tools and tests stay put, and you can price one workload on three vendors in an afternoon. The same code reaches Groq, OpenRouter or LM Studio through the [OpenAI-compatible providers](/docs/npm/chatbot/openai-compatible). One exception: Cohere's input never sends tools, so `runTools` on Cohere returns plain text with zero steps and no error.
+The same code reaches Groq, OpenRouter or LM Studio through the [OpenAI-compatible providers](/docs/npm/chatbot/openai-compatible). One exception: Cohere's input never sends tools, so `runTools` on Cohere returns plain text with zero steps and no error.
 
 ## Use MCP servers as agent tools in Node.js
 
-Plain functions work while the agent and tools share a repo. Once another team owns the order service, or Claude Code and Cursor should use the same tools, put them behind an MCP server. `MCPServer` takes almost the same shape, with `inputSchema` in place of `parameters`:
+Changing the model took one line. Moving the tools out of your repo takes a little more.
+
+Plain functions work while the agent and tools share a repo. Once another team owns the order service, or Claude Code and Cursor (two AI coding assistants) should use the same tools, put them behind an MCP server. An MCP server offers tools over the protocol, so any MCP client can list and call them. IntelliNode's `MCPServer` takes almost the same shape, with `inputSchema` in place of `parameters`:
 
 ```javascript
 // order-server.js: the same tools, served over MCP
@@ -245,7 +267,7 @@ main();
 
 Before you rely on it:
 
-- The client runs `order-server.js` as a stdio subprocess. For a remote server, use `new MCPClient({ url, headers })` over Streamable HTTP. It handles both the 2026-07-28 protocol and the older initialize handshake.
+- The client runs `order-server.js` as a stdio subprocess, a child process it talks to over standard input and output. For a remote server, use `new MCPClient({ url, headers })` over Streamable HTTP, MCP's web transport. It handles both the 2026-07-28 protocol and the older initialize handshake.
 - Always call `close()`. A test script that skipped it was still running six seconds after its last line, held open by the subprocess.
 - Community servers plug in the same way: `command: 'npx', args: ['-y', '@modelcontextprotocol/server-filesystem', './kb']` gives the agent file tools limited to one folder.
 - `runTools` takes one tool source per call, so an agent that needs both kinds should get all its tools from one MCP server.
@@ -257,7 +279,9 @@ The official [Build an MCP client](https://modelcontextprotocol.io/docs/2026-07-
 
 ## Keep a human in the loop for risky actions
 
-`runTools` runs every tool it is given as soon as the model asks. That is right for reads and wrong for refunds. For actions that move money, keep the tool out of the loop: put the definition on the input, read `tool_calls` from `chat()`, and continue only after someone approves.
+So far the agent only reads data, so the worst case is a wrong answer someone catches. Refunds are the other kind of action.
+
+`runTools` runs every tool it is given as soon as the model asks. That is right for reads and wrong for refunds. For actions that move money, keep the tool out of the loop: put the definition on the input, read `tool_calls` from `chat()`, which makes a single model call and runs nothing, and continue only after someone approves.
 
 ```javascript
 // refund.js: the model proposes, a person approves
@@ -319,11 +343,15 @@ main();
 
 In about half our runs the model proposed `issue_refund`, most often as `{"amount":49.9,"orderId":"A-1002"}`; in the rest it skipped the tool, usually asking for the order number again. `addToolCalls` records that request, `addToolResults` records the outcome, and the second `chat()` writes the reply. A declined refund is a normal result: with "n", the model apologized and pointed the customer to the support team.
 
-The small model also invented things. After an approval it added that the refund was "sent to your billing address", which no tool returned. Some proposals asked for 51 or -49.9 USD instead of 49.90, and once it called a made-up `getOrderId` tool. That is why the approver sees the exact arguments and only `issue_refund` reaches the prompt. That argues for a larger model, and for letting the approver see the final message while you build trust. In a real service the approval is a queue in your admin tool, not a terminal prompt. Store the pending call id, name and arguments with the ticket, and rebuild the input with `addToolCalls` when the decision arrives.
+The small model also invented things. After an approval it added that the refund was "sent to your billing address", which no tool returned. Some proposals asked for 51 or -49.9 USD instead of 49.90, and once it called a made-up `getOrderId` tool. That is why the approver sees the exact arguments and only `issue_refund` reaches the prompt. Those mistakes argue for a larger model, and for letting the approver see the final message while you build trust.
+
+In a real service the approval is a queue in your admin tool, not a terminal prompt. Store the pending call id, name and arguments with the ticket, and rebuild the input with `addToolCalls` when the decision arrives.
 
 ## Production checklist for a Node.js AI agent
 
-Here is the agent from `switch.js` with request limits and fallback lanes added:
+Every piece now works on its own. What's left is making the agent behave when providers are slow or down and when customers leave before the answer arrives.
+
+Here is the agent from `switch.js` with request limits and fallback lanes added. Each lane is one provider, tried in order when the one before it hits a provider-side problem:
 
 ```javascript
 // support-agent.js
@@ -412,7 +440,9 @@ The [model routing page](/docs/npm/use-cases/model-routing) extends the lanes id
 
 ## When a bigger agent framework fits better
 
-For agents, IntelliNode is deliberately small: a `Chatbot` class with one tool loop, an MCP client and server, and a ready coding agent. It has no memory store, tracing UI, React hooks or durable execution, and when you need those, other tools fit better. From their official docs, checked on September 30, 2026:
+The whole agent fits in a handful of short files. It helps to know where that approach stops and a larger framework earns its weight.
+
+For agents, IntelliNode is deliberately small: a `Chatbot` class with one tool loop, an MCP client and server, and a ready coding agent. It has no memory store, tracing UI, React hooks or durable execution (runs that survive a crash and resume where they stopped), and when you need those, other tools fit better. From their official docs, checked on September 30, 2026:
 
 - **[OpenAI Agents SDK](https://openai.github.io/openai-agents-js/)** (`@openai/agents`): handoffs, guardrails, sessions, tracing and MCP tools, with other models through an AI SDK extension. Good for multi-agent handoffs with tracing built in.
 - **Vercel AI SDK**: a [`ToolLoopAgent`](https://ai-sdk.dev/docs/agents/overview) with `stopWhen` loop control, an [MCP client](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) (`createMCPClient` in `@ai-sdk/mcp`) and [UI hooks](https://ai-sdk.dev/docs/ai-sdk-ui/overview) such as `useChat` for React, Vue, Svelte and Angular. Pick it when the agent streams into a web UI.
@@ -422,6 +452,8 @@ For agents, IntelliNode is deliberately small: a `Chatbot` class with one tool l
 Choose IntelliNode for a backend agent that swaps providers by config, runs locally on Ollama, and stays small enough for a new teammate to read in an hour. For a wider comparison, see [How to Choose a Node.js LLM Library in 2026](/articles/nodejs-llm-library).
 
 ## FAQ
+
+A few questions come up with almost every first agent.
 
 ### What is the best model for an AI agent in Node.js?
 
@@ -445,7 +477,7 @@ Yes. `order-server.js` is a standard stdio MCP server, so you can register it wi
 
 ## Next step
 
-Install the package, pull a local model, and run `agent.js` from this guide:
+The quickest way to make this stick is to run the smallest file yourself. Install the package, pull a local model, and run `agent.js` from this guide:
 
 ```bash
 npm i intellinode
