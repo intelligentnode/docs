@@ -43,11 +43,11 @@ The OpenAI [function calling guide](https://developers.openai.com/api/docs/guide
 
 The stop rule is the part most tutorials skip. Every pass is a full model call that resends the whole conversation. At 1,000 tickets a day and three calls per ticket you pay for 3,000 calls a day, and one confused conversation without a cap can burn twenty on its own. A `max_steps` cap keeps the bill bounded.
 
-Here is the whole cycle in one picture, with the stop rule underneath:
+Here is the whole cycle in one picture:
 
-![Diagram of the AI agent loop in Python: the model either calls a tool, whose result goes back into the conversation, or answers the customer](pathname:///img/articles/diagrams/how-to-build-ai-agent-python-loop.svg)
+![Diagram of an AI agent loop: a question goes to the model, which asks your tool and gets results back until it answers](pathname:///img/articles/diagrams/how-to-build-ai-agent-python-loop.svg)
 
-*The agent loop. The model asks, your code runs the tool, and the result goes back until the model answers in plain text or reaches the step cap.*
+*The model asks your tool for data, gets the result back, and answers once it has enough.*
 
 None of the four steps cares who made the model, so the same code will run on OpenAI, Claude or a local Ollama model (which runs open models on your own machine) by changing one constructor and the model name.
 

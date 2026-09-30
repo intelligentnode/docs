@@ -43,11 +43,11 @@ For AI agent orchestration in Python, Intelli gives you four pieces:
 - `SequenceFlow`: runs tasks in a straight line.
 - `Flow`: runs a graph of tasks. `map_paths` says which task feeds which, independent tasks run in parallel, and connectors add routing.
 
-Those four pieces combine into six shapes, and each one gets its own section below. Here they are side by side, so you can see where the guide is heading:
+Those pieces combine into a handful of shapes, and each one gets its own section below. The idea behind all of them fits in one small picture:
 
-![Diagram of six agentic workflow patterns in Python: sequential chain, parallel fan-out and merge, classifier routing, a review loop, tool calls to an MCP server, and a human approval step](pathname:///img/articles/diagrams/agentic-workflow-python-patterns.svg)
+![Diagram of an agentic workflow: a ticket goes to a facts step and a risks step side by side, and both feed the reply](pathname:///img/articles/diagrams/agentic-workflow-python-patterns.svg)
 
-*The six patterns, with the Intelli class that builds each one.*
+*A workflow is small steps wired together. Here two steps read the same ticket side by side, and a third writes the reply.*
 
 Each agent picks its own provider, so a cheap fast model can classify while a stronger one writes. Install with `pip install intelli`, then put the provider setup in one file so the pattern examples stay short:
 

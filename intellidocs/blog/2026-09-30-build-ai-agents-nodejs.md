@@ -32,9 +32,9 @@ Two terms from that list will keep coming up. A provider is whoever runs the mod
 
 By the end of the guide, the pieces fit together like this:
 
-![Diagram of the Node.js support agent: a runTools loop calls models through fallback lanes and tools from functions or an MCP server, while refunds wait for a person](pathname:///img/articles/diagrams/build-ai-agents-nodejs-architecture.svg)
+![Diagram of the Node.js support agent: the customer talks to the agent, the agent uses tools, and refunds go to a person](pathname:///img/articles/diagrams/build-ai-agents-nodejs-architecture.svg)
 
-*The finished agent. Order lookups run inside the loop, the model lanes take over for each other when a provider fails, and refunds wait for a person outside the loop.*
+*The finished agent. It answers the customer, looks orders up with its tools, and sends refunds to a person first.*
 
 ## Install IntelliNode and pick a model
 

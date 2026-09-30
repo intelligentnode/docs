@@ -204,11 +204,11 @@ You've now seen every option and where each falls short. To turn that into a dec
 5. **Is there a Python side?** Look for a Python counterpart with the same concepts, so prompts and tool schemas carry over. IntelliNode's is Intelli, with the same `Chatbot` idea and JSON Schema [tool calling](/docs/python/chatbot/tool-calling), though there you run the tool loop yourself.
 6. **Who maintains it?** Two backend engineers do better with fewer abstractions. A platform team serving ten product teams can justify a framework.
 
-Here is the same checklist as a flow you can follow from the top:
+If you keep only one picture from this guide, keep this one:
 
-![Decision flow for choosing a Node.js LLM library: web UI streaming, a fixed vendor, stateful workflows, on-premises data and a Python team each point to a different option](pathname:///img/articles/diagrams/nodejs-llm-library-decision.svg)
+![Diagram for choosing a Node.js LLM library: a chat UI points to the Vercel AI SDK, complex workflows to LangGraph.js or Mastra, one API to IntelliNode](pathname:///img/articles/diagrams/nodejs-llm-library-decision.svg)
 
-*Follow the questions from the top and stop at the first yes.*
+*The three most common answers. The checklist above covers the rest, such as a fixed vendor or a Python team next door.*
 
 ### A scenario most SaaS teams will recognize
 

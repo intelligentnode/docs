@@ -1,58 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 600" width="720" height="600" role="img" aria-labelledby="t d">
-<title id="t">How the Node.js support agent is wired</title>
-<desc id="d">A customer question enters the runTools loop in IntelliNode. The loop calls a model through fallback lanes: OpenAI first, then Claude, then a local Ollama model. It calls tools from a JavaScript function list or an MCP server. The reply goes back to the customer. Refunds stay outside the loop: the model proposes the refund, a person approves or declines, and then the reply is written.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" width="720" height="380" role="img" aria-labelledby="t d">
+<title id="t">The support agent</title>
+<desc id="d">The customer talks to the agent. The agent uses tools to look up orders. Refunds go to a person, who approves them before anything is paid.</desc>
 <defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#091434"/><stop offset="1" stop-color="#1E164E"/>
-  </linearGradient>
   <marker id="head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-    <path d="M 0 0 L 10 5 L 0 10 z" fill="#9DB8FF"/>
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
   </marker>
   <marker id="head-start" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-    <path d="M 0 0 L 10 5 L 0 10 z" fill="#9DB8FF"/>
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
   </marker>
 </defs>
-<rect width="720" height="600" rx="18" fill="url(#bg)"/>
-<rect x="230" y="26" width="260" height="50" rx="25.0" fill="#B8A0F5" fill-opacity="0.22" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="360" y="58" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" font-weight="600" fill="#F3F6FF" text-anchor="middle">Customer question</text>
-<path d="M 360 76 L 360 114" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<rect x="230" y="116" width="260" height="118" rx="14" fill="#2992FE" fill-opacity="0.18" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="360" y="160" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#F3F6FF" text-anchor="middle">runTools loop</text>
-<text x="360" y="189.7" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="400" fill="#B9C6EE" text-anchor="middle">IntelliNode Chatbot</text>
-<text x="360" y="209.27499999999998" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="400" fill="#B9C6EE" text-anchor="middle">maxSteps caps the rounds</text>
-<text x="105" y="112" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#B8A0F5" text-anchor="middle">Model lanes</text>
-<rect x="20" y="126" width="170" height="36" rx="10" fill="#2992FE" fill-opacity="0.18" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="34" y="150" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#F3F6FF" text-anchor="start">1  OpenAI</text>
-<rect x="20" y="172" width="170" height="36" rx="10" fill="#B8A0F5" fill-opacity="0.18" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="34" y="196" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#F3F6FF" text-anchor="start">2  Claude</text>
-<rect x="20" y="218" width="170" height="36" rx="10" fill="#2DD4BF" fill-opacity="0.18" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="34" y="242" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#F3F6FF" text-anchor="start">3  Ollama, local</text>
-<text x="105" y="286" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#B9C6EE" text-anchor="middle">next lane on errors</text>
-<path d="M 192 175 L 228 175" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)" marker-start="url(#head-start)"/>
-<text x="615" y="112" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#2DD4BF" text-anchor="middle">Tools</text>
-<rect x="530" y="126" width="170" height="58" rx="10" fill="#2DD4BF" fill-opacity="0.14" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="615" y="150" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">JS functions</text>
-<text x="615" y="169.575" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="12.5" font-weight="500" fill="#2DD4BF" text-anchor="middle">get_order_status</text>
-<text x="615" y="204" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#B9C6EE" text-anchor="middle">or</text>
-<rect x="530" y="214" width="170" height="58" rx="10" fill="#2DD4BF" fill-opacity="0.14" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="615" y="238" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">MCP server</text>
-<text x="615" y="257.575" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="12.5" font-weight="500" fill="#2DD4BF" text-anchor="middle">via MCPClient</text>
-<path d="M 492 175 L 528 160" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)" marker-start="url(#head-start)"/>
-<path d="M 492 200 L 528 238" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)" marker-start="url(#head-start)"/>
-<path d="M 360 234 L 360 290" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<rect x="230" y="292" width="260" height="50" rx="25.0" fill="#2DD4BF" fill-opacity="0.22" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="360" y="324" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" font-weight="600" fill="#F3F6FF" text-anchor="middle">Reply to the customer</text>
-<line x1="20" y1="390" x2="700" y2="390" stroke="#B9C6EE" stroke-opacity="0.35" stroke-dasharray="4 6"/>
-<text x="360" y="422" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#F3F6FF" text-anchor="middle">Refunds move money, so they stay outside the loop</text>
-<rect x="20" y="446" width="200" height="84" rx="14" fill="#2992FE" fill-opacity="0.16" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="120" y="482" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15.5" font-weight="700" fill="#F3F6FF" text-anchor="middle">The model proposes</text>
-<text x="120" y="502.925" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5" font-weight="500" fill="#2DD4BF" text-anchor="middle">issue_refund</text>
-<path d="M 222 488 L 258 488" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<rect x="260" y="446" width="200" height="84" rx="14" fill="#F0ABFC" fill-opacity="0.16" stroke="#F0ABFC" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="360" y="482" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15.5" font-weight="700" fill="#F3F6FF" text-anchor="middle">A person approves</text>
-<text x="360" y="502.925" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="500" fill="#B9C6EE" text-anchor="middle">or declines</text>
-<path d="M 462 488 L 498 488" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<rect x="500" y="446" width="200" height="84" rx="14" fill="#2DD4BF" fill-opacity="0.16" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="600" y="482" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15.5" font-weight="700" fill="#F3F6FF" text-anchor="middle">The result is recorded</text>
-<text x="600" y="502.925" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="500" fill="#B9C6EE" text-anchor="middle">then the reply is sent</text>
+<rect width="720" height="380" fill="#FFFFFF"/>
+<rect x="25.0" y="122.0" width="160" height="56" rx="28.0" fill="#8B6FE0" fill-opacity="0.09" stroke="#8B6FE0" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="105" y="157" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Customer</text>
+<circle cx="360" cy="150" r="70" fill="#2F80ED" fill-opacity="0.09" stroke="#2F80ED" stroke-opacity="0.9" stroke-width="1.5"/>
+<text x="360" y="148" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#1B2540" text-anchor="middle">Agent</text>
+<text x="360" y="172" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">model and loop</text>
+<rect x="530.0" y="118.0" width="170" height="64" rx="16" fill="#119C88" fill-opacity="0.09" stroke="#119C88" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="615" y="147" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Tools</text>
+<text x="615" y="170" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">order lookups</text>
+<rect x="260.0" y="280.0" width="200" height="60" rx="30.0" fill="#C45AD1" fill-opacity="0.09" stroke="#C45AD1" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="360" y="307" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">A person</text>
+<text x="360" y="330" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">approves refunds</text>
+<path d="M 187 150 L 287 150" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)" marker-start="url(#head-start)"/>
+<path d="M 432 150 L 528 150" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)" marker-start="url(#head-start)"/>
+<path d="M 360 222 L 360 278" fill="none" stroke="#8A9CC7" stroke-width="1.8" stroke-dasharray="7 6" marker-end="url(#head)"/>
+<text x="372" y="256" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="start">refunds</text>
 </svg>

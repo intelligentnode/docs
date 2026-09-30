@@ -1,104 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 880" width="720" height="880" role="img" aria-labelledby="t d">
-<title id="t">Six agentic workflow patterns in Python</title>
-<desc id="d">Six small graphs: a sequential chain, a parallel fan-out that merges, a classifier that routes to one branch, a draft and review loop, a model routing tool calls to an MCP server, and a step that runs your own code before a person approves.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" width="720" height="340" role="img" aria-labelledby="t d">
+<title id="t">An agentic workflow</title>
+<desc id="d">A ticket goes to two steps that run side by side, one pulls out the facts and one spots risks. Both feed a final step that writes the reply.</desc>
 <defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#091434"/><stop offset="1" stop-color="#1E164E"/>
-  </linearGradient>
   <marker id="head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-    <path d="M 0 0 L 10 5 L 0 10 z" fill="#9DB8FF"/>
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
   </marker>
   <marker id="head-start" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-    <path d="M 0 0 L 10 5 L 0 10 z" fill="#9DB8FF"/>
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
   </marker>
 </defs>
-<rect width="720" height="880" rx="18" fill="url(#bg)"/>
-<rect x="20" y="20" width="330" height="270" rx="14" fill="#2992FE" fill-opacity="0.06" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="38" y="54" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#F3F6FF" text-anchor="start">1. Sequential chain</text>
-<text x="38" y="270" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5" font-weight="500" fill="#B8A0F5" text-anchor="start">SequenceFlow</text>
-<rect x="370" y="20" width="330" height="270" rx="14" fill="#2992FE" fill-opacity="0.06" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="388" y="54" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#F3F6FF" text-anchor="start">2. Parallel fan-out and merge</text>
-<text x="388" y="270" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5" font-weight="500" fill="#B8A0F5" text-anchor="start">Flow with map_paths</text>
-<rect x="20" y="305" width="330" height="270" rx="14" fill="#2992FE" fill-opacity="0.06" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="38" y="339" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#F3F6FF" text-anchor="start">3. Routing with a classifier</text>
-<text x="38" y="555" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5" font-weight="500" fill="#B8A0F5" text-anchor="start">DynamicConnector</text>
-<rect x="370" y="305" width="330" height="270" rx="14" fill="#2992FE" fill-opacity="0.06" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="388" y="339" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#F3F6FF" text-anchor="start">4. Loop for self-review</text>
-<text x="388" y="555" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5" font-weight="500" fill="#B8A0F5" text-anchor="start">LoopTask</text>
-<rect x="20" y="590" width="330" height="270" rx="14" fill="#2992FE" fill-opacity="0.06" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="38" y="624" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#F3F6FF" text-anchor="start">5. Tool calls to an MCP server</text>
-<text x="38" y="840" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5" font-weight="500" fill="#B8A0F5" text-anchor="start">ToolDynamicConnector</text>
-<rect x="370" y="590" width="330" height="270" rx="14" fill="#2992FE" fill-opacity="0.06" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="388" y="624" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#F3F6FF" text-anchor="start">6. Your code and approval</text>
-<text x="388" y="840" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5" font-weight="500" fill="#B8A0F5" text-anchor="start">CustomAgent</text>
-<rect x="65.0" y="131.0" width="100" height="38" rx="10" fill="#2992FE" fill-opacity="0.2" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="115" y="155" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">notes</text>
-<rect x="205.0" y="131.0" width="100" height="38" rx="10" fill="#B8A0F5" fill-opacity="0.2" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="255" y="155" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">banner</text>
-<path d="M 167 150 L 203 150" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<text x="115" y="190" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="500" fill="#B9C6EE" text-anchor="middle">GPT</text>
-<text x="255" y="190" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="500" fill="#B9C6EE" text-anchor="middle">Claude</text>
-<text x="185" y="242" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#B9C6EE" text-anchor="middle">each step uses the last output</text>
-<rect x="386.0" y="131.0" width="78" height="38" rx="10" fill="#2992FE" fill-opacity="0.2" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="425" y="155" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">ticket</text>
-<rect x="495.0" y="102.0" width="80" height="36" rx="10" fill="#B8A0F5" fill-opacity="0.2" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="535" y="125" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">facts</text>
-<path d="M 464 150 L 493 120" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<path d="M 575 120 L 604 150" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<rect x="495.0" y="162.0" width="80" height="36" rx="10" fill="#F0ABFC" fill-opacity="0.2" stroke="#F0ABFC" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="535" y="185" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">risks</text>
-<path d="M 464 150 L 493 180" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<path d="M 575 180 L 604 150" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<rect x="607.0" y="131.0" width="76" height="38" rx="10" fill="#2DD4BF" fill-opacity="0.2" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="645" y="155" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">reply</text>
-<text x="535" y="242" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#B9C6EE" text-anchor="middle">facts and risks run at the same time</text>
-<rect x="37.0" y="416.0" width="90" height="38" rx="10" fill="#B8A0F5" fill-opacity="0.2" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="82" y="440" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">triage</text>
-<rect x="225.0" y="366.0" width="90" height="34" rx="10" fill="#2DD4BF" fill-opacity="0.2" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="270" y="388" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">billing</text>
-<path d="M 128 435 L 224 383" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<rect x="225.0" y="418.0" width="90" height="34" rx="10" fill="#5B6B9A" fill-opacity="0.2" stroke="#5B6B9A" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="270" y="440" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">bug</text>
-<path d="M 128 435 L 224 435" fill="none" stroke="#5B6B9A" stroke-width="1.8" stroke-dasharray="7 6" marker-end="url(#head)"/>
-<rect x="225.0" y="470.0" width="90" height="34" rx="10" fill="#5B6B9A" fill-opacity="0.2" stroke="#5B6B9A" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="270" y="492" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">sales</text>
-<path d="M 128 435 L 224 487" fill="none" stroke="#5B6B9A" stroke-width="1.8" stroke-dasharray="7 6" marker-end="url(#head)"/>
-<text x="185" y="527" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#B9C6EE" text-anchor="middle">only the chosen desk runs</text>
-<rect x="415.0" y="416.0" width="100" height="38" rx="10" fill="#2992FE" fill-opacity="0.2" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="465" y="440" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">rewrite</text>
-<polygon points="610,401 672,435 610,469 548,435" fill="#B8A0F5" fill-opacity="0.14" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="610" y="440" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">fits 60?</text>
-<path d="M 517 435 L 546 435" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<path d="M 610 401 C 610 371, 465 371, 465 414" fill="none" stroke="#9DB8FF" stroke-width="1.8" stroke-dasharray="7 6" marker-end="url(#head)"/>
-<text x="538" y="365" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#B9C6EE" text-anchor="middle">no, try again</text>
-<path d="M 610 469 L 610 495" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<text x="625" y="491" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#B9C6EE" text-anchor="start">yes, done</text>
-<text x="535" y="527" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#B9C6EE" text-anchor="middle">at most 4 loops, checked in Python</text>
-<rect x="37.0" y="701.0" width="90" height="38" rx="10" fill="#2992FE" fill-opacity="0.2" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="82" y="725" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">router</text>
-<rect x="190" y="660" width="142" height="64" rx="12" fill="#2DD4BF" fill-opacity="0.14" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="261" y="687" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#F3F6FF" text-anchor="middle">MCP server</text>
-<text x="261" y="710" font-family="'SFMono-Regular', Menlo, Consolas, monospace" font-size="12.5" font-weight="500" fill="#2DD4BF" text-anchor="middle">lookup_order</text>
-<rect x="206.0" y="745.0" width="110" height="34" rx="10" fill="#B8A0F5" fill-opacity="0.2" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="261" y="767" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">direct</text>
-<path d="M 128 714 L 188 692" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<path d="M 128 728 L 204 758" fill="none" stroke="#9DB8FF" stroke-width="1.8" stroke-dasharray="7 6" marker-end="url(#head)"/>
-<text x="124" y="694" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#B9C6EE" text-anchor="start">tool call</text>
-<text x="138" y="768" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#B9C6EE" text-anchor="start">text</text>
-<text x="185" y="812" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#B9C6EE" text-anchor="middle">the model decides, the flow runs it</text>
-<rect x="385.0" y="702.0" width="58" height="36" rx="10" fill="#B8A0F5" fill-opacity="0.2" stroke="#B8A0F5" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="414" y="725" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">CRM</text>
-<rect x="458.0" y="702.0" width="60" height="36" rx="10" fill="#2992FE" fill-opacity="0.2" stroke="#2992FE" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="488" y="725" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">draft</text>
-<rect x="540" y="700" width="80" height="40" rx="20" fill="#F0ABFC" fill-opacity="0.22" stroke="#F0ABFC" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="580" y="725" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#F3F6FF" text-anchor="middle">approve</text>
-<rect x="633.0" y="702.0" width="58" height="36" rx="10" fill="#2DD4BF" fill-opacity="0.2" stroke="#2DD4BF" stroke-opacity="0.8" stroke-width="1.5"/>
-<text x="662" y="725" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#F3F6FF" text-anchor="middle">send</text>
-<path d="M 444 720 L 456 720" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<path d="M 519 720 L 538 720" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<path d="M 621 720 L 631 720" fill="none" stroke="#9DB8FF" stroke-width="1.8" marker-end="url(#head)"/>
-<text x="414" y="758" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#B9C6EE" text-anchor="middle">your code</text>
-<text x="488" y="758" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#B9C6EE" text-anchor="middle">a model</text>
-<text x="580" y="758" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#B9C6EE" text-anchor="middle">a person</text>
-<text x="535" y="812" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#B9C6EE" text-anchor="middle">plain Python and a human sign-off</text>
+<rect width="720" height="340" fill="#FFFFFF"/>
+<rect x="25.0" y="142.0" width="150" height="56" rx="28.0" fill="#8B6FE0" fill-opacity="0.09" stroke="#8B6FE0" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="100" y="177" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Ticket</text>
+<rect x="275.0" y="60.0" width="170" height="64" rx="16" fill="#2F80ED" fill-opacity="0.09" stroke="#2F80ED" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="360" y="99" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Facts</text>
+<rect x="275.0" y="216.0" width="170" height="64" rx="16" fill="#C45AD1" fill-opacity="0.09" stroke="#C45AD1" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="360" y="255" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Risks</text>
+<rect x="540.0" y="142.0" width="150" height="56" rx="28.0" fill="#119C88" fill-opacity="0.09" stroke="#119C88" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="615" y="177" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Reply</text>
+<path d="M 176 160 L 273 100" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<path d="M 176 180 L 273 240" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<path d="M 446 100 L 538 160" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<path d="M 446 240 L 538 180" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="360" y="176" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">side by side</text>
 </svg>
