@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 290" width="720" height="290" role="img" aria-labelledby="t d">
+<title id="t">The coding agent loop</title>
+<desc id="d">A failing test goes to the agent, which reads and edits the code. When the agent says it is finished, the test gate runs npm test. A failure sends the agent back to work, and only exit code 0 counts as done.</desc>
+<defs>
+  <marker id="head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
+  </marker>
+  <marker id="head-start" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
+  </marker>
+</defs>
+<rect width="720" height="290" fill="#FFFFFF"/>
+<rect x="10.0" y="98.0" width="150" height="64" rx="32.0" fill="#C45AD1" fill-opacity="0.09" stroke="#C45AD1" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="85" y="127" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Task</text>
+<text x="85" y="150" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">a failing test</text>
+<circle cx="280" cy="130" r="62" fill="#2F80ED" fill-opacity="0.09" stroke="#2F80ED" stroke-opacity="0.9" stroke-width="1.5"/>
+<text x="280" y="128" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#1B2540" text-anchor="middle">Agent</text>
+<text x="280" y="152" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">reads and edits</text>
+<rect x="395.0" y="94.0" width="150" height="72" rx="16" fill="#8B6FE0" fill-opacity="0.09" stroke="#8B6FE0" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="470" y="127" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Test gate</text>
+<text x="470" y="150" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">npm test</text>
+<rect x="590.0" y="98.0" width="110" height="64" rx="32.0" fill="#119C88" fill-opacity="0.09" stroke="#119C88" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="645" y="127" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Done</text>
+<text x="645" y="150" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">exit code 0</text>
+<path d="M 162 130 L 215 130" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<path d="M 344 130 L 392 130" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="368" y="118" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">finish</text>
+<path d="M 547 130 L 588 130" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="567" y="118" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">pass</text>
+<path d="M 470 168 Q 390 250 300 192" fill="none" stroke="#8A9CC7" stroke-width="1.8" stroke-dasharray="7 6" marker-end="url(#head)"/>
+<text x="392" y="236" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">fail</text>
+</svg>
