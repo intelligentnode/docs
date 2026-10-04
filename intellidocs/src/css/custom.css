@@ -59,3 +59,61 @@
 .footer__social-link svg {
   flex-shrink: 0;
 }
+
+/* Terminal look for short command blocks: wrap a fenced block in <div className="terminal">. */
+.terminal {
+  margin: 0.75rem 0 1rem;
+}
+
+.terminal .theme-code-block {
+  background: #101a38;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(16, 26, 56, 0.18);
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+/* window bar with three dots */
+.terminal .theme-code-block::before {
+  content: '';
+  display: block;
+  height: 26px;
+  background:
+    radial-gradient(circle at 16px 13px, #f2695c 4.5px, transparent 5.5px),
+    radial-gradient(circle at 32px 13px, #f5bd4f 4.5px, transparent 5.5px),
+    radial-gradient(circle at 48px 13px, #5fc38b 4.5px, transparent 5.5px),
+    #1b2748;
+}
+
+.terminal pre,
+.terminal pre code {
+  background: transparent !important;
+  color: #e6ebff !important;
+}
+
+.terminal pre code {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  padding: 0.7rem 1rem 0.85rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.terminal pre code span {
+  color: #e6ebff !important;
+  font-style: normal !important;
+}
+
+/* prompt sign, not part of the copied text */
+.terminal .token-line::before {
+  content: '$ ';
+  color: #5fd0c0;
+  user-select: none;
+}
+
+/* when a command wraps, the rest lines up under the command, not under the prompt */
+.terminal .token-line {
+  display: block;
+  padding-left: 1.25em;
+  text-indent: -1.25em;
+}

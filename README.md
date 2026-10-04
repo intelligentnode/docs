@@ -36,7 +36,7 @@ How it works: the key file `intellidocs/static/bd34eaec1ac75ea7e9dec3485c744d33.
 
 The site also publishes https://www.intellinode.ai/llms.txt, an index of every docs page and article for coding agents such as Claude Code, Codex and Cursor. It is generated on every build by `intellidocs/src/plugins/llms-txt.js` from the sidebars and the articles folder, so there is nothing to update by hand.
 
-The folder `intellidocs/static/agent-kit` holds the files that connect Intelli to coding agents: an `AGENTS.md` section, a `SKILL.md` and the example code from the Claude Code and Codex article. They are served as plain files under https://www.intellinode.ai/agent-kit/ and linked from llms.txt. When the Intelli API changes, update them and rerun the examples.
+The folder `intellidocs/static/agent-kit` holds the files that connect Intelli to coding agents: an `AGENTS.md` section, a `SKILL.md`, an `install.sh` that adds both to a project, and the example code from the Claude Code and Codex article. They are served as plain files under https://www.intellinode.ai/agent-kit/ and linked from llms.txt. When the Intelli API changes, update them and rerun the examples.
 
 Google does not use IndexNow. For Google, the sitemap `https://www.intellinode.ai/sitemap.xml` is submitted in Google Search Console.
 

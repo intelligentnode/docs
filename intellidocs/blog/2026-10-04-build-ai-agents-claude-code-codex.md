@@ -34,22 +34,18 @@ Three things, each with its own section below.
 
 :::tip[Download the skill first]
 
-This guide uses one skill file that works in both Claude Code and Codex, plus a short instruction file. Get them now, because every use case below depends on them:
+One skill file works in both Claude Code and Codex. Add it to your project before you start:
 
-- [SKILL.md](https://www.intellinode.ai/agent-kit/SKILL.md), saved as `.agents/skills/intelli-flows/SKILL.md`
-- [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md), added to the `AGENTS.md` in your project
-
-A developer can install both from the project folder:
+<div className="terminal">
 
 ```bash
-curl -s https://www.intellinode.ai/agent-kit/AGENTS.md >> AGENTS.md
-mkdir -p .agents/skills/intelli-flows .claude/skills
-curl -s https://www.intellinode.ai/agent-kit/SKILL.md -o .agents/skills/intelli-flows/SKILL.md
-ln -s ../../.agents/skills/intelli-flows .claude/skills/intelli-flows
+curl -fsSL https://www.intellinode.ai/agent-kit/install.sh | sh
 pip install -U "intelli[visual]"
 ```
 
-Use Intelli 2.1.0 or above, which fixes two issues these tests found. `pip show intelli` prints your version. No developer nearby? The next section has a request that makes your coding agent do the same install.
+</div>
+
+Use Intelli 2.1.0 or above. To look before you run it, open the [skill](https://www.intellinode.ai/agent-kit/SKILL.md), the [instruction file](https://www.intellinode.ai/agent-kit/AGENTS.md) or the [install script](https://www.intellinode.ai/agent-kit/install.sh).
 
 :::
 
@@ -256,7 +252,7 @@ For you, the lesson is short. Review the picture for structure and the agent's r
 
 ## For developers
 
-The kit is two files: an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md) and a [skill](https://www.intellinode.ai/agent-kit/SKILL.md). Both point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The install commands are in the box near the top. The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
+The kit is two files: an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md) and a [skill](https://www.intellinode.ai/agent-kit/SKILL.md). Both point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The install script in the box near the top adds the AGENTS.md section, saves the skill and links it for Claude Code. The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
 
 Codex reads AGENTS.md by default; its [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) covers nested files. Claude Code reads it since v2.1.277 when the project has no CLAUDE.md. If it has one, put `@AGENTS.md` at the top, as the [memory docs](https://code.claude.com/docs/en/memory) describe. We checked these paths against both tools' docs, not in live sessions.
 
