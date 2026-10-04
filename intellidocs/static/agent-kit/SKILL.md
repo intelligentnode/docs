@@ -25,7 +25,9 @@ Follow the Intelli section of AGENTS.md, then these rules.
 5. Before `flow.start()`, loop over `flow.tasks` and raise if any `agent.provider` is not the one
    the user asked for. After every run, raise if `flow.errors` is not empty.
 6. For anything else, fetch https://www.intellinode.ai/llms.txt and open the page it lists.
-7. The user may not read code. When the flow is written, run it, save its picture with
-   `flow.generate_graph_img(name="<tool>_graph", save_path=".", show_legend=False)`, and report in plain
-   language: what each step does, which provider each step uses, and where the picture and the output
-   files are.
+7. Follow the sequence at the top of the Intelli section in AGENTS.md every time: run, read the output,
+   save the picture, report in plain language. The user may not read code.
+8. Choose the form. Write a code Flow when steps need routing, exact prompts or Python checks. Write a
+   Vibe Agent spec when the steps are plain text steps and the user wants a saved plan to rerun or change.
+9. A small local model is fine for a first run. Follow the small-model rules in AGENTS.md and tell the user
+   what it got wrong, so they can decide which steps need a stronger model.

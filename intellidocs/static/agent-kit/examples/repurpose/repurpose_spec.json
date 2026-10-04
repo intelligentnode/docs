@@ -1,0 +1,80 @@
+{
+  "version": "1",
+  "tasks": [
+    {
+      "name": "tweet_thread",
+      "desc": "Rewrite the blog post below as a tweet thread of 4 tweets. Number them 1/4, 2/4, 3/4 and 4/4, one tweet per line. Each tweet is one or two short sentences, under 280 characters. Use only facts and numbers from the blog post. Output only the tweets.",
+      "post_process": "check_against_post",
+      "agent": {
+        "agent_type": "text",
+        "provider": "vllm",
+        "mission": "You are a social media editor who writes clear tweet threads from blog posts.",
+        "model_params": {
+          "model": "qwen2.5:0.5b",
+          "temperature": 0.3,
+          "max_tokens": 320
+        },
+        "options": {
+          "baseUrl": "${ENV:OLLAMA_BASE_URL}"
+        }
+      }
+    },
+    {
+      "name": "linkedin_post",
+      "desc": "Rewrite the blog post below as one LinkedIn post: a one line hook, then 3 short paragraphs, then a closing question for the reader. About 120 words, professional and friendly. Use only facts and numbers from the blog post. Output only the post.",
+      "post_process": "check_against_post",
+      "agent": {
+        "agent_type": "text",
+        "provider": "vllm",
+        "mission": "You are a B2B marketer who writes LinkedIn posts from blog posts.",
+        "model_params": {
+          "model": "qwen2.5:0.5b",
+          "temperature": 0.3,
+          "max_tokens": 320
+        },
+        "options": {
+          "baseUrl": "${ENV:OLLAMA_BASE_URL}"
+        }
+      }
+    },
+    {
+      "name": "newsletter_blurb",
+      "desc": "Write a short newsletter blurb that introduces the blog post below: a headline line, then 2 sentences that say what the team changed and what the result was. Under 60 words. Do not add any fact or number that is not in the blog post. Output only the blurb.",
+      "post_process": "check_against_post",
+      "agent": {
+        "agent_type": "text",
+        "provider": "vllm",
+        "mission": "You are a newsletter editor who writes short blurbs that introduce blog posts.",
+        "model_params": {
+          "model": "qwen2.5:0.5b",
+          "temperature": 0.3,
+          "max_tokens": 160
+        },
+        "options": {
+          "baseUrl": "${ENV:OLLAMA_BASE_URL}"
+        }
+      }
+    },
+    {
+      "name": "search_snippet",
+      "desc": "Write the search result snippet (meta description) for the blog post below: one plain sentence, under 155 characters, no quotes, no hashtags. Output only that sentence.",
+      "post_process": "snippet_160",
+      "agent": {
+        "agent_type": "text",
+        "provider": "vllm",
+        "mission": "You are an SEO editor who writes one sentence search snippets for blog posts.",
+        "model_params": {
+          "model": "qwen2.5:0.5b",
+          "temperature": 0.2,
+          "max_tokens": 80
+        },
+        "options": {
+          "baseUrl": "${ENV:OLLAMA_BASE_URL}"
+        }
+      }
+    }
+  ],
+  "map_paths": {},
+  "dynamic_connectors": [],
+  "output_memory_map": {}
+}

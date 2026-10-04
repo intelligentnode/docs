@@ -1,0 +1,11 @@
+feat: add CSV export to the invoices page
+feat: dark mode for the mobile app
+feat: sign in with Google Workspace (single sign-on)
+fix: password reset emails were not sent to addresses containing a plus sign
+fix: dashboard charts showed the wrong time zone for users outside UTC
+fix: app crashed when uploading files larger than 2 GB
+perf: search results load about 40 percent faster
+chore: upgrade the payments library to v5, the refund API response format changed
+refactor: move user sessions to the new database, needs a 10 minute maintenance window during deploy
+feat!: remove the old v1 reports API, customers must move to v2 before the next release
+docs: update the API guide for the new export endpoint

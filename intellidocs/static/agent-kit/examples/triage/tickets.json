@@ -1,0 +1,38 @@
+[
+  {
+    "id": "T-1001",
+    "from": "Dana (Northwind Cafe)",
+    "text": "We were charged twice for our March invoice (#4471). Please refund the duplicate payment of $240.",
+    "expected": {"category": "billing", "urgency": "medium"}
+  },
+  {
+    "id": "T-1002",
+    "from": "Omar (Brightline Logistics)",
+    "text": "URGENT: the whole dashboard has been down for our entire team since 9am. Every page shows error 500 and we cannot serve our customers.",
+    "expected": {"category": "bug", "urgency": "high"}
+  },
+  {
+    "id": "T-1003",
+    "from": "Priya",
+    "text": "I forgot my password and the reset email never arrives. I cannot log in to my account. Can you help?",
+    "expected": {"category": "account", "urgency": "medium"}
+  },
+  {
+    "id": "T-1004",
+    "from": "Lukas (Studio Nine)",
+    "text": "It would be great if we could export reports to Excel. Not urgent, just a suggestion for a future version.",
+    "expected": {"category": "feature", "urgency": "low"}
+  },
+  {
+    "id": "T-1005",
+    "from": "Mei",
+    "text": "Someone changed the email address on my account without my permission and now I am locked out. I think my account was hacked. Please help immediately.",
+    "expected": {"category": "account", "urgency": "high"}
+  },
+  {
+    "id": "T-1006",
+    "from": "Sam",
+    "text": "The mobile app sometimes closes by itself when I rotate my phone on the settings screen. I can reopen it and carry on, so it is only a small annoyance.",
+    "expected": {"category": "bug", "urgency": "low"}
+  }
+]
