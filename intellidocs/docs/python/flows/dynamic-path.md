@@ -197,8 +197,19 @@ expander_task = Task(
     log=True,
 )
 
-formatter_task = Task(
-    TextTaskInput("Format this content nicely with markdown:"),
+simple_formatter_task = Task(
+    TextTaskInput("Format this simplified content nicely with markdown:"),
+    Agent(
+        agent_type=AgentTypes.TEXT.value,
+        provider="mistral",
+        mission="Format content",
+        model_params={"key": MISTRAL_API_KEY, "model": "mistral-medium-latest"},
+    ),
+    log=True,
+)
+
+detailed_formatter_task = Task(
+    TextTaskInput("Format this detailed content nicely with markdown:"),
     Agent(
         agent_type=AgentTypes.TEXT.value,
         provider="mistral",
@@ -214,7 +225,8 @@ tasks = {
     "complexity_analyzer": analyzer_task,
     "simplifier": simplifier_task,
     "expander": expander_task,
-    "formatter": formatter_task,
+    "simple_formatter": simple_formatter_task,
+    "detailed_formatter": detailed_formatter_task,
 }
 
 # Define complexity router function
@@ -235,8 +247,10 @@ def complexity_router(output, output_type):
 map_paths = {
     # Static connections
     "initial_query": ["complexity_analyzer"],
-    "simplifier": ["formatter"],
-    "expander": ["formatter"],
+    # Each branch has its own formatter. A formatter shared by both
+    # branches would wait for the branch that did not run.
+    "simplifier": ["simple_formatter"],
+    "expander": ["detailed_formatter"],
 }
 
 dynamic_connectors = {

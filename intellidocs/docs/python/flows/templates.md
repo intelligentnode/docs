@@ -21,9 +21,13 @@ The `TextInputTemplate` is a example for text-based inputs.
 ```python
 class TextInputTemplate(Template):
 
-    def __init__(self, template_text: str, previous_input_tag='context', user_request_tag='user request'):
+    def __init__(self, template_text: str, previous_input_tag='PREVIOUS_ANALYSIS', user_request_tag='CURRENT_TASK'):
+        # Keep the plain instruction to use it alone when there is no input
+        self.instruction = None
+
         # Ensure the template text includes placeholders for dynamic content
         if '{0}' not in template_text:
+            self.instruction = template_text.strip()
             context = previous_input_tag + ': {0}\n'
             request = user_request_tag + ': ' + template_text
             template_text = context + request
@@ -31,8 +35,14 @@ class TextInputTemplate(Template):
         self.template_text = template_text.strip()
 
     def apply_input(self, data):
-        # Format the input data using the template
-        return self.template_text.format(data)
+        # Without input, use the instruction alone
+        if data is None:
+            if self.instruction is not None:
+                return self.instruction
+            return self.template_text.replace('{0}', '')
+
+        # Put the input in place of the placeholder
+        return self.template_text.replace('{0}', str(data))
 
     def apply_output(self, data):
         # This method can be left unimplemented if output manipulation is not required
@@ -47,8 +57,8 @@ Prepare the template instance.
 ```python
 from intelli.flow.template.basic_template import TextInputTemplate
 
-# define the template text
-template_text = "Context: {0}\nuser request:"
+# define the template text, {0} is replaced with the input from the previous step
+template_text = "Context: {0}\nuser request: analyze the sentiment of the context"
 
 # create an instance of TextInputTemplate
 text_template = TextInputTemplate(template_text)
