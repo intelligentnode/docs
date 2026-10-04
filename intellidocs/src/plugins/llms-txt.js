@@ -31,7 +31,7 @@ function frontMatter(file) {
 }
 
 // Pages that do not help anyone write code: a discontinued service and download statistics.
-const SKIP = new Set(['python/intellicloud', 'npm/intellicloud', 'python/downloads']);
+const SKIP = new Set(['npm/intellicloud', 'python/downloads']);
 
 function docEntry(siteDir, siteUrl, id) {
   if (SKIP.has(id)) return null;

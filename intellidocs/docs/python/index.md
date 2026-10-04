@@ -54,7 +54,7 @@ Give your coding agent the Intelli rules, so it writes, runs and explains flows 
 - **Claude Code**: run `/plugin marketplace add intelligentnode/Intelli`, then `/plugin install intelli-flows@intellinode`.
 - **Codex or any project**: run `curl -fsSL https://www.intellinode.ai/agent-kit/install.sh | sh` in the project folder.
 
-Then ask in plain words. [Give IntelliNode to Claude Code or Codex to Build AI Agents](/articles/build-ai-agents-claude-code-codex) walks through three examples and shows the flow pictures the agent hands back.
+Then ask in plain words. The [skill page](/docs/python/claude-code-codex-skill) has every step, and [Give IntelliNode to Claude Code or Codex to Build AI Agents](/articles/build-ai-agents-claude-code-codex) walks through three examples with the flow pictures the agent hands back.
 
 ## License
 This project is licensed under Apache 2.0.

@@ -67,7 +67,7 @@ const sidebars = {
     },
     {
       type: 'doc',
-      id: "python/intellicloud"
+      id: "python/claude-code-codex-skill"
     },
     
   ],
