@@ -101,7 +101,7 @@ When the user asks for an AI tool, follow this sequence. The user may not read c
 
 Step 3 is there because of our tests. More on that below.
 
-Short files like this work. When [LangChain tested Claude Code](https://www.langchain.com/blog/how-to-turn-claude-code-into-a-domain-specific-coding-agent) on its own library, a condensed guide beat docs access through an MCP server on its own, and on one task it cost about 2.5 times less.
+Short files like this are enough. In our tests, agents that had only these two files built all three tools in this guide.
 
 ## Value 2: The Intelli graph gives the coding agent structure
 
