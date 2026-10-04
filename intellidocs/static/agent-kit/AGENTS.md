@@ -1,6 +1,12 @@
 ## Using Intelli (Python) to build agent flows
 
-Install with `pip install intelli` (2.0.3) and import from `intelli.flow`:
+When the user asks for an AI tool, follow this sequence. The user may not read code.
+1. Write the tool as an Intelli flow of small steps.
+2. Run it. If `flow.errors` is not empty, fix the cause and run again.
+3. Save the flow picture: `flow.generate_graph_img(name="<tool>_graph", save_path=".", show_legend=False)`.
+4. Report in plain language: what each step does, which provider each step uses, and where the picture and the output files are.
+
+Install with `pip install "intelli[visual]"` (2.0.3; the visual extra adds matplotlib for flow pictures) and import from `intelli.flow`:
 `from intelli.flow import Agent, Task, TextTaskInput, Flow, SequenceFlow, DynamicConnector, Memory, VibeAgent`
 
 Agents and tasks
@@ -16,7 +22,7 @@ Flow (async graph)
 - Routing: `dynamic_connectors={"a": DynamicConnector(decision_fn=lambda out, kind: "x", destinations={"x": "task_x", "y": "task_y"})}`. Only the chosen task runs (4 destinations at most).
 - Task failures do not raise. Check `flow.errors` (a dict) after every run.
 - `SequenceFlow([t1, t2]).start()` is synchronous and returns `{"task1": ..., "task2": ...}`.
-- Diagram: `flow.generate_graph_img(name="graph", save_path=".", show_legend=False)` (needs matplotlib).
+- Picture: `flow.generate_graph_img(name="graph", save_path=".", show_legend=False)` returns the PNG path. It needs matplotlib, which the visual extra installs.
 
 Vibe Agents (a flow from a plain language intent)
 - `va = VibeAgent(planner_provider="anthropic", planner_api_key=os.environ["ANTHROPIC_API_KEY"], planner_model="<model>")`, then `flow = await va.build(intent, save_dir="bundle")`
