@@ -1,30 +1,57 @@
 ---
 slug: build-ai-agents-claude-code-codex
 title: "Give IntelliNode to Claude Code or Codex to Build AI Agents"
-description: "Build AI agents with Claude Code or Codex: give them IntelliNode through AGENTS.md, a skill and llms.txt, then let them write Intelli flows and Vibe Agents."
-keywords: ["build ai agents with claude code", "build ai agents with codex", "teach claude code a new library", "agents.md example", "agents.md vs claude.md", "codex agents.md", "llms.txt for coding agents", "claude code skills", "codex skills", "vibe coding ai agents python"]
-tags: [{label: "Python", permalink: "/python"}, "AI Agents", "Claude Code", "Codex", "Vibe Agents"]
+description: "Build AI agents with Claude Code or Codex on IntelliNode: three AI agent use cases for business, flows you can review and no AI vendor lock-in."
+keywords: ["build ai agents with claude code", "ai agents for business", "ai agent use cases", "ai workflow automation", "multi model ai strategy", "avoid ai vendor lock-in", "ai customer support automation", "build ai agents with codex", "agents.md example", "claude code skills"]
+tags: [{label: "Python", permalink: "/python"}, "AI Agents", "AI Automation", "Claude Code", "Codex", "Vibe Agents"]
 authors: [intellinode]
 image: /img/articles/build-ai-agents-claude-code-codex.jpg
 image_alt: "Clusters of dots joined by thin curved lines, like a coding agent linking project rules, docs and agent apps"
 date: 2026-10-04T09:00:00Z
 ---
 
-You ask your coding agent for a support triage tool built on a small library your team likes, and a minute later you have a page of confident Python. Then the first run fails on an import that never existed, because the model barely saw that library in training, or saw an old version.
+Your developers already use Claude Code or Codex every day. The business, meanwhile, has a list of AI requests that never make the roadmap: sort the support inbox so urgent problems reach an engineer, send customers a short update every Friday, turn each blog post into social posts. Each one is too small for a project and too useful to drop.
 
-That's the usual result when you build AI agents with Claude Code or Codex on a framework that isn't famous. The agent isn't careless. It's guessing, and nothing in your repo tells it otherwise.
+If you're a CIO, an engineering manager or a project manager, you already have what it takes to build AI agents with Claude Code or Codex. What you need is a way to do it that doesn't leave you with a pile of one-off scripts, a model bill nobody planned, or customer data sent to a vendor nobody approved.
 
-This guide replaces the guessing with three small files you add once, then walks through three useful apps written from plain prompts, all running on a free model on your own machine.
+This guide shows what you gain when your coding agent builds on IntelliNode, the one-time setup your developers do, and three AI agent use cases built from a plain request: support triage, a weekly release brief and content reuse. All three run on a free model on your own hardware and can move to a cloud model one step at a time.
 
 ![Clusters of dots joined by thin curved lines, like a coding agent linking project rules, docs and agent apps](/img/articles/build-ai-agents-claude-code-codex.jpg)
 
 <!-- truncate -->
 
-## How to make Claude Code and Codex use a library they don't know
+## AI agents for business: what a manager gets
 
-Fixing the guessing starts with what a coding agent reads before it writes code: the instruction files in your repo, plus whatever it looks up. So the kit has three layers. The library here is Intelli, the Python half of IntelliNode (`pip install intelli`), which builds agent apps as flows (graphs of model steps) or as Vibe Agents planned from a plain-English description.
+AI agents for business only pay off when someone can own them, budget for them and explain what they do. Here's what this setup changes for the people who own the budget and the deadline.
 
-Here's the handoff in one picture:
+- **Small requests get built.** A developer describes the tool in a few sentences, and the coding agent assembles it from tested parts. Each of the three tools in this guide came from one short request.
+- **Every tool has the same shape.** Each one is a flow, a graph of small steps. Intelli can draw that graph as a picture, so a project manager can check the process and a new developer can take it over.
+- **No vendor lock-in.** The backend is multi-model: OpenAI, Claude, Gemini, Mistral or a model on your own servers. Moving a step to another vendor means changing its provider and model, not rewriting the tool.
+- **Costs stay predictable.** The strong model works once, when the tool is built. Daily runs can use a small or local model, with a premium model only on the steps customers read.
+- **Sensitive data can stay inside.** Steps that handle customer text can run on a local model, so that text never leaves your network.
+- **People stay in charge.** The tools sort, summarize and draft. A person approves what goes to a customer, and this guide lists the checks to run before a team relies on a tool.
+
+## How it works: AI workflow automation on a multi-model backend
+
+Those benefits come from two ideas in Intelli, the Python half of IntelliNode (`pip install intelli`).
+
+The first is the flow. A flow is a graph of small model steps that can run side by side, branch on a result and share memory. Small steps are easier to test than one long prompt, and the graph shows who does what. Intelli also has Vibe Agents, which build a flow from a plain-English description.
+
+The second is the multi-model backend. Each step is done by an agent, and every agent names its own provider and model. So one tool can use a free local model where the work is routine or the data is private, and a cloud model where the wording matters.
+
+Here's that idea for a support inbox:
+
+![Diagram of a multi-model flow: tickets go into a flow, which sends sorting and labels to a local model and customer replies to a cloud model](pathname:///img/articles/diagrams/build-ai-agents-claude-code-codex-models.svg)
+
+*One flow, two models: the local model sorts and labels tickets, and the cloud model writes the replies customers read.*
+
+The coding agent writes the tool, and Intelli runs it on whatever models you choose. That split is good for the budget, because the expensive model works once, while the tool is built. It also means this isn't the Claude Agent SDK, which puts Claude itself inside your app.
+
+## What your developers hand over: three small files
+
+The rest of the setup is for the developer who does it. If you manage the work, you can skip ahead to the three use cases.
+
+A coding agent decides how to write code from what it reads first: the instruction files in your repo and the docs it looks up. So the handoff has three parts.
 
 ![Diagram: AGENTS.md loads into the coding agent, the agent reads llms.txt, and it writes an Intelli app](pathname:///img/articles/diagrams/build-ai-agents-claude-code-codex-handoff.svg)
 
@@ -36,11 +63,9 @@ Here's the handoff in one picture:
 
 Short and curated beats a pile of docs. In [LangChain's test of Claude Code on LangGraph tasks](https://www.langchain.com/blog/how-to-turn-claude-code-into-a-domain-specific-coding-agent), a condensed CLAUDE.md guide beat docs access through an MCP server (a tool server the agent can call) alone, and on one task cost about 2.5 times less. The guide plus docs access did best, the same split as AGENTS.md plus llms.txt.
 
-The coding agent writes the app and doesn't run inside it; Intelli runs the finished app on whatever model you choose. So this isn't the Claude Agent SDK, which puts Claude itself inside your app.
-
 ## Step 1: Add an Intelli section to AGENTS.md
 
-The first layer is the one the agent always sees. Paste this section into the AGENTS.md at your repo root, or create the file. Every API in it was checked against Intelli 2.0.3 by running code, and each pitfall is something that failed quietly in our tests.
+Start with the part the agent always sees. Paste this section into the AGENTS.md at your repo root, or create the file. Every API in it was checked against Intelli 2.0.3 by running code, and each pitfall is something that failed quietly in our tests.
 
 ```markdown
 ## Using Intelli (Python) to build agent flows
@@ -79,7 +104,7 @@ Pitfalls
 - Tiny local models are poor planners and labelers: qwen2.5:0.5b produced 0 valid VibeAgent specs in 42 tries. For a local planner, set `max_context_chars=0` (the default prompt is about 96k characters, and `context_files=[]` does not shrink it).
 ```
 
-The import line stops the agent from inventing module paths. The pitfalls matter more, because those failures don't raise, so one test run won't reveal them.
+The import line and the pitfalls keep the agent's first draft runnable, so your team spends review time on the business rules instead of the plumbing. The pitfalls matter most, because those failures don't raise errors, so one test run won't reveal them.
 
 ### Codex
 
@@ -106,7 +131,7 @@ Or set **Project instructions** to `claude-md-and-agents-md` in `/config`. Then 
 
 ## Step 2: Point your agent at llms.txt
 
-AGENTS.md can't hold a whole library, and it shouldn't try. For everything else, give the agent an index.
+AGENTS.md can't hold a whole framework, and it shouldn't try. For everything else, give the agent an index of the docs.
 
 The [llms.txt format](https://llmstxt.org/) was proposed by Jeremy Howard in September 2024: an H1 naming the project, a short summary in a blockquote, then H2 sections of links, each with a one-line note. An agent reads the notes, picks a page and fetches only that.
 
@@ -129,7 +154,7 @@ Add one line at the end of the Intelli section in AGENTS.md:
 - Docs index: https://www.intellinode.ai/llms.txt (local copy: docs/intellinode-llms.txt). Before using an Intelli API that is not listed above, open the matching page from the index.
 ```
 
-A prompt can then send the agent to a page instead of its memory:
+When the support team asks for one more feature later, a request can send the agent to the right page:
 
 ```text
 Read docs/intellinode-llms.txt, open the page about loop tasks, and add a LoopTask to triage.py
@@ -146,9 +171,9 @@ Claude Code's own docs publish one too, at `https://code.claude.com/docs/llms.tx
 
 ## Step 3: Package it as a skill for Claude Code and Codex
 
-The AGENTS.md section costs context in every session, even ones that never touch Intelli, so longer how-to text belongs in a skill. Both tools list each skill's name and description up front and load the body only when a task matches or you call it by name. Both follow the Agent Skills format, so one folder serves both.
+The AGENTS.md section costs context in every session, even ones that never touch Intelli, so the longer how-to belongs in a skill. Both tools list each skill's name and description up front and load the body only when a task matches or you call it by name. Both follow the Agent Skills format, so one folder serves both.
 
-This `SKILL.md` holds the FlowSpec shape (the JSON a Vibe Agent runs from), the rule for processors (Python functions that check each task's output) and the local-only check:
+This `SKILL.md` holds the FlowSpec shape (the JSON a Vibe Agent runs from), the rule for processors (Python functions that check each task's output) and a check that every step stays on the model you approved:
 
 ```markdown
 ---
@@ -180,7 +205,7 @@ Follow the Intelli section of AGENTS.md, then these rules.
 6. For anything else, fetch https://www.intellinode.ai/llms.txt and open the page it lists.
 ```
 
-Codex looks for project skills in `.agents/skills` and Claude Code only in `.claude/skills`. Both follow a symlinked skill folder, so keep one copy:
+Codex looks for project skills in `.agents/skills` and Claude Code only in `.claude/skills`. Both follow a symlinked skill folder, so keep one copy. Codex requires `name` and `description` in the file; Claude Code defaults the name to the folder:
 
 ```bash
 mkdir -p .agents/skills/intelli-flows .claude/skills
@@ -190,13 +215,13 @@ ln -s ../../.agents/skills/intelli-flows .claude/skills/intelli-flows
 
 Call it with `/intelli-flows` in Claude Code or `$intelli-flows` in Codex, or let either tool pick it from the description, and run `/skills` to confirm it's listed. We checked the paths against both tools' docs, not in live sessions.
 
-## Build AI agents with Claude Code: three Intelli apps from plain prompts
+## Build AI agents with Claude Code: three AI agent use cases for business
 
-With the kit in place, here's what it buys you. Each app starts with the prompt you'd give Claude Code or Codex, then the code the agent should end up with when it follows the AGENTS.md section.
+With the setup done, the request is the part that matters. Each use case below starts with the business problem, then what someone on the team types into Claude Code or Codex, then the code the agent should end up with when it follows the AGENTS.md section.
 
-Where the code came from: a Claude coding agent produced it from each prompt plus the AGENTS.md section, and we trimmed it for this page. It isn't a transcript of a Claude Code session, and we made no Codex run, though the same files work there. Every app ran end to end on qwen2.5:0.5b, a tiny model, in Ollama, a free local model server, with no API keys.
+Where the code came from: a Claude coding agent produced it from each request plus the AGENTS.md section, and we trimmed it for this page. It isn't a transcript of a Claude Code session, and we made no Codex run, though the same files work there. Every tool ran end to end on qwen2.5:0.5b, a tiny model, in Ollama, a free local model server, with no API keys.
 
-The apps share two helpers. Intelli's `vllm` provider talks to any OpenAI-compatible server, which Ollama is:
+The tools share two helpers. Intelli's `vllm` provider talks to any OpenAI-compatible server, which Ollama is:
 
 ```python
 # helpers.py: every agent talks to local Ollama, so no API key is needed
@@ -224,7 +249,9 @@ class Prompt:
 
 `Prompt` exists because the built-in `TextInputTemplate` never fills `{0}`; it appends the input, and small models echo the leftover text back.
 
-### App 1: Support ticket triage with a Flow graph and routing
+### Use case 1: Customer support automation that gets urgent tickets to an engineer
+
+The support team's problem is speed. An outage report shouldn't wait in the same queue as a dark mode request. This tool labels each ticket, writes a one-line summary, and sends urgent tickets to the on-call engineer with an escalation note, while the rest get a drafted reply for an agent to review.
 
 ```text
 Build a support ticket triage tool with Intelli. For each ticket, run three steps in parallel:
@@ -328,9 +355,11 @@ if __name__ == "__main__":
 [account |low   ] -> reply      The CSV export button does nothing in Safari.
 ```
 
-The plumbing held: six tickets in about five seconds, no `flow.errors`, and exactly one of escalation or reply per ticket. The labels didn't. At temperature 0, category was right for 3 of 6 tickets and urgency for 2 of 6 (2 and 0 with the default template). The model rated 5 of 6 tickets high, so a dark mode request got an escalation note, and it filed the API outage as a feature. Change `MODEL` to a bigger model before you trust the labels; the graph stays the same. For a PNG of the graph, call `build_flow(Memory()).generate_graph_img(name="triage_graph", save_path=".", show_legend=False)`. The [dynamic routing docs](/docs/python/flows/dynamic-path) cover the other router modes.
+The plumbing held: six tickets in about five seconds, no `flow.errors`, and exactly one of escalation or reply per ticket. The labels didn't. At temperature 0, category was right for 3 of 6 tickets and urgency for 2 of 6 (2 and 0 with the default template). The model rated 5 of 6 tickets high, so a dark mode request got an escalation note, and it filed the API outage as a feature. That's fine for a demo and not for a real inbox: change `MODEL` to a bigger model before anyone relies on the labels, and the graph stays the same. For a PNG of the graph to share with the support lead, call `build_flow(Memory()).generate_graph_img(name="triage_graph", save_path=".", show_legend=False)`. The [dynamic routing docs](/docs/python/flows/dynamic-path) cover the other router modes.
 
-### App 2: A weekly release brief from commit messages
+### Use case 2: A weekly release brief for customers and sales
+
+Every Friday someone spends an hour turning commit messages into an update that customers and the sales team can read. This tool takes the week's commits and writes that brief in a few seconds, ready for a person to check and send.
 
 ```text
 Every Friday I paste the week's commit messages. Use Intelli to turn them into a short release
@@ -435,11 +464,11 @@ if __name__ == "__main__":
 
 Over five runs it took 2.8 to 4.5 seconds, with no errors and `brief_md` stored every time. The section writers, each with a short, narrow input, stayed faithful. The merge step drifted: it kept 7 to 10 of the 10 sorted commits, explained "rate limit returned 500 instead of 429" as a performance improvement, and copied Flow's labels into its headings ("Features Output") every time. The headline step often just returned the brief's first line.
 
-The lesson holds for any model: let code do the grouping, and keep each model step short and narrow. The [async flow docs](/docs/python/flows/async-flow) cover more graph shapes.
+The lesson holds for any model, and it's why a person still reads the brief before it goes out: let code do the grouping, and keep each model step short and narrow. The [async flow docs](/docs/python/flows/async-flow) cover more graph shapes.
 
-### App 3: Vibe code an AI agent where the coding agent is the planner
+### Use case 3: One blog post, four channels, with a Vibe Agent
 
-The first two apps are graphs written in Python. A Vibe Agent builds the graph from a sentence instead: a planner model turns your plain English into a FlowSpec (JSON listing each task, its agent and how tasks connect), and `VibeAgent` validates it, builds the Flow and saves a bundle that reruns with no planning.
+Marketing wants every blog post turned into a tweet thread, a LinkedIn post, a newsletter blurb and a search snippet. Writing those by hand takes longer than most posts deserve. This time the tool is a Vibe Agent, which builds the graph from a sentence instead of Python: a planner model turns your plain English into a FlowSpec (JSON listing each task, its agent and how tasks connect), and `VibeAgent` validates it, builds the Flow and saves a bundle that reruns with no planning.
 
 ```text
 Use Intelli VibeAgent to build a content repurposing flow from a plain language intent: a blog
@@ -450,7 +479,7 @@ again without planning. Run every task on local Ollama.
 
 We first let qwen2.5:0.5b plan. Across our probes it produced a runnable local spec 0 times in 42 attempts. Most replies were broken JSON or failed validation, and three passed validation but sent tasks to OpenAI. With the `${ENV:OPENAI_API_KEY}` placeholder the planner prompt suggests, that's a paid call on any machine where the key is set.
 
-So let the strong model plan once and small models do the repeated work. That's the practical version of agents that write agents:
+So let the strong model plan once and small models do the repeated work. That's the practical version of agents that write agents, and it keeps the cost of every later run close to zero:
 
 ![Diagram of agents that write agents: an intent goes to the coding agent, its FlowSpec goes to VibeAgent, and a local model runs the tasks](pathname:///img/articles/diagrams/build-ai-agents-claude-code-codex-vibe.svg)
 
@@ -571,7 +600,7 @@ if __name__ == "__main__":
         print(f"## {name}\n\n{text}\n")
 ```
 
-Run `python repurpose.py --build` once, then `python repurpose.py` for each new post in `post.md`. On a post about cutting CI time from 22 minutes to 9, each run took 2.4 to 3.5 seconds, even from another folder. The number check caught invented figures such as a "95%" cache hit rate, but not real numbers on the wrong fact: one LinkedIn draft turned the 91% cache hit rate into "a 91% increase in cache utilization". A meta description listed batched changes as a fix, though batching was the original problem.
+Run `python repurpose.py --build` once, then `python repurpose.py` for each new post in `post.md`. On a post about cutting CI time from 22 minutes to 9, each run took 2.4 to 3.5 seconds, even from another folder. The number check caught invented figures such as a "95%" cache hit rate, but not real numbers on the wrong fact: one LinkedIn draft turned the 91% cache hit rate into "a 91% increase in cache utilization". A meta description listed batched changes as a fix, though batching was the original problem. Drafts like these save the marketing team the blank page, and someone still edits them before they're published.
 
 For a cloud planner, the documented constructor is below. We didn't run it, since it's a paid call:
 
@@ -584,9 +613,34 @@ async def build_with_cloud_planner():
 
 The [Vibe Agents docs](/docs/python/vibe-agents) cover `edit()` for changing a saved flow with a new instruction.
 
-## Check the generated app before you trust it
+## A multi-model AI strategy: choose a model for each step
 
-Each app above had a way to fail without telling you. Before you ship code a coding agent wrote with Intelli, check these, each confirmed by running code:
+The three tools ran on one tiny local model, and the results show where that's enough and where it isn't. Sorting commits and running in parallel worked. Labels, merged summaries and marketing copy need a stronger model. With a multi-model backend you fix that one step at a time instead of moving the whole tool.
+
+A cloud step is one more helper next to `local_agent`:
+
+```python
+# helpers.py (addition): a cloud agent for the steps customers read
+import os
+
+
+def claude_agent(mission, max_tokens=300):
+    return Agent("text", "anthropic", mission,
+                 {"key": os.environ["ANTHROPIC_API_KEY"], "model": "claude-sonnet-5", "max_tokens": max_tokens})
+```
+
+Use it for the tasks customers read, such as the reply in the triage tool, and leave the labels and checks on the local model. The flow, the routing and the reports stay as they are. We ran that mix with a stand-in for the Claude call, since a real one is paid.
+
+For a manager, this is where the cost and risk decisions sit:
+
+- **Cost.** Building a tool uses the coding agent you already pay for. Running it is a separate bill that depends on the model behind each step, and local steps cost nothing per call.
+- **Data.** Decide per step what may leave your network. Ticket text can stay on a local model while a cloud model only sees a short summary.
+- **Vendor lock-in.** To avoid AI vendor lock-in, keep the model choice on the step, not in the tool's structure. To compare two vendors, change the provider and model on one step and run the same inputs through both.
+- **Planning.** For Vibe Agents, planning happens once and the saved bundle runs with no planner call, so a strong planner adds almost nothing to the monthly cost.
+
+## Check the generated tool before your team relies on it
+
+Each tool above had a way to fail without telling you. Before your team relies on code a coding agent wrote with Intelli, check these, each confirmed by running code:
 
 - **Read `flow.errors` after every run.** A failed task becomes an "Error: ..." string in the output, and `start()` doesn't raise.
 - **Check every task's provider before `start()`.** A spec task without `agent_type` skips validation and defaults to openai.
@@ -599,7 +653,7 @@ These lines earn their place in AGENTS.md, because none of them shows up until s
 
 ## Do you need MCP or Context7?
 
-The kit so far is plain files. The other common way to feed docs to an agent is an MCP server. For this job you don't need one: plain files add no dependency, and LangChain's results favor a short guide. Context7 is a good option for widely used libraries. Its MCP server pulls version-specific docs into the agent's context, and `npx ctx7 setup` configures it for Claude Code.
+The setup so far is plain files. The other common way to feed docs to an agent is an MCP server. For this job you don't need one: plain files add no dependency, and LangChain's results favor a short guide. Context7 is a good option for widely used libraries. Its MCP server pulls version-specific docs into the agent's context, and `npx ctx7 setup` configures it for Claude Code.
 
 IntelliNode's own MCP server does a different job. It gives your coding agent 15 cross-provider tools, such as `review_code`, `generate_unit_tests` and `consensus`:
 
@@ -611,6 +665,18 @@ We started it from the IntelliNode repo rather than through npx, with no keys, a
 
 ## FAQ
 
+### What are good AI agent use cases for a business?
+
+Start with work that is repetitive, heavy on text and easy for a person to check. This guide builds three: customer support automation that sorts tickets and escalates urgent ones, a weekly release brief written from commit messages, and one blog post turned into posts for four channels.
+
+### How do you avoid AI vendor lock-in with AI agents?
+
+Keep the model choice out of the tool's structure. In an Intelli flow every step has its own agent, and each agent names its provider and model, so one workflow can sort tickets on a local model and write replies with Claude or GPT. Moving a step to another vendor is a small change. [Agentic Workflows in Python](/articles/agentic-workflow-python) mixes three providers in one flow.
+
+### How much does it cost to run AI agents like these?
+
+There are two bills. Building a tool uses the coding agent subscription your developers already have. Running it depends on the model behind each step: steps on a local model cost nothing per call, and cloud steps are billed by the vendor per token. Start local, then move only the steps customers read.
+
 ### Does Claude Code read AGENTS.md?
 
 Yes, from v2.1.277, and only when there's no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` in your working directory or above it. Otherwise put `@AGENTS.md` at the top of CLAUDE.md, or set Project instructions to `claude-md-and-agents-md` in `/config`. Run `/memory` to check.
@@ -619,20 +685,16 @@ Yes, from v2.1.277, and only when there's no `CLAUDE.md`, `.claude/CLAUDE.md` or
 
 No. If your team uses both tools, keep the shared rules in AGENTS.md so both read the same lines. Add a CLAUDE.md only for Claude-specific notes, starting with `@AGENTS.md`.
 
-### Where do skills go in Claude Code and Codex?
-
-Claude Code reads project skills from `.claude/skills/<name>/SKILL.md` and Codex from `.agents/skills/<name>/SKILL.md`. Both follow symlinked folders, so keep one copy. Codex requires `name` and `description`; Claude Code defaults the name to the folder.
-
 ### Does Codex read llms.txt?
 
 Only when something points it there; nothing in the Codex docs says it looks for one on its own. Add the line to AGENTS.md, and because web search is cached by default, run `codex --search` or keep a local copy.
 
-### Can the generated apps run without an API key?
+### Can these AI tools run without an API key?
 
-Yes. Every app here uses Intelli's `vllm` provider pointed at Ollama on `localhost:11434`, which needs no key. For a self-hosted vLLM server, see the [vLLM integration page](/docs/python/offline-chatbot/vllm).
+Yes. Every tool here uses Intelli's `vllm` provider pointed at Ollama on `localhost:11434`, which needs no key. For a self-hosted vLLM server, see the [vLLM integration page](/docs/python/offline-chatbot/vllm).
 
 ## Next step
 
-Copy the AGENTS.md section into your repo, add the llms.txt line, and give your agent the triage prompt from App 1. Compare what it writes with `triage.py`, then run it on your own tickets with a bigger local model.
+Pick the request your team asks for most. Have a developer copy the AGENTS.md section into the repo, add the llms.txt line, and give the coding agent the request from that use case. Run the result on your own tickets, commits or posts, then decide which steps deserve a stronger model.
 
-When you want the agent to plan whole flows, start from the [Vibe Agents docs](/docs/python/vibe-agents). [How to Build an AI Agent in Python](/articles/how-to-build-ai-agent-python) writes an agent loop by hand, and [Agentic Workflows in Python](/articles/agentic-workflow-python) covers the patterns behind these apps.
+When you want the agent to plan whole flows, start from the [Vibe Agents docs](/docs/python/vibe-agents). [How to Build an AI Agent in Python](/articles/how-to-build-ai-agent-python) writes an agent loop by hand, and [Agentic Workflows in Python](/articles/agentic-workflow-python) covers the patterns behind these tools.
