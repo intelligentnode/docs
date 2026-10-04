@@ -1,11 +1,13 @@
 ---
 title: "Add Intelli as a Skill to Claude Code and Codex"
-sidebar_label: "Claude Code & Codex skill"
+sidebar_label: "Coding agent skill"
 description: "Add the Intelli skill to Claude Code or Codex so your coding agent writes, runs and draws AI agent flows in Python from a plain request."
 keywords: ["claude code skill","codex skill","intelli skill","agents.md intelli","claude code plugin python","ai agent flows claude code","codex agents.md python"]
 ---
 
-# Claude Code & Codex skill
+# Coding agent skill
+
+<p className="doc-subtitle">Claude Code & Codex skill</p>
 
 The Intelli skill teaches a coding agent to build with Intelli. You ask for a tool in plain words. The agent writes it as a flow, runs it, saves a picture of the flow and explains the result.
 

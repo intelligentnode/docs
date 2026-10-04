@@ -134,3 +134,12 @@
 .terminal--chat .token-line::before {
   content: '> ';
 }
+
+/* subtitle line under a docs page heading */
+.doc-subtitle {
+  margin-top: -0.75rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+}
