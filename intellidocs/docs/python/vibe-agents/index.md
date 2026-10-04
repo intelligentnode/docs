@@ -18,6 +18,10 @@ Your intent is compiled into **execution graph**, each node represents an agent 
 VibeAgent is beta supported starting from version **1.4.0** as we work toward AGI where agents generate agents.
 :::
 
+:::tip
+Want your coding agent to write the plan for you? See [Give IntelliNode to Claude Code or Codex to Build AI Agents](/articles/build-ai-agents-claude-code-codex).
+:::
+
 ### How it works
 
 1.  **Planner**: A high-level LLM (OpenAI, Gemini, or Anthropic) analyzes your description.

@@ -47,5 +47,14 @@ openai_bot = Chatbot(YOUR_MISTRAL_API_KEY, provider)
 response = openai_bot.chat(input)
 ```
 
+## Use with Claude Code and Codex
+
+Give your coding agent the Intelli rules, so it writes, runs and explains flows for you.
+
+- **Claude Code**: run `/plugin marketplace add intelligentnode/Intelli`, then `/plugin install intelli-flows@intellinode`.
+- **Codex or any project**: run `curl -fsSL https://www.intellinode.ai/agent-kit/install.sh | sh` in the project folder.
+
+Then ask in plain words. [Give IntelliNode to Claude Code or Codex to Build AI Agents](/articles/build-ai-agents-claude-code-codex) walks through three examples and shows the flow pictures the agent hands back.
+
 ## License
 This project is licensed under Apache 2.0.

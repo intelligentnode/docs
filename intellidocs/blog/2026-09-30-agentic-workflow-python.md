@@ -449,3 +449,5 @@ pip install "intelli[visual]"   # flow graph images
 ```
 
 Then follow the [flows get started guide](/docs/python/flows/get-started) to build your first `Flow` with your own tasks.
+
+If you'd rather have a coding agent write these flows, [Give IntelliNode to Claude Code or Codex to Build AI Agents](/articles/build-ai-agents-claude-code-codex) shows how to hand it the rules and review the result as a picture.

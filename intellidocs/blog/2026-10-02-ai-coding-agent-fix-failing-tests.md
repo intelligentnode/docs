@@ -556,3 +556,5 @@ LLM=ollama node fix.js     # or LLM=anthropic with ANTHROPIC_API_KEY set
 ```
 
 When both behave, point the guarded `fix.js` at one real red build on a branch, and read the diff yourself.
+
+On the Python side, a coding agent can build whole flows and draw them for your team to review. [Give IntelliNode to Claude Code or Codex to Build AI Agents](/articles/build-ai-agents-claude-code-codex) shows how.

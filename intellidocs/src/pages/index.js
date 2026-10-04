@@ -32,6 +32,10 @@ function Header() {
           >
             As mentioned in Towards Data Science
           </Link>
+          <br />
+          <Link to="/articles/build-ai-agents-claude-code-codex" className={styles.articleLink} style={{ fontSize: '1.1rem' }}>
+            New: let Claude Code or Codex build AI agents with IntelliNode
+          </Link>
         </p>
         <div style={{ marginTop: '2rem', width: '100%', maxWidth: '100%' }}>
           <KitSubscribe />

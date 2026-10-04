@@ -394,3 +394,5 @@ pip install intelli
 ```
 
 Then swap the fake `ORDERS` dict for your real order API, keep `max_steps` and the approval gate, and run it against a local model first. The [tool calling guide](/docs/python/chatbot/tool-calling) covers `tool_choice` and each provider's tool format, and the [installation page](/docs/python/get-started/installation) lists the optional extras, such as `pip install "intelli[mcp]"` for MCP support.
+
+To let Claude Code or Codex build tools like this for you, see [Give IntelliNode to Claude Code or Codex to Build AI Agents](/articles/build-ai-agents-claude-code-codex).

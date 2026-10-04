@@ -9,6 +9,8 @@ keywords: ["python intelli flows","intelli flow get started","python ai workflow
 
 The flow provides a structured approach to orchestrating complex tasks that involve multiple operations such as text generation, image creation, vision analysis, and speech processing. By leveraging the flow concept, you can execute a sequence of tasks efficiently, passing data between them as needed.
 
+To have Claude Code or Codex write and run flows for you, and to review them as a picture, read [Give IntelliNode to Claude Code or Codex to Build AI Agents](/articles/build-ai-agents-claude-code-codex).
+
 ## Latest Updates
 
 The framework has been significantly enhanced with:
