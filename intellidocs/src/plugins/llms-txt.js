@@ -95,6 +95,13 @@ export default function llmsTxtPlugin(context) {
         ...sidebarSections(siteDir, siteUrl, sidebars.pythonSidebar, 'Intelli for Python'),
         ...sidebarSections(siteDir, siteUrl, sidebars.npmSidebar, 'IntelliNode for Node.js'),
         {heading: 'Articles', entries: articleEntries(siteDir, siteUrl)},
+        {
+          heading: 'Agent kit',
+          entries: [
+            {title: 'AGENTS.md section for Intelli', url: `${siteUrl}/agent-kit/AGENTS.md`, description: 'Rules that teach a coding agent to build Intelli flows and Vibe Agents. Add it to the AGENTS.md of a project.'},
+            {title: 'intelli-flows skill', url: `${siteUrl}/agent-kit/SKILL.md`, description: 'A SKILL.md for Claude Code and Codex: write the flow, run it, draw its picture and explain it in plain language.'},
+          ],
+        },
       ].filter((section) => section.entries.length);
       const body = sections.map((s) => `## ${s.heading}\n\n${s.entries.map(line).join('\n')}`).join('\n\n');
       fs.writeFileSync(path.join(outDir, 'llms.txt'), `${INTRO}\n${body}\n`);

@@ -1,0 +1,30 @@
+{
+  "version": "1",
+  "tasks": [
+    {"name": "thread", "post_process": "flag_new_numbers",
+     "desc": "Write a thread of 4 short tweets about the blog post. Number them 1. to 4., one tweet per line. Use only facts from the post.",
+     "agent": {"agent_type": "text", "provider": "vllm", "mission": "You turn blog posts into tweet threads.",
+               "model_params": {"model": "qwen2.5:0.5b", "temperature": 0.3, "max_tokens": 300},
+               "options": {"baseUrl": "${ENV:OLLAMA_BASE_URL}"}}},
+    {"name": "linkedin", "post_process": "flag_new_numbers",
+     "desc": "Write a LinkedIn post of 4 to 6 sentences from the blog post for engineering managers. Use only facts from the post.",
+     "agent": {"agent_type": "text", "provider": "vllm", "mission": "You write clear LinkedIn posts.",
+               "model_params": {"model": "qwen2.5:0.5b", "temperature": 0.3, "max_tokens": 300},
+               "options": {"baseUrl": "${ENV:OLLAMA_BASE_URL}"}}},
+    {"name": "newsletter", "post_process": "flag_new_numbers",
+     "desc": "Write a 3 sentence newsletter blurb that makes readers want to open the blog post. Use only facts from the post.",
+     "agent": {"agent_type": "text", "provider": "vllm", "mission": "You write newsletter blurbs.",
+               "model_params": {"model": "qwen2.5:0.5b", "temperature": 0.3, "max_tokens": 200},
+               "options": {"baseUrl": "${ENV:OLLAMA_BASE_URL}"}}},
+    {"name": "meta", "post_process": "check_meta",
+     "desc": "Write one SEO meta description for the blog post, under 155 characters. Answer with the description only.",
+     "agent": {"agent_type": "text", "provider": "vllm", "mission": "You write SEO meta descriptions.",
+               "model_params": {"model": "qwen2.5:0.5b", "temperature": 0.2, "max_tokens": 80},
+               "options": {"baseUrl": "${ENV:OLLAMA_BASE_URL}"}}}
+  ],
+  "map_paths": {},
+  "dynamic_connectors": [],
+  "output_memory_map": {},
+  "max_workers": 4,
+  "log": false
+}
