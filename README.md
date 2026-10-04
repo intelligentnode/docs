@@ -34,6 +34,8 @@ Other options:
 
 How it works: the key file `intellidocs/static/bd34eaec1ac75ea7e9dec3485c744d33.txt` is served at the site root and proves the submissions come from the site owner. Keep that file in place, do not rename it, and do not create a second key. The script lives in `intellidocs/scripts/indexnow.mjs` and refuses to send anything until the key file is live.
 
+The site also publishes https://www.intellinode.ai/llms.txt, an index of every docs page and article for coding agents such as Claude Code, Codex and Cursor. It is generated on every build by `intellidocs/src/plugins/llms-txt.js` from the sidebars and the articles folder, so there is nothing to update by hand.
+
 Google does not use IndexNow. For Google, the sitemap `https://www.intellinode.ai/sitemap.xml` is submitted in Google Search Console.
 
 ## Content

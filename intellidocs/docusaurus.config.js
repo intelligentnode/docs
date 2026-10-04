@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import llmsTxtPlugin from './src/plugins/llms-txt.js';
 
 // The site is served from the root domain; docs.intellinode.ai and intellinode.ai redirect here.
 const siteUrl = 'https://www.intellinode.ai';
@@ -94,6 +95,9 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  // Writes /llms.txt so coding agents can find every docs page and article.
+  plugins: [llmsTxtPlugin],
 
   presets: [
     [

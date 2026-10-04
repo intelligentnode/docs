@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 240" width="720" height="240" role="img" aria-labelledby="t d">
+<title id="t">The coding agent plans, VibeAgent builds, a local model runs</title>
+<desc id="d">A plain English intent goes to the coding agent, which writes a FlowSpec once. VibeAgent checks it, builds the flow and saves it. A local model then runs the tasks with no planning call.</desc>
+<defs>
+  <marker id="head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
+  </marker>
+  <marker id="head-start" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
+  </marker>
+</defs>
+<rect width="720" height="240" fill="#FFFFFF"/>
+<rect x="15.0" y="88.0" width="130" height="64" rx="32.0" fill="#8B6FE0" fill-opacity="0.09" stroke="#8B6FE0" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="80" y="117" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Intent</text>
+<text x="80" y="140" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">plain English</text>
+<rect x="190.0" y="88.0" width="160" height="64" rx="16" fill="#2F80ED" fill-opacity="0.09" stroke="#2F80ED" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="270" y="117" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Coding agent</text>
+<text x="270" y="140" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">writes FlowSpec</text>
+<rect x="390.0" y="88.0" width="150" height="64" rx="16" fill="#C45AD1" fill-opacity="0.09" stroke="#C45AD1" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="465" y="117" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">VibeAgent</text>
+<text x="465" y="140" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">builds and saves</text>
+<rect x="580.0" y="88.0" width="130" height="64" rx="32.0" fill="#119C88" fill-opacity="0.09" stroke="#119C88" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="645" y="117" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Local model</text>
+<text x="645" y="140" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#5B6680" text-anchor="middle">runs the tasks</text>
+<path d="M 147 120 L 188 120" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="167" y="108" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">plans</text>
+<path d="M 352 120 L 388 120" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="370" y="108" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">spec</text>
+<path d="M 542 120 L 578 120" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="560" y="108" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">runs</text>
+</svg>
