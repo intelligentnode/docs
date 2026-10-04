@@ -14,7 +14,7 @@ You run the support queue or the Friday customer update, and you know what an AI
 
 The trouble starts when the work comes back. If you build AI agents with Claude Code or Codex, you get a few hundred lines you can't read, and you're asked to trust them.
 
-IntelliNode changes what comes back. The agent builds the tool as a flow, a small graph of steps. It runs the flow, then hands you a picture of the graph and a report in plain words. This guide starts with one example on an OpenAI or Claude key, then moves the same tool to an offline model and shows what our tests found.
+IntelliNode changes what comes back. The agent builds the tool as a flow, a small graph of steps. It draws a picture of the graph before anything runs, then runs it and reports back in plain words. This guide starts with one example on an OpenAI or Claude key, then moves the same tool to an offline model and shows what our tests found.
 
 ![Clusters of dots joined by thin curved lines, like a coding agent linking project rules, docs and agent apps](/img/articles/build-ai-agents-claude-code-codex.jpg)
 
@@ -24,7 +24,7 @@ IntelliNode changes what comes back. The agent builds the tool as a flow, a smal
 
 Three things, each with its own section below.
 
-1. **The agent knows the library.** Two small files teach it to build with Intelli, the Python library in IntelliNode.
+1. **The agent knows the library.** One skill teaches it to build with Intelli, the Python library in IntelliNode.
 2. **It builds a graph instead of a script.** Small steps, each on the model you choose.
 3. **You get a picture of what it built.** One look tells you what the tool does and where your data goes.
 
@@ -47,11 +47,10 @@ One skill works in both Claude Code and Codex. Every example below needs it.
 
 </div>
 
-**In Codex or any other project.** Download both files. Your coding agent puts them in place in the next section.
+**In Codex or any other project.** Download the skill. Your coding agent puts it in place in the next section.
 
 <div className="kit-downloads">
-<a className="button button--primary button--sm" href="https://www.intellinode.ai/agent-kit/SKILL.md" download="SKILL.md">Download SKILL.md</a>
-<a className="button button--secondary button--sm" href="https://www.intellinode.ai/agent-kit/AGENTS.md" download="AGENTS.md">Download AGENTS.md</a>
+<a className="button button--primary button--sm" href="https://www.intellinode.ai/agent-kit/intelli-flows.zip" download="intelli-flows.zip">Download the skill (.zip)</a>
 </div>
 
 **For developers.** Install both from the project folder:
@@ -65,27 +64,26 @@ pip install -U "intelli[visual]"
 
 </div>
 
-Use Intelli 2.1.0 or above.
+Use Intelli 2.1.1 or above.
 
 :::
 
 ## Value 1: Connect IntelliNode to Claude Code or Codex
 
-A coding agent writes code from what it reads first, which is the instruction file in your project. Claude Code and Codex both load a file called AGENTS.md at the start of a session. The skill is a longer how-to that the agent opens when a task calls for it.
+A coding agent writes code from what it reads first. The skill is a small folder the agent opens when a task calls for it: `SKILL.md` says when to use it, `AGENTS.md` next to it holds the rules, and a reference file lists the step types and providers.
 
-You don't edit either file. Paste this into your coding agent:
+You don't edit any of it. Paste this into your coding agent:
 
 ```text
-Set this project up to build with Intelli. Use the SKILL.md and AGENTS.md I downloaded, or get them from
-https://www.intellinode.ai/agent-kit/SKILL.md and https://www.intellinode.ai/agent-kit/AGENTS.md.
-1. Add the content of AGENTS.md to the AGENTS.md in this repo.
-2. Save SKILL.md as .agents/skills/intelli-flows/SKILL.md, and link that folder to
-   .claude/skills/intelli-flows so Claude Code finds it too.
-3. Run pip install -U "intelli[visual]" and tell me the installed version. It should be 2.1.0 or above.
+Set this project up to build with Intelli. Use the intelli-flows.zip I downloaded, or get it from
+https://www.intellinode.ai/agent-kit/intelli-flows.zip.
+1. Unzip it into .agents/skills/ so the skill is at .agents/skills/intelli-flows/SKILL.md, and link
+   that folder to .claude/skills/intelli-flows so Claude Code finds it too.
+2. Run pip install -U "intelli[visual]" and tell me the installed version. It should be 2.1.1 or above.
 Tell me when it is done and what you added.
 ```
 
-It may ask before it downloads or installs anything. Say yes. If you installed the Claude Code plugin, the skill is already in place, so ask only for step 3.
+It may ask before it downloads or installs anything. Say yes. If you installed the Claude Code plugin, the skill is already in place, so ask only for step 2.
 
 Then give it one key. The easiest start is a hosted model from OpenAI or Claude, because there's nothing to run on your own machine. Ask whoever manages your accounts for an API key, and set it in the terminal before you start the coding agent:
 
@@ -99,20 +97,20 @@ export OPENAI_API_KEY="your-key"
 
 For Claude the name is `ANTHROPIC_API_KEY`. Don't paste a key into the chat. Offline models need no key at all, and we get to them after the first example.
 
-With that done, every request you make goes through the same routine. The instruction file opens with it:
+With that done, every request you make goes through the same routine. The skill's rules open with it:
 
 ```markdown
 When the user asks for an AI tool, follow this sequence. The user may not read code.
 1. Write the tool as an Intelli flow of small steps.
-2. Run it. If `flow.errors` is not empty, fix the cause and run again.
-3. Read the output. An empty `flow.errors` only means nothing crashed. Check that `sorted(out)` lists exactly the steps you expect and that the text is right for the input: a small model may return the input unchanged or give every item the same label. Fix and run again.
-4. Save the flow picture: `flow.generate_graph_img(name="<tool>_graph", save_path=".", show_legend=False)`.
+2. Save the flow picture before the first run: `flow.generate_graph_img(name="<tool>_graph", save_path=".")`. Drawing calls no model and needs no key.
+3. Run it. If `flow.errors` is not empty, fix the cause and run again.
+4. Read the output. An empty `flow.errors` only means nothing crashed. Check that `sorted(out)` lists exactly the steps you expect and that the text is right for the input: a small model may return the input unchanged or give every item the same label. Open saved images and check audio sizes too. Fix and run again.
 5. Report in plain language: what each step does, which model each step uses (say "a local model on your computer" for vllm), what you checked and what is still weak, and where the picture and the output files are.
 ```
 
-Step 3 is there because of our tests. More on that below.
+Step 2 means you see the plan before any model is called. Step 4 is there because of our tests, more on that below.
 
-Short files like this are enough. In our tests, agents that had only these two files built all three tools in this guide.
+Short rules like these are enough. In our tests, agents that had only the skill's files built all three tools in this guide.
 
 ## Value 2: The Intelli graph gives the coding agent structure
 
@@ -128,9 +126,15 @@ flow = Flow(tasks=tasks, map_paths={"features": ["brief"], "fixes": ["brief"], "
 
 You don't have to read it. Intelli draws it.
 
+Steps aren't limited to text. One flow can have Claude write a product pitch, OpenAI illustrate it and read it aloud, and Gemini check that the picture matches. The picture colors each step by type:
+
+<img src="/img/articles/flows/mixed_types_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: a pitch step on Claude feeds an illustration step on OpenAI and a voice over step on OpenAI, and the illustration feeds an image check step on Gemini, each colored by step type" />
+
+*Four step types from three providers in one flow, drawn before any model was called.*
+
 ## Value 3: Review the flow picture, not the code
 
-Every flow can save a picture of itself, and the instruction file makes the agent do that each time. It's what turns generated code from a black box into a white box. The first example shows how to read one.
+Every flow can save a picture of itself, and the skill makes the agent save it before the first run. Drawing calls no model and needs no key, so you can check the plan before anything is spent. When you didn't spell out the steps, the agent also shows a short table of them and waits for your go-ahead. That's what turns generated code from a black box into a white box. The first example shows how to read a picture.
 
 ### First example: support triage with one OpenAI or Claude key
 
@@ -296,21 +300,20 @@ It also settles most of the cost. Building a tool uses the coding agent you alre
 
 ## What the tests changed
 
-"No errors" is not the same as "right". In all three tests the first run reported no errors and produced something wrong. The agents noticed because they read their own output, so that is now a written step in the instruction file.
+"No errors" is not the same as "right". In all three tests the first run reported no errors and produced something wrong. The agents noticed because they read their own output, so that is now a written step in the skill's rules.
 
-Two of the failures were the library's doing, and Intelli 2.1.0 fixes both. A routed step now runs only when its route is chosen, and the default prompt no longer carries the stray placeholder that made a small model copy its input.
+Two of the failures were the library's doing, and Intelli 2.1.0 fixed both. A routed step now runs only when its route is chosen, and the default prompt no longer carries the stray placeholder that made a small model copy its input.
 
 For you, the lesson is short. Review the picture for structure and the agent's report for weak spots. Then have a person read real output before a customer sees any of it.
 
 ## For developers
 
-The kit is an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md), a [skill](https://www.intellinode.ai/agent-kit/SKILL.md) and an [install script](https://www.intellinode.ai/agent-kit/install.sh) that puts both in place. The Claude Code plugin in the [Intelli repository](https://github.com/intelligentnode/Intelli) bundles the same skill and rules, and the [skill page in the docs](/docs/python/claude-code-codex-skill) has the install steps on one page. They point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
+The skill is one folder in the Intelli repository, [plugins/intelli-flows/skills/intelli-flows](https://github.com/intelligentnode/Intelli/tree/main/plugins/intelli-flows/skills/intelli-flows): [SKILL.md](https://github.com/intelligentnode/Intelli/blob/main/plugins/intelli-flows/skills/intelli-flows/SKILL.md), its rules in [AGENTS.md](https://github.com/intelligentnode/Intelli/blob/main/plugins/intelli-flows/skills/intelli-flows/AGENTS.md) and a [reference of step types and providers](https://github.com/intelligentnode/Intelli/blob/main/plugins/intelli-flows/skills/intelli-flows/references/agents.md). The Claude Code plugin ships that folder. The [install script](https://www.intellinode.ai/agent-kit/install.sh) downloads it from the same path into `.agents/skills/intelli-flows` and links it for Claude Code, and the zip in the box holds the same three files. The [skill page in the docs](/docs/python/claude-code-codex-skill) has the install steps on one page. When the skill needs an API it doesn't cover, it reads the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
 
-Codex reads AGENTS.md by default; its [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) covers nested files. Claude Code reads it since v2.1.277 when the project has no CLAUDE.md. If it has one, put `@AGENTS.md` at the top, as the [memory docs](https://code.claude.com/docs/en/memory) describe. We checked these paths against both tools' docs, not in live sessions.
+Codex finds project skills in `.agents/skills` and Claude Code in `.claude/skills`, which is why the script links one to the other. We checked these paths against both tools' docs, not in live sessions.
 
 | | Claude Code | Codex |
 | --- | --- | --- |
-| Instructions file | `CLAUDE.md`, or `AGENTS.md` when no CLAUDE.md exists | `AGENTS.md` |
 | Project skills folder | `.claude/skills/<name>/SKILL.md` | `.agents/skills/<name>/SKILL.md` |
 | Invoke the skill | `/intelli-flows`, or `/intelli-flows:intelli-flows` from the plugin | `$intelli-flows` |
 
@@ -332,7 +335,7 @@ Keep the model choice on each step. In an Intelli flow every step names its own 
 
 ### Does Claude Code read AGENTS.md?
 
-Yes, from v2.1.277, when there's no `CLAUDE.md` in the project. Otherwise put `@AGENTS.md` at the top of CLAUDE.md and run `/memory` to check that it loaded.
+Yes, from v2.1.277, when there's no `CLAUDE.md` in the project. Otherwise put `@AGENTS.md` at the top of CLAUDE.md and run `/memory` to check that it loaded. The Intelli skill doesn't depend on it: its rules sit in the skill folder and load with the skill.
 
 ### Can these AI tools run without an API key?
 

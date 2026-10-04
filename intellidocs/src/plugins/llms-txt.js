@@ -98,8 +98,9 @@ export default function llmsTxtPlugin(context) {
         {
           heading: 'Agent kit',
           entries: [
-            {title: 'AGENTS.md section for Intelli', url: `${siteUrl}/agent-kit/AGENTS.md`, description: 'Rules that teach a coding agent to build Intelli flows and Vibe Agents. Add it to the AGENTS.md of a project.'},
-            {title: 'intelli-flows skill', url: `${siteUrl}/agent-kit/SKILL.md`, description: 'A SKILL.md for Claude Code and Codex: write the flow, run it, draw its picture and explain it in plain language.'},
+            {title: 'intelli-flows skill', url: `${siteUrl}/agent-kit/SKILL.md`, description: 'The SKILL.md for Claude Code and Codex: plan the flow, draw it before running, run it and explain it in plain language.'},
+            {title: 'intelli-flows rules', url: `${siteUrl}/agent-kit/AGENTS.md`, description: 'The AGENTS.md inside the skill folder: the routine for every tool, the Intelli flow APIs and the pitfalls.'},
+            {title: 'Step types and providers', url: `${siteUrl}/agent-kit/references/agents.md`, description: 'Every Intelli step type (text, image, vision, speech, recognition, embed, search, MCP) with its providers and model settings.'},
           ],
         },
       ].filter((section) => section.entries.length);

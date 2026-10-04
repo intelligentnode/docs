@@ -9,7 +9,7 @@ keywords: ["claude code skill","codex skill","intelli skill","agents.md intelli"
 
 <p className="doc-subtitle">Claude Code & Codex skill</p>
 
-The Intelli skill teaches a coding agent to build with Intelli. You ask for a tool in plain words. The agent writes it as a flow, runs it, saves a picture of the flow and explains the result.
+The Intelli skill teaches a coding agent to build with Intelli. You ask for a tool in plain words. The agent plans it as a flow, saves a picture of the flow before anything runs, then runs it and explains the result.
 
 One skill file works in both Claude Code and Codex.
 
@@ -28,7 +28,18 @@ Add the plugin from inside a Claude Code session:
 
 </div>
 
-The plugin bundles the skill and its rules. After the install, the skill is listed as `/intelli-flows:intelli-flows`.
+Or from your terminal:
+
+<div className="terminal">
+
+```bash
+claude plugin marketplace add intelligentnode/Intelli
+claude plugin install intelli-flows@intellinode
+```
+
+</div>
+
+The plugin, named Intelli Visual Agent Flows, ships the skill folder described below. After the install, the skill is listed as `/intelli-flows:intelli-flows`.
 
 ### Codex, or any project
 
@@ -42,17 +53,23 @@ curl -fsSL https://www.intellinode.ai/agent-kit/install.sh | sh
 
 </div>
 
-It does three things, and it is safe to run again:
+It downloads the skill from the Intelli repository into `.agents/skills/intelli-flows`, where Codex looks for it, and links that folder to `.claude/skills/intelli-flows`, where Claude Code looks for it. It is safe to run again.
 
-- adds an Intelli section to `AGENTS.md`, keeping what is already there
-- saves the skill as `.agents/skills/intelli-flows/SKILL.md`, where Codex looks for it
-- links that folder to `.claude/skills/intelli-flows`, where Claude Code looks for it
+Without a terminal, [download the skill as a zip](https://www.intellinode.ai/agent-kit/intelli-flows.zip) and unzip it into `.agents/skills/`.
 
-To do it by hand, download [SKILL.md](https://www.intellinode.ai/agent-kit/SKILL.md) and the [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md) and put them in those places.
+### What is in the skill
+
+The skill is one folder, the same one the Claude Code plugin ships: [plugins/intelli-flows/skills/intelli-flows](https://github.com/intelligentnode/Intelli/tree/main/plugins/intelli-flows/skills/intelli-flows).
+
+| File | What it holds |
+| --- | --- |
+| [SKILL.md](https://github.com/intelligentnode/Intelli/blob/main/plugins/intelli-flows/skills/intelli-flows/SKILL.md) | When to use the skill, and how to plan, mix providers and step types, and build Vibe Agents |
+| [AGENTS.md](https://github.com/intelligentnode/Intelli/blob/main/plugins/intelli-flows/skills/intelli-flows/AGENTS.md) | The rules: the routine for every tool, the Intelli APIs and the pitfalls |
+| [references/agents.md](https://github.com/intelligentnode/Intelli/blob/main/plugins/intelli-flows/skills/intelli-flows/references/agents.md) | Every step type and provider, and what passes between them |
 
 ## Install the library
 
-The skill writes code for Intelli 2.1.0 or above. The `visual` extra adds the drawing library for flow pictures.
+The skill writes code for Intelli 2.1.1 or above. The `visual` extra adds the drawing library for flow pictures.
 
 <div className="terminal">
 
@@ -74,7 +91,7 @@ export OPENAI_API_KEY="your-key"
 
 </div>
 
-For Claude the name is `ANTHROPIC_API_KEY`. With no key set, the agent uses a local server such as Ollama or vLLM, which needs none.
+For Claude the name is `ANTHROPIC_API_KEY`, and a flow that mixes providers needs each one's key, such as `GEMINI_API_KEY`. With no key set, the agent uses a local server such as Ollama or vLLM, which needs none.
 
 ## Ask for a tool
 
@@ -89,12 +106,12 @@ a drafted reply. Run it on six sample tickets, then show me the flow picture and
 The skill makes the agent follow the same routine every time:
 
 1. Write the tool as a flow of small steps.
-2. Run it, and fix any step that fails.
-3. Read the output and check it against the input.
-4. Save a picture of the flow.
+2. Save a picture of the flow before the first run. Drawing calls no model and needs no key.
+3. Run it, and fix any step that fails.
+4. Read the output and check it against the input.
 5. Report in plain language: what each step does, which model it uses and where the files are.
 
-The picture shows each step, the model behind it and the routes between steps, so you can review the tool without reading its code.
+The picture shows each step, its type, the model behind it and the routes between steps, so you can review the plan before anything is spent. A flow can mix step types too, such as text, image, vision and speech.
 
 ## Check that it loaded
 
@@ -102,14 +119,13 @@ The picture shows each step, the model behind it and the routes between steps, s
 | --- | --- | --- |
 | List skills | `/skills` | `/skills` |
 | Call the skill by name | `/intelli-flows:intelli-flows` from the plugin, `/intelli-flows` from the install script | `$intelli-flows` |
-| Check the instruction file | `/memory` | Ask "Summarize the current instructions." |
 
-Claude Code reads `AGENTS.md` on its own when the project has no `CLAUDE.md`. If the project has one, add the line `@AGENTS.md` at the top of it.
+The skill's rules sit in its own folder and load with the skill, so your project's `AGENTS.md` or `CLAUDE.md` doesn't need to change.
 
 ## Keep it up to date
 
 - **Claude Code plugin**: run `/plugin marketplace update intellinode`, then choose **Update now** for the plugin in the `/plugin` panel.
-- **Install script**: run it again. It replaces the skill file and leaves your `AGENTS.md` section in place.
+- **Install script**: run it again. It downloads the latest skill files from the repository.
 
 ## Learn more
 
