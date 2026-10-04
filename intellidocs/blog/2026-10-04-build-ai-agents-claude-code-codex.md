@@ -32,7 +32,28 @@ Three things, each with its own section below.
 
 *You ask in plain words, and a picture of what the agent built comes back.*
 
-## Connect it once
+:::tip[Download the skill first]
+
+This guide uses one skill file that works in both Claude Code and Codex, plus a short instruction file. Get them now, because every use case below depends on them:
+
+- [SKILL.md](https://www.intellinode.ai/agent-kit/SKILL.md), saved as `.agents/skills/intelli-flows/SKILL.md`
+- [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md), added to the `AGENTS.md` in your project
+
+A developer can install both from the project folder:
+
+```bash
+curl -s https://www.intellinode.ai/agent-kit/AGENTS.md >> AGENTS.md
+mkdir -p .agents/skills/intelli-flows .claude/skills
+curl -s https://www.intellinode.ai/agent-kit/SKILL.md -o .agents/skills/intelli-flows/SKILL.md
+ln -s ../../.agents/skills/intelli-flows .claude/skills/intelli-flows
+pip install -U "intelli[visual]"
+```
+
+Use Intelli 2.1.0 or above, which fixes two issues these tests found. `pip show intelli` prints your version. No developer nearby? The next section has a request that makes your coding agent do the same install.
+
+:::
+
+## Value 1: Connect IntelliNode to Claude Code or Codex
 
 A coding agent writes code from what it reads first, which is the instruction file in your project. Claude Code and Codex both load a file called AGENTS.md at the start of a session. IntelliNode publishes a ready-made section for it, plus a skill, a longer how-to the agent opens when a task calls for it.
 
@@ -43,7 +64,7 @@ Set this project up to build with Intelli:
 1. Download https://www.intellinode.ai/agent-kit/AGENTS.md and add its content to AGENTS.md in this repo.
 2. Download https://www.intellinode.ai/agent-kit/SKILL.md and save it as .agents/skills/intelli-flows/SKILL.md.
    Link that folder to .claude/skills/intelli-flows so Claude Code finds it too.
-3. Run pip install "intelli[visual]".
+3. Run pip install -U "intelli[visual]" and tell me the installed version. It should be 2.1.0 or above.
 Tell me when it is done and what you added.
 ```
 
@@ -64,7 +85,7 @@ Step 3 is there because of our tests. More on that below.
 
 The rest is about forty lines of rules, most of them mistakes that fail without an error message. Short files like this work. When [LangChain tested Claude Code](https://www.langchain.com/blog/how-to-turn-claude-code-into-a-domain-specific-coding-agent) on its own library, a condensed guide beat docs access through an MCP server on its own, and on one task it cost about 2.5 times less.
 
-## The agent builds a graph, not a script
+## Value 2: The Intelli graph gives the coding agent structure
 
 Ask a coding agent for a tool with no framework and you get a one-off script, shaped differently every time. With Intelli it builds a flow: small steps with one job each, wired into a graph.
 
@@ -78,7 +99,7 @@ flow = Flow(tasks=tasks, map_paths={"features": ["brief"], "fixes": ["brief"], "
 
 You don't have to read it. Intelli draws it.
 
-## You review a picture
+## Value 3: Review the flow picture, not the code
 
 Every flow can save a picture of itself, and the instruction file makes the agent do that each time. It's what turns generated code from a black box into a white box. This one is the release brief tool:
 
@@ -171,36 +192,37 @@ without planning. Run it on a local model with a short sample blog post. Then sh
 and explain it in plain language.
 ```
 
-<img src="/img/articles/flows/repurpose_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: four steps on one row named tweet thread, linkedin post, newsletter blurb and search snippet, with no arrows" />
+The first picture was four circles in a row with no lines between them. It was accurate, because each writer got the post directly, but it told a reviewer almost nothing. So we asked for a change:
 
-*Four writers on one row with no arrows: each gets the post directly, and all four work at once.*
+```text
+Add a first step that reads the post and picks its key points. Have the four writers work from those
+points. Then redraw the flow picture.
+```
 
-A Vibe Agent builds the flow from a description instead of from code, so the plan is data. This is one of the four steps as the agent wrote it:
+<img src="/img/articles/flows/repurpose_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: a content plan step at the top with arrows to four steps named tweet thread, linkedin post, newsletter blurb and search snippet" />
+
+*A content planner reads the post first and feeds the same key points to four writers.*
+
+Now the picture shows how the work moves. A Vibe Agent builds the flow from a description instead of from code, so the plan is data. This is the wiring you see above:
 
 ```json
 {
-  "name": "tweet_thread",
-  "desc": "Rewrite the blog post below as a tweet thread of 4 tweets. Number them 1/4, 2/4, 3/4 and 4/4, one tweet per line. Each tweet is one or two short sentences, under 280 characters. Use only facts and numbers from the blog post. Output only the tweets.",
-  "post_process": "check_against_post",
-  "agent": {
-    "agent_type": "text",
-    "provider": "vllm",
-    "mission": "You are a social media editor who writes clear tweet threads from blog posts.",
-    "model_params": {
-      "model": "qwen2.5:0.5b",
-      "temperature": 0.3,
-      "max_tokens": 320
-    },
-    "options": {
-      "baseUrl": "${ENV:OLLAMA_BASE_URL}"
-    }
+  "map_paths": {
+    "content_plan": [
+      "tweet_thread",
+      "linkedin_post",
+      "newsletter_blurb",
+      "search_snippet"
+    ]
   }
 }
 ```
 
-Intelli saves that plan. On the second run the tool loaded it and went straight to work in about three seconds, with no planning step.
+Intelli saves that plan. On the second run the tool loaded it and went straight to work in about four seconds, with no planning step.
 
-Here the first run was the bad one. It reported no errors, and two of the four pieces were the blog post copied back word for word. After tracing that to the default prompt format, the agent replaced it with its own. From then on the drafts were usable but rough. Asked for four tweets, the model wrote seven. The newsletter blurb invented "80%", which the tool's own check flagged, and it got two other details wrong that the check missed.
+Two things went wrong on the way. In the first test, two of the four pieces were the blog post copied back word for word, and no error was reported. The agent traced that to the default prompt format and replaced it. Then the new planner step misstated the post's numbers, and all four writers repeated the mistake. The tool now keeps only key points that are real sentences from the post.
+
+A planner mistake spreads to every step after it, so the planner is the first step to move to a stronger model. The drafts are still rough on a tiny one: a thread claimed "90%" of tickets, a figure the post never mentions, and the tool's own check flagged it.
 
 ## Move one step to a stronger model
 
@@ -234,17 +256,7 @@ For you, the lesson is short. Review the picture for structure and the agent's r
 
 ## For developers
 
-The kit is two files: an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md) and a [skill](https://www.intellinode.ai/agent-kit/SKILL.md). Both point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). To install by hand:
-
-```bash
-curl -s https://www.intellinode.ai/agent-kit/AGENTS.md >> AGENTS.md
-mkdir -p .agents/skills/intelli-flows .claude/skills
-curl -s https://www.intellinode.ai/agent-kit/SKILL.md -o .agents/skills/intelli-flows/SKILL.md
-ln -s ../../.agents/skills/intelli-flows .claude/skills/intelli-flows
-pip install "intelli[visual]"
-```
-
-The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
+The kit is two files: an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md) and a [skill](https://www.intellinode.ai/agent-kit/SKILL.md). Both point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The install commands are in the box near the top. The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
 
 Codex reads AGENTS.md by default; its [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) covers nested files. Claude Code reads it since v2.1.277 when the project has no CLAUDE.md. If it has one, put `@AGENTS.md` at the top, as the [memory docs](https://code.claude.com/docs/en/memory) describe. We checked these paths against both tools' docs, not in live sessions.
 
@@ -254,7 +266,7 @@ Codex reads AGENTS.md by default; its [AGENTS.md guide](https://learn.chatgpt.co
 | Project skills folder | `.claude/skills/<name>/SKILL.md` | `.agents/skills/<name>/SKILL.md` |
 | Invoke the skill | `/intelli-flows` | `$intelli-flows` |
 
-The code the test agents wrote is published as is: [triage](https://www.intellinode.ai/agent-kit/examples/triage/triage.py), [release brief](https://www.intellinode.ai/agent-kit/examples/release_brief/release_brief.py) and [content reuse](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose.py) with its [plan](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose_spec.json). We ran each one again from a clean folder before publishing. The [async flow docs](/docs/python/flows/async-flow) and the [Vibe Agents docs](/docs/python/vibe-agents) cover the library itself.
+The code the test agents wrote is published, with the planner step added to the third: [triage](https://www.intellinode.ai/agent-kit/examples/triage/triage.py), [release brief](https://www.intellinode.ai/agent-kit/examples/release_brief/release_brief.py) and [content reuse](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose.py) with its [plan](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose_spec.json). We ran each one again from a clean folder before publishing. The [async flow docs](/docs/python/flows/async-flow) and the [Vibe Agents docs](/docs/python/vibe-agents) cover the library itself.
 
 ## FAQ
 

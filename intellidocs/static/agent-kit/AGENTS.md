@@ -7,7 +7,7 @@ When the user asks for an AI tool, follow this sequence. The user may not read c
 4. Save the flow picture: `flow.generate_graph_img(name="<tool>_graph", save_path=".", show_legend=False)`.
 5. Report in plain language: what each step does, which model each step uses (say "a local model on your computer" for vllm), what you checked and what is still weak, and where the picture and the output files are.
 
-Install with `pip install "intelli[visual]"` (2.0.3; the visual extra adds matplotlib for flow pictures), in the project's virtual environment if it has one. Import from `intelli.flow`:
+Install with `pip install -U "intelli[visual]"`, in the project's virtual environment if it has one. The visual extra adds matplotlib for flow pictures. Use version 2.1.0 or above (`pip show intelli`); these rules were checked on 2.0.3 and still hold. Import from `intelli.flow`:
 `from intelli.flow import Agent, Task, TextTaskInput, Flow, SequenceFlow, DynamicConnector, Memory, CustomAgent, VibeAgent`
 
 Agents and tasks

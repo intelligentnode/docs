@@ -1,7 +1,8 @@
 """Blog post repurposer, built with Intelli as a Vibe Agent.
 
-Turns one blog post into four pieces written at the same time on a local model:
-a tweet thread, a LinkedIn post, a newsletter blurb and a search snippet.
+A content planner step first pulls the key points out of one blog post. Four writers
+then work from those points at the same time on a local model: a tweet thread, a
+LinkedIn post, a newsletter blurb and a search snippet.
 
 Usage:
     ./.venv/bin/python repurpose.py [path/to/post.md]
@@ -28,8 +29,8 @@ OUT_DIR = ROOT / "outputs"
 
 PROVIDER = "vllm"  # local Ollama through its OpenAI compatible API
 INTENT = (
-    "Turn any blog post into a tweet thread, a LinkedIn post, a newsletter blurb "
-    "and a search snippet, all written at the same time, on a local model."
+    "Plan the key points of a blog post first, then turn them into a tweet thread, a LinkedIn post, "
+    "a newsletter blurb and a search snippet, all written at the same time, on a local model."
 )
 OUTPUT_FILES = {
     "tweet_thread": "tweet_thread.md",
@@ -69,11 +70,39 @@ def make_processors(source):
             line = line[:157].rsplit(" ", 1)[0] + "..."
         return check_against_post(line)
 
-    return {"check_against_post": check_against_post, "snippet_160": snippet_160}
+    def clean_plan(text):
+        """Turn the planner's answer into key points that are real sentences from the post.
+
+        Each line the model returns is matched to the closest sentence in the post and replaced by it,
+        so a planner mistake cannot spread to the four writers. Unmatched lines are dropped. If too few
+        remain, the title and the sentences that carry numbers fill the list.
+        """
+        plain = re.sub(r"(?m)^#+\s*", "", source)
+        sentences = [x.strip() for part in plain.splitlines() for x in re.split(r"(?<=[.!?])\s+", part) if len(x.strip()) > 15]
+
+        def words(value):
+            return set(re.findall(r"[a-z0-9%]+", value.lower()))
+
+        points = []
+        for line in (text or "").splitlines():
+            line = re.sub(r"^[\s\-*#\d.)]+", "", line).strip()
+            if len(line) < 15:
+                continue
+            best = max(sentences, key=lambda sentence: len(words(line) & words(sentence)) / max(1, len(words(line) | words(sentence))))
+            overlap = len(words(line) & words(best)) / max(1, len(words(line) | words(best)))
+            if overlap >= 0.6 and best not in points:
+                points.append(best)
+        if len(points) < 3:
+            for sentence in sentences[:1] + [x for x in sentences if re.search(r"\d", x)]:
+                if sentence not in points:
+                    points.append(sentence)
+        return "\n".join("- " + point for point in points[:5])
+
+    return {"check_against_post": check_against_post, "snippet_160": snippet_160, "clean_plan": clean_plan}
 
 
 class ExactPrompt:
-    """Exact prompt for one step: the instruction, then the blog post.
+    """Exact prompt for one step: the instruction, then its input (the post or the key points).
 
     A Vibe Agent wraps each instruction in its own template, which leaves a stray
     placeholder line in the prompt. A small local model copies the post back when
@@ -137,6 +166,8 @@ async def main():
     if flow.errors:
         raise SystemExit("The flow reported errors, so nothing was saved.")
 
+    print("\n--- content_plan (key points the four writers received) ---\n" + out["content_plan"]["output"])
+
     OUT_DIR.mkdir(exist_ok=True)
     for name, filename in OUTPUT_FILES.items():
         text = out[name]["output"]
@@ -144,7 +175,7 @@ async def main():
         print(f"\n--- {name} -> outputs/{filename} ---\n{text}")
 
     picture = flow.generate_graph_img(name="repurpose_graph", save_path=".", show_legend=False)
-    print(f"\nRuntime of the four steps: {elapsed:.1f} seconds")
+    print(f"\nRuntime of the five steps: {elapsed:.1f} seconds")
     print("Picture:", picture)
 
 
