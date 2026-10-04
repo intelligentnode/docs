@@ -1,7 +1,7 @@
 ---
 slug: build-ai-agents-claude-code-codex
 title: "Give IntelliNode to Claude Code or Codex to Build AI Agents"
-description: "Build AI agents with Claude Code or Codex on IntelliNode: three AI agent use cases for business, flows you can review and no AI vendor lock-in."
+description: "Build AI agents with Claude Code or Codex on IntelliNode: support ticket triage, a weekly release brief and blog post reuse, with no AI vendor lock-in."
 keywords: ["build ai agents with claude code", "ai agents for business", "ai agent use cases", "ai workflow automation", "multi model ai strategy", "avoid ai vendor lock-in", "ai customer support automation", "build ai agents with codex", "agents.md example", "claude code skills"]
 tags: [{label: "Python", permalink: "/python"}, "AI Agents", "AI Automation", "Claude Code", "Codex", "Vibe Agents"]
 authors: [intellinode]
