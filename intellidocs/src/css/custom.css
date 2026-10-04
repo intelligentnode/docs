@@ -117,3 +117,15 @@
   padding-left: 1.25em;
   text-indent: -1.25em;
 }
+
+/* download buttons for the agent kit */
+.kit-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.25rem 0 1.1rem;
+}
+
+.kit-downloads .button {
+  text-decoration: none;
+}

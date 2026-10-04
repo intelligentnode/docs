@@ -14,7 +14,7 @@ You run the support queue or the Friday customer update, and you know what an AI
 
 The trouble starts when the work comes back. If you build AI agents with Claude Code or Codex, you get a few hundred lines you can't read, and you're asked to trust them.
 
-IntelliNode changes what comes back. The agent builds the tool as a flow, a small graph of steps. It runs the flow, then hands you a picture of the graph and a report in plain words. We tested that with three use cases, and this guide shows what happened, including what went wrong.
+IntelliNode changes what comes back. The agent builds the tool as a flow, a small graph of steps. It runs the flow, then hands you a picture of the graph and a report in plain words. This guide starts with one example on an OpenAI or Claude key, then moves the same tool to an offline model and shows what our tests found.
 
 ![Clusters of dots joined by thin curved lines, like a coding agent linking project rules, docs and agent apps](/img/articles/build-ai-agents-claude-code-codex.jpg)
 
@@ -34,7 +34,16 @@ Three things, each with its own section below.
 
 :::tip[Download the skill first]
 
-One skill file works in both Claude Code and Codex. Add it to your project before you start:
+One skill file works in both Claude Code and Codex, and a short instruction file goes with it. Every example below needs them.
+
+**The easy way.** Download both files. Your coding agent puts them in place in the next section.
+
+<div className="kit-downloads">
+<a className="button button--primary button--sm" href="https://www.intellinode.ai/agent-kit/SKILL.md" download="SKILL.md">Download SKILL.md</a>
+<a className="button button--secondary button--sm" href="https://www.intellinode.ai/agent-kit/AGENTS.md" download="AGENTS.md">Download AGENTS.md</a>
+</div>
+
+**For developers.** Install both from the project folder:
 
 <div className="terminal">
 
@@ -45,28 +54,41 @@ pip install -U "intelli[visual]"
 
 </div>
 
-Use Intelli 2.1.0 or above. To look before you run it, open the [skill](https://www.intellinode.ai/agent-kit/SKILL.md), the [instruction file](https://www.intellinode.ai/agent-kit/AGENTS.md) or the [install script](https://www.intellinode.ai/agent-kit/install.sh).
+Use Intelli 2.1.0 or above.
 
 :::
 
 ## Value 1: Connect IntelliNode to Claude Code or Codex
 
-A coding agent writes code from what it reads first, which is the instruction file in your project. Claude Code and Codex both load a file called AGENTS.md at the start of a session. IntelliNode publishes a ready-made section for it, plus a skill, a longer how-to the agent opens when a task calls for it.
+A coding agent writes code from what it reads first, which is the instruction file in your project. Claude Code and Codex both load a file called AGENTS.md at the start of a session. The skill is a longer how-to that the agent opens when a task calls for it.
 
-You don't write either file. Paste this into your coding agent:
+You don't edit either file. Paste this into your coding agent:
 
 ```text
-Set this project up to build with Intelli:
-1. Download https://www.intellinode.ai/agent-kit/AGENTS.md and add its content to AGENTS.md in this repo.
-2. Download https://www.intellinode.ai/agent-kit/SKILL.md and save it as .agents/skills/intelli-flows/SKILL.md.
-   Link that folder to .claude/skills/intelli-flows so Claude Code finds it too.
+Set this project up to build with Intelli. Use the SKILL.md and AGENTS.md I downloaded, or get them from
+https://www.intellinode.ai/agent-kit/SKILL.md and https://www.intellinode.ai/agent-kit/AGENTS.md.
+1. Add the content of AGENTS.md to the AGENTS.md in this repo.
+2. Save SKILL.md as .agents/skills/intelli-flows/SKILL.md, and link that folder to
+   .claude/skills/intelli-flows so Claude Code finds it too.
 3. Run pip install -U "intelli[visual]" and tell me the installed version. It should be 2.1.0 or above.
 Tell me when it is done and what you added.
 ```
 
 It may ask before it downloads or installs anything. Say yes.
 
-The instruction file opens with the routine the agent follows for every tool you ask for:
+Then give it one key. The easiest start is a hosted model from OpenAI or Claude, because there's nothing to run on your own machine. Ask whoever manages your accounts for an API key, and set it in the terminal before you start the coding agent:
+
+<div className="terminal">
+
+```bash
+export OPENAI_API_KEY="your-key"
+```
+
+</div>
+
+For Claude the name is `ANTHROPIC_API_KEY`. Don't paste a key into the chat. Offline models need no key at all, and we get to them after the first example.
+
+With that done, every request you make goes through the same routine. The instruction file opens with it:
 
 ```markdown
 When the user asks for an AI tool, follow this sequence. The user may not read code.
@@ -79,7 +101,7 @@ When the user asks for an AI tool, follow this sequence. The user may not read c
 
 Step 3 is there because of our tests. More on that below.
 
-The rest is about forty lines of rules, most of them mistakes that fail without an error message. Short files like this work. When [LangChain tested Claude Code](https://www.langchain.com/blog/how-to-turn-claude-code-into-a-domain-specific-coding-agent) on its own library, a condensed guide beat docs access through an MCP server on its own, and on one task it cost about 2.5 times less.
+Short files like this work. When [LangChain tested Claude Code](https://www.langchain.com/blog/how-to-turn-claude-code-into-a-domain-specific-coding-agent) on its own library, a condensed guide beat docs access through an MCP server on its own, and on one task it cost about 2.5 times less.
 
 ## Value 2: The Intelli graph gives the coding agent structure
 
@@ -87,7 +109,7 @@ Ask a coding agent for a tool with no framework and you get a one-off script, sh
 
 That shape does real work. Steps that don't depend on each other run at the same time, and one step's answer can decide which step runs next. Every step also names its own model, so a free local model can sort tickets while a cloud model writes the reply a customer reads. That keeps you from being tied to one vendor.
 
-In code, the wiring is short. This line from the release brief tool says which step feeds which:
+In code, the wiring is short. This line, from a release brief tool you'll meet below, says which step feeds which:
 
 ```python
 flow = Flow(tasks=tasks, map_paths={"features": ["brief"], "fixes": ["brief"], "risks": ["brief"]})
@@ -97,53 +119,31 @@ You don't have to read it. Intelli draws it.
 
 ## Value 3: Review the flow picture, not the code
 
-Every flow can save a picture of itself, and the instruction file makes the agent do that each time. It's what turns generated code from a black box into a white box. This one is the release brief tool:
+Every flow can save a picture of itself, and the instruction file makes the agent do that each time. It's what turns generated code from a black box into a white box. The first example shows how to read one.
 
-<img src="/img/articles/flows/brief_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: features, fixes and risks steps each have an arrow to a brief step below them" />
+### First example: support triage with one OpenAI or Claude key
 
-*The release brief flow as Intelli drew it: three writers at the top, one editor step below.*
-
-Each circle is a step, named by the agent. The tag under the name is the model behind it. `[text:vllm]` is a text model on a server you run yourself, and a cloud step would say `[text:openai]` or `[text:anthropic]`. A solid arrow means one step always feeds the next. Steps on one row with no arrow between them run together.
-
-So before anyone opens a file, you can check two things: the steps match what you asked for, and no step sends data somewhere you didn't approve. If the picture looks wrong, say so and ask for a new one.
-
-The picture shows structure. It can't tell you whether the output is any good, and our tests showed how much that matters.
-
-## We tested it the way you would use it
-
-For each use case we started a fresh Claude agent in an empty folder. It got the setup request above, then one request in plain words. It could read only the two kit files and the public docs. Everything ran on the published package and a tiny free model on our own machine. These were Claude agents following the kit, not Claude Code sessions, and we made no Codex run.
-
-All three built a working tool and ran it. None got it right the first time, and that turned out to be the useful part.
-
-### Use case 1: Support triage that gets urgent tickets to an engineer
-
-An outage report shouldn't wait in the same queue as a dark mode request. The request:
+An outage report shouldn't wait in the same queue as a dark mode request. With your key set, the request is:
 
 ```text
 Build a support ticket triage tool with Intelli. For each ticket, run three steps in parallel: pick a
 category (billing, bug, account, feature), rate urgency (high, medium, low) and write a one line summary.
 High urgency tickets get an escalation note for the on-call engineer; the rest get a drafted customer
-reply. Run it on a local model with six sample tickets and write a triage.md report. Then show me the
-flow picture and explain it in plain language.
+reply. Run it on OpenAI with six sample tickets and write a triage.md report. My key is in
+OPENAI_API_KEY. Then show me the flow picture and explain it in plain language.
 ```
 
-The picture that came back:
+To use Claude, name it in the request and set its key instead. The picture that comes back:
 
-<img src="/img/articles/flows/triage_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: category, urgency and summary feed a triage card step, and red dashed arrows labeled high and other lead to an escalation note or a customer reply" />
+<img src="/img/articles/flows/triage_openai_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: category, urgency and summary feed a triage card step, with red dashed arrows labeled high and other leading to an escalation note or a customer reply. Every step is tagged text openai" />
 
 *Three steps read the ticket together and feed a triage card. The red dashed arrows are routes: only one is followed for each ticket.*
 
-Part of the agent's own report, word for word:
+Each circle is a step, named by the agent. The tag under the name is the model behind it, here `[text:openai]` on every step. A solid arrow means one step always feeds the next. Steps on one row with no arrow between them run together.
 
-> Your ticket triage tool is built and ran on all six sample tickets in about 11 seconds, with no errors. Everything ran on the small model on your own machine; nothing was sent to a cloud service.
->
-> The picture is `triage_graph.png`. Read it top to bottom: three circles at the top are the parallel steps, their solid arrows meet at the triage card, and two dashed red arrows leave it. "high" goes to the escalation note and "other" goes to the customer reply.
+So before anyone opens a file, you can check two things: the steps match what you asked for, and no step sends data somewhere you didn't approve. If the picture looks wrong, say so and ask for a new one.
 
-Getting there took six runs. Version one looked fine and reported no errors, yet it wrote both an escalation note and a reply for the same ticket. The agent caught that by checking which steps had run, then added the triage card step so only one route fires. Version two rated every ticket high, so it reworded the question and tested again.
-
-On the final run the labels matched a person's on all six categories and five of six urgency ratings. Then the agent added a warning of its own: "That score is flattering. I adjusted the wording of the urgency question on these same six tickets." That is the kind of sentence you want from a tool builder.
-
-The routing you see in the picture is this part of the generated code:
+The routing in the picture is this part of the generated code:
 
 ```python
 flow = Flow(
@@ -162,7 +162,42 @@ flow = Flow(
 )
 ```
 
-### Use case 2: A weekly release brief for customers and sales
+Along with the picture you get a report file with each ticket's labels and drafted text, and a summary from the agent in plain words.
+
+One note on how we checked this version. We drew the picture from the real flow and ran the tool on its OpenAI and Claude settings with stand-ins for the paid calls. The runs we measured are in the next section, on a free offline model.
+
+## Then move to vLLM and offline models
+
+A hosted model is the quick start. A local one costs nothing per call and keeps every ticket inside your network. Intelli reaches local servers such as Ollama or vLLM through a provider it calls `vllm`, and the tool you just built moves over with one request:
+
+```text
+Move every step of the triage tool to the local model on this machine and run it again.
+Then redraw the flow picture.
+```
+
+<img src="/img/articles/flows/triage_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: the same triage flow with every step tagged text vllm" />
+
+*The same flow on a local model. Every tag now says `[text:vllm]`.*
+
+Nothing else in the picture moved. The structure you reviewed is the same, and only the place it runs has changed.
+
+### How we tested the offline path
+
+For each use case we started a fresh Claude agent in an empty folder. It got the setup request, then one request in plain words. It could read only the two kit files and the public docs. Everything ran on the published package and a tiny free model on our own machine, which is the hardest case for output quality. These were Claude agents following the kit, not Claude Code sessions, and we made no Codex run.
+
+All three built a working tool and ran it. None got it right the first time, and that turned out to be the useful part.
+
+### Support triage on a tiny local model
+
+Part of the agent's own report, word for word:
+
+> Your ticket triage tool is built and ran on all six sample tickets in about 11 seconds, with no errors. Everything ran on the small model on your own machine; nothing was sent to a cloud service.
+
+Getting there took six runs. Version one looked fine and reported no errors, yet it wrote both an escalation note and a reply for the same ticket. The agent caught that by checking which steps had run, then added the triage card step so only one route fires. Version two rated every ticket high, so it reworded the question and tested again.
+
+On the final run the labels matched a person's on all six categories and five of six urgency ratings. Then the agent added a warning of its own: "That score is flattering. I adjusted the wording of the urgency question on these same six tickets." That is the kind of sentence you want from a tool builder.
+
+### A weekly release brief for customers and sales
 
 Every Friday someone turns the developers' change notes into an update that customers can read. The request:
 
@@ -173,11 +208,15 @@ parallel, then one brief with a headline. Run it on a local model with about ten
 and save brief.md. Then show me the flow picture and explain it in plain language.
 ```
 
-You saw its picture earlier. Its first run finished with no errors and a wrong brief: fixes were listed as features, with details the model made up. So the agent moved the sorting into ordinary code, which does it perfectly, and left the model one small job, rewriting each item in plain words. It also added a check that falls back to the original wording when a sentence drifts.
+<img src="/img/articles/flows/brief_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: features, fixes and risks steps each have an arrow to a brief step below them" />
+
+*Three writers at the top, one editor step below.*
+
+Its first run finished with no errors and a wrong brief: fixes were listed as features, with details the model made up. So the agent moved the sorting into ordinary code, which does it perfectly, and left the model one small job, rewriting each item in plain words. It also added a check that falls back to the original wording when a sentence drifts.
 
 Producing the final brief took about a second. It still said "log in directly from Google Workspace" where the change note said "sign in with". A person reads it before it goes out.
 
-### Use case 3: One blog post, four channels
+### One blog post, four channels
 
 Marketing wants each post turned into a tweet thread, a LinkedIn post, a newsletter blurb and a search snippet. The request:
 
@@ -218,15 +257,15 @@ Intelli saves that plan. On the second run the tool loaded it and went straight 
 
 Two things went wrong on the way. In the first test, two of the four pieces were the blog post copied back word for word, and no error was reported. The agent traced that to the default prompt format and replaced it. Then the new planner step misstated the post's numbers, and all four writers repeated the mistake. The tool now keeps only key points that are real sentences from the post.
 
-A planner mistake spreads to every step after it, so the planner is the first step to move to a stronger model. The drafts are still rough on a tiny one: a thread claimed "90%" of tickets, a figure the post never mentions, and the tool's own check flagged it.
+A planner mistake spreads to every step after it, so the planner is the first step to move to a stronger model.
 
-## Move one step to a stronger model
+## Mix both: one step on a stronger model
 
-Those results say where a tiny model is enough and where it isn't. Sorting in code and running steps together worked. Writing for customers needs something stronger, and you can fix that one step at a time:
+You don't have to pick a side. The tests show where a tiny model is enough and where it isn't: sorting in code and running steps together worked, and writing for customers needs something stronger. Change that one step:
 
 ```text
-In the triage tool, move the customer reply step to Claude and keep every other step on the local model.
-Then redraw the flow picture.
+In the triage tool, keep every step on the local model except the customer reply. Move that step to
+Claude. Then redraw the flow picture.
 ```
 
 One step's agent changes:
@@ -238,7 +277,7 @@ Agent("text", "anthropic", "You write short, polite replies to customers.",
 
 <img src="/img/articles/flows/triage_mixed_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: the same triage flow, with the customer reply step tagged text anthropic and all other steps tagged text vllm" />
 
-*The same flow after the change. Only the customer reply step is tagged `[text:anthropic]`.*
+*Only the customer reply step is tagged `[text:anthropic]`. The rest stays local.*
 
 Now the picture answers the question a CIO asks first: where does our data go? Only that step calls an outside vendor. We drew this picture from the real flow without calling Claude, since that call is paid.
 
@@ -252,7 +291,7 @@ For you, the lesson is short. Review the picture for structure and the agent's r
 
 ## For developers
 
-The kit is two files: an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md) and a [skill](https://www.intellinode.ai/agent-kit/SKILL.md). Both point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The install script in the box near the top adds the AGENTS.md section, saves the skill and links it for Claude Code. The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
+The kit is an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md), a [skill](https://www.intellinode.ai/agent-kit/SKILL.md) and an [install script](https://www.intellinode.ai/agent-kit/install.sh) that puts both in place. They point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
 
 Codex reads AGENTS.md by default; its [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) covers nested files. Claude Code reads it since v2.1.277 when the project has no CLAUDE.md. If it has one, put `@AGENTS.md` at the top, as the [memory docs](https://code.claude.com/docs/en/memory) describe. We checked these paths against both tools' docs, not in live sessions.
 
@@ -262,7 +301,7 @@ Codex reads AGENTS.md by default; its [AGENTS.md guide](https://learn.chatgpt.co
 | Project skills folder | `.claude/skills/<name>/SKILL.md` | `.agents/skills/<name>/SKILL.md` |
 | Invoke the skill | `/intelli-flows` | `$intelli-flows` |
 
-The code the test agents wrote is published, with the planner step added to the third: [triage](https://www.intellinode.ai/agent-kit/examples/triage/triage.py), [release brief](https://www.intellinode.ai/agent-kit/examples/release_brief/release_brief.py) and [content reuse](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose.py) with its [plan](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose_spec.json). We ran each one again from a clean folder before publishing. The [async flow docs](/docs/python/flows/async-flow) and the [Vibe Agents docs](/docs/python/vibe-agents) cover the library itself.
+The code behind the examples is published: [triage](https://www.intellinode.ai/agent-kit/examples/triage/triage.py), [release brief](https://www.intellinode.ai/agent-kit/examples/release_brief/release_brief.py) and [content reuse](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose.py) with its [plan](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose_spec.json). It is what the test agents wrote, with two additions from us: the planner step, and a switch in the triage tool that picks OpenAI or Claude when a key is set and a local server when `TRIAGE_PROVIDER=vllm`. We ran each one again from a clean folder before publishing. The [async flow docs](/docs/python/flows/async-flow) and the [Vibe Agents docs](/docs/python/vibe-agents) cover the library itself.
 
 ## FAQ
 
@@ -284,10 +323,10 @@ Yes, from v2.1.277, when there's no `CLAUDE.md` in the project. Otherwise put `@
 
 ### Can these AI tools run without an API key?
 
-Yes. All three ran on Ollama, a free local model server, through Intelli's `vllm` provider. For a self-hosted server, see the [vLLM integration page](/docs/python/offline-chatbot/vllm).
+Yes. Start a local model server such as Ollama and ask for a local model. All three tools ran that way in our tests, through Intelli's `vllm` provider. For a self-hosted server, see the [vLLM integration page](/docs/python/offline-chatbot/vllm).
 
 ## Next step
 
-Pick the request your team makes most often. Paste the setup request into your coding agent, then the request from that use case. When the picture comes back, look at it with the person who owns the process.
+Download the skill and set one key. Then paste the first request into your coding agent. When the picture comes back, look at it with the person who owns the process. Move to an offline model once the structure is right.
 
 If you want to see what the agent loop looks like when a developer writes it by hand, read [How to Build an AI Agent in Python](/articles/how-to-build-ai-agent-python).

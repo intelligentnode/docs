@@ -7,8 +7,9 @@ description: Use when writing or changing Python code that builds an AI agent ap
 
 Follow the Intelli section of AGENTS.md, then these rules.
 
-1. Run every agent on local Ollama unless the user names a cloud provider:
-   provider "vllm", options {"baseUrl": "${ENV:OLLAMA_BASE_URL}"} in specs, http://localhost:11434 in code.
+1. Pick the provider the way AGENTS.md says: the one the user names, else OpenAI or Anthropic when its
+   key is set, else a local server. For a local or offline model use provider "vllm" with
+   options {"baseUrl": "${ENV:OLLAMA_BASE_URL}"} in specs, http://localhost:11434 in code.
 2. For a Vibe Agent you are the planner. Write the FlowSpec JSON yourself, save it in the repo,
    and load it with `planner_fn` or `build_from_spec`. Use this shape:
 

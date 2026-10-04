@@ -1,12 +1,18 @@
-"""Support ticket triage with Intelli, running on a local model (Ollama).
+"""Support ticket triage with Intelli, on OpenAI, Claude or a local model.
 
 For each ticket, three steps run in parallel (category, urgency, summary).
 A fourth step collects the three answers on one triage card and picks the path:
 high urgency tickets get an escalation note for the on-call engineer;
 every other ticket gets a drafted customer reply.
 
-Run:  ./.venv/bin/python triage.py
+Run:  python triage.py
 Out:  triage.md (the report) and triage_graph.png (the flow picture)
+
+Start with one cloud key, then move offline when you want to:
+  OPENAI_API_KEY set     -> runs on OpenAI (the default when this key is set)
+  ANTHROPIC_API_KEY set  -> runs on Claude
+  TRIAGE_PROVIDER=vllm   -> runs on a local server such as Ollama or vLLM, no key needed
+TRIAGE_MODEL picks another model on the same provider.
 """
 import asyncio
 import json
@@ -19,9 +25,17 @@ from pathlib import Path
 from intelli.flow import Agent, Task, TextTaskInput, Flow, DynamicConnector, Memory
 
 HERE = Path(__file__).resolve().parent
-PROVIDER = "vllm"  # Intelli's provider for local OpenAI-style servers such as Ollama
-MODEL = os.environ.get("TRIAGE_MODEL", "qwen2.5:0.5b")
+KEY_NAMES = {"openai": "OPENAI_API_KEY", "anthropic": "ANTHROPIC_API_KEY"}
+DEFAULT_MODELS = {"openai": "gpt-4.1-mini", "anthropic": "claude-haiku-4-5", "vllm": "qwen2.5:0.5b"}
+# "vllm" is Intelli's provider for local OpenAI-style servers such as Ollama.
+PROVIDER = os.environ.get("TRIAGE_PROVIDER") or next(
+    (name for name, key in KEY_NAMES.items() if os.environ.get(key)), "vllm")
+if PROVIDER not in DEFAULT_MODELS:
+    raise SystemExit(f"TRIAGE_PROVIDER must be one of {sorted(DEFAULT_MODELS)}, not '{PROVIDER}'.")
+MODEL = os.environ.get("TRIAGE_MODEL", DEFAULT_MODELS[PROVIDER])
 BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+WHERE = (f"a local model through {BASE_URL}. No cloud service was called" if PROVIDER == "vllm"
+         else f"the {PROVIDER} API")
 DEBUG = os.environ.get("TRIAGE_DEBUG") == "1"
 
 CATEGORIES = ["billing", "bug", "account", "feature"]
@@ -127,11 +141,20 @@ def route_by_urgency(output, output_type):
     return "high" if "urgency: high" in str(output).lower() else "other"
 
 
-def local(mission, max_tokens, temperature):
-    # temperature 0 for labels: at 0.1 this model flipped an outage between "high" and "medium"
+def step_agent(mission, max_tokens, temperature):
+    """One agent per step, on the provider chosen above."""
+    # temperature 0 for labels: at 0.1 the small local model flipped an outage between "high" and "medium"
+    if PROVIDER == "vllm":
+        return Agent("text", PROVIDER, mission,
+                     {"model": MODEL, "temperature": temperature, "max_tokens": max_tokens},
+                     options={"baseUrl": BASE_URL})
+    key = os.environ.get(KEY_NAMES[PROVIDER])
+    if not key:
+        raise SystemExit(f"Set {KEY_NAMES[PROVIDER]} to run on {PROVIDER}, "
+                         f"or set TRIAGE_PROVIDER=vllm to run on a local model.")
+    # hosted models get more room: some spend part of the budget before they answer
     return Agent("text", PROVIDER, mission,
-                 {"model": MODEL, "temperature": temperature, "max_tokens": max_tokens},
-                 options={"baseUrl": BASE_URL})
+                 {"key": key, "model": MODEL, "temperature": temperature, "max_tokens": max(max_tokens, 256)})
 
 
 def build_flow(ticket):
@@ -145,28 +168,28 @@ def build_flow(ticket):
 
     tasks = {
         "category": Task(TextTaskInput("Pick the ticket category"),
-                         local("You label support tickets with one category.", 8, 0),
+                         step_agent("You label support tickets with one category.", 8, 0),
                          template=Prompt(CATEGORY_PROMPT, label="category"),
                          post_process=clean_category),
         "urgency": Task(TextTaskInput("Rate the ticket urgency"),
-                        local("You rate how urgent support tickets are.", 8, 0),
+                        step_agent("You rate how urgent support tickets are.", 8, 0),
                         template=Prompt(URGENCY_PROMPT, label="urgency"),
                         post_process=clean_urgency),
         "summary": Task(TextTaskInput("Summarize the ticket in one line"),
-                        local("You summarize support tickets in one line.", 60, 0.2),
+                        step_agent("You summarize support tickets in one line.", 60, 0.2),
                         template=Prompt(SUMMARY_PROMPT, label="summary"),
                         post_process=one_line),
         "triage_card": Task(TextTaskInput("Collect the three answers on one triage card"),
-                            local("You confirm that the triage results arrived.", 2, 0),
+                            step_agent("You confirm that the triage results arrived.", 2, 0),
                             template=Prompt(CARD_PROMPT, label="triage_card"),
                             post_process=make_card),
         "escalation_note": Task(TextTaskInput("Write an escalation note for the on-call engineer"),
-                                local("You write short escalation notes for on-call engineers.",
+                                step_agent("You write short escalation notes for on-call engineers.",
                                       320, 0.3),
                                 template=Prompt(ESCALATION_PROMPT, ticket, "escalation_note"),
                                 post_process=tidy),
         "customer_reply": Task(TextTaskInput("Draft a reply to the customer"),
-                               local("You write short, polite replies to customers.", 320, 0.3),
+                               step_agent("You write short, polite replies to customers.", 320, 0.3),
                                template=Prompt(REPLY_PROMPT, ticket, "customer_reply"),
                                post_process=tidy),
     }
@@ -187,7 +210,7 @@ def build_flow(ticket):
     for name, task in flow.tasks.items():
         if task.agent.provider != PROVIDER:
             raise RuntimeError(f"Step '{name}' uses provider '{task.agent.provider}', "
-                               f"expected the local provider '{PROVIDER}'.")
+                               f"expected '{PROVIDER}'.")
     return flow
 
 
@@ -234,7 +257,7 @@ def write_report(results, seconds, picture):
         "# Support ticket triage report",
         "",
         f"- Run: {datetime.now():%Y-%m-%d %H:%M}, {seconds:.0f} seconds for {len(results)} tickets",
-        f"- Model: {MODEL}, running locally through Ollama ({BASE_URL}). No cloud service was called.",
+        f"- Model: {MODEL}, running on {WHERE}.",
         f"- Escalated to the on-call engineer: {len(escalated)}. Customer replies drafted: "
         f"{len(results) - len(escalated)}.",
         f"- Flow picture: {Path(picture).name}",
@@ -304,7 +327,7 @@ async def main():
     seconds = time.time() - started
 
     report = write_report(results, seconds, picture)
-    print(f"\n{len(results)} tickets triaged in {seconds:.0f}s on {MODEL} (local). flow.errors: none")
+    print(f"\n{len(results)} tickets triaged in {seconds:.0f}s on {MODEL} ({PROVIDER}). flow.errors: none")
     print(f"Report:  {report}")
     print(f"Picture: {picture}")
 

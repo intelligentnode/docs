@@ -11,8 +11,9 @@ Install with `pip install -U "intelli[visual]"`, in the project's virtual enviro
 `from intelli.flow import Agent, Task, TextTaskInput, Flow, SequenceFlow, DynamicConnector, Memory, CustomAgent, VibeAgent`
 
 Agents and tasks
-- Cloud: `Agent("text", "openai", "mission", {"key": os.environ["OPENAI_API_KEY"], "model": "<model>"})`. Never hardcode keys.
-- Local, no key (Ollama or vLLM): `Agent("text", "vllm", "mission", {"model": "<ollama tag>", "temperature": 0.2, "max_tokens": 300}, options={"baseUrl": "http://localhost:11434"})`
+- Which provider: the one the user names. If they name none, use OpenAI when `OPENAI_API_KEY` is set, else Anthropic when `ANTHROPIC_API_KEY` is set, else a local server. Say which one you used.
+- Cloud, the easy start: `Agent("text", "openai", "mission", {"key": os.environ["OPENAI_API_KEY"], "model": "gpt-4.1-mini", "max_tokens": 300})` or `Agent("text", "anthropic", "mission", {"key": os.environ["ANTHROPIC_API_KEY"], "model": "claude-haiku-4-5", "max_tokens": 300})`. Read keys from the environment. Never hardcode or print them, and stop with a clear message when the key is missing.
+- Local or offline, no key (Ollama or vLLM): `Agent("text", "vllm", "mission", {"model": "<ollama tag>", "temperature": 0.2, "max_tokens": 300}, options={"baseUrl": "http://localhost:11434"})`
 - Plain Python step, no model: `class Step(CustomAgent)` with `def execute(self, agent_input, new_params=None): return fn(agent_input.desc)`, used as `Task(TextTaskInput("x"), Step("text"))`.
 - `Task(TextTaskInput("instruction"), agent, pre_process=fn, post_process=fn, memory_key="name", exclude=False, template=obj)`
 - The mission is the system prompt. For each task: `pre_process(input)`, then the template builds the prompt, then the model, then `post_process(output) -> output`. Child tasks and `out[name]["output"]` get the processed value.
