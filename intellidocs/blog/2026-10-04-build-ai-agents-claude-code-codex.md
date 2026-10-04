@@ -32,11 +32,22 @@ Three things, each with its own section below.
 
 *You ask in plain words, and a picture of what the agent built comes back.*
 
-:::tip[Download the skill first]
+:::tip[Get the skill first]
 
-One skill file works in both Claude Code and Codex, and a short instruction file goes with it. Every example below needs them.
+One skill works in both Claude Code and Codex. Every example below needs it.
 
-**The easy way.** Download both files. Your coding agent puts them in place in the next section.
+**In Claude Code.** Install the plugin with two commands:
+
+<div className="terminal terminal--chat">
+
+```text
+/plugin marketplace add intelligentnode/Intelli
+/plugin install intelli-flows@intellinode
+```
+
+</div>
+
+**In Codex or any other project.** Download both files. Your coding agent puts them in place in the next section.
 
 <div className="kit-downloads">
 <a className="button button--primary button--sm" href="https://www.intellinode.ai/agent-kit/SKILL.md" download="SKILL.md">Download SKILL.md</a>
@@ -74,7 +85,7 @@ https://www.intellinode.ai/agent-kit/SKILL.md and https://www.intellinode.ai/age
 Tell me when it is done and what you added.
 ```
 
-It may ask before it downloads or installs anything. Say yes.
+It may ask before it downloads or installs anything. Say yes. If you installed the Claude Code plugin, the skill is already in place, so ask only for step 3.
 
 Then give it one key. The easiest start is a hosted model from OpenAI or Claude, because there's nothing to run on your own machine. Ask whoever manages your accounts for an API key, and set it in the terminal before you start the coding agent:
 
@@ -107,7 +118,7 @@ Short files like this are enough. In our tests, agents that had only these two f
 
 Ask a coding agent for a tool with no framework and you get a one-off script, shaped differently every time. With Intelli it builds a flow: small steps with one job each, wired into a graph.
 
-That shape does real work. Steps that don't depend on each other run at the same time, and one step's answer can decide which step runs next. Every step also names its own model, so a free local model can sort tickets while a cloud model writes the reply a customer reads. That keeps you from being tied to one vendor.
+That shape does real work. Steps that don't depend on each other run at the same time, and one step's answer can decide which step runs next. Every step also names its own model: OpenAI, Claude, Gemini, Amazon Bedrock or one on your own servers. A free local model can sort tickets while a cloud model writes the reply a customer reads, and you aren't tied to one vendor.
 
 In code, the wiring is short. This line, from a release brief tool you'll meet below, says which step feeds which:
 
@@ -285,13 +296,15 @@ It also settles most of the cost. Building a tool uses the coding agent you alre
 
 ## What the tests changed
 
-"No errors" is not the same as "right". In all three tests the first run reported no errors and produced something wrong. The agents noticed because they read their own output, so that is now a written step in the instruction file, along with the routing rule the triage test uncovered.
+"No errors" is not the same as "right". In all three tests the first run reported no errors and produced something wrong. The agents noticed because they read their own output, so that is now a written step in the instruction file.
+
+Two of the failures were the library's doing, and Intelli 2.1.0 fixes both. A routed step now runs only when its route is chosen, and the default prompt no longer carries the stray placeholder that made a small model copy its input.
 
 For you, the lesson is short. Review the picture for structure and the agent's report for weak spots. Then have a person read real output before a customer sees any of it.
 
 ## For developers
 
-The kit is an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md), a [skill](https://www.intellinode.ai/agent-kit/SKILL.md) and an [install script](https://www.intellinode.ai/agent-kit/install.sh) that puts both in place. They point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
+The kit is an [AGENTS.md section](https://www.intellinode.ai/agent-kit/AGENTS.md), a [skill](https://www.intellinode.ai/agent-kit/SKILL.md) and an [install script](https://www.intellinode.ai/agent-kit/install.sh) that puts both in place. The Claude Code plugin in the [Intelli repository](https://github.com/intelligentnode/Intelli) bundles the same skill and rules. They point to the docs index at [www.intellinode.ai/llms.txt](https://www.intellinode.ai/llms.txt), written in the [llms.txt format](https://llmstxt.org/). The `visual` extra installs the drawing library. Without it the flow runs and the picture step fails.
 
 Codex reads AGENTS.md by default; its [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) covers nested files. Claude Code reads it since v2.1.277 when the project has no CLAUDE.md. If it has one, put `@AGENTS.md` at the top, as the [memory docs](https://code.claude.com/docs/en/memory) describe. We checked these paths against both tools' docs, not in live sessions.
 
@@ -299,7 +312,7 @@ Codex reads AGENTS.md by default; its [AGENTS.md guide](https://learn.chatgpt.co
 | --- | --- | --- |
 | Instructions file | `CLAUDE.md`, or `AGENTS.md` when no CLAUDE.md exists | `AGENTS.md` |
 | Project skills folder | `.claude/skills/<name>/SKILL.md` | `.agents/skills/<name>/SKILL.md` |
-| Invoke the skill | `/intelli-flows` | `$intelli-flows` |
+| Invoke the skill | `/intelli-flows`, or `/intelli-flows:intelli-flows` from the plugin | `$intelli-flows` |
 
 The code behind the examples is published: [triage](https://www.intellinode.ai/agent-kit/examples/triage/triage.py), [release brief](https://www.intellinode.ai/agent-kit/examples/release_brief/release_brief.py) and [content reuse](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose.py) with its [plan](https://www.intellinode.ai/agent-kit/examples/repurpose/repurpose_spec.json). It is what the test agents wrote, with two additions from us: the planner step, and a switch in the triage tool that picks OpenAI or Claude when a key is set and a local server when `TRIAGE_PROVIDER=vllm`. We ran each one again from a clean folder before publishing. The [async flow docs](/docs/python/flows/async-flow) and the [Vibe Agents docs](/docs/python/vibe-agents) cover the library itself.
 
@@ -327,6 +340,6 @@ Yes. Start a local model server such as Ollama and ask for a local model. All th
 
 ## Next step
 
-Download the skill and set one key. Then paste the first request into your coding agent. When the picture comes back, look at it with the person who owns the process. Move to an offline model once the structure is right.
+Get the skill and set one key. Then paste the first request into your coding agent. When the picture comes back, look at it with the person who owns the process. Move to an offline model once the structure is right.
 
 If you want to see what the agent loop looks like when a developer writes it by hand, read [How to Build an AI Agent in Python](/articles/how-to-build-ai-agent-python).

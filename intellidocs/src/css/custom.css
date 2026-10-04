@@ -129,3 +129,8 @@
 .kit-downloads .button {
   text-decoration: none;
 }
+
+/* commands typed inside a coding agent, not in a shell */
+.terminal--chat .token-line::before {
+  content: '> ';
+}
