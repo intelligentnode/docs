@@ -118,7 +118,7 @@ Ask a coding agent for a tool with no framework and you get a one-off script, sh
 
 That shape does real work. Steps that don't depend on each other run at the same time, and one step's answer can decide which step runs next. Every step also names its own model: OpenAI, Claude, Gemini, Amazon Bedrock or one on your own servers. A free local model can sort tickets while a cloud model writes the reply a customer reads, and you aren't tied to one vendor.
 
-In code, the wiring is short. This line, from a release brief tool you'll meet below, says which step feeds which:
+Connecting the steps takes one line of code. Here is the one from the release brief tool later in this article. It says the features, fixes and risks steps all feed into the brief:
 
 ```python
 flow = Flow(tasks=tasks, map_paths={"features": ["brief"], "fixes": ["brief"], "risks": ["brief"]})
