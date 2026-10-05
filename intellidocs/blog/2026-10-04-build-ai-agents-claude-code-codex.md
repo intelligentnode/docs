@@ -134,7 +134,7 @@ Steps aren't limited to text. One flow can have Claude write a product pitch, Op
 
 ## Value 3: Review the flow picture, not the code
 
-Every flow can save a picture of itself, and the skill makes the agent save it before the first run. Drawing calls no model and needs no key, so you can check the plan before anything is spent. When you didn't spell out the steps, the agent also shows a short table of them and waits for your go-ahead. That's what turns generated code from a black box into a white box. The first example shows how to read a picture.
+Every flow can save a picture of itself, and the skill makes the agent save it before the first run. Drawing calls no model and needs no key, so you can check the plan before anything is spent. When you didn't spell out the steps, the agent also shows a short table of them and waits for your go-ahead. That's what turns generated code from a black box into a transparent box. The first example shows how to read a picture.
 
 ### First example: support triage with one OpenAI or Claude key
 
