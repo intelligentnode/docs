@@ -34,9 +34,9 @@ Three things, each with its own section below.
 
 :::tip[Get the skill first]
 
-One skill works in both Claude Code and Codex. Every example below needs it.
+One skill works in both Claude Code and Codex, and every example below needs it. There are three ways to get it. Pick one.
 
-**In Claude Code.** Install the plugin with two commands:
+**In Claude Code.** Type these two commands in the Claude Code chat:
 
 <div className="terminal terminal--chat">
 
@@ -47,13 +47,13 @@ One skill works in both Claude Code and Codex. Every example below needs it.
 
 </div>
 
-**In Codex or any other project.** Download the skill. Your coding agent puts it in place in the next section.
+**In Codex, or without commands.** Download the skill. In the next section, your coding agent unzips it and puts it in place.
 
 <div className="kit-downloads">
 <a className="button button--primary button--sm" href="https://www.intellinode.ai/agent-kit/intelli-flows.zip" download="intelli-flows.zip">Download the skill (.zip)</a>
 </div>
 
-**For developers.** Install both from the project folder:
+**In a terminal.** Open a terminal in your project folder, the folder where you start Claude Code or Codex, and run:
 
 <div className="terminal">
 
@@ -64,7 +64,7 @@ pip install -U "intelli[visual]"
 
 </div>
 
-Use Intelli 2.1.1 or above.
+The first line installs the skill for both coding agents. The second installs Intelli, the library the skill writes code for, and you need version 2.1.1 or above. If you chose the plugin or the zip, your coding agent installs the library for you in the next section.
 
 :::
 
@@ -83,7 +83,7 @@ https://www.intellinode.ai/agent-kit/intelli-flows.zip.
 Tell me when it is done and what you added.
 ```
 
-It may ask before it downloads or installs anything. Say yes. If you installed the Claude Code plugin, the skill is already in place, so ask only for step 2.
+It may ask before it downloads or installs anything. Say yes. If you installed the Claude Code plugin, the skill is already in place, so ask only for step 2. If you ran the terminal commands, both steps are done and you can skip this prompt.
 
 Then give it one key. The easiest start is a hosted model from OpenAI or Claude, because there's nothing to run on your own machine. Ask whoever manages your accounts for an API key, and set it in the terminal before you start the coding agent:
 

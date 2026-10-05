@@ -43,7 +43,7 @@ The plugin, named Intelli Visual Agent Flows, ships the skill folder described b
 
 ### Codex, or any project
 
-Run the install script in the project folder:
+Open a terminal in your project folder, the folder where you start Codex or Claude Code, and run the install script:
 
 <div className="terminal">
 
@@ -55,7 +55,7 @@ curl -fsSL https://www.intellinode.ai/agent-kit/install.sh | sh
 
 It downloads the skill from the Intelli repository into `.agents/skills/intelli-flows`, where Codex looks for it, and links that folder to `.claude/skills/intelli-flows`, where Claude Code looks for it. It is safe to run again.
 
-Without a terminal, [download the skill as a zip](https://www.intellinode.ai/agent-kit/intelli-flows.zip) and unzip it into `.agents/skills/`.
+Without a terminal, [download the skill as a zip](https://www.intellinode.ai/agent-kit/intelli-flows.zip) and unzip it into `.agents/skills/` inside that folder.
 
 ### What is in the skill
 
