@@ -96,6 +96,8 @@ input.addUserMessage('Who painted the Mona Lisa?');
 const responses = await geminiBot.chat(input);
 ```
 
+With a Google Cloud key, use the `'vertex'` provider instead. [Gemini and Vertex AI](./gemini-vertex) covers both, plus Google Search, images, speech and video.
+
 ### Mistral AI
 1. Import the `Chatbot` and `MistralInput` modules.
 ```javascript

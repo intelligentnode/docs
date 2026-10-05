@@ -82,7 +82,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'Chatbot',
-      items: ['npm/chatbot/get-started', 'npm/chatbot/multiple-messages', 'npm/chatbot/tool-calling', 'npm/chatbot/structured-output', 'npm/chatbot/openai-compatible', 'npm/chatbot/request-options', 'npm/chatbot/nvidia-chat', 'npm/chatbot/vllm', 'npm/chatbot/docs-chat'],
+      items: ['npm/chatbot/get-started', 'npm/chatbot/gemini-vertex', 'npm/chatbot/multiple-messages', 'npm/chatbot/tool-calling', 'npm/chatbot/structured-output', 'npm/chatbot/openai-compatible', 'npm/chatbot/request-options', 'npm/chatbot/nvidia-chat', 'npm/chatbot/vllm', 'npm/chatbot/docs-chat'],
+    },
+    {
+      type: 'category',
+      label: 'Assistant',
+      items: ['npm/assistant/get-started', 'npm/assistant/vector-stores'],
     },
     {
       type: 'category',

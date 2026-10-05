@@ -28,7 +28,8 @@ Keys come from the environment or a `.env` file in the directory where the serve
 | --- | --- |
 | `OPENAI_API_KEY` | OpenAI (chat tools and image generation) |
 | `ANTHROPIC_API_KEY` | Anthropic |
-| `GEMINI_API_KEY` | Google Gemini |
+| `GEMINI_API_KEY` | Google Gemini (chat, web search, images and speech) |
+| `VERTEX_API_KEY` | Gemini on Vertex AI. Add `VERTEX_PROJECT_ID` and `VERTEX_LOCATION` for project mode. |
 | `MISTRAL_API_KEY` | Mistral |
 | `COHERE_API_KEY` | Cohere |
 | `NVIDIA_API_KEY` | NVIDIA |
@@ -48,6 +49,12 @@ Claude Code:
 
 ```bash
 claude mcp add intellinode -e OPENAI_API_KEY=sk-... -e ANTHROPIC_API_KEY=sk-ant-... -- npx -y intellinode mcp
+```
+
+Codex:
+
+```bash
+codex mcp add intellinode --env GEMINI_API_KEY=... -- npx -y intellinode mcp
 ```
 
 Or a project `.mcp.json` (Claude Code) / `.cursor/mcp.json` (Cursor):
@@ -98,7 +105,9 @@ For the HTTP transport start `npx -y intellinode mcp --http` and register `{ "ty
 | `generate_regex` | `description`, `language?`, `provider?` | `{ pattern, flags, explanation, matches, nonMatches, verified }` |
 | `generate_mock_data` | `schema`, `count?`, `provider?` | `{ records, count }` |
 | `generate_seo_meta` | `page`, `url?`, `siteName?`, `provider?` | meta fields and rendered HTML |
-| `generate_image` | `prompt`, `provider?` (`openai` or `stability`), `size?` | PNG image block |
+| `search_web` | `question`, `model?` | an answer from Google Search with its source links (Gemini) |
+| `generate_image` | `prompt`, `provider?` (`openai`, `stability`, `gemini` or `vertex`), `size?` | image block |
+| `generate_speech` | `text`, `voice?` (default `Kore`) | WAV audio block (Gemini) |
 | `list_providers` | none | configured providers, defaults and the variables still unset |
 
 ### Build your own server

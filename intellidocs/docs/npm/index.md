@@ -8,7 +8,7 @@ keywords: ["intellinode node.js","npm intellinode","node.js ai framework","opena
 
 # Introduction
 
-Intellinode is a framework to streamline the interactions with diverse AI capabilities. It provides a unified layer to access multiple models such as speech, image, and text, and higher level building blocks such as a tool-calling chatbot, a coding agent and an MCP server.
+Intellinode is a framework to streamline the interactions with diverse AI capabilities. It provides a unified layer to access multiple models such as speech, image, and text, and higher level building blocks such as a tool-calling chatbot, a chat assistant with document answers and memory, a coding agent and an MCP server.
 
 ```sh
 npm i intellinode
@@ -26,7 +26,7 @@ The wrapper layer in intellinode include:
 
 * **OpenAIWrapper**: Access to the OpenAI models (GPT-5.5 and the Responses API, images, embeddings, speech).
 * **AnthropicWrapper**: Access to the Claude models (Sonnet 5, Opus 5, Fable 5.1, Haiku 4.5).
-* **GeminiAIWrapper**: Access to the Google Gemini models.
+* **GoogleAIWrapper**: Gemini on the Gemini Developer API and Vertex AI, with Google Search grounding, images, speech, Veo video, Lyria music and the Live API. **GeminiAIWrapper** covers the same Gemini calls.
 * **MistralAIWrapper**: Access to the Mistral models.
 * **CohereAIWrapper**: Access to the Cohere Command models.
 * **NvidiaWrapper**: Access to the NVIDIA hosted models (DeepSeek, Llama) and local NIM.
@@ -47,8 +47,10 @@ Intellinode also provides a set of functions that offer higher-level abstraction
 
 * **Chatbot**: A unified chatbot for every provider with streaming, a tool-calling loop (`runTools`) and schema-matched JSON output (`chatJson`).
 * **Gen**: The fastest way to interact with AI models for your use cases, one line to generate tuned content, UI code, backend code, tests and more.
+* **Assistant**: A ChatGPT- or Gemini-style assistant with saved conversations, answers from your documents with sources, and long-term memory.
+* **Vector stores**: One interface for Pinecone, Qdrant, Chroma, Weaviate, Milvus, Elasticsearch, pgvector, MongoDB Atlas, Firestore and Vertex AI.
 * **CodingAgent**: An agent that edits a repository and runs its tests until they pass.
-* **MCPClient** and **MCPServer**: Use the tools of any MCP server in your chatbot, or serve intellinode's tools to Claude Code, Cursor and VS Code.
+* **MCPClient** and **MCPServer**: Use the tools of any MCP server in your chatbot, or serve intellinode's tools to Claude Code, Codex, Cursor and VS Code.
 * **SemanticSearch**: Speeds the semantic search integration using powerful embedding providers.
 * **SemanticSearchPaging**: Apply the semantic search in iterations for large datasets.
 * **TextAnalyzer**: Sentiment analysis, text summaries, and more.
