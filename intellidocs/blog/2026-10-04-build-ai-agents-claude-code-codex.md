@@ -181,10 +181,24 @@ One note on how we checked this version. We drew the picture from the real flow 
 
 ## Then move to vLLM and offline models
 
-A hosted model is the quick start. A local one costs nothing per call and keeps every ticket inside your network. Intelli reaches local servers such as Ollama or vLLM through a provider it calls `vllm`, and the tool you just built moves over with one request:
+A hosted model is the quick start. A local one costs nothing per call and keeps every ticket inside your network. Intelli reaches local servers such as Ollama or vLLM through a provider it calls `vllm`.
+
+Our tests used [Qwen2.5 0.5B](https://ollama.com/library/qwen2.5:0.5b), a free model that runs on [Ollama](https://ollama.com). It's a 398 MB download, so a laptop with 32 GB of memory runs it and keeps almost all of that memory for other work. It's also the hardest case for quality. For better answers on the same laptop, try [Qwen2.5 7B](https://ollama.com/library/qwen2.5:7b), a 4.7 GB download that still leaves most of the memory free. We ran our tests on the 0.5B model only.
+
+Install Ollama, then get the model:
+
+<div className="terminal">
+
+```bash
+ollama pull qwen2.5:0.5b
+```
+
+</div>
+
+The tool you just built moves over with one request:
 
 ```text
-Move every step of the triage tool to the local model on this machine and run it again.
+Move every step of the triage tool to qwen2.5:0.5b on the local Ollama server and run it again.
 Then redraw the flow picture.
 ```
 
@@ -196,7 +210,7 @@ Nothing else in the picture moved. The structure you reviewed is the same, and o
 
 ### How we tested the offline path
 
-For each use case we started a fresh Claude agent in an empty folder. It got the setup request, then one request in plain words. It could read only the two kit files and the public docs. Everything ran on the published package and a tiny free model on our own machine, which is the hardest case for output quality. These were Claude agents following the kit, not Claude Code sessions, and we made no Codex run.
+For each use case we started a fresh Claude agent in an empty folder. It got the setup request, then one request in plain words. It could read only the two kit files and the public docs. Everything ran on the published package and Qwen2.5 0.5B on our own machine. These were Claude agents following the kit, not Claude Code sessions, and we made no Codex run.
 
 All three built a working tool and ran it. None got it right the first time, and that turned out to be the useful part.
 
@@ -337,7 +351,7 @@ Yes, from v2.1.277, when there's no `CLAUDE.md` in the project. Otherwise put `@
 
 ### Can these AI tools run without an API key?
 
-Yes. Start a local model server such as Ollama and ask for a local model. All three tools ran that way in our tests, through Intelli's `vllm` provider. For a self-hosted server, see the [vLLM integration page](/docs/python/offline-chatbot/vllm).
+Yes. Install Ollama, pull a small model such as `qwen2.5:0.5b`, and ask your coding agent to use it. All three tools ran that way in our tests, through Intelli's `vllm` provider. For a self-hosted server, see the [vLLM integration page](/docs/python/offline-chatbot/vllm).
 
 ## Next step
 
