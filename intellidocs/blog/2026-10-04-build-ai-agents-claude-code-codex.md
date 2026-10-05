@@ -53,7 +53,7 @@ One skill works in both Claude Code and Codex, and every example below needs it.
 <a className="button button--primary button--sm" href="https://www.intellinode.ai/agent-kit/intelli-flows.zip" download="intelli-flows.zip">Download the skill (.zip)</a>
 </div>
 
-**In a terminal.** Open a terminal in your project folder, the folder where you start Claude Code or Codex, and run:
+**Or in a terminal.** Open a terminal in your project folder, the folder where you start Claude Code or Codex, and run:
 
 <div className="terminal">
 
