@@ -124,8 +124,6 @@ In code, the wiring is short. This line, from a release brief tool you'll meet b
 flow = Flow(tasks=tasks, map_paths={"features": ["brief"], "fixes": ["brief"], "risks": ["brief"]})
 ```
 
-You don't have to read it. Intelli draws it.
-
 Steps aren't limited to text. One flow can have Claude write a product pitch, OpenAI illustrate it and read it aloud, and Gemini check that the picture matches. The picture colors each step by type:
 
 <img src="/img/articles/flows/mixed_types_graph.png" width="560" loading="lazy" alt="Flow picture drawn by Intelli: a pitch step on Claude feeds an illustration step on OpenAI and a voice over step on OpenAI, and the illustration feeds an image check step on Gemini, each colored by step type" />
