@@ -25,22 +25,6 @@
     justify-content: center;
   }
   
-  .newsLine {
-    margin: 1.25rem 0 0;
-    font-size: 0.9rem;
-    color: #6b7280;
-  }
-
-  .newsLine a {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .newsLine a:hover {
-    color: #2992fe;
-  }
-
   @media screen and (max-width: 480px) {
     .heroTitle {
       font-size: 1.9rem;

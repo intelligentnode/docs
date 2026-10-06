@@ -1,3 +1,4 @@
+import Link from '@docusaurus/Link';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -53,6 +54,9 @@ export default function Features() {
   return (
     <section className={styles.features}>
       <div className="container">
+        <p className={styles.newsLine}>
+          New article: <Link to="/articles/build-ai-agents-claude-code-codex">let Claude Code or Codex build AI agents with IntelliNode</Link>
+        </p>
         <div className="row">
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />

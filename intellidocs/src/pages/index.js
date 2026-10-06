@@ -36,9 +36,6 @@ function Header() {
         <div style={{ marginTop: '2rem', width: '100%', maxWidth: '100%' }}>
           <KitSubscribe />
         </div>
-        <p className={styles.newsLine}>
-          New article: <Link to="/articles/build-ai-agents-claude-code-codex">let Claude Code or Codex build AI agents with IntelliNode</Link>
-        </p>
       </div>
     </header>
   );
