@@ -18,7 +18,7 @@ function Header() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          Super AI is open source
+          Super Intelligence is Open
         </Heading>
         <p className="hero__subtitle">
           {siteConfig.tagline}
