@@ -10,7 +10,7 @@ import {pathToFileURL} from 'node:url';
 
 const INTRO = `# IntelliNode
 
-> Open source AI framework with two libraries: Intelli for Python (pip install intelli) and IntelliNode for Node.js (npm i intellinode). One API for OpenAI, Anthropic, Gemini, Mistral and local models (Ollama, vLLM, llama.cpp), plus flows and graphs of agents, Vibe Agents that build a flow from a plain language intent, tool calling, structured output, MCP and coding agents.
+> Open source AI agent framework with two libraries: Intelli for Python (pip install intelli) and IntelliNode for Node.js (npm i intellinode). One API for OpenAI, Anthropic, Gemini, Mistral and local models (Ollama, vLLM, llama.cpp), plus flows and graphs of agents, Vibe Agents that build a flow from a plain language intent, tool calling, structured output, MCP and coding agents.
 
 Use these pages to write code with the libraries. Python examples import from \`intelli\` and Node.js examples require \`intellinode\`. Each link opens the full page; the text after the colon says what the page covers.
 `;

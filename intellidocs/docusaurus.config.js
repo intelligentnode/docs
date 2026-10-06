@@ -9,7 +9,7 @@ import llmsTxtPlugin from './src/plugins/llms-txt.js';
 
 // The site is served from the root domain; docs.intellinode.ai and intellinode.ai redirect here.
 const siteUrl = 'https://www.intellinode.ai';
-const siteDescription = 'Open source AI framework for Python and Node.js: one API for OpenAI, Anthropic, Gemini and local models, with agents, MCP and model evaluation.';
+const siteDescription = 'Open source AI agent framework for Python and Node.js: build AI agents, RAG chatbots and MCP servers on OpenAI, Anthropic, Gemini or local models.';
 
 // Structured data for search engines: the organization, the site name and the two libraries.
 const structuredData = {
@@ -65,7 +65,7 @@ const structuredData = {
 const config = {
   // used as the suffix of every page title: "<page> | IntelliNode"
   title: 'IntelliNode',
-  tagline: 'Intellinode provides unified prompt, evaluation, and MCP integration to any large model.',
+  tagline: 'An AI agent framework for Python and Node.js. Build agents, RAG chatbots and MCP servers on OpenAI, Claude, Gemini or your own local models.',
   favicon: 'img/favicon.ico',
 
   headTags: [
@@ -161,7 +161,7 @@ const config = {
         {property: 'og:type', content: 'website'},
         {property: 'og:image:width', content: '1200'},
         {property: 'og:image:height', content: '630'},
-        {property: 'og:image:alt', content: 'IntelliNode, the open source AI framework for Python and Node.js'},
+        {property: 'og:image:alt', content: 'IntelliNode, the open source AI agent framework for Python and Node.js'},
         {name: 'twitter:creator', content: '@BarqawiTechno'},
       ],
       navbar: {

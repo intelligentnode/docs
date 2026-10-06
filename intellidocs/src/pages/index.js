@@ -17,8 +17,8 @@ function Header() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          Open Source AI Framework
+        <Heading as="h1" className={clsx('hero__title', styles.heroTitle)}>
+          Superintelligence is open source
         </Heading>
         <p className="hero__subtitle">
           {siteConfig.tagline}
@@ -32,14 +32,13 @@ function Header() {
           >
             As mentioned in Towards Data Science
           </Link>
-          <br />
-          <Link to="/articles/build-ai-agents-claude-code-codex" className={styles.articleLink} style={{ fontSize: '1.1rem' }}>
-            New: let Claude Code or Codex build AI agents with IntelliNode
-          </Link>
         </p>
         <div style={{ marginTop: '2rem', width: '100%', maxWidth: '100%' }}>
           <KitSubscribe />
         </div>
+        <p className={styles.newsLine}>
+          New article: <Link to="/articles/build-ai-agents-claude-code-codex">let Claude Code or Codex build AI agents with IntelliNode</Link>
+        </p>
       </div>
     </header>
   );
@@ -49,10 +48,10 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title="Open Source AI Framework for Python and Node.js"
-      description="IntelliNode is an open source AI framework for Python and Node.js: one API for OpenAI, Claude, Gemini and local models, with agents and MCP.">
+      title="Open Source AI Agent Framework for Python and Node.js"
+      description="Open source AI agent framework for Python and Node.js. Build AI agents, RAG chatbots and MCP servers on OpenAI, Claude, Gemini or local models with vLLM.">
       <Head>
-        <meta name="keywords" content="intellinode, intelli, open source ai framework, llm framework, python ai library, node.js ai library, ai agents, mcp server, openai, anthropic claude, gemini" />
+        <meta name="keywords" content="open source ai agent framework, ai agent framework, build ai agents, llm framework, rag chatbot, mcp server, python ai library, node.js ai sdk, vllm, claude code, openai, anthropic claude, gemini, intellinode, intelli" />
       </Head>
       <Header />
       <main>
