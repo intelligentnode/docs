@@ -65,7 +65,7 @@ const structuredData = {
 const config = {
   // used as the suffix of every page title: "<page> | IntelliNode"
   title: 'IntelliNode',
-  tagline: 'Build AI agents, RAG and MCP apps in Python and Node.js',
+  tagline: 'Build AI agents, RAG and MCP apps',
   favicon: 'img/favicon.ico',
 
   headTags: [
