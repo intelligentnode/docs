@@ -8,8 +8,8 @@
   --muted: #6e6e73;
   --faint: #86868b;
   --line: #d2d2d7;
-  --action: #0071e3;
-  --action-hover: #0077ed;
+  --action: #1d1d1f;
+  --action-hover: #3a3a3c;
 
   width: 640px;
   max-width: 100%;
@@ -104,7 +104,7 @@
 .formHost :global(.formkit-input:focus) {
   outline: none !important;
   border-color: var(--action) !important;
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15) !important;
+  box-shadow: 0 0 0 4px rgba(29, 29, 31, 0.1) !important;
 }
 
 .formHost :global(.formkit-submit) {
