@@ -35,29 +35,29 @@
   min-height: 40px;
   padding: 0.4rem 1rem;
   border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 999px;
+  border-radius: 12px;
   background: var(--ifm-background-color);
   color: var(--ifm-font-color-base);
   font: inherit;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: background-color var(--ifm-transition-fast) ease, border-color var(--ifm-transition-fast) ease,
     color var(--ifm-transition-fast) ease;
 }
 
 .filterButton:hover {
-  border-color: var(--ifm-color-primary);
+  border-color: #1d1d1f;
 }
 
 .filterButton:focus-visible {
-  outline: 2px solid var(--ifm-color-primary);
+  outline: 2px solid #1d1d1f;
   outline-offset: 2px;
 }
 
 .filterButtonActive,
 .filterButtonActive:hover {
-  background: var(--ifm-color-primary-darker);
-  border-color: var(--ifm-color-primary-darker);
+  background: #1d1d1f;
+  border-color: #1d1d1f;
   color: #fff;
 }
 

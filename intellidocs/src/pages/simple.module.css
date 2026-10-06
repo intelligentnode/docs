@@ -3,7 +3,7 @@
 .page {
   --ink: #1d1d1f;
   --muted: #6e6e73;
-  --action: #0071e3;
+  --action: #1d1d1f;
 
   max-width: 980px;
   margin: 0 auto;
@@ -73,15 +73,16 @@
   display: inline-block;
   margin-top: 16px;
   padding: 10px 22px;
-  border-radius: 999px;
+  border-radius: 12px;
   background: var(--action);
   color: #fff !important;
   font-size: 17px;
+  font-weight: 500;
   text-decoration: none !important;
 }
 
 .action:hover {
-  background: #0077ed;
+  background: #3a3a3c;
 }
 
 /* Newsletter page: the signup card sits right under the headline, above the fold */

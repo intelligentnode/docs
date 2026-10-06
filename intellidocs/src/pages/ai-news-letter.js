@@ -17,6 +17,10 @@ const ITEMS = [
     title: 'Model choices',
     text: 'Which models fit which job, from cloud APIs to models that run on your own machine.',
   },
+  {
+    title: 'Use cases',
+    text: 'Real jobs AI agents take on at work, with working code you can copy.',
+  },
 ];
 
 export default function AiNewsletter() {

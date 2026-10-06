@@ -143,3 +143,21 @@
   font-weight: 600;
   color: var(--ifm-color-emphasis-700);
 }
+
+/* Buttons across the site: graphite, 12px corners, medium weight, matching the newsletter card */
+.button {
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.button--primary {
+  --ifm-button-background-color: #1d1d1f;
+  --ifm-button-border-color: #1d1d1f;
+  --ifm-button-color: #fff;
+}
+
+.button--primary:hover,
+.button--primary:focus {
+  --ifm-button-background-color: #3a3a3c;
+  --ifm-button-border-color: #3a3a3c;
+}
