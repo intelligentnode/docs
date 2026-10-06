@@ -65,6 +65,11 @@
   box-shadow: none !important;
 }
 
+/* Kit pads the form's inner wrapper on narrow screens; our card already has padding */
+.formHost :global(.formkit-form > div) {
+  padding: 0 !important;
+}
+
 .formHost :global(.formkit-fields) {
   display: flex !important;
   flex-wrap: nowrap !important;
@@ -167,9 +172,10 @@
     flex-direction: column !important;
     align-items: stretch !important;
   }
+  /* stacked on phones: each control keeps its own height and takes the full width */
   .formHost :global(.formkit-field),
   .formHost :global(.formkit-submit) {
-    flex: 1 1 100% !important;
+    flex: none !important;
     width: 100% !important;
   }
 }
