@@ -152,7 +152,7 @@ const config = {
         defaultMode: "light",
         disableSwitch: true,
       },
-      image: 'img/intellinode-social-card-si.png',
+      image: 'img/intellinode-social-card-super-intelligence.png',
       metadata: [
         {name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1'},
         {name: 'author', content: 'IntelliNode'},
@@ -161,7 +161,7 @@ const config = {
         {property: 'og:type', content: 'website'},
         {property: 'og:image:width', content: '1200'},
         {property: 'og:image:height', content: '630'},
-        {property: 'og:image:alt', content: 'Super AI is open source: IntelliNode, the model agnostic AI agent framework for Python and Node.js'},
+        {property: 'og:image:alt', content: 'Super Intelligence: IntelliNode, the open source and model agnostic AI agent framework for Python and Node.js, with a graph of connected nodes'},
         {name: 'twitter:creator', content: '@BarqawiTechno'},
       ],
       navbar: {
