@@ -8,9 +8,83 @@ keywords: ["vector database node.js","pinecone node.js","qdrant node.js","pgvect
 
 # Vector stores and chat history
 
-Every IntelliNode vector store has the same five methods, so you can start with an in-memory store and move to a database later without changing the rest of your code. The [Assistant](./get-started) uses these stores for documents and memory, and you can also use them on their own.
+A vector store saves your text together with an embedding, a list of numbers that captures what the text means. When a question comes in, the store finds the passages closest in meaning, even when they use different words. This is how the [Assistant](./get-started) answers from your documents and remembers earlier conversations.
 
-### The shared interface
+IntelliNode gives every vector database the same methods. You can start with the in-memory store and switch to a database later by changing one line.
+
+## What's supported
+
+### Vector stores
+
+| Database | Class | What you need first |
+| --- | --- | --- |
+| In memory, with an optional JSON file | `MemoryVectorStore({ path })` | Nothing. Good for getting started, tests and up to a few thousand chunks. |
+| Pinecone | `PineconeVectorStore({ apiKey, indexHost })` | An index with the same dimension as your embedder |
+| Qdrant | `QdrantVectorStore({ url, apiKey, collection })` | A Qdrant server or Qdrant Cloud |
+| Chroma | `ChromaVectorStore({ url, collection })` | `chroma run`, or Chroma Cloud |
+| Weaviate | `WeaviateVectorStore({ url, apiKey, className })` | A Weaviate server or Weaviate Cloud. The class name starts with a capital letter. |
+| Milvus or Zilliz | `MilvusVectorStore({ url, token, collection, dimension })` | Milvus 2.5 or later |
+| Elasticsearch | `ElasticsearchVectorStore({ url, apiKey, index, dimension })` | Elasticsearch 8 or later |
+| Postgres with pgvector, including AlloyDB, Cloud SQL, Supabase and Neon | `PgVectorStore({ client, dimension })` | `npm i pg` and the pgvector extension |
+| MongoDB Atlas | `MongoDBAtlasVectorStore({ collection })` | `npm i mongodb` and an Atlas vector index |
+| Google Cloud Firestore | `FirestoreVectorStore({ projectId, collection })` | [Google Cloud sign-in](#google-cloud-sign-in) and a vector index |
+| Vertex AI RAG Engine | `VertexRAGStore({ projectId, location, corpus })` | Google Cloud sign-in. Google reads, splits and embeds your files for you. |
+| Vertex AI Vector Search | `VertexVectorSearchStore({ projectId, collection })` | Google Cloud sign-in |
+
+Qdrant creates its collection, and pgvector its table and index, the first time you write to them.
+
+### Embedders
+
+An embedder turns text into vectors. You set it once on the store:
+
+| Provider | Setting |
+| --- | --- |
+| OpenAI | `{ provider: 'openai', apiKey }` |
+| Gemini Developer API | `{ provider: 'gemini', apiKey }` |
+| Gemini on Vertex AI | `{ provider: 'vertex', apiKey, dimensions: 768 }` |
+| Cohere | `{ provider: 'cohere', apiKey }` |
+| NVIDIA | `{ provider: 'nvidia', apiKey }` |
+| A local Ollama model | `{ provider: 'ollama', model: 'nomic-embed-text', options: { baseUrl: 'http://localhost:11434/v1' } }` |
+| Your own code | `async (texts) => vectors` |
+
+Anthropic has no embedder. If your assistant runs on Claude, give its stores one of the embedders above.
+
+### Chat history
+
+The Assistant saves conversations through a history store:
+
+| Class | Where it saves | Good for |
+| --- | --- | --- |
+| `MemoryChatHistory()` | Process memory, lost on restart | Tests. The Assistant uses it when you set none. |
+| `FileChatHistory({ dir })` | One JSON file per conversation | Local apps and desktop tools |
+| `FirestoreChatHistory({ projectId, collection })` | Google Cloud Firestore | Servers with many users |
+
+For another database, see [Your own chat history](#your-own-chat-history).
+
+## Save and search documents
+
+This example needs only an OpenAI key:
+
+```javascript
+const { MemoryVectorStore } = require('intellinode');
+
+const store = new MemoryVectorStore({
+  embedder: { provider: 'openai', apiKey: process.env.OPENAI_API_KEY },
+  path: './data/vectors.json',
+});
+
+await store.addDocuments([
+  { id: 'a', text: 'IntelliNode supports Gemini and Vertex AI.', metadata: { lang: 'en' } },
+  { id: 'b', text: 'Refunds take five working days.', metadata: { lang: 'en' } },
+]);
+
+const hits = await store.search('Which models can I use?', 3);
+console.log(hits[0]);   // { id: 'a', score: 0.71, text: 'IntelliNode supports Gemini...', metadata: { lang: 'en' } }
+```
+
+`score` is a similarity, so a higher score means a closer match. The score above is only an example.
+
+To move to a database, change only the store you create. The rest of the code stays the same:
 
 ```javascript
 const { QdrantVectorStore } = require('intellinode');
@@ -20,77 +94,46 @@ const store = new QdrantVectorStore({
   collection: 'docs',
   embedder: { provider: 'openai', apiKey: process.env.OPENAI_API_KEY },
 });
-
-await store.addDocuments([{ id: 'a', text: 'IntelliNode supports Gemini.', metadata: { lang: 'en' } }]);
-const hits = await store.search('Which models are supported?', 3, { lang: 'en' });
-// [{ id, score, text, metadata }]
 ```
+
+Once a store has documents, keep the same embedder. Vectors from a different model, or with a different `dimensions`, can't be compared with the ones already saved.
+
+### The methods
+
+Every store has these five:
 
 | Method | What it does |
 | --- | --- |
-| `addDocuments(docs)` | Embeds the text with the store's embedder and saves it under your ids. |
-| `upsert(items)` | Saves vectors you made yourself: `{ id, vector, text, metadata }`. |
-| `search(text, topK, filter)` | Finds the closest documents to a question. |
-| `query({ text or vector, topK, filter })` | The same search, with an object. |
+| `addDocuments(docs)` | Embeds each `{ id, text, metadata }` and saves it. Adding the same id again replaces it. |
+| `search(text, topK, filter)` | Returns the `topK` closest documents to the text. |
+| `query({ text, topK, filter })` | The same search, with an object. Pass `vector` instead of `text` to search with your own vector. |
+| `upsert(items)` | Saves vectors you made yourself, as `{ id, vector, text, metadata }`. |
 | `delete(ids)` | Removes documents by id. |
 
-`score` is a similarity, so higher means closer. `filter` matches metadata values exactly, and an array means "one of". For anything more, pass the database's own filter as `nativeFilter`.
+### Filter by metadata
 
-### Pick an embedder
-
-The `embedder` turns text into vectors:
+The third argument of `search` keeps only documents whose metadata matches:
 
 ```javascript
-{ provider: 'openai', apiKey }                                   // text-embedding-3-small
-{ provider: 'gemini', apiKey }                                   // 3072 numbers
-{ provider: 'vertex', apiKey, dimensions: 768 }                  // gemini-embedding-001 on Vertex AI
-{ provider: 'cohere', apiKey }
-{ provider: 'ollama', model: 'nomic-embed-text', options: { baseUrl: 'http://localhost:11434/v1' } }
-async (texts) => myVectors(texts)                                 // your own function
+await store.search('refund policy', 5, { lang: 'en' });            // only documents with lang: 'en'
+await store.search('refund policy', 5, { lang: ['en', 'fr'] });    // lang is 'en' or 'fr'
 ```
 
-Keep the same embedder for the life of a store. A different model or `dimensions` makes the saved vectors useless.
+For filters beyond exact matches, pass the database's own filter syntax as `nativeFilter` in `query`.
 
-### Pick a store
+## Google Cloud sign-in
 
-| Class | Use it for | Needs |
-| --- | --- | --- |
-| `MemoryVectorStore({ path })` | Local apps, tests and the browser, up to a few thousand chunks | Nothing. `path` saves it to a JSON file. |
-| `PineconeVectorStore({ apiKey, indexHost })` | Managed vector search | An index with the right dimension |
-| `QdrantVectorStore({ url, apiKey, collection })` | Self-hosted or Qdrant Cloud | A Qdrant server |
-| `ChromaVectorStore({ url, collection })` | Local development | `chroma run` or Chroma Cloud |
-| `WeaviateVectorStore({ url, apiKey, className })` | Weaviate 1.2x and later | A capitalized class name |
-| `MilvusVectorStore({ url, token, collection, dimension })` | Milvus or Zilliz | Milvus 2.5 or later |
-| `ElasticsearchVectorStore({ url, apiKey, index, dimension })` | An existing Elasticsearch cluster | Elasticsearch 8 or later |
-| `PgVectorStore({ client, dimension })` | Postgres, AlloyDB, Cloud SQL, Supabase, Neon | `npm i pg` and the pgvector extension |
-| `MongoDBAtlasVectorStore({ collection })` | MongoDB Atlas | `npm i mongodb` and an Atlas vector index |
-| `FirestoreVectorStore({ projectId, collection })` | Data next to your Firestore app data | Google Cloud OAuth and a vector index |
-| `VertexRAGStore({ projectId, location, corpus })` | Google parses, chunks and embeds your files | Google Cloud OAuth |
-| `VertexVectorSearchStore({ projectId, collection })` | Vertex AI Vector Search 2.0 | Google Cloud OAuth |
-
-`PgVectorStore` creates its table and index on first use, and Qdrant creates its collection on the first write.
-
-### Google Cloud stores
-
-Firestore, RAG Engine and Vector Search don't accept API keys. For local development, sign in once:
+Firestore, Vertex AI RAG Engine and Vector Search don't accept API keys. On your own machine, sign in once:
 
 ```bash
 gcloud auth application-default login
 ```
 
-On Cloud Run, GKE or Compute Engine the token comes from the environment. Anywhere else, point `GOOGLE_APPLICATION_CREDENTIALS` at a service account key file, or pass `accessToken`.
+On Cloud Run, GKE or Compute Engine, the sign-in comes from the environment and you don't need this step. Anywhere else, set `GOOGLE_APPLICATION_CREDENTIALS` to a service account key file, or pass `accessToken` to the store.
 
-Firestore also needs a vector index. `store.indexCommand(768)` prints the `gcloud` command that creates it.
+Firestore also needs a vector index. `store.indexCommand(768)` prints the `gcloud` command that creates one for 768-number vectors.
 
-### Chat history
-
-The Assistant saves conversations through one of these:
-
-| Class | Where it saves | Good for |
-| --- | --- | --- |
-| `MemoryChatHistory()` | Process memory, lost on restart | Tests. It is the default. |
-| `FileChatHistory({ dir })` | One JSON file per conversation | Local apps and desktop tools |
-| `FirestoreChatHistory({ projectId, collection })` | Firestore | Servers with many users |
+### Keep everything in Firestore
 
 With Firestore for both history and memory, a user's conversations stay in your Google Cloud project:
 
@@ -106,4 +149,6 @@ const assistant = new Assistant({
 });
 ```
 
-For another database, such as Redis or DynamoDB, extend `ChatHistory` and write its seven methods: `getMessages`, `addMessages`, `getConversation`, `saveConversation`, `listConversations`, `deleteConversation` and `deleteLastMessages`.
+## Your own chat history
+
+To save conversations in another database, such as Redis or DynamoDB, extend `ChatHistory` and write its seven methods: `getMessages`, `addMessages`, `getConversation`, `saveConversation`, `listConversations`, `deleteConversation` and `deleteLastMessages`. Then pass an instance as `history` to the Assistant.
