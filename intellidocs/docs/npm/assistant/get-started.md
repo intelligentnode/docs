@@ -22,7 +22,7 @@ You build an assistant from up to four settings. Only the model is required.
 
 | Setting | Options | If you leave it out |
 | --- | --- | --- |
-| `provider`: the model that answers | `openai`, `anthropic`, `gemini`, `vertex`, `mistral`, `cohere`, `nvidia`. Hosted services: `openrouter`, `groq`, `deepseek`, `xai`, `together`. Local models: `ollama`, `lmstudio`, `vllm`. | `openai` |
+| `provider`: the model that answers | `openai`, `anthropic`, `gemini`, `vertex`, `mistral`, `cohere`, `nvidia`. Hosted services: `openrouter`, `groq`, `deepseek`, `xai`, `together`. <br/>**Local models**: `ollama`, `lmstudio`, `vllm`. | `openai` |
 | `history`: where conversations are saved | `MemoryChatHistory` (lost on restart), `FileChatHistory` (JSON files on disk), `FirestoreChatHistory` (Google Cloud) | `MemoryChatHistory` |
 | `knowledge`: your documents | `MemoryVectorStore`, or a database such as Pinecone, Qdrant, pgvector or Firestore | No answers from documents |
 | `memory`: what it remembers across conversations | The same stores as `knowledge` | No long-term memory |
