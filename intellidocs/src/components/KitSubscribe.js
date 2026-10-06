@@ -56,7 +56,6 @@ export default function KitSubscribe({ variant = 'hero' }) {
       <p className={styles.title}>Stay ahead with Super AI.</p>
       <p className={styles.pitch}>New AI agent guides and IntelliNode releases, straight to your inbox.</p>
       <div ref={containerRef} className={styles.formHost} />
-      <p className={styles.fine}>One short email when we publish. No spam. Unsubscribe anytime.</p>
     </div>
   );
 }

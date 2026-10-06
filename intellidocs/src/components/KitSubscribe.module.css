@@ -1,5 +1,5 @@
 /* Newsletter card around the Kit (FormKit) embed.
-   Local classes (.card/.title/.pitch/.fine/.formHost) are scoped by CSS Modules;
+   Local classes (.card/.title/.pitch/.formHost) are scoped by CSS Modules;
    the .formkit-* overrides target Kit's injected markup via :global.
    The look follows Apple's product pages: system type, quiet greys, one blue action, pill controls. */
 
@@ -14,7 +14,7 @@
   width: 640px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 40px 40px 28px;
+  padding: 40px 40px 32px;
   box-sizing: border-box;
   border-radius: 24px;
   background: #fff;
@@ -55,13 +55,6 @@
   color: var(--muted);
 }
 
-.fine {
-  margin: 12px 0 0;
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--faint);
-}
-
 /* Strip Kit's default form chrome so our card is the only container */
 .formHost :global(.formkit-form) {
   max-width: 460px !important;
@@ -95,7 +88,7 @@
   padding: 0 20px !important;
   box-sizing: border-box !important;
   border: 1px solid var(--line) !important;
-  border-radius: 999px !important;
+  border-radius: 12px !important;
   background: #fff !important;
   color: var(--ink) !important;
   font-family: inherit !important;
@@ -122,13 +115,13 @@
   margin: 0 !important;
   padding: 0 24px !important;
   border: none !important;
-  border-radius: 999px !important;
+  border-radius: 12px !important;
   background: var(--action) !important;
   background-color: var(--action) !important;
   color: #fff !important;
   font-family: inherit !important;
   font-size: 17px !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   letter-spacing: -0.01em !important;
   cursor: pointer !important;
   transition: background-color 0.2s !important;
@@ -153,7 +146,7 @@
 }
 
 .formHost :global(.formkit-powered-by-convertkit-container) {
-  margin: 10px 0 -18px !important;
+  margin: 10px 0 -22px !important;
   transform: scale(0.45);
   transform-origin: center top;
   opacity: 0.4;
