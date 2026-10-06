@@ -33,6 +33,7 @@ When creating an `Agent`, you need to provide several parameters that define its
 The Intelli framework currently supports the following agent types:
 
 - `'text'`: Agents that generate or manipulate text.
+- `'assistant'`: A text step that can also answer from your documents, keep a conversation, remember and call tools, check the [assistant page](../assistant/get-started#use-an-assistant-as-a-flow-step).
 - `'image'`: Agents designed for image generation tasks.
 - `'vision'`: Agents that perform image to text tasks.
 - `'speech'`: Agents that convert text to audio.

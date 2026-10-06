@@ -26,6 +26,7 @@ pip install intelli
 3. **Function Layer**: Provides abstract application layer, focused on real world use cases. You can extend the use cases of intelli based on your specific needs.
 4. **Flow Layer**: Orchestrates complex workflows involving multiple AI models and tasks.
 5. **Vibe Agents**: Build and execute multi-modal agents directly from your natural language intent.
+6. **Assistant**: A ChatGPT- or Gemini-style assistant with saved conversations, answers from your documents with sources and long-term memory, on [vector stores](/docs/python/assistant/vector-stores) such as Pinecone, Qdrant, pgvector and Firestore. Check the [assistant page](/docs/python/assistant/get-started).
 
 
 ## Example

@@ -27,6 +27,11 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Assistant',
+      items: ['python/assistant/get-started', 'python/assistant/vector-stores'],
+    },
+    {
+      type: 'category',
       label: 'Offline Chatbot',
       items: ['python/offline-chatbot/gemma', 'python/offline-chatbot/mistral', 'python/offline-chatbot/llama', 'python/offline-chatbot/whisper', 'python/offline-chatbot/llamacpp', 'python/offline-chatbot/vllm'],
     },
