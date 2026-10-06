@@ -48,6 +48,10 @@ export default function Home() {
       title="Open Source AI Agent Framework for Python and Node.js"
       description="Open source AI agent framework for Python and Node.js. Build AI agents, RAG chatbots and MCP servers on OpenAI, Claude, Gemini or local models with vLLM.">
       <Head>
+        <meta property="og:title" content="Super AI is open source | IntelliNode" />
+        <meta name="twitter:title" content="Super AI is open source | IntelliNode" />
+        <meta property="og:description" content="Build SI agents, RAG and MCP apps. Open source and model agnostic, in Python and Node.js." />
+        <meta name="twitter:description" content="Build SI agents, RAG and MCP apps. Open source and model agnostic, in Python and Node.js." />
         <meta name="keywords" content="open source ai agent framework, ai agent framework, build ai agents, llm framework, rag chatbot, mcp server, python ai library, node.js ai sdk, vllm, claude code, openai, anthropic claude, gemini, intellinode, intelli" />
       </Head>
       <Header />
