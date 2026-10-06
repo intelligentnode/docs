@@ -17,8 +17,8 @@ function Header() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className={clsx('hero__title', styles.heroTitle)}>
-          Superintelligence is open source
+        <Heading as="h1" className="hero__title">
+          Super AI is open source
         </Heading>
         <p className="hero__subtitle">
           {siteConfig.tagline}
