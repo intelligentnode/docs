@@ -54,7 +54,7 @@ export default function KitSubscribe({ variant = 'hero' }) {
   return (
     <div className={clsx(styles.card, variant === 'inline' && styles.inline)}>
       <p className={styles.title}>Stay ahead with Super AI.</p>
-      <p className={styles.pitch}>New AI agent guides and IntelliNode releases, straight to your inbox.</p>
+      <p className={styles.pitch}>New AI agent guides straight to your inbox.</p>
       <div ref={containerRef} className={styles.formHost} />
     </div>
   );

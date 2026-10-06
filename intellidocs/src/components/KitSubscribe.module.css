@@ -1,7 +1,7 @@
 /* Newsletter card around the Kit (FormKit) embed.
    Local classes (.card/.title/.pitch/.formHost) are scoped by CSS Modules;
    the .formkit-* overrides target Kit's injected markup via :global.
-   The look follows Apple's product pages: system type, quiet greys, one blue action, pill controls. */
+   The look follows Apple's product pages: system type, quiet greys, one dark action, rounded controls. */
 
 .card {
   --ink: #1d1d1f;
