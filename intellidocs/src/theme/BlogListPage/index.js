@@ -12,6 +12,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import SearchMetadata from '@theme/SearchMetadata';
 import styles from './styles.module.css';
+import KitSubscribe from '@site/src/components/KitSubscribe';
 
 const FILTERS = [
   {id: 'all', label: 'All'},
@@ -181,6 +182,7 @@ export default function BlogListPage({metadata, items}) {
           {visible.length === 0 && (
             <p className={styles.empty}>No articles for this filter yet.</p>
           )}
+          <KitSubscribe variant="inline" />
         </main>
     </Layout>
   );

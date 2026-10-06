@@ -1,134 +1,174 @@
-/* Replicates the previously customized signup card so the Kit (FormKit)
-   embed matches the styling that is already live on intellinode.ai.
-   Local classes (.card/.heading/.formHost) are scoped by CSS Modules;
-   the .formkit-* overrides target Kit's injected markup via :global. */
+/* Newsletter card around the Kit (FormKit) embed.
+   Local classes (.card/.title/.pitch/.fine/.formHost) are scoped by CSS Modules;
+   the .formkit-* overrides target Kit's injected markup via :global.
+   The look follows Apple's product pages: system type, quiet greys, one blue action, pill controls. */
 
 .card {
-  background: rgba(255, 255, 255, 0.5);
-  color: #222;
-  width: 600px;
+  --ink: #1d1d1f;
+  --muted: #6e6e73;
+  --faint: #86868b;
+  --line: #d2d2d7;
+  --action: #0071e3;
+  --action-hover: #0077ed;
+
+  width: 640px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 30px 20px 15px 20px;
-  border-radius: 12px;
+  padding: 40px 40px 28px;
   box-sizing: border-box;
-  border: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  font: 14px Helvetica, Arial, sans-serif;
-}
-
-:global([data-theme='dark']) .card {
-  background: rgba(0, 0, 0, 0.2);
-  color: #eee;
-}
-
-.heading {
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 40px rgba(0, 0, 0, 0.06);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   text-align: center;
-  font-weight: bold;
-  margin-bottom: 12px;
-  font-size: 14px;
-  color: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Compact card at the end of articles and docs pages */
+.inline {
+  width: 100%;
+  margin: 3rem 0 1.5rem;
+  padding: 36px 32px 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 28px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.inline .title {
+  font-size: 24px;
+}
+
+.pitch {
+  margin: 0 auto 24px;
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+}
+
+.fine {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--faint);
 }
 
 /* Strip Kit's default form chrome so our card is the only container */
 .formHost :global(.formkit-form) {
+  max-width: 460px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
 .formHost :global(.formkit-fields) {
   display: flex !important;
   flex-wrap: nowrap !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 8px !important;
   margin: 0 !important;
 }
 
 .formHost :global(.formkit-field) {
   flex: 1 1 auto !important;
   width: auto !important;
-  margin: 0 !important;
   min-width: 0 !important;
+  margin: 0 !important;
 }
 
 .formHost :global(.formkit-input) {
   width: 100% !important;
-  height: 42px !important;
+  height: 48px !important;
   min-height: 0 !important;
-  padding: 9px 12px !important;
-  font-size: 14px !important;
-  background: #fff !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  border-radius: 6px !important;
-  box-sizing: border-box !important;
   margin: 0 !important;
-  color: #000 !important;
+  padding: 0 20px !important;
+  box-sizing: border-box !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  color: var(--ink) !important;
+  font-family: inherit !important;
+  font-size: 17px !important;
+  letter-spacing: -0.01em !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
 }
 
-:global([data-theme='dark']) .formHost :global(.formkit-input) {
-  background: rgba(0, 0, 0, 0.3) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: #fff !important;
+.formHost :global(.formkit-input::placeholder) {
+  color: var(--faint) !important;
+}
+
+.formHost :global(.formkit-input:focus) {
+  outline: none !important;
+  border-color: var(--action) !important;
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15) !important;
 }
 
 .formHost :global(.formkit-submit) {
   flex: 0 0 auto !important;
   width: auto !important;
-  height: 42px !important;
+  height: 48px !important;
   min-height: 0 !important;
-  min-width: 120px !important;
-  padding: 0 22px !important;
-  font-size: 14px !important;
-  background: #000 !important;
-  background-color: #000 !important;
-  color: #fff !important;
-  border: none !important;
-  border-radius: 6px !important;
-  cursor: pointer !important;
-  font-weight: 600 !important;
   margin: 0 !important;
-  transition: background-color 0.3s !important;
+  padding: 0 24px !important;
+  border: none !important;
+  border-radius: 999px !important;
+  background: var(--action) !important;
+  background-color: var(--action) !important;
+  color: #fff !important;
+  font-family: inherit !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
 }
 
-.formHost :global(.formkit-submit span) {
+.formHost :global(.formkit-submit > span) {
+  padding: 0 !important;
   color: inherit !important;
 }
 
 .formHost :global(.formkit-submit:hover) {
-  background: #333 !important;
-  background-color: #333 !important;
+  background: var(--action-hover) !important;
+  background-color: var(--action-hover) !important;
 }
 
-:global([data-theme='dark']) .formHost :global(.formkit-submit) {
-  background: #fff !important;
-  background-color: #fff !important;
-  color: #000 !important;
-}
-
-:global([data-theme='dark']) .formHost :global(.formkit-submit:hover) {
-  background: #eee !important;
-  background-color: #eee !important;
+.formHost :global(.formkit-alert) {
+  margin: 0 0 12px !important;
+  padding: 10px 16px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
 }
 
 .formHost :global(.formkit-powered-by-convertkit-container) {
-  margin: 6px 0 0 !important;
-  transform: scale(0.5);
+  margin: 10px 0 -18px !important;
+  transform: scale(0.45);
   transform-origin: center top;
-  opacity: 0.55;
+  opacity: 0.4;
 }
 
-.formHost :global(.formkit-powered-by-convertkit) {
-  font-size: 11px !important;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .card {
-    padding: 20px 15px 10px 15px;
+    padding: 32px 20px 20px;
+    border-radius: 20px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .pitch {
+    font-size: 16px;
   }
   .formHost :global(.formkit-fields) {
     flex-direction: column !important;
