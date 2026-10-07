@@ -217,6 +217,10 @@ const config = {
                 label: 'Articles',
                 to: '/articles',
               },
+              {
+                label: 'Why IntelliNode',
+                to: '/why-intellinode',
+              },
             ],
           },
           {
@@ -231,10 +235,6 @@ const config = {
                 label: 'Sport AI',
                 // Tagged so Kickwise's analytics can count doc-footer referrals separately.
                 href: 'https://kickwise.ai/?utm_source=intellinode&utm_medium=referral&utm_campaign=docs&utm_content=footer',
-              },
-              {
-                label: 'Why IntelliNode',
-                to: '/why-intellinode',
               },
               {
                 label: 'AI Newsletter',
