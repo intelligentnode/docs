@@ -1,14 +1,20 @@
 ---
 sidebar_position: 5
-title: "Offline Whisper Speech Recognition in Python"
+title: "Offline Whisper Speech to Text in Python (pip, Local Weights)"
 sidebar_label: "Whisper"
-description: "Use Intelli with offline Whisper models for local speech recognition in Python, including multilingual variants, long audio, and user prompts."
-keywords: ["python whisper offline","intelli whisper","offline speech recognition python","whisper transcription python","keras wrapper whisper","local audio transcription"]
+description: "Run Whisper tiny to large offline in Python with pip install intelli[offline]. The weights download once and are cached on disk, then transcription runs with no internet or API key."
+keywords: ["python whisper offline","pypi whisper offline","whisper tiny offline","whisper model weights offline","pip whisper offline package","offline speech recognition python","whisper transcription python","local audio transcription"]
 ---
 
 # Whisper
 
-You can use Whisper models offline for speech recognition. They work entirely on your local machine, supporting both **English-only** and **multilingual** variants. The module support long audio files and user prompts.
+You can use Whisper models offline for speech recognition. They work entirely on your local machine, supporting both **English-only** and **multilingual** variants. The module supports long audio files and user prompts.
+
+### Does the package include the Whisper weights?
+
+No. `pip install intelli[offline]` installs the code, not the model weights, which keeps the package small. The first time you load a model, its weights download from Kaggle and are cached on your machine. After that, transcription runs fully offline, with no internet connection and no API key.
+
+To use Whisper on a machine without internet, load the model once on a connected machine, then copy the KaggleHub cache folder (`~/.cache/kagglehub` by default) to the offline machine.
 
 ### Available Whisper Models
 | **Model Name**            | **Parameters** |

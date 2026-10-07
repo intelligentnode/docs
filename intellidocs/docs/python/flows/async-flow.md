@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: "Async AI Workflows in Python"
+title: "Async Flow: Parallel AI Workflows in Python"
 sidebar_label: "Async flow"
 description: "Learn to build asynchronous DAG workflows in Python Intelli with agents, tasks, dependencies, logging, and OpenAI, Gemini, and Stability models."
 keywords: ["python intelli async flow","intelli async workflows","python ai dag workflow","intelli flow tasks","async ai agents python","openai gemini stability workflow"]

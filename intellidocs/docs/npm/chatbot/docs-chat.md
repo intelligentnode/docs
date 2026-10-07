@@ -8,7 +8,7 @@ keywords: ["intellinode chat ui","intellichat","open source chatbot ui","chat wi
 
 # Chat UI
 
-The One Key document service is no longer available, see [Intellicloud](/docs/npm/intellicloud). As a UI alternative, **[IntelliChat](https://chat.intellinode.ai/)** lets you connect any supported model with your own key, and chat with it from the browser without writing code. It is open source and built on the same `Chatbot` you use in code.
+The One Key document service is no longer available. To answer from your own documents in code, use the [Assistant](/docs/npm/assistant/get-started). As a UI alternative, **[IntelliChat](https://chat.intellinode.ai/)** lets you connect any supported model with your own key, and chat with it from the browser without writing code. It is open source and built on the same `Chatbot` you use in code.
 
 ### Connect a Model
 
