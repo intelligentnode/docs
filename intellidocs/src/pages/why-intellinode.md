@@ -43,17 +43,11 @@ This page is about what you get with IntelliNode, and what to expect if you come
 
 ## Coming from another framework
 
-- **From LangGraph.** Your state graph becomes a flow of tasks: routes are plain functions, shared memory takes the place of the state object, and the picture takes the place of a separate studio. One thing you leave behind: IntelliNode doesn't checkpoint a paused flow and resume it hours later. For a side by side example, see [agentic workflows in Python without LangGraph](/articles/agentic-workflow-python).
+- **From LangGraph.** Your state graph becomes a flow of tasks: routes are plain functions, shared memory takes the place of the state object, and the picture takes the place of a separate studio. For a side by side example, see [agentic workflows in Python without LangGraph](/articles/agentic-workflow-python).
 - **From CrewAI.** Each role becomes a step on the model you choose, so a run is easier to predict and to draw. Steps still share memory, so agents can build on each other's work.
 - **From LlamaIndex.** The Assistant covers the common RAG path, and its vector stores talk to each database over its API, so most need no extra package.
 - **From the Vercel AI SDK.** The one-API idea is the same. IntelliNode adds agents, the Assistant and an MCP server on the server side, and the two work well together with any UI on top.
 - **From Mastra.** The core is far smaller and you can keep the same design in Python.
-
-## Limits to know about
-
-- **No hosted tracing dashboard.** IntelliNode logs what each step does, and the flow picture shows the plan, but there is no hosted platform for traces and evaluations.
-- **No checkpoint and resume.** A flow keeps step outputs and shared memory while it runs, but it can't pause for hours and pick up after a restart.
-- **A smaller community.** You will find fewer ready-made connectors and forum answers than with the oldest frameworks. The docs, the examples and the Claude Code plugin are meant to close that gap.
 
 ## Try it
 
