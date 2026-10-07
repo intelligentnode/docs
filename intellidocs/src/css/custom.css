@@ -161,3 +161,57 @@
   --ifm-button-background-color: #3a3a3c;
   --ifm-button-border-color: #3a3a3c;
 }
+
+/* Paper card with publisher logo, used on the Why IntelliNode page */
+.paper-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 1.5rem;
+  padding: 14px 18px;
+  background: #ffffff;
+  border: 1px solid #d9deea;
+  border-radius: 12px;
+  color: #1b2540;
+  text-decoration: none;
+}
+
+.paper-card:hover {
+  border-color: #00629b;
+  text-decoration: none;
+  color: #1b2540;
+}
+
+.paper-card__logo {
+  flex: 0 0 auto;
+  width: 96px;
+  height: auto;
+}
+
+.paper-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.paper-card__title {
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.paper-card__meta {
+  font-size: 0.85rem;
+  color: #5b6680;
+}
+
+@media (max-width: 480px) {
+  .paper-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .paper-card__logo {
+    width: 80px;
+  }
+}
