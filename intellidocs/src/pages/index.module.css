@@ -25,3 +25,16 @@
     justify-content: center;
   }
   
+  /* header content sits above the node canvas */
+  .heroContent {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* the key phrase in the logo's blue to violet, like the hexagon mark */
+  .gradientText {
+    background: linear-gradient(90deg, #2992fe 0%, #6f7cf7 55%, #9d84f8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }

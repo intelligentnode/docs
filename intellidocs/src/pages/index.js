@@ -8,6 +8,7 @@ import Features from '@site/src/components/features';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 import KitSubscribe from '@site/src/components/KitSubscribe';
+import HeroNodes from '@site/src/components/HeroNodes';
 // Kickwise popup is disabled for now. Uncomment this import and the
 // <KickwiseBanner /> line below to bring it back.
 // import KickwiseBanner from '@site/src/components/KickwiseBanner';
@@ -16,9 +17,10 @@ function Header() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
+      <HeroNodes />
+      <div className={clsx('container', styles.heroContent)}>
         <Heading as="h1" className="hero__title">
-          Super Intelligence is Open
+          <span className={styles.gradientText}>Super Intelligence</span> is Open
         </Heading>
         <p className="hero__subtitle">
           {siteConfig.tagline}

@@ -1,0 +1,15 @@
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* clear in the middle, where the headline and the signup card sit */
+  -webkit-mask-image: radial-gradient(ellipse 44% 60% at 50% 55%, transparent 0%, transparent 50%, #000 92%);
+  mask-image: radial-gradient(ellipse 44% 60% at 50% 55%, transparent 0%, transparent 50%, #000 92%);
+}
+
+@media (max-width: 600px) {
+  .canvas {
+    opacity: 0.55;
+  }
+}
