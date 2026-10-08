@@ -12,7 +12,7 @@ This page is about what you get with IntelliNode, and what to expect if you come
 
 ## What makes IntelliNode different
 
-**Light, so it fits into the project you already have.** The Python core declares three dependencies, and so does the Node.js package. The browser build has none. Few dependencies means few version pins, so IntelliNode drops into an existing codebase without fighting the libraries that are already there. Heavier features, such as offline models, computer use or the flow pictures, are optional extras you install only when you need them.
+**Light, so it fits into the project you already have.** The Python core declares three dependencies, and `pip install intelli` brings eight packages in total. The Node.js package also declares three, and the browser build has none. Few dependencies means few version pins, so IntelliNode drops into an existing codebase without fighting the libraries that are already there. Heavier features, such as offline models, computer use or the flow pictures, are optional extras you install only when you need them.
 
 **You can see the agent, with no extra tool.** Every Intelli flow draws itself as a picture from the same code: each step, the model and provider behind it, and the routes between steps. Drawing calls no model and needs no key or server, so a teammate who doesn't read code can review the plan before it runs. See [Flows](/docs/python/flows/get-started).
 
@@ -34,9 +34,9 @@ This page is about what you get with IntelliNode, and what to expect if you come
 
 ## Side by side
 
-<img src="/img/why-intellinode/comparison.svg" width="860" loading="lazy" alt="Comparison grid. Dependencies each core package declares: Python, IntelliNode 3, LangGraph 6, CrewAI 31, LlamaIndex 4. Node.js, IntelliNode 3, LangGraph 6, LlamaIndex 8, AI SDK 3, Mastra 30. Only IntelliNode draws a flow picture that names the model behind every step, and only IntelliNode has vibe agents, its key feature, which build a flow from a plain request." />
+<img src="/img/why-intellinode/comparison.svg" width="860" loading="lazy" alt="Comparison grid. Python packages installed with the core package: IntelliNode 8, LangChain 39, LangGraph 38, CrewAI 136, LlamaIndex 69. Node.js dependencies declared by the core package, with required peers: IntelliNode 3, LangChain 5, LangGraph 6, LlamaIndex 8, AI SDK 3, Mastra 30. Only IntelliNode draws a flow picture that names the model behind every step, and only IntelliNode has vibe agents, its key feature, which build a flow from a plain request." />
 
-*Dependency counts are what each core package declares on PyPI or npm, including required peer packages, checked on 7 October 2026.*
+*The Python row counts every package that pip installs with each core package. The Node.js row counts the dependencies each core package declares, including required peer packages. Both were checked on 8 October 2026.*
 
 Want to see how your current agent would look in IntelliNode? [Contact us](mailto:intellinode.comp@gmail.com?subject=Moving%20my%20agent%20to%20IntelliNode) by email.
 
@@ -53,8 +53,9 @@ Want to see how your current agent would look in IntelliNode? [Contact us](mailt
 
 Here is what you gain when you move an agent to IntelliNode.
 
-- **From LangGraph.** You keep the graph, with half the dependencies and no separate studio, because the code that runs a flow also draws it. Your state graph becomes a flow of tasks, routes become plain functions, and shared memory replaces the state object. For a side by side example, see [agentic workflows in Python without LangGraph](/articles/agentic-workflow-python).
-- **From CrewAI.** The core goes from 31 dependencies to 3. Each role becomes a step on the model you choose, and the picture shows every step and its model before anything runs. Steps share memory, so agents still build on each other's work.
+- **From LangChain.** `pip install langchain` brings 39 packages, including all of LangGraph and LangSmith, and each model provider is one more package on top. `pip install intelli` brings 8, with every provider already built in, so there are far fewer version pins to clash with your project.
+- **From LangGraph.** You keep the graph, with 8 packages to install instead of 38 and no separate studio, because the code that runs a flow also draws it. Your state graph becomes a flow of tasks, routes become plain functions, and shared memory replaces the state object. For a side by side example, see [agentic workflows in Python without LangGraph](/articles/agentic-workflow-python).
+- **From CrewAI.** The Python install goes from 136 packages to 8. Each role becomes a step on the model you choose, and the picture shows every step and its model before anything runs. Steps share memory, so agents still build on each other's work.
 - **From LlamaIndex.** The Assistant gives you RAG with numbered sources and long-term memory, and its vector stores talk to each database over its API, so most need no extra package. Agents, flows and the picture come in the same library.
 - **From the Vercel AI SDK.** You keep one API for every model and gain what the AI SDK leaves to you: an Assistant with RAG over many vector stores, flows that draw themselves, vibe agents and an MCP server.
 - **From Mastra.** The core goes from 30 dependencies to 3, and you can keep the same design in Python.
