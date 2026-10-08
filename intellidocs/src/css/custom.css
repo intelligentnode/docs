@@ -162,56 +162,51 @@
   --ifm-button-border-color: #3a3a3c;
 }
 
-/* Paper card with publisher logo, used on the Why IntelliNode page */
+/* Paper citation on the Why IntelliNode page: a quiet left rule, like a quote, so it reads as part of the text */
 .paper-card {
   display: flex;
-  align-items: center;
-  gap: 18px;
+  flex-direction: column;
+  gap: 4px;
   margin: 0 0 1.5rem;
-  padding: 14px 18px;
-  background: #ffffff;
-  border: 1px solid #d9deea;
-  border-radius: 12px;
-  color: #1b2540;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-font-color-base);
   text-decoration: none;
 }
 
 .paper-card:hover {
-  border-color: #00629b;
+  border-left-color: var(--ifm-color-primary);
+  color: var(--ifm-font-color-base);
   text-decoration: none;
-  color: #1b2540;
+}
+
+.paper-card__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+}
+
+.paper-card__title {
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.paper-card:hover .paper-card__title {
+  text-decoration: underline;
+}
+
+.paper-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
 }
 
 .paper-card__logo {
   flex: 0 0 auto;
-  width: 96px;
+  width: 52px;
   height: auto;
-}
-
-.paper-card__text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.paper-card__title {
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-.paper-card__meta {
-  font-size: 0.85rem;
-  color: #5b6680;
-}
-
-@media (max-width: 480px) {
-  .paper-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .paper-card__logo {
-    width: 80px;
-  }
 }

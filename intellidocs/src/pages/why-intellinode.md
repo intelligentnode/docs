@@ -19,11 +19,9 @@ This page is about what you get with IntelliNode, and what to expect if you come
 **Shared memory between agents.** Steps in a flow write their results to a shared memory, and later steps read from it, so several agents reason over the same facts instead of passing one string down a chain. A 2025 IEEE paper co-written by IntelliNode's author built its agents on IntelliNode this way: analysis agents for lab results, vital signs and clinical context ran first and shared their memory with the prediction and validation agents. The multi-agent version predicted ICU mortality more accurately than a single agent (59% against 56%) and cut the length of stay error from 5.82 to 4.37 days.
 
 <a className="paper-card" href="https://ieeexplore.ieee.org/document/11177136" target="_blank" rel="noopener noreferrer">
-  <img className="paper-card__logo" src="/img/why-intellinode/ieee-logo.svg" width="96" height="28" alt="IEEE" />
-  <span className="paper-card__text">
-    <span className="paper-card__title">Enhancing Clinical Decision-Making: Integrating Multi-Agent Systems with Ethical AI Governance</span>
-    <span className="paper-card__meta">IEEE CIBCB 2025 · Read the paper on IEEE Xplore</span>
-  </span>
+  <span className="paper-card__label">Built with IntelliNode</span>
+  <span className="paper-card__title">Enhancing Clinical Decision-Making: Integrating Multi-Agent Systems with Ethical AI Governance</span>
+  <span className="paper-card__meta"><img className="paper-card__logo" src="/img/why-intellinode/ieee-logo.svg" width="52" height="15" alt="IEEE" />CIBCB 2025 · Read the paper</span>
 </a>
 
 **One API for every model, and a different one per step.** OpenAI, Anthropic, Gemini and Vertex AI, Mistral, Cohere, NVIDIA and Amazon Bedrock, plus local models through Ollama, vLLM and llama.cpp, all in the core package. Each step of a flow can use a different one, so a free local model can sort tickets while a stronger model writes the reply.
@@ -39,6 +37,8 @@ This page is about what you get with IntelliNode, and what to expect if you come
 <img src="/img/why-intellinode/comparison.svg" width="860" loading="lazy" alt="Comparison grid. Dependencies each core package declares: Python, IntelliNode 3, LangGraph 6, CrewAI 31, LlamaIndex 4. Node.js, IntelliNode 3, LangGraph 6, LlamaIndex 8, AI SDK 3, Mastra 30. Only IntelliNode draws a flow picture that names the model behind every step, and only IntelliNode has vibe agents, its key feature, which build a flow from a plain request." />
 
 *Dependency counts are what each core package declares on PyPI or npm, including required peer packages, checked on 7 October 2026.*
+
+Want to see how your current agent would look in IntelliNode? [Contact us](mailto:intellinode.comp@gmail.com?subject=Moving%20my%20agent%20to%20IntelliNode) by email.
 
 ## What you can build with IntelliNode
 
