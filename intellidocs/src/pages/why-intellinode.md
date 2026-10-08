@@ -40,7 +40,7 @@ This page is about what you get with IntelliNode, and what to expect if you come
 
 *Dependency counts are what each core package declares on PyPI or npm, including required peer packages, checked on 7 October 2026.*
 
-## What you can build with it
+## What you can build with IntelliNode
 
 - **Multi-step agents** as flows: steps that run in sequence or side by side, routes decided at runtime, loops with a stop rule, and tool calls through MCP. See [Flows](/docs/python/flows/get-started) and [dynamic paths](/docs/python/flows/dynamic-path).
 - **Assistants with RAG and memory**: answers from your documents with numbered sources, saved conversations and long-term memory, with one interface for Pinecone, Qdrant, pgvector, MongoDB Atlas, Firestore and more. See the [Assistant](/docs/python/assistant/get-started).
@@ -51,11 +51,13 @@ This page is about what you get with IntelliNode, and what to expect if you come
 
 ## Coming from another framework
 
-- **From LangGraph.** Your state graph becomes a flow of tasks: routes are plain functions, shared memory takes the place of the state object, and the picture takes the place of a separate studio. For a side by side example, see [agentic workflows in Python without LangGraph](/articles/agentic-workflow-python).
-- **From CrewAI.** Each role becomes a step on the model you choose, so a run is easier to predict and to draw. Steps still share memory, so agents can build on each other's work.
-- **From LlamaIndex.** The Assistant covers the common RAG path, and its vector stores talk to each database over its API, so most need no extra package.
-- **From the Vercel AI SDK.** The one-API idea is the same. IntelliNode adds agents, the Assistant and an MCP server on the server side, and the two work well together with any UI on top.
-- **From Mastra.** The core is far smaller and you can keep the same design in Python.
+Here is what you gain when you move an agent to IntelliNode.
+
+- **From LangGraph.** You keep the graph, with half the dependencies and no separate studio, because the code that runs a flow also draws it. Your state graph becomes a flow of tasks, routes become plain functions, and shared memory replaces the state object. For a side by side example, see [agentic workflows in Python without LangGraph](/articles/agentic-workflow-python).
+- **From CrewAI.** The core goes from 31 dependencies to 3. Each role becomes a step on the model you choose, and the picture shows every step and its model before anything runs. Steps share memory, so agents still build on each other's work.
+- **From LlamaIndex.** The Assistant gives you RAG with numbered sources and long-term memory, and its vector stores talk to each database over its API, so most need no extra package. Agents, flows and the picture come in the same library.
+- **From the Vercel AI SDK.** You keep one API for every model and gain what the AI SDK leaves to you: an Assistant with RAG over many vector stores, flows that draw themselves, vibe agents and an MCP server.
+- **From Mastra.** The core goes from 30 dependencies to 3, and you can keep the same design in Python.
 
 ## Try it
 
