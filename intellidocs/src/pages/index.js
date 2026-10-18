@@ -9,6 +9,7 @@ import Heading from '@theme/Heading';
 import styles from './index.module.css';
 import KitSubscribe from '@site/src/components/KitSubscribe';
 import HeroNodes from '@site/src/components/HeroNodes';
+import AhmadaiWelcome from '@site/src/components/AhmadaiWelcome';
 // Kickwise popup is disabled for now. Uncomment this import and the
 // <KickwiseBanner /> line below to bring it back.
 // import KickwiseBanner from '@site/src/components/KickwiseBanner';
@@ -19,6 +20,7 @@ function Header() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <HeroNodes />
       <div className={clsx('container', styles.heroContent)}>
+        <AhmadaiWelcome />
         <Heading as="h1" className="hero__title">
           <span className={styles.gradientText}>Super Intelligence</span> is Open
         </Heading>
