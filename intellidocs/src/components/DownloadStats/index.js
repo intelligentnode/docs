@@ -11,16 +11,21 @@ FROM pypi.pypi_downloads_per_day_by_version_by_installer_by_type_by_country AS d
 LEFT JOIN pypi.countries AS c ON c.code = toString(d.country_code)
 WHERE d.project = '${project}' AND d.date >= today() - ${days}
   AND d.installer IN ('pip', 'uv')
-GROUP BY country ORDER BY downloads DESC LIMIT 10 FORMAT JSON`;
+GROUP BY country WITH TOTALS ORDER BY downloads DESC LIMIT 10 FORMAT JSON`;
 
 export default function DownloadStats({project = 'intelli', days = 180}) {
   const [rows, setRows] = useState(null);
+  const [total, setTotal] = useState(0);
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     fetch(ENDPOINT, {method: 'POST', body: query(project, days)})
       .then((response) => response.json())
-      .then((json) => setRows(json.data || []))
+      .then((json) => {
+        // WITH TOTALS sums every country, not only the 10 rows shown
+        setTotal(Number(json.totals?.downloads || 0));
+        setRows(json.data || []);
+      })
       .catch(() => setFailed(true));
   }, [project, days]);
 
@@ -30,8 +35,6 @@ export default function DownloadStats({project = 'intelli', days = 180}) {
   if (!rows) {
     return <p>Loading download stats...</p>;
   }
-
-  const total = rows.reduce((sum, row) => sum + Number(row.downloads), 0);
 
   return (
     <table>
@@ -50,7 +53,7 @@ export default function DownloadStats({project = 'intelli', days = 180}) {
         ))}
         <tr>
           <td>
-            <strong>Top 10 total</strong>
+            <strong>All countries, last {Math.round(days / 30)} months</strong>
           </td>
           <td align="right">
             <strong>{total.toLocaleString()}</strong>
