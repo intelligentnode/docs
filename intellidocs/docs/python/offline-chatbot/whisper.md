@@ -1,9 +1,9 @@
 ---
 sidebar_position: 5
-title: "Offline Whisper Speech to Text in Python (pip, Local Weights)"
+title: "Offline Whisper Speech to Text in Python (Bundle the Weights)"
 sidebar_label: "Whisper"
-description: "Run Whisper tiny to large offline in Python with pip install intelli[offline]. The weights download once and are cached on disk, then transcription runs with no internet or API key."
-keywords: ["python whisper offline","pypi whisper offline","whisper tiny offline","whisper model weights offline","pip whisper offline package","offline speech recognition python","whisper transcription python","local audio transcription"]
+description: "Run Whisper offline in Python with pip install intelli[offline], then bundle the model weights with your app or Docker image so transcription runs with no internet and no API key."
+keywords: ["python whisper offline","pypi whisper offline","whisper tiny offline","whisper model weights offline","bundle whisper model weights","pip whisper offline package","whisper offline docker","offline speech recognition python","speech to text offline python","local audio transcription"]
 ---
 
 # Whisper
@@ -12,9 +12,10 @@ You can use Whisper models offline for speech recognition. They work entirely on
 
 ### Does the package include the Whisper weights?
 
-No. `pip install intelli[offline]` installs the code, not the model weights, which keeps the package small. The first time you load a model, its weights download from Kaggle and are cached on your machine. After that, transcription runs fully offline, with no internet connection and no API key.
+Not inside the pip package. `pip install intelli[offline]` installs the code only, which keeps the package small. You have two ways to get the weights:
 
-To use Whisper on a machine without internet, load the model once on a connected machine, then copy the KaggleHub cache folder (`~/.cache/kagglehub` by default) to the offline machine.
+- **Download on first use.** The first time you load a model, its weights download from Kaggle and are cached on your machine (`~/.cache/kagglehub`). After that, transcription runs offline with no API key.
+- **Bundle the weights with your app.** Download them once into your project folder and ship that folder with your code or Docker image. The machine that runs the app never needs internet. See [Bundle the weights with your app](#bundle-the-weights-with-your-app).
 
 ### Available Whisper Models
 | **Model Name**            | **Parameters** |
@@ -73,5 +74,38 @@ result = wrapper.transcript(
     max_chunk_sec=30                    # Max chunk length in seconds
 )
 ```
+
+## Bundle the weights with your app
+
+Use this when the app runs where there is no internet, such as an air-gapped server, a factory PC or a container without network access. You download the weights once on a connected machine, keep them in a folder next to your code, and point the app at that folder.
+
+The folder location comes from the `KAGGLEHUB_CACHE` environment variable. Without it, the weights go to `~/.cache/kagglehub`.
+
+**1. Download the weights into your project.** Run this once on a machine with internet, from your project folder:
+
+```bash
+KAGGLEHUB_CACHE=./whisper_weights python -c "from intelli.wrappers.keras_wrapper import KerasWrapper; KerasWrapper(model_name='whisper_tiny_en')"
+```
+
+The `whisper_weights` folder now holds the model. For `whisper_tiny_en` it is about 150 MB. Larger models take more space.
+
+**2. Point the app at the folder.** Set the variable before you load the model:
+
+```python
+import os
+os.environ["KAGGLEHUB_CACHE"] = "./whisper_weights"
+
+from intelli.wrappers.keras_wrapper import KerasWrapper
+wrapper = KerasWrapper(model_name="whisper_tiny_en")
+```
+
+The model now loads from `whisper_weights` and makes no network call. Copy the folder with your code to any machine, or bake it into a Docker image:
+
+```dockerfile
+COPY whisper_weights /app/whisper_weights
+ENV KAGGLEHUB_CACHE=/app/whisper_weights
+```
+
+Already downloaded a model the default way? Copy `~/.cache/kagglehub` into your project instead of downloading again, and set `KAGGLEHUB_CACHE` to the copied folder.
 
 
