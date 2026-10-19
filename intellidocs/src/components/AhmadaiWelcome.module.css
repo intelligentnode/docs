@@ -1,7 +1,9 @@
 /* Welcome bar for visitors redirected from ahmadai.com: a flat white bar with a hairline border
-   at the top of the home page header, full width of the header grid */
+   at the top of the home page header, full width of the header grid. It is in every visitor's
+   HTML but hidden; a script in the page head marks these visitors on <html> before the first
+   paint (a data attribute, because Helmet rewrites the html class). */
 .bar {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 16px;
   margin: 0 0 32px;
@@ -12,6 +14,10 @@
   background: #fff;
   color: #1d1d1f;
   text-align: left;
+}
+
+:global(html[data-from='ahmadai']) .bar {
+  display: flex;
 }
 
 .text {
@@ -43,13 +49,18 @@
   background: #3a3a3c;
 }
 
+/* A 44px tap target around a 32px circle: the padding is clipped from the hover background, and
+   the negative margin keeps the bar's layout as it was with a 32px button. */
 .close {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  margin: -6px;
+  padding: 6px;
   border: 0;
   border-radius: 50%;
   background: transparent;
+  background-clip: content-box;
   color: #86868b;
   font-size: 22px;
   line-height: 1;
@@ -57,7 +68,7 @@
 }
 
 .close:hover {
-  background: #f2f2f4;
+  background-color: #f2f2f4;
   color: #1d1d1f;
 }
 

@@ -168,6 +168,33 @@
   min-height: 74px;
 }
 
+/* The plain form from the server HTML, shown until Kit's form replaces it. The rules above style
+   it through Kit's class names; the field and button rules below add what Kit's own stylesheet
+   sets on its form. */
+.fallback {
+  margin: 0;
+}
+
+.fallback :global(.formkit-input) {
+  line-height: 1.4;
+}
+
+.fallback :global(.formkit-submit) {
+  overflow: hidden;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (max-width: 600px) {
   .card {
     padding: 32px 20px 20px;

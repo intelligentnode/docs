@@ -62,6 +62,12 @@ const structuredData = {
   ],
 };
 
+// Visitors redirected from ahmadai.com arrive with utm_source=ahmadai.com. This marks them on
+// <html> before the first paint, so the home page shows its welcome bar (AhmadaiWelcome) without
+// moving the header after load. A data attribute, because Helmet rewrites the html class.
+const markAhmadaiVisitors =
+  "try{if(new URLSearchParams(location.search).get('utm_source')==='ahmadai.com')document.documentElement.dataset.from='ahmadai'}catch(e){}";
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   // used as the suffix of every page title: "<page> | IntelliNode"
@@ -72,6 +78,7 @@ const config = {
   headTags: [
     {tagName: 'link', attributes: {rel: 'apple-touch-icon', sizes: '180x180', href: '/img/apple-touch-icon.png'}},
     {tagName: 'script', attributes: {type: 'application/ld+json'}, innerHTML: JSON.stringify(structuredData)},
+    {tagName: 'script', attributes: {}, innerHTML: markAhmadaiVisitors},
   ],
   
   // Set the production url of your site here

@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { findNewsletterInput } from './KitSubscribe';
 import styles from './AhmadaiWelcome.module.css';
 
 // A welcome bar for visitors redirected from ahmadai.com. The Cloudflare redirect adds
-// utm_source=ahmadai.com, so the bar shows only for them. Its button scrolls to the newsletter
-// form in the home page header and focuses the email field, so there is one Kit form on the page.
+// utm_source=ahmadai.com, and a small script in the page head (headTags in docusaurus.config.js)
+// then sets data-from="ahmadai" on <html> before the first paint. The bar is in the server HTML
+// for every visitor and its CSS shows it only under that attribute, so it never pushes the header
+// down after load. Its button scrolls to the newsletter form in the home page header and focuses
+// the email field, so there is one signup form on the page.
 export default function AhmadaiWelcome() {
-  const [visible, setVisible] = useState(false);
+  const [closed, setClosed] = useState(false);
 
-  useEffect(() => {
-    const source = new URLSearchParams(window.location.search).get('utm_source');
-    setVisible(source === 'ahmadai.com');
-  }, []);
-
-  if (!visible) return null;
+  if (closed) return null;
 
   function goToNewsletter() {
-    const input = document.querySelector('.formkit-input[name="email_address"]');
+    const input = findNewsletterInput();
     if (input) {
       input.scrollIntoView({ behavior: 'smooth', block: 'center' });
       input.focus({ preventScroll: true });
     }
+  }
+
+  function close() {
+    // so the bar stays closed when the visitor comes back to the home page
+    delete document.documentElement.dataset.from;
+    setClosed(true);
   }
 
   return (
@@ -31,7 +36,7 @@ export default function AhmadaiWelcome() {
       <button type="button" className={styles.action} onClick={goToNewsletter}>
         Subscribe
       </button>
-      <button type="button" className={styles.close} aria-label="Close" onClick={() => setVisible(false)}>
+      <button type="button" className={styles.close} aria-label="Close" onClick={close}>
         ×
       </button>
     </div>
