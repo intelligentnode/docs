@@ -25,6 +25,8 @@
   display: block;
   width: 56px;
   height: 56px;
+  /* the drawings start about 5px inside their box; this lines them up with the titles */
+  margin-left: -5px;
   color: #1d1d1f;
 }
 

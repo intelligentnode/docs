@@ -1,7 +1,8 @@
 /* Newsletter card around the Kit (FormKit) embed, and the bare form for the home page header.
-   Local classes (.card/.bare/.title/.pitch/.formHost) are scoped by CSS Modules;
+   Local classes (.card/.bare/.title/.formHost) are scoped by CSS Modules;
    the .formkit-* overrides target Kit's injected markup via :global.
-   The look follows Apple's product pages: system type, quiet greys, one dark action, rounded controls. */
+   The look matches the home page: system type, quiet greys, one dark action, flat cards with a
+   hairline border, rounded controls. */
 
 .card,
 .bare {
@@ -19,9 +20,9 @@
   margin: 0 auto;
   padding: 40px 40px 32px;
   box-sizing: border-box;
-  border-radius: 24px;
+  border: 1px solid #e6e3dc;
+  border-radius: 16px;
   background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 40px rgba(0, 0, 0, 0.06);
   color: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   text-align: center;
@@ -33,29 +34,20 @@
   width: 100%;
   margin: 3rem 0 1.5rem;
   padding: 36px 32px 24px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 28px rgba(0, 0, 0, 0.05);
 }
 
 .title {
-  margin: 0 0 8px;
+  margin: 0 0 24px;
   font-size: 28px;
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--ink);
+  text-wrap: balance;
 }
 
 .inline .title {
   font-size: 24px;
-}
-
-.pitch {
-  margin: 0 auto 24px;
-  max-width: 520px;
-  font-size: 17px;
-  line-height: 1.47;
-  letter-spacing: -0.01em;
-  color: var(--muted);
 }
 
 /* Strip Kit's default form chrome so our card is the only container */
@@ -135,9 +127,17 @@
   transition: background-color 0.2s !important;
 }
 
+/* Kit darkens the label's box on hover; the button's own hover color is enough */
 .formHost :global(.formkit-submit > span) {
   padding: 0 !important;
+  background: none !important;
   color: inherit !important;
+}
+
+/* Kit removes the focus outline from its button */
+.formHost :global(.formkit-submit:focus-visible) {
+  outline: 2px solid var(--action) !important;
+  outline-offset: 2px !important;
 }
 
 .formHost :global(.formkit-submit:hover) {
@@ -153,23 +153,31 @@
   font-size: 14px !important;
 }
 
+/* Kit's "Built with Kit" badge, scaled to 45%, so its row is 16px tall */
 .formHost :global(.formkit-powered-by-convertkit-container) {
-  margin: 10px 0 -22px !important;
+  height: 16px !important;
+  margin: 10px 0 0 !important;
   transform: scale(0.45);
   transform-origin: center top;
   opacity: 0.4;
 }
 
+/* Reserves the form's height (fields, gap, badge row) so the page does not move when Kit's
+   script renders the form. */
+.formHost {
+  min-height: 74px;
+}
+
 @media (max-width: 600px) {
   .card {
     padding: 32px 20px 20px;
-    border-radius: 20px;
   }
   .title {
     font-size: 24px;
   }
-  .pitch {
-    font-size: 16px;
+  /* stacked field and button */
+  .card .formHost {
+    min-height: 130px;
   }
   .card .formHost :global(.formkit-fields) {
     flex-direction: column !important;
@@ -192,12 +200,6 @@
   text-align: left;
 }
 
-/* Reserves the form's height (fields, gap, badge row) so the header does not move when Kit's
-   script renders the form. */
-.bare .formHost {
-  min-height: 74px;
-}
-
 .bare .formHost :global(.formkit-form) {
   max-width: none !important;
 }
@@ -216,19 +218,15 @@
   font-size: 16px !important;
 }
 
-/* The badge is scaled to 45%, so its row is 16px tall. */
+/* The badge sits under the button's right edge; Kit centers it with auto margins */
 .bare .formHost :global(.formkit-powered-by-convertkit-container) {
-  height: 16px !important;
-  margin: 10px 0 0 !important;
   justify-content: flex-end !important;
   transform-origin: right top;
 }
 
-/* Kit centers its badge with auto margins */
 .bare .formHost :global(.formkit-powered-by-convertkit) {
   margin: 0 !important;
 }
-
 
 @media (max-width: 374px) {
   .bare .formHost {

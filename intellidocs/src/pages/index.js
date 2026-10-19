@@ -16,11 +16,15 @@ import styles from './index.module.css';
 const TDS_ARTICLE = 'https://towardsdatascience.com/agents-that-write-agents/?source=intellidoc';
 const IEEE_PAPER = 'https://ieeexplore.ieee.org/document/11177136';
 
-function ExternalArrow() {
+// The arrow after a link that opens in a new tab, with the same note for screen readers.
+function NewTabArrow() {
   return (
-    <svg className={styles.ext} viewBox="0 0 12 12" aria-hidden="true" focusable="false">
-      <path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <>
+      <svg className={styles.ext} viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+        <path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span className={styles.srOnly}> (opens in a new tab)</span>
+    </>
   );
 }
 
@@ -58,7 +62,7 @@ function Header() {
               As mentioned in{' '}
               <Link to={TDS_ARTICLE} target="_blank" rel="noopener noreferrer">
                 Towards Data Science
-                <ExternalArrow />
+                <NewTabArrow />
               </Link>
             </p>
           </div>
@@ -87,17 +91,17 @@ function Details() {
           </div>
           <ul className={styles.install}>
             <li>
-              <Link to="/docs/python/">
-                <span className={styles.lang}>Python</span>
-                <code>pip install intelli</code>
-                <span className={styles.go}>Docs <NextArrow /></span>
+              <span className={styles.lang}>Python</span>
+              <code>pip install intelli</code>
+              <Link className={styles.go} to="/docs/python" aria-label="Python docs">
+                Docs <NextArrow />
               </Link>
             </li>
             <li>
-              <Link to="/docs/npm/">
-                <span className={styles.lang}>Node.js</span>
-                <code>npm i intellinode</code>
-                <span className={styles.go}>Docs <NextArrow /></span>
+              <span className={styles.lang}>Node.js</span>
+              <code>npm i intellinode</code>
+              <Link className={styles.go} to="/docs/npm" aria-label="Node.js docs">
+                Docs <NextArrow />
               </Link>
             </li>
           </ul>
@@ -106,7 +110,7 @@ function Details() {
               Used in an <b>IEEE CIBCB 2025</b> paper on{' '}
               <i>
                 multi-agent ICU prediction
-                <ExternalArrow />
+                <NewTabArrow />
               </i>
             </Link>
           </p>
@@ -121,8 +125,8 @@ function Details() {
             {guides.map((guide) => (
               <li key={guide.permalink}>
                 <Link to={guide.permalink}>
+                  <span className={styles.guideTitle}>{guide.title}</span>{' '}
                   <time dateTime={guide.date}>{guide.label}</time>
-                  <span className={styles.guideTitle}>{guide.title}</span>
                 </Link>
               </li>
             ))}
@@ -149,13 +153,11 @@ export default function Home() {
         {/* the headline font, so the first paint already uses it */}
         <link rel="preload" href={interTight} as="font" type="font/woff2" crossOrigin="anonymous" />
       </Head>
-      <div className={styles.page}>
+      <main className={styles.page}>
         <Header />
-        <main>
-          <Details />
-          <Features />
-        </main>
-      </div>
+        <Details />
+        <Features />
+      </main>
       {/* <KickwiseBanner /> */}
     </Layout>
   );

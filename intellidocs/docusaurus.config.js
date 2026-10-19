@@ -168,7 +168,7 @@ const config = {
       ],
       navbar: {
         logo: {
-          alt: 'Intelli Logo',
+          alt: 'IntelliNode',
           src: 'img/logo-dark.png',
         },
         items: [
@@ -209,11 +209,11 @@ const config = {
             items: [
               {
                 label: 'Python',
-                to: '/docs/python/',
+                to: '/docs/python',
               },
               {
                 label: 'NPM',
-                to: '/docs/npm/',
+                to: '/docs/npm',
               },
               {
                 label: 'Articles',

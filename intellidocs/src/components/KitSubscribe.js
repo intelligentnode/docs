@@ -27,7 +27,14 @@ export default function KitSubscribe({ variant = 'hero' }) {
       if (input && input.placeholder !== PLACEHOLDER) {
         input.placeholder = PLACEHOLDER;
         input.setAttribute('aria-label', 'Email address');
+        // Kit renders a plain text field: ask for the email keyboard and for autofill
+        input.setAttribute('autocomplete', 'email');
+        input.setAttribute('inputmode', 'email');
+        input.setAttribute('autocapitalize', 'none');
+        input.setAttribute('spellcheck', 'false');
       }
+      // Kit's error and success messages are read out when they appear
+      container.querySelectorAll('[data-group="alert"]').forEach((alert) => alert.setAttribute('aria-live', 'polite'));
       const label = container.querySelector('.formkit-submit > span');
       if (label && label.textContent !== BUTTON_TEXT) label.textContent = BUTTON_TEXT;
       const form = container.querySelector('form');
@@ -63,7 +70,6 @@ export default function KitSubscribe({ variant = 'hero' }) {
   return (
     <div className={clsx(styles.card, variant === 'inline' && styles.inline)}>
       <p className={styles.title}>Get the next agent guide in your inbox.</p>
-      <p className={styles.pitch}>Free.</p>
       <div ref={containerRef} className={styles.formHost} />
     </div>
   );

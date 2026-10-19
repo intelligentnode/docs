@@ -46,6 +46,11 @@
   margin: 0 auto;
 }
 
+/* the GitHub link's text ends on the grid's right edge, like the Subscribe button below it */
+.navbar:has(~ .home-page) .navbar__items--right {
+  margin-right: calc(-1 * var(--ifm-navbar-item-padding-horizontal));
+}
+
 .home-page ~ .footer {
   padding-left: 0;
   padding-right: 0;

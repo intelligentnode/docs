@@ -25,13 +25,15 @@ function EvaluationIcon() {
   );
 }
 
+// a small task graph: one step forks into two that join again
 function WorkflowIcon() {
   return (
     <svg viewBox="0 0 56 56" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
-      <path d="M21.5 24.5L35.5 17M21.5 31.5L35.5 39" />
-      <circle cx="15" cy="28" r="7.5" fill="#C8E0FF" />
-      <circle cx="41" cy="14" r="6" />
-      <circle cx="41" cy="42" r="6" />
+      <path d="M14 25L24 17M14 31L24 39M32 17L42 25M32 39L42 31" />
+      <circle cx="10" cy="28" r="5" fill="#C8E0FF" />
+      <circle cx="28" cy="14" r="5" />
+      <circle cx="28" cy="42" r="5" />
+      <circle cx="46" cy="28" r="5" />
     </svg>
   );
 }
