@@ -171,8 +171,10 @@
   grid-column: 7 / -1;
   grid-row: 2 / span 2;
   align-self: start;
-  /* optical step: the heading's cap line meets the x-height of "is open." */
-  padding-top: calc(var(--size) * 0.29 - 7px);
+  /* the heading sits on the same baseline as "is open." (0.84 of the headline size down the line,
+     less the 30px from the top of the heading to its baseline), which leaves clear space under
+     the descenders of "Super Intelligence" */
+  padding-top: calc(var(--size) * 0.84 - 30px);
   max-width: 600px;
 }
 
