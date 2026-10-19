@@ -15,7 +15,7 @@ const INTRO = `# IntelliNode
 Use these pages to write code with the libraries. Python examples import from \`intelli\` and Node.js examples require \`intellinode\`. Each link opens the full page; the text after the colon says what the page covers.
 `;
 
-function frontMatter(file) {
+export function frontMatter(file) {
   const text = fs.readFileSync(file, 'utf8');
   const match = text.match(/^---\n([\s\S]*?)\n---/);
   const data = {};

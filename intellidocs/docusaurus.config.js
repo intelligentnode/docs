@@ -6,6 +6,7 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 import llmsTxtPlugin from './src/plugins/llms-txt.js';
+import recentGuidesPlugin from './src/plugins/recent-guides.js';
 
 // The site is served from the root domain; docs.intellinode.ai and intellinode.ai redirect here.
 const siteUrl = 'https://www.intellinode.ai';
@@ -96,8 +97,9 @@ const config = {
     locales: ['en'],
   },
 
-  // Writes /llms.txt so coding agents can find every docs page and article.
-  plugins: [llmsTxtPlugin],
+  // llms-txt writes /llms.txt so coding agents can find every docs page and article.
+  // recent-guides lists the newest articles for the home page.
+  plugins: [llmsTxtPlugin, recentGuidesPlugin],
 
   presets: [
     [

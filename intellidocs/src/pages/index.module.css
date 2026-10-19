@@ -1,40 +1,528 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Home page, Marker design: a warm paper header where the only decoration is one highlighter
+ * stroke under "Super Intelligence", the newsletter beside "is open.", then install, research and
+ * recent guides, then the features. Everything sits on one 12 column grid, 1200px wide.
+ * CSS files with the .module.css suffix are scoped locally.
  */
 
- .heroBanner {
-    padding: 4rem 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    color: #333;
-    background-color: #f5f6f7;
-    background-image: linear-gradient(54deg, #cc98ef24, #ff837a00 28%);
-  }
-  
-  @media screen and (max-width: 996px) {
-    .heroBanner {
-      padding: 2rem;
-    }
-  }
-  
-  .buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* header content sits above the node canvas */
-  .heroContent {
-    position: relative;
-    z-index: 1;
+/* Inter Tight (SIL Open Font License), latin subset, weights 700 to 800, served from this site.
+   Used for the headline and headings only; text uses the site's system font. Name the family
+   directly in font-family (not through a CSS variable): the CSS minifier drops @font-face rules
+   whose family no declaration names. */
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 700 800;
+  font-display: swap;
+  src: url('../fonts/inter-tight-latin.woff2') format('woff2');
+}
+
+.page {
+  --home-max: 1200px;
+  --home-gutter: 32px;
+  --home-gap: 32px;
+  --paper: #fbfaf7;
+  --ink: #1d1d1f;
+  --muted: #5e5e63;
+  --soft: #6e6e73;
+  --line: #d2d2d7;
+  --hair: #e6e3dc;
+  --pen: #1a66c9;
+  color: var(--ink);
+  background: #fff;
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--home-max) + 2 * var(--home-gutter));
+  margin: 0 auto;
+  padding: 0 var(--home-gutter);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--home-gap);
+}
+
+.nw {
+  white-space: nowrap;
+}
+
+.ext {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-left: 3px;
+  vertical-align: 0;
+  color: var(--soft);
+}
+
+/* ---------- Header ---------- */
+
+.hero {
+  --size: clamp(52px, 7.8vw, 112px);
+  --lh: 0.95;
+  background: var(--paper);
+  padding: 56px 0 64px;
+}
+
+.eyebrow {
+  margin: 0 0 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Row 1: "Super Intelligence". Rows 2 and 3: "is open." and the tagline on the left,
+   the newsletter on the right. */
+.heroGrid {
+  grid-template-rows: auto auto 1fr;
+}
+
+.title {
+  grid-column: 1 / -1;
+  grid-row: 1 / span 2;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: subgrid;
+  margin: 0;
+  font-family: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-size: var(--size);
+  line-height: var(--lh);
+  letter-spacing: -0.04em;
+  word-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.l1 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.l2 {
+  grid-column: 1 / span 6;
+  grid-row: 2;
+}
+
+/* The marker: one flat stroke with a chisel start, a slight rise to the right and a lifted end.
+   Three layers so the ends keep their shape at any length, and each wrapped line gets its own ends. */
+.hl {
+  --cap: 0.3em;
+  --band: 0.76em;
+  --top: 0.36em;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 100' preserveAspectRatio='none'%3E%3Cpath fill='%23C8E0FF' d='M40 24L15 24.5C10 24.7 7.8 27.4 7.1 32.5C6.4 39 5 44.5 5.4 51C5.8 57 4 62 3.6 69C3.2 76 2.4 81 3.5 85.5C4.5 89.2 7.6 90.3 12.5 90.1L40 90Z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 100' preserveAspectRatio='none'%3E%3Cpath fill='%23C8E0FF' d='M0 16L20 15.6C27 15.4 31.5 17.5 33.6 23C35.6 28.5 34.6 34 36 41C37.6 49 36.4 56 37.4 63C38.2 70 35.4 77.5 29 80.8C24.5 83 18 83.2 0 83Z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath fill='%23C8E0FF' d='M0 24C160 22.6 300 22.4 470 20.6S800 17.2 1000 16L1000 83C860 83.6 700 85.6 520 86.8S180 89.4 0 90Z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size:
+    var(--cap) var(--band),
+    var(--cap) var(--band),
+    calc(100% - 2 * var(--cap) + 2px) var(--band);
+  background-position:
+    left 0 top var(--top),
+    right 0 top var(--top),
+    calc(var(--cap) - 1px) var(--top);
+  /* starts flush at the S on the grid edge; only the right end runs past the last letter */
+  padding: 0 0.14em 0 0;
+  margin: 0 -0.14em 0 0;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.lede {
+  grid-column: 1 / span 6;
+  grid-row: 3;
+  margin-top: 36px;
+}
+
+.tagline {
+  margin: 0;
+  max-width: 17em;
+  font-size: 22px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.press {
+  margin: 20px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.press a {
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.press a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.signup {
+  grid-column: 7 / -1;
+  grid-row: 2 / span 2;
+  align-self: start;
+  /* optical step: the heading's cap line meets the x-height of "is open." */
+  padding-top: calc(var(--size) * 0.29 - 7px);
+  max-width: 600px;
+}
+
+.signupTitle {
+  margin: 0 0 24px;
+  font-family: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* ---------- Install, research and recent guides ---------- */
+
+.details {
+  border-top: 1px solid var(--hair);
+  padding: 48px 0 64px;
+  background: #fff;
+}
+
+.start {
+  grid-column: 1 / span 6;
+}
+
+.recent {
+  grid-column: 7 / -1;
+}
+
+.blockHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.blockHead h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.blockHead a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pen);
+  text-decoration: none;
+}
+
+.blockHead a:hover {
+  color: var(--pen);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.install,
+.recent ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.install li + li,
+.recent li + li {
+  margin-top: 0;
+}
+
+.install {
+  border-bottom: 1px solid var(--hair);
+}
+
+.install a {
+  display: grid;
+  grid-template-columns: 76px 1fr auto;
+  align-items: center;
+  min-height: 48px;
+  border-top: 1px solid var(--hair);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.install a:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.lang {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.install code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 15px;
+  vertical-align: baseline;
+  color: var(--ink);
+}
+
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pen);
+}
+
+.go svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.15s ease;
+}
+
+.install a:hover .go svg {
+  transform: translateX(2px);
+}
+
+.paper {
+  margin: 20px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.paper a,
+.paper a:hover {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.paper b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.paper i {
+  font-style: normal;
+}
+
+.paper a:hover i {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.recent li a {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid var(--hair);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.recent li:last-child a {
+  border-bottom: 1px solid var(--hair);
+}
+
+.recent time {
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.guideTitle {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.recent li a:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.recent li a:hover .guideTitle {
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+}
+
+/* ---------- Responsive ---------- */
+
+.lgOnly {
+  display: inline;
+}
+
+@media (max-width: 1099px) and (min-width: 900px) {
+  .page {
+    --home-gap: 24px;
   }
 
-  /* the key phrase in the logo's blue to violet, like the hexagon mark */
-  .gradientText {
-    background: linear-gradient(90deg, #2992fe 0%, #6f7cf7 55%, #9d84f8 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .tagline {
+    font-size: 20px;
   }
+
+  .signupTitle {
+    font-size: 29px;
+  }
+}
+
+/* No subgrid: the newsletter drops below the headline instead of guessing its position. */
+@supports not (grid-template-rows: subgrid) {
+  .title,
+  .l1,
+  .l2 {
+    display: block;
+  }
+
+  .signup {
+    grid-row: 4;
+    grid-column: 1 / span 8;
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 899px) {
+  .page {
+    --home-gutter: 24px;
+  }
+
+  .hero {
+    --size: clamp(46px, 10vw, 88px);
+    padding: 48px 0 56px;
+  }
+
+  .heroGrid,
+  .details .grid {
+    display: block;
+  }
+
+  .title,
+  .l1,
+  .l2 {
+    display: block;
+  }
+
+  .lede {
+    margin-top: 28px;
+  }
+
+  .signup {
+    padding-top: 0;
+    margin-top: 44px;
+  }
+
+  .start,
+  .recent {
+    max-width: 640px;
+  }
+
+  .recent {
+    margin-top: 44px;
+  }
+}
+
+@media (max-width: 599px) {
+  .page {
+    --home-gutter: 20px;
+  }
+
+  .lgOnly {
+    display: none;
+  }
+
+  .hero {
+    --size: min(15vw, 66px);
+    --lh: 0.96;
+    padding: 32px 0 48px;
+  }
+
+  .eyebrow {
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  /* Phone: a lower, thinner stroke across the bottom of the letters, so the wrapped lines read as
+     marker and not as a text selection. */
+  .hl {
+    --cap: 0.2em;
+    --band: 0.44em;
+    --top: 0.62em;
+  }
+
+  .lede {
+    margin-top: 20px;
+  }
+
+  .tagline {
+    font-size: 20px;
+  }
+
+  .press {
+    margin-top: 14px;
+  }
+
+  .press a {
+    display: inline-block;
+    padding: 10px 0;
+    margin: -10px 0;
+  }
+
+  .signup {
+    margin-top: 36px;
+  }
+
+  .signupTitle {
+    margin-bottom: 20px;
+    font-size: 27px;
+  }
+
+  .details {
+    padding: 40px 0 48px;
+  }
+
+  .install a {
+    grid-template-columns: 68px 1fr auto;
+  }
+
+  .install code {
+    font-size: 14px;
+  }
+
+  .recent {
+    margin-top: 40px;
+  }
+
+  .blockHead a {
+    padding: 12px 0;
+    margin: -12px 0;
+  }
+
+  .recent li a {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 374px) {
+  .tagline {
+    font-size: 19px;
+  }
+}

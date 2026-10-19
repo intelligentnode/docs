@@ -1,16 +1,19 @@
-/* Newsletter card around the Kit (FormKit) embed.
-   Local classes (.card/.title/.pitch/.formHost) are scoped by CSS Modules;
+/* Newsletter card around the Kit (FormKit) embed, and the bare form for the home page header.
+   Local classes (.card/.bare/.title/.pitch/.formHost) are scoped by CSS Modules;
    the .formkit-* overrides target Kit's injected markup via :global.
    The look follows Apple's product pages: system type, quiet greys, one dark action, rounded controls. */
 
-.card {
+.card,
+.bare {
   --ink: #1d1d1f;
   --muted: #6e6e73;
   --faint: #86868b;
   --line: #d2d2d7;
   --action: #1d1d1f;
   --action-hover: #3a3a3c;
+}
 
+.card {
   width: 640px;
   max-width: 100%;
   margin: 0 auto;
@@ -168,13 +171,85 @@
   .pitch {
     font-size: 16px;
   }
-  .formHost :global(.formkit-fields) {
+  .card .formHost :global(.formkit-fields) {
     flex-direction: column !important;
     align-items: stretch !important;
   }
   /* stacked on phones: each control keeps its own height and takes the full width */
-  .formHost :global(.formkit-field),
-  .formHost :global(.formkit-submit) {
+  .card .formHost :global(.formkit-field),
+  .card .formHost :global(.formkit-submit) {
+    flex: none !important;
+    width: 100% !important;
+  }
+}
+
+/* Home page header: only the form, on the header's warm paper. The header sets the heading.
+   The field and button stay on one row down to 375px wide, and Kit's "Built with Kit" badge
+   sits on the right of the fine print. */
+.bare {
+  --line: #cfcbc2;
+  position: relative;
+  font-family: inherit;
+  text-align: left;
+}
+
+/* Reserves the form's height (fields, gap, badge row) so the header does not move when Kit's
+   script renders the form. */
+.bare .formHost {
+  min-height: 74px;
+}
+
+.bare .formHost :global(.formkit-form) {
+  max-width: none !important;
+}
+
+.bare .formHost :global(.formkit-input) {
+  padding: 0 16px !important;
+  font-size: 16px !important;
+}
+
+.bare .formHost :global(.formkit-input:hover) {
+  border-color: #b5b1a7 !important;
+}
+
+.bare .formHost :global(.formkit-submit) {
+  padding: 0 22px !important;
+  font-size: 16px !important;
+}
+
+/* The badge is scaled to 45%, so its row is 16px tall; the fine print sits on the same row. */
+.bare .formHost :global(.formkit-powered-by-convertkit-container) {
+  height: 16px !important;
+  margin: 10px 0 0 !important;
+  justify-content: flex-end !important;
+  transform-origin: right top;
+}
+
+/* Kit centers its badge with auto margins */
+.bare .formHost :global(.formkit-powered-by-convertkit) {
+  margin: 0 !important;
+}
+
+.note {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 16px;
+  color: #5e5e63;
+}
+
+@media (max-width: 374px) {
+  .bare .formHost {
+    min-height: 130px;
+  }
+  .bare .formHost :global(.formkit-fields) {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .bare .formHost :global(.formkit-field),
+  .bare .formHost :global(.formkit-submit) {
     flex: none !important;
     width: 100% !important;
   }

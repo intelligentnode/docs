@@ -11,9 +11,11 @@ const PLACEHOLDER = 'you@company.com';
 // <script> placed through dangerouslySetInnerHTML does not execute in React.
 // Once Kit renders, we set our own button text and placeholder, and send a
 // Google Analytics sign_up event when the form is submitted.
-// variant="hero" is the home page card; variant="inline" is the compact card
-// shown at the end of articles and docs pages.
-export default function KitSubscribe({ variant = 'hero' }) {
+// variant="hero" is the card on the contact and newsletter pages; variant="inline" is the
+// compact card shown at the end of articles and docs pages; variant="bare" is only the form,
+// for the home page header, which sets its own heading. `note` is the fine print shown on
+// the left of Kit's "Built with Kit" badge in the bare variant.
+export default function KitSubscribe({ variant = 'hero', note }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -50,6 +52,15 @@ export default function KitSubscribe({ variant = 'hero' }) {
 
     return () => observer.disconnect();
   }, []);
+
+  if (variant === 'bare') {
+    return (
+      <div className={styles.bare}>
+        <div ref={containerRef} className={styles.formHost} />
+        {note && <p className={styles.note}>{note}</p>}
+      </div>
+    );
+  }
 
   return (
     <div className={clsx(styles.card, variant === 'inline' && styles.inline)}>

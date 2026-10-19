@@ -1,18 +1,16 @@
-/* Welcome bar for visitors redirected from ahmadai.com, in the same quiet style as the newsletter card */
+/* Welcome bar for visitors redirected from ahmadai.com: a flat white bar with a hairline border
+   at the top of the home page header, full width of the header grid */
 .bar {
   display: flex;
   align-items: center;
   gap: 16px;
-  width: 640px;
-  max-width: 100%;
-  margin: 0 auto 2rem;
-  padding: 14px 14px 14px 20px;
+  margin: 0 0 32px;
+  padding: 12px 12px 12px 20px;
   box-sizing: border-box;
-  border-radius: 16px;
+  border: 1px solid #e6e3dc;
+  border-radius: 12px;
   background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
   color: #1d1d1f;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   text-align: left;
 }
 

@@ -1,73 +1,72 @@
-import Link from '@docusaurus/Link';
-import clsx from 'clsx';
-import Heading from '@theme/Heading';
 import styles from './styles.module.css';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
-const terminalGif = require('@site/static/img/terminal_small.gif').default;
+// The three framework features on the home page. The icons are one drawn set: ink outlines
+// with one pale blue part, the same blue as the highlighter in the home page header.
+function AnyModelIcon() {
+  return (
+    <svg viewBox="0 0 56 56" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
+      <rect x="6" y="33" width="44" height="11" rx="3" fill="#C8E0FF" />
+      <circle cx="13" cy="15" r="6" />
+      <circle cx="28" cy="15" r="6" />
+      <circle cx="43" cy="15" r="6" />
+      <path d="M13 21V33M28 21V33M43 21V33" />
+    </svg>
+  );
+}
+
+function EvaluationIcon() {
+  return (
+    <svg viewBox="0 0 56 56" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
+      <rect x="10" y="27" width="9" height="17" rx="1.5" />
+      <rect x="23.5" y="13" width="9" height="31" rx="1.5" fill="#C8E0FF" />
+      <rect x="37" y="32" width="9" height="12" rx="1.5" />
+      <path d="M6 44H50" />
+    </svg>
+  );
+}
+
+function WorkflowIcon() {
+  return (
+    <svg viewBox="0 0 56 56" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
+      <path d="M21.5 24.5L35.5 17M21.5 31.5L35.5 39" />
+      <circle cx="15" cy="28" r="7.5" fill="#C8E0FF" />
+      <circle cx="41" cy="14" r="6" />
+      <circle cx="41" cy="42" r="6" />
+    </svg>
+  );
+}
 
 const FeatureList = [
   {
     title: 'Any Model Access',
-    imgSrc: require('@site/static/img/any-model-access.png').default,
-    description: (
-      <>
-        Connect various AI models using a unified input layer with minimum change.
-      </>
-    ),
+    Icon: AnyModelIcon,
+    description: 'Connect various AI models using a unified input layer with minimum change.',
   },
   {
     title: 'Evaluation',
-    imgSrc: require('@site/static/img/evaluation.png').default,
-    description: (
-      <>
-        Run continuous evaluation across multiple models with metrics.
-      </>
-    ),
+    Icon: EvaluationIcon,
+    description: 'Run continuous evaluation across multiple models with metrics.',
   },
   {
     title: 'Optimized Workflow',
-    imgSrc: require('@site/static/img/neural.png').default,
-    description: (
-      <>
-        Manage the relations between multiple AI models as a graph of tasks.
-      </>
-    ),
+    Icon: WorkflowIcon,
+    description: 'Manage the relations between multiple AI models as a graph of tasks.',
   },
 ];
 
-function Feature({imgSrc, title, description}) {
-  return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <img className={styles.featureSvg} src={imgSrc} alt={title} />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
-      </div>
-    </div>
-  );
-}
-
 export default function Features() {
   return (
-    <section className={styles.features}>
-      <div className="container">
-        <p className={styles.newsLine}>
-          New article: <Link to="/articles/build-ai-agents-claude-code-codex">let Claude Code or Codex build AI agents with IntelliNode</Link>
-        </p>
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
-        </div>
-        <div className="row" style={{paddingTop: '20px'}}> 
-          <div className="col col--12"> 
-            <div className="text--center">
-              <img src={terminalGif} alt="Terminal demo of an IntelliNode script calling AI models" />
+    <section className={styles.features} aria-labelledby="features-title">
+      <div className={styles.wrap}>
+        <h2 id="features-title" className={styles.srOnly}>Features</h2>
+        <div className={styles.grid}>
+          {FeatureList.map(({title, Icon, description}) => (
+            <div key={title} className={styles.feature}>
+              <Icon />
+              <h3>{title}</h3>
+              <p>{description}</p>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

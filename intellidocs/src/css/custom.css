@@ -34,6 +34,48 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* Home page only: the navbar row and the footer columns line up with the page's 1200px grid
+   and its 32px, 24px and 20px side gutters. src/pages/index.js gives the main wrapper the
+   "home-page" class; the navbar comes before it and the footer after it. */
+.navbar:has(~ .home-page) {
+  --ifm-navbar-padding-horizontal: 32px;
+}
+
+.navbar:has(~ .home-page) .navbar__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-page ~ .footer {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.home-page ~ .footer .container {
+  max-width: 1264px;
+  padding: 0 32px;
+}
+
+@media (max-width: 899px) {
+  .navbar:has(~ .home-page) {
+    --ifm-navbar-padding-horizontal: 24px;
+  }
+
+  .home-page ~ .footer .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 599px) {
+  .navbar:has(~ .home-page) {
+    --ifm-navbar-padding-horizontal: 20px;
+  }
+
+  .home-page ~ .footer .container {
+    padding: 0 20px;
+  }
+}
+
 /* Example: Adjust the navbar logo image size if needed */
 .navbar__logo img {
   height: 70%;
