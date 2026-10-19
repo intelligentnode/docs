@@ -184,11 +184,10 @@
 }
 
 /* Home page header: only the form, on the header's warm paper. The header sets the heading.
-   The field and button stay on one row down to 375px wide, and Kit's "Built with Kit" badge
-   sits on the right of the fine print. */
+   The field and button stay on one row down to 375px wide, with Kit's "Built with Kit" badge
+   right aligned under the button. */
 .bare {
   --line: #cfcbc2;
-  position: relative;
   font-family: inherit;
   text-align: left;
 }
@@ -217,7 +216,7 @@
   font-size: 16px !important;
 }
 
-/* The badge is scaled to 45%, so its row is 16px tall; the fine print sits on the same row. */
+/* The badge is scaled to 45%, so its row is 16px tall. */
 .bare .formHost :global(.formkit-powered-by-convertkit-container) {
   height: 16px !important;
   margin: 10px 0 0 !important;
@@ -230,15 +229,6 @@
   margin: 0 !important;
 }
 
-.note {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  margin: 0;
-  font-size: 13px;
-  line-height: 16px;
-  color: #5e5e63;
-}
 
 @media (max-width: 374px) {
   .bare .formHost {

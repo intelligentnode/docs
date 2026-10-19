@@ -66,7 +66,7 @@ function Header() {
             <h2 id="newsletter-title" className={styles.signupTitle}>
               Get the next agent guide in your inbox.
             </h2>
-            <KitSubscribe variant="bare" note="Free." />
+            <KitSubscribe variant="bare" />
           </section>
         </div>
       </div>
