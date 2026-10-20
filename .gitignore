@@ -130,3 +130,8 @@ dist
 .pnp.*
 .DS_Store
 .idea
+
+# Local material that is not part of the website: the marketing videos and their
+# pipeline, and the Claude Code preview config. Kept on disk, not in the repo.
+tiktok-videos/
+.claude/
