@@ -3,6 +3,10 @@ import clsx from 'clsx';
 import styles from './KitSubscribe.module.css';
 
 const FORM_ACTION = 'https://app.kit.com/forms/9607296/subscriptions';
+
+// The signup heading and the line under it, shared by the home page header and the cards.
+export const NEWSLETTER_TITLE = 'Get the next agent guide in your inbox.';
+export const NEWSLETTER_LEAD = 'Be the first to read new guides on AI agents, RAG and MCP apps.';
 const BUTTON_TEXT = 'Subscribe';
 const PLACEHOLDER = 'you@company.com';
 
@@ -126,7 +130,8 @@ export default function KitSubscribe({ variant = 'hero' }) {
 
   return (
     <div className={clsx(styles.card, variant === 'inline' && styles.inline)}>
-      <p className={styles.title}>Get the next agent guide in your inbox.</p>
+      <p className={styles.title}>{NEWSLETTER_TITLE}</p>
+      <p className={styles.lead}>{NEWSLETTER_LEAD}</p>
       {formHost}
     </div>
   );

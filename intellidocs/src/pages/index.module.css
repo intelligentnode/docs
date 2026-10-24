@@ -192,13 +192,22 @@
 }
 
 .signupTitle {
-  margin: 0 0 24px;
+  margin: 0 0 8px;
   font-family: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   font-size: var(--title);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.025em;
   color: var(--ink);
+  text-wrap: balance;
+}
+
+/* the line under the heading that says why to subscribe */
+.signupLead {
+  margin: 0 0 24px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
   text-wrap: balance;
 }
 
@@ -513,8 +522,9 @@
     margin-top: 36px;
   }
 
-  .signupTitle {
+  .signupLead {
     margin-bottom: 20px;
+    font-size: 16px;
   }
 
   .details {

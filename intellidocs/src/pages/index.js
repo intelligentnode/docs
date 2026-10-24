@@ -4,7 +4,7 @@ import Layout from '@theme/Layout';
 import Head from '@docusaurus/Head';
 import {usePluginData} from '@docusaurus/useGlobalData';
 import Features from '@site/src/components/features';
-import KitSubscribe from '@site/src/components/KitSubscribe';
+import KitSubscribe, {NEWSLETTER_LEAD, NEWSLETTER_TITLE} from '@site/src/components/KitSubscribe';
 import AhmadaiWelcome from '@site/src/components/AhmadaiWelcome';
 import interTight from '@site/src/fonts/inter-tight-latin.woff2';
 
@@ -68,8 +68,9 @@ function Header() {
           </div>
           <section className={styles.signup} aria-labelledby="newsletter-title">
             <h2 id="newsletter-title" className={styles.signupTitle}>
-              Get the next agent guide in your inbox.
+              {NEWSLETTER_TITLE}
             </h2>
+            <p className={styles.signupLead}>{NEWSLETTER_LEAD}</p>
             <KitSubscribe variant="bare" />
           </section>
         </div>

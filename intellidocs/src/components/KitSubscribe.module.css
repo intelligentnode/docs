@@ -37,7 +37,7 @@
 }
 
 .title {
-  margin: 0 0 24px;
+  margin: 0 0 8px;
   font-size: 28px;
   font-weight: 600;
   line-height: 1.15;
@@ -48,6 +48,17 @@
 
 .inline .title {
   font-size: 24px;
+}
+
+/* the line under the title that says why to subscribe */
+.lead {
+  margin: 0 auto 24px;
+  max-width: 30em;
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  text-wrap: balance;
 }
 
 /* Strip Kit's default form chrome so our card is the only container */
@@ -201,6 +212,9 @@
   }
   .title {
     font-size: 24px;
+  }
+  .lead {
+    font-size: 16px;
   }
   /* stacked field and button */
   .card .formHost {
