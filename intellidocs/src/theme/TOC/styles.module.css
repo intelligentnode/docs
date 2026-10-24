@@ -1,0 +1,19 @@
+/* The rail holds the table of contents and the newsletter form under it, and is the sticky part,
+   so the stock table of contents stops being sticky on its own and leaves room for the form. */
+
+.rail {
+  --form-height: 190px;
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.toc {
+  position: static !important;
+  max-height: calc(100vh - (var(--ifm-navbar-height) + 2rem) - var(--form-height)) !important;
+}
+
+@media (max-width: 996px) {
+  .rail {
+    display: none;
+  }
+}

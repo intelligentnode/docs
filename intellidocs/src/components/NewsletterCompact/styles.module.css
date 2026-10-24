@@ -1,0 +1,164 @@
+/* The small newsletter form. "article" is a quiet paper box after an article's intro, like the
+   home page header; "toc" sits under the "On this page" list in the right column. */
+
+.box {
+  color: #1d1d1f;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.lead {
+  margin: 4px 0 0;
+  color: #5e5e63;
+  text-wrap: pretty;
+}
+
+.form {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+
+.input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #cfcbc2;
+  border-radius: 12px;
+  background: #fff;
+  color: #1d1d1f;
+  font: inherit;
+  font-size: 16px;
+}
+
+.input::placeholder {
+  color: #7a7a7f;
+}
+
+.input:hover {
+  border-color: #b5b1a7;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1d1d1f;
+}
+
+.input:focus-visible {
+  outline: 2px solid #1a66c9;
+  outline-offset: 2px;
+}
+
+.button {
+  flex: none;
+  height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 12px;
+  background: #1d1d1f;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #3a3a3c;
+}
+
+.button:focus-visible {
+  outline: 2px solid #1d1d1f;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.done {
+  margin: 12px 0 0;
+  font-weight: 500;
+}
+
+.error {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #b42318;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- After an article's intro ---------- */
+
+.article {
+  margin: 32px 0;
+  padding: 20px 24px 22px;
+  border: 1px solid #e6e3dc;
+  border-radius: 12px;
+  background: #fbfaf7;
+}
+
+.article .title {
+  font-size: 18px;
+}
+
+.article .lead {
+  font-size: 15px;
+}
+
+@media (max-width: 374px) {
+  .article .form {
+    flex-direction: column;
+  }
+}
+
+/* ---------- Under "On this page" ---------- */
+
+.toc {
+  margin: 20px 0 0;
+  padding: 16px 0 0 var(--ifm-toc-padding-horizontal, 0.5rem);
+  border-top: 1px solid var(--ifm-toc-border-color, #e6e3dc);
+}
+
+.toc .title {
+  font-size: 13px;
+}
+
+.toc .form {
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.toc .input,
+.toc .button {
+  width: 100%;
+  height: 38px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.toc .input {
+  padding: 0 12px;
+}
+
+.toc .done {
+  font-size: 13px;
+}

@@ -7,6 +7,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import llmsTxtPlugin from './src/plugins/llms-txt.js';
 import recentGuidesPlugin from './src/plugins/recent-guides.js';
+import remarkNewsletterInline from './src/plugins/remark-newsletter-inline.js';
 
 // The site is served from the root domain; docs.intellinode.ai and intellinode.ai redirect here.
 const siteUrl = 'https://www.intellinode.ai';
@@ -126,6 +127,8 @@ const config = {
           blogDescription: 'Guides and use cases for building AI agents, tool calling and multi-model apps with Intelli for Python and IntelliNode for Node.js.',
           blogSidebarTitle: 'All articles',
           blogSidebarCount: 'ALL',
+          // puts the newsletter form after each article's intro
+          remarkPlugins: [remarkNewsletterInline],
           postsPerPage: 'ALL',
           showReadingTime: true,
           feedOptions: {

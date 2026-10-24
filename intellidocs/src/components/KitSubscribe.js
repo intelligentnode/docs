@@ -2,19 +2,22 @@ import React, { useEffect, useId, useRef } from 'react';
 import clsx from 'clsx';
 import styles from './KitSubscribe.module.css';
 
-const FORM_ACTION = 'https://app.kit.com/forms/9607296/subscriptions';
+export const FORM_ACTION = 'https://app.kit.com/forms/9607296/subscriptions';
 
 // The signup heading and the line under it, shared by the home page header and the cards.
 export const NEWSLETTER_TITLE = 'Get the next agent guide in your inbox.';
 export const NEWSLETTER_LEAD = 'Be the first to read new guides on AI agents, RAG and MCP apps.';
-const BUTTON_TEXT = 'Subscribe';
-const PLACEHOLDER = 'you@company.com';
+export const BUTTON_TEXT = 'Subscribe';
+export const PLACEHOLDER = 'you@company.com';
 
-function trackSignUp() {
+// The Google Analytics sign_up event. placement says which form it came from (header, card,
+// article or toc), so the forms can be compared in Analytics.
+export function sendSignUpEvent(placement) {
   if (typeof window.gtag === 'function') {
     // beacon, so the event still goes out when the plain form leaves the page for Kit
     window.gtag('event', 'sign_up', {
       method: 'newsletter',
+      placement,
       page_path: window.location.pathname,
       transport_type: 'beacon',
     });
@@ -43,6 +46,8 @@ export function findNewsletterInput() {
 // compact card shown at the end of articles and docs pages; variant="bare" is only the form,
 // for the home page header, which sets its own heading.
 export default function KitSubscribe({ variant = 'hero' }) {
+  const placement = variant === 'bare' ? 'header' : 'card';
+  const trackSignUp = () => sendSignUpEvent(placement);
   const containerRef = useRef(null);
   const fallbackRef = useRef(null);
   const inputId = useId();
