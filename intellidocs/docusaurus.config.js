@@ -69,6 +69,19 @@ const structuredData = {
 const markAhmadaiVisitors =
   "try{if(new URLSearchParams(location.search).get('utm_source')==='ahmadai.com')document.documentElement.dataset.from='ahmadai'}catch(e){}";
 
+// Google Analytics runs only on the live site, so local previews (npm run serve) and preview
+// deploys never count as visits. The preset's gtag plugin would load it on every host that
+// serves a production build, so it is loaded here instead; src/clientModules/analytics.js sends
+// the page views for moves between pages, as the plugin did.
+const GA_ID = 'G-PSSTWY93JY';
+const ANALYTICS_HOSTS = ['www.intellinode.ai', 'intellinode.ai'];
+const loadAnalytics =
+  `if(${JSON.stringify(ANALYTICS_HOSTS)}.indexOf(location.hostname)>-1){` +
+  `window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};` +
+  `gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});` +
+  `var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${GA_ID}';` +
+  `document.head.appendChild(s)}`;
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   // used as the suffix of every page title: "<page> | IntelliNode"
@@ -77,6 +90,9 @@ const config = {
   favicon: 'img/favicon.ico',
 
   headTags: [
+    {tagName: 'link', attributes: {rel: 'preconnect', href: 'https://www.googletagmanager.com'}},
+    {tagName: 'link', attributes: {rel: 'preconnect', href: 'https://www.google-analytics.com'}},
+    {tagName: 'script', attributes: {}, innerHTML: loadAnalytics},
     {tagName: 'link', attributes: {rel: 'apple-touch-icon', sizes: '180x180', href: '/img/apple-touch-icon.png'}},
     {tagName: 'script', attributes: {type: 'application/ld+json'}, innerHTML: JSON.stringify(structuredData)},
     {tagName: 'script', attributes: {}, innerHTML: markAhmadaiVisitors},
@@ -104,6 +120,9 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  // page views for moves between pages, for the analytics loaded by loadAnalytics
+  clientModules: ['./src/clientModules/analytics.js'],
 
   // llms-txt writes /llms.txt so coding agents can find every docs page and article.
   // recent-guides lists the newest articles for the home page.
@@ -148,10 +167,7 @@ const config = {
         theme: {
           customCss: './src/css/custom.css',
         },
-        gtag: {
-          trackingID: 'G-PSSTWY93JY',
-          anonymizeIP: true,
-        },
+        // Google Analytics is loaded by the loadAnalytics head tag above, on the live site only.
       }),
     ],
   ],
