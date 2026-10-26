@@ -1,14 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './styles.module.css';
 
-// "Build it with AI" box for an article: opens a new Gemini or ChatGPT chat with a request
-// that points to the article and asks the assistant to implement it with the reader.
-// ChatGPT reads the request from the ?q= parameter. Gemini ignores URL parameters, so its
-// button copies the request to the clipboard and opens an empty chat to paste it into.
-const TARGETS = [
-  {name: 'Gemini', url: 'https://gemini.google.com/app', copy: true},
-  {name: 'ChatGPT', url: 'https://chatgpt.com/?q='},
-];
+// "Build it with AI" box for an article: opens a new ChatGPT chat with a request that points
+// to the article and asks the assistant to implement it with the reader. ChatGPT reads the
+// request from the ?q= parameter. Claude shows a caution banner for such links and Gemini
+// ignores URL parameters, so neither is offered.
+const TARGETS = [{name: 'ChatGPT', url: 'https://chatgpt.com/?q='}];
 
 function sendOpenEvent(assistant) {
   if (typeof window.gtag === 'function') {
@@ -21,42 +18,26 @@ function sendOpenEvent(assistant) {
 }
 
 export default function OpenInAI({prompt}) {
-  const [copied, setCopied] = useState(false);
-
-  function handleClick(target) {
-    sendOpenEvent(target.name);
-    if (target.copy && navigator.clipboard) {
-      navigator.clipboard.writeText(prompt).then(
-        () => setCopied(true),
-        () => {},
-      );
-    }
-  }
-
   return (
     <aside className={styles.box} aria-label="Build this with an AI assistant">
       <p className={styles.title}>Build it with an AI assistant</p>
       <p className={styles.lead}>
-        Opens a new chat with a ready request to build this agent with you, step by step. For
-        Gemini, the request is copied for you to paste into the chat.
+        Opens a new chat with this guide and a ready request to build the agent with you, step by step.
       </p>
       <div className={styles.buttons}>
-        {TARGETS.map((target) => (
+        {TARGETS.map(({name, url}) => (
           <a
-            key={target.name}
+            key={name}
             className={styles.button}
-            href={target.copy ? target.url : target.url + encodeURIComponent(prompt)}
+            href={url + encodeURIComponent(prompt)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => handleClick(target)}>
-            Open in {target.name}
+            onClick={() => sendOpenEvent(name)}>
+            Open in {name}
             <span className={styles.arrow} aria-hidden="true">↗</span>
           </a>
         ))}
       </div>
-      <p className={styles.note} role="status">
-        {copied ? 'Request copied. Paste it into the Gemini chat and send it.' : ''}
-      </p>
     </aside>
   );
 }
