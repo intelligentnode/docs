@@ -135,3 +135,6 @@ dist
 # pipeline, and the Claude Code preview config. Kept on disk, not in the repo.
 tiktok-videos/
 .claude/
+
+# Article drafts for review, not part of the website.
+drafts/
