@@ -10,6 +10,8 @@ image_alt: "Soft rings spreading out from a small point, like a voice on a phone
 date: 2026-10-26T00:00:00Z
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 Picture a small dental clinic around lunchtime. The receptionist is at lunch, the dentist is with a patient, and the phone keeps ringing. One caller wants to know if the clinic takes their insurance. Another has a broken tooth and wants to come in today. A third wants to move a cleaning to Saturday. Nobody picks up, so two of them call the clinic down the road.
 
 Most small businesses have an hour like this every day, which is a big part of why "AI receptionist" grew into one of the fastest rising searches of the year. The idea is simple. A voice agent picks up every time, deals with the easy questions on its own, books the visit, and hands anything it is unsure about to a person.
@@ -33,15 +35,23 @@ Medical advice and payments are not on the list. Those stay with the staff, on p
 
 Nothing about this is specific to dentists. A plumber, a law office or a small hotel would swap out two things, the notes Sam reads and the function it calls to book, and keep the rest as it is.
 
-## How one turn of the call works
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/build-ai-voice-agent-python\n\nHelp me build the AI receptionist it describes, in Python with Intelli (pip install -U intelli, version 2.1.3 or above). Before writing code, ask me about my business: what we do, our opening hours and prices, and how we take bookings today. Then follow the guide step by step, and get it working on my computer before we connect a real phone number."} />
 
-Every time the caller says something, three things happen in order. Sam hears, which means the audio becomes text. Sam thinks, which means it searches the notes, calls a booking tool if one is needed, and writes a short reply. Then Sam speaks the reply back, and goes quiet to listen again.
+## What happens each time the caller speaks
+
+A call with Sam is a conversation, just like a call with a person at the front desk. The caller says something, Sam answers, the caller says something back. Each time the caller finishes talking, Sam does the same three things:
+
+1. **Hear.** Sam turns the caller's voice into written text, the way the dictation on your phone does.
+2. **Think.** Sam reads that text and works out the answer. It looks things up in the clinic's notes, and if the caller wants an appointment, it checks the calendar for a free time.
+3. **Speak.** Sam turns its answer into a voice and plays it to the caller. Then it waits for the caller to talk again, and the three steps start over.
+
+Here is one example. The caller asks: "Can I come in Saturday morning for a cleaning?" Sam hears the question as text. It finds in the notes that the clinic is open on Saturday from 9 to 1 for cleanings, then checks which Saturday times are still free. It answers out loud with a time, something like "I have 10 o'clock free on Saturday. Shall I book it for you?"
 
 ![Diagram: the caller speaks, the agent hears the speech as text, thinks with the clinic documents and booking tools, and speaks the answer back](pathname:///img/articles/diagrams/build-ai-voice-agent-python-loop.svg)
 
-*One turn of the call. The answer plays back and the agent listens again.*
+*The three steps run every time the caller speaks. After Sam answers, it listens again.*
 
-Each of those three steps is its own Intelli class, and they do not have to come from the same company. We used OpenAI for all three to keep the first run simple, but the table shows how much room you have to move later, for example when you want cheaper transcription or a voice with a particular accent.
+In the code, each step is its own Intelli class, and the three do not have to come from the same company. We used OpenAI for all three to keep the first run simple. The table shows what you can switch to later, for example cheaper speech to text, or a voice with a particular accent.
 
 | Step | Intelli class | Providers you can choose |
 | --- | --- | --- |
