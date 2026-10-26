@@ -10,6 +10,8 @@ image_alt: "Small dots on the left joined by thin curved lines to one hub in the
 date: 2026-10-19T00:00:00Z
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 Your support team answers the same question all day: where is my order? The answer sits in your order system, behind an API your developers built years ago. The AI assistant your team uses can't see it, so someone copies the order number into one window and pastes the status back into another.
 
 MCP removes that copy and paste. The Model Context Protocol is an open standard that lets AI apps such as Claude, Cursor and your own agents call your systems as tools. You put a small MCP server in front of the API you already have, and every app that speaks MCP can use it.
@@ -31,6 +33,8 @@ The MCP server sits in front of the API and describes each task in plain words, 
 *The app talks to the MCP server, and only the server talks to your API.*
 
 So the real work is choosing the tasks. You don't need a tool for every endpoint. Our example has two: look up one order, and list the late ones. Start with tools that only read. Tools that change data, such as refunds, can come later with a person approving each one.
+
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/build-mcp-server-python\n\nHelp me turn my own API into an MCP server in Python with Intelli (pip install -U 'intelli[mcp]'), the way the guide does. Before writing code, ask me what my API does and which tasks an AI assistant should be able to do with it, starting with tasks that only read data. Then follow the guide step by step and connect the server to Claude Code, Claude Desktop or Cursor."} />
 
 :::tip[Get the example first]
 

@@ -10,6 +10,8 @@ image_alt: "Blue core circled by orbit rings and small bodies, showing a Python 
 date: 2026-09-30T09:00:00Z
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 Picture the support inbox at an online retailer on a Monday morning. Ticket after ticket asks the same thing: where is my order? Each one means a rep checks the order, then the carrier, then types a reply.
 
 A plain chatbot can't help. It doesn't know your orders, so it guesses. An AI agent can look things up on its own and hand anything risky to a person. This guide shows how to build an AI agent in Python for that job, without a big framework.
@@ -29,6 +31,8 @@ That gives an agent four parts: a model, a set of tools, a loop and a stop rule.
 Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) describes agents the same way: models using tools in a loop, with stopping conditions such as a maximum number of iterations. It also recommends starting with large language model (LLM) APIs directly before adopting a framework, which is the path taken here.
 
 Back to that support inbox. Each "where is my order" ticket takes a rep two lookups, the order system and then the carrier. An agent with tools does both lookups itself and hands anything involving money to a human. Those two lookups become its first two tools.
+
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/how-to-build-ai-agent-python\n\nHelp me build an AI agent in Python with Intelli (pip install -U intelli, version 2.1.0 or above), like the one in the guide. Before writing code, ask me what the agent should do, which tools or APIs it needs, and what it must never do without a person approving it. Then follow the guide step by step: the tools, the loop, a step limit, and a test run."} />
 
 ## How to build an AI agent in Python in four steps
 

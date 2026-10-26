@@ -10,6 +10,8 @@ image_alt: "Loose shapes settling into an ordered grid, like a coding agent turn
 date: 2026-10-02T09:00:00Z
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 A small SaaS team bumps a dependency on Monday morning and 14 tests go red. Nothing is seriously broken. A helper now rounds a little differently, and someone gives up the morning to fixes that are dull, careful and easy to get slightly wrong.
 
 That morning is a good job for an AI coding agent that fixes failing tests. It takes the first pass while the team does something else, but only if "done" means the tests really pass and a person still approves the merge. An agent that says it's finished, or quietly edits the tests until they agree, costs more time than it saves.
@@ -33,6 +35,8 @@ Here is that loop for the Monday fix, where only exit code 0 from `npm test` cou
 ![Diagram of the coding agent loop: a failing test goes to the agent, its finish goes to the npm test gate, a failure goes back, exit code 0 is done](pathname:///img/articles/diagrams/ai-coding-agent-fix-failing-tests-loop.svg)
 
 *The agent can say it's finished. Only the test gate can say it's done, and a failure sends it back to work.*
+
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/ai-coding-agent-fix-failing-tests\n\nHelp me set up the AI coding agent from the guide in my Node.js repo with IntelliNode (npm i intellinode), so it fixes failing tests and only finishes when the tests pass. Before writing code, ask me about my repo: the test command, which model I can use, and whether I want it to run in CI. Then follow the guide step by step, starting with a local run."} />
 
 ## Set up a repo with one failing test
 

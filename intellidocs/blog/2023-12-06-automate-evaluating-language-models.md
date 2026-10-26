@@ -12,6 +12,8 @@ last_update:
   date: 2026-10-06
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 *Updated in October 2026 for IntelliNode 3.1 and today's models.*
 
 Every few weeks a new model takes the top spot on some leaderboard. Your team still has a plainer question to answer: which model should our product use for this job? Public benchmarks test someone else's tasks. What you want is to ask your own questions to a few models and see whose answers come closest to an answer you would accept.
@@ -37,6 +39,8 @@ So IntelliNode first turns each text into an embedding, a list of numbers that c
 Cosine similarity is the one to read first. The two distances usually agree with it and help break a tie.
 
 One limit to keep in mind: these scores measure how close a reply is to your answers, not whether your answers are right. Write the good answers carefully, and keep a person reading the top replies before you decide.
+
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/automate-evaluating-language-models\n\nHelp me compare LLMs on my own questions with IntelliNode in Node.js (npm i intellinode), the way the guide does. Before writing code, ask me which models I want to compare, and for a few real questions from my work with the answers I expect. Then follow the guide step by step and show me the scores in a table."} />
 
 ## Set up the project
 

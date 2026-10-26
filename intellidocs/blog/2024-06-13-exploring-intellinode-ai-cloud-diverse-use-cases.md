@@ -12,6 +12,8 @@ last_update:
   date: 2026-10-06
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 *Updated in October 2026. An earlier version of this article walked through the IntelliCloud app, which has since been retired. Everything it did now runs in the open source libraries, Intelli for Python and IntelliNode for Node.js.*
 
 Most teams don't start by looking for an AI framework. They start with a job that eats hours every week: answering the same customer questions, reading invoices, writing product copy, or arguing about which of three models is the best.
@@ -67,6 +69,8 @@ Some jobs need more than one answer. They need steps: read a ticket, decide how 
 - [A CI quality gate](/docs/npm/use-cases/engineering-quality-gate) reviews pull requests and writes tests.
 
 You don't have to write the flows yourself. [Give IntelliNode to Claude Code or Codex](/articles/build-ai-agents-claude-code-codex), describe the job in plain words, and review the picture the agent hands back.
+
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/exploring-intellinode-ai-cloud-diverse-use-cases\n\nHelp me pick the use case from the guide that fits my business best, and build a first version of it. Before writing code, ask me what my business does, which task takes my team the most time, and whether we work in Python or Node.js. Then build it step by step with Intelli (pip install -U intelli) or IntelliNode (npm i intellinode)."} />
 
 ## Try one
 

@@ -10,6 +10,8 @@ image_alt: "Blue and lavender ribbons crossing and merging from left to right, l
 date: 2026-09-30T10:00:00Z
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 Most teams build their first agentic workflow in Python almost by accident. A script sends support tickets to a model, the demo sorts twenty of them nicely, and then the real queue shows up. Soon one prompt has become five jobs: read the ticket, pull out the facts, spot customers who might leave, draft a reply, and have someone check it before it goes out.
 
 Now the hard part is the wiring, not the prompt: what runs first, what can run side by side, what happens when a step breaks, and what it all costs each month. It's tempting to grab the biggest framework you've heard of. Often you don't need it.
@@ -31,6 +33,8 @@ Anthropic's engineering team draws a useful line in [Building effective agents](
 For most business processes the workflow wins on cost and audits. Say the queue from the opening belongs to a SaaS support team handling 12,000 tickets a month. A workflow that triages, extracts facts and risks in parallel, and drafts a reply makes four model calls per ticket, every time. That is 48,000 calls a month, a number finance can budget and QA can test. An autonomous agent might use 3 calls on one ticket and 25 on the next.
 
 So fix the known steps in code and give the model freedom only inside a step. For that you don't need LangGraph, the graph framework from the LangChain team. You need a graph runner that executes steps in order, a clean handoff between steps, and a way to call different providers (the services or local servers that host the models). If you have not built a single tool calling agent yet, start with [How to Build an AI Agent in Python](/articles/how-to-build-ai-agent-python) and come back when one step is not enough.
+
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/agentic-workflow-python\n\nHelp me build an agentic workflow for my own process in Python with Intelli (pip install -U intelli, version 2.1.0 or above), using the patterns in the guide. Before writing code, ask me what the process is, which steps it has, and which steps could run at the same time. Then pick the pattern that fits, build it step by step, and save a picture of the flow so I can review it."} />
 
 ## The building blocks of an agentic workflow in Python
 

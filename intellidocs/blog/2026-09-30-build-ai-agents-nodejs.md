@@ -10,6 +10,8 @@ image_alt: "Blue hub with thin spokes to round and square endpoints, like one No
 date: 2026-09-30T11:00:00Z
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 Picture an online store with a small support team. Much of the inbox is some version of "where is my order", and every answer means opening the order system and copying a status into a reply. You've used ChatGPT, maybe called an AI API once, and now the team wants an agent to take that first pass.
 
 This guide shows you how to build AI agents in Node.js by building that one, a piece at a time. By the end it looks orders up by itself, asks a person before it gives money back, and keeps answering when an AI service goes down. You start on your laptop with no API key and move to a hosted model when you're ready.
@@ -35,6 +37,8 @@ By the end of the guide, the pieces fit together like this:
 ![Diagram of the Node.js support agent: the customer talks to the agent, the agent uses tools, and refunds go to a person](pathname:///img/articles/diagrams/build-ai-agents-nodejs-architecture.svg)
 
 *The finished agent. It answers the customer, looks orders up with its tools, and sends refunds to a person first.*
+
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/build-ai-agents-nodejs\n\nHelp me build an AI agent with tools in Node.js with IntelliNode (npm i intellinode), like the support agent in the guide. Before writing code, ask me what the agent should do, which of my systems or APIs it needs to call, and which actions need a person to approve. Then follow the guide step by step, starting on a local Ollama model or my own API key."} />
 
 ## Install IntelliNode and pick a model
 

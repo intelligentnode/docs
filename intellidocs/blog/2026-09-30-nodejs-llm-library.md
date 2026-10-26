@@ -10,6 +10,8 @@ image_alt: "Translucent prisms of different heights along an arc, one circled by
 date: 2026-09-30T12:00:00Z
 ---
 
+import OpenInAI from '@site/src/components/OpenInAI';
+
 The first demo usually takes an afternoon. Someone wires a chatbot into the support tool, it answers a billing question nicely, and everyone is impressed. Six weeks later that feature has to look up real invoices, return answers a database can store, and survive a busy Monday. That's when your Node.js LLM library, the code your team uses to talk to large language models, starts to matter.
 
 Almost any option gets you through the demo. What separates them is what comes after, and your team will live with the choice for about two years, so the real question is which trade-offs you can carry for that long.
@@ -31,6 +33,8 @@ Every option can send a prompt and return text, so the demo proves little. The d
 - **Errors you can branch on**: timeouts, retries with backoff, and the HTTP status on the error, so a 429 can fall back to another model while a 401 (bad key) fails loudly.
 
 Then come the business questions: how much code is tied to one vendor's format, whether a workload can move to a cheaper model without a sprint of refactoring, how long until the first feature ships, and who maintains it when its champion changes teams. With Python services too, ask whether prompts and tool schemas can be shared or will live twice.
+
+<OpenInAI prompt={"Read this guide: https://www.intellinode.ai/articles/nodejs-llm-library\n\nHelp me decide whether IntelliNode (npm i intellinode) fits my Node.js project, using the checklist in the guide. Before writing code, ask me what I am building, which models I want to use, and what I need most: tool calling, JSON output, streaming or fallbacks between providers. Then set up a first working example in my project."} />
 
 ## The options at a glance
 

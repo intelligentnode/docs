@@ -22,7 +22,7 @@ export default function OpenInAI({prompt}) {
     <aside className={styles.box} aria-label="Build this with an AI assistant">
       <p className={styles.title}>Build it with an AI assistant</p>
       <p className={styles.lead}>
-        Opens a new chat with this guide and a ready request to build the agent with you, step by step.
+        Opens a new chat with this guide and a ready request to build it with you, step by step.
       </p>
       <div className={styles.buttons}>
         {TARGETS.map(({name, url}) => (
