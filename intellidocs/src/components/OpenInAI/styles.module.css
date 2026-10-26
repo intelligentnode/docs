@@ -56,6 +56,16 @@
   outline-offset: 2px;
 }
 
+.note {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.note:empty {
+  display: none;
+}
+
 .arrow {
   color: #7a7a7f;
   font-size: 13px;

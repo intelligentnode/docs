@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './styles.module.css';
 
-// "Build it with AI" box for an article: opens a new Claude or ChatGPT chat with a prompt
+// "Build it with AI" box for an article: opens a new Gemini or ChatGPT chat with a request
 // that points to the article and asks the assistant to implement it with the reader.
-// Both sites read the prompt from the ?q= parameter.
+// ChatGPT reads the request from the ?q= parameter. Gemini ignores URL parameters, so its
+// button copies the request to the clipboard and opens an empty chat to paste it into.
 const TARGETS = [
-  {name: 'Claude', url: 'https://claude.ai/new?q='},
+  {name: 'Gemini', url: 'https://gemini.google.com/app', copy: true},
   {name: 'ChatGPT', url: 'https://chatgpt.com/?q='},
 ];
 
@@ -20,26 +21,42 @@ function sendOpenEvent(assistant) {
 }
 
 export default function OpenInAI({prompt}) {
+  const [copied, setCopied] = useState(false);
+
+  function handleClick(target) {
+    sendOpenEvent(target.name);
+    if (target.copy && navigator.clipboard) {
+      navigator.clipboard.writeText(prompt).then(
+        () => setCopied(true),
+        () => {},
+      );
+    }
+  }
+
   return (
     <aside className={styles.box} aria-label="Build this with an AI assistant">
       <p className={styles.title}>Build it with an AI assistant</p>
       <p className={styles.lead}>
-        Opens a new chat with this guide and a ready request to build the agent with you, step by step.
+        Opens a new chat with a ready request to build this agent with you, step by step. For
+        Gemini, the request is copied for you to paste into the chat.
       </p>
       <div className={styles.buttons}>
-        {TARGETS.map(({name, url}) => (
+        {TARGETS.map((target) => (
           <a
-            key={name}
+            key={target.name}
             className={styles.button}
-            href={url + encodeURIComponent(prompt)}
+            href={target.copy ? target.url : target.url + encodeURIComponent(prompt)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => sendOpenEvent(name)}>
-            Open in {name}
+            onClick={() => handleClick(target)}>
+            Open in {target.name}
             <span className={styles.arrow} aria-hidden="true">↗</span>
           </a>
         ))}
       </div>
+      <p className={styles.note} role="status">
+        {copied ? 'Request copied. Paste it into the Gemini chat and send it.' : ''}
+      </p>
     </aside>
   );
 }
