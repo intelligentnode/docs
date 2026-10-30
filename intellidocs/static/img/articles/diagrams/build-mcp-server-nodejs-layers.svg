@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" width="760" height="250" role="img" aria-labelledby="t d">
+<title id="t">Where the Node.js MCP server sits</title>
+<desc id="d">Claude, Cursor, VS Code or your own Node.js app picks a tool on the MCP server. The MCP server calls your inventory API with your key. The API does not change.</desc>
+<defs>
+  <marker id="head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
+  </marker>
+</defs>
+<rect width="760" height="250" fill="#FFFFFF"/>
+<rect x="20" y="78" width="190" height="64" rx="32" fill="#8B6FE0" fill-opacity="0.09" stroke="#8B6FE0" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="115" y="106" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">AI app</text>
+<text x="115" y="128" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">Claude, Cursor, your app</text>
+<circle cx="380" cy="110" r="76" fill="#2F80ED" fill-opacity="0.09" stroke="#2F80ED" stroke-opacity="0.9" stroke-width="1.5"/>
+<text x="380" y="106" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" font-weight="700" fill="#1B2540" text-anchor="middle">MCP server</text>
+<text x="380" y="130" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">your tools, in Node.js</text>
+<rect x="570" y="78" width="170" height="64" rx="16" fill="#119C88" fill-opacity="0.09" stroke="#119C88" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="655" y="106" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Inventory API</text>
+<text x="655" y="128" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">unchanged</text>
+<path d="M 212 110 L 300 110" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<path d="M 458 110 L 566 110" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="256" y="96" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">picks a tool</text>
+<text x="512" y="96" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#5B6680" text-anchor="middle">uses your key</text>
+<text x="380" y="216" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">The key and the business rules stay in the server, never in the chat.</text>
+</svg>
