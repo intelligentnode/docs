@@ -7,8 +7,8 @@ const PORT = Number(process.env.PORT || 8001);
 
 // daily_sales is the average over the last 30 days; lead_days is how long the supplier takes to deliver
 const products = [
-  { sku: 'TEE-BLK-M', name: 'Black organic tee, size M', stock: 42, daily_sales: 6, supplier: 'Northwind Textiles', lead_days: 10, unit_cost: 6.4 },
-  { sku: 'TEE-BLK-L', name: 'Black organic tee, size L', stock: 118, daily_sales: 5, supplier: 'Northwind Textiles', lead_days: 10, unit_cost: 6.4 },
+  { sku: 'SHIRT-BLK-M', name: 'Black organic shirt, size M', stock: 42, daily_sales: 6, supplier: 'Northwind Textiles', lead_days: 10, unit_cost: 6.4 },
+  { sku: 'SHIRT-BLK-L', name: 'Black organic shirt, size L', stock: 118, daily_sales: 5, supplier: 'Northwind Textiles', lead_days: 10, unit_cost: 6.4 },
   { sku: 'HOOD-GRY-M', name: 'Grey hoodie, size M', stock: 9, daily_sales: 2, supplier: 'Northwind Textiles', lead_days: 14, unit_cost: 17.9 },
   { sku: 'CAP-NVY', name: 'Navy cap', stock: 260, daily_sales: 3, supplier: 'Harbor Headwear', lead_days: 7, unit_cost: 4.1 },
   { sku: 'MUG-WHT', name: 'White logo mug', stock: 15, daily_sales: 4, supplier: 'Clayworks', lead_days: 5, unit_cost: 2.3 },

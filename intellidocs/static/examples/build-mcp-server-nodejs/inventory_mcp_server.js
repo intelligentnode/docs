@@ -21,23 +21,23 @@ async function callApi(path, options = {}) {
 const server = new MCPServer({
   name: 'inventory',
   version: '1.0.0',
-  instructions: 'Stock levels for the online shop. Look products up before you answer. ' +
+  instructions: 'Stock levels for the e-commerce store. Look products up before you answer. ' +
     'draft_purchase_order only creates a draft; a person approves it in the inventory system.',
   tools: [
     {
       name: 'check_stock',
-      description: 'Find a product by SKU, such as TEE-BLK-M, or by words in its name, such as "grey hoodie". ' +
+      description: 'Find a product by SKU, such as SHIRT-BLK-M, or by words in its name, such as "grey hoodie". ' +
         'Returns units in stock, average daily sales, days of stock left and the supplier.',
       inputSchema: {
         type: 'object',
-        properties: { query: { type: 'string', description: 'A SKU like TEE-BLK-M, or words from the product name' } },
+        properties: { query: { type: 'string', description: 'A SKU like SHIRT-BLK-M, or words from the product name' } },
         required: ['query'],
       },
       handler: async ({ query }) => {
         const bySku = await callApi(`/products/${encodeURIComponent(query.trim())}`);
         if (bySku) return bySku;
         const matches = await callApi(`/products?search=${encodeURIComponent(query)}`);
-        if (!matches.length) throw new Error(`No product matches "${query}". Try a SKU such as TEE-BLK-M.`);
+        if (!matches.length) throw new Error(`No product matches "${query}". Try a SKU such as SHIRT-BLK-M.`);
         return { matches };
       },
     },

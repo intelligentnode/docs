@@ -6,7 +6,7 @@ const { Chatbot, ChatGPTInput, OpenAICompatibleInput, MCPClient } = require('int
 
 const local = process.argv.includes('--local');
 
-const SYSTEM = 'You plan restocking for a small online shop. First call list_low_stock. ' +
+const SYSTEM = 'You plan restocking for a small e-commerce store. First call list_low_stock. ' +
   'Then call draft_purchase_order once for each supplier in the result, ordering the suggested_quantity of each product. ' +
   'Finally write a short report for the owner: what to reorder, why, and the draft order ids the tool returned. ' +
   'Use only numbers the tools returned.';
@@ -31,7 +31,13 @@ async function main() {
   await inventory.close();
 
   console.log(`\n${text}\n`);
-  console.error(`${steps.length} tool calls, ${steps.filter((s) => s.name === 'draft_purchase_order').length} draft orders`);
+  // check what the model did, not what it says it did: a report without draft_purchase_order calls created nothing
+  const drafts = steps.filter((step) => step.name === 'draft_purchase_order' && !step.isError);
+  console.error(`${steps.length} tool calls, ${drafts.length} draft orders`);
+  if (drafts.length === 0) {
+    console.error('No purchase order was drafted. The report above only describes orders. Run it again or use a larger model.');
+    process.exitCode = 1;
+  }
 }
 
 main().catch((error) => {

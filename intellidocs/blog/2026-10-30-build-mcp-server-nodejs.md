@@ -1,8 +1,8 @@
 ---
 slug: build-mcp-server-nodejs
 title: "How to Build an MCP Server in Node.js for Your Own API"
-description: "Build an MCP server in Node.js for your own REST API, so Claude, Cursor, VS Code and your Node apps can check stock, find what is running low and draft purchase orders."
-keywords: ["mcp server nodejs", "how to build an mcp server in node.js", "create mcp server nodejs", "mcp server nodejs example", "mcp server javascript", "build mcp server javascript", "mcp server tutorial nodejs", "create mcp server for rest api", "how to build mcp server for my api", "mcp server nodejs vs python", "connect mcp server to claude code", "intellinode mcp"]
+description: "Build an MCP server in Node.js for your own REST API, with an e-commerce example: Claude, Cursor, VS Code and your Node apps check stock, find what is running low and draft purchase orders."
+keywords: ["mcp server nodejs", "how to build an mcp server in node.js", "create mcp server nodejs", "mcp server nodejs example", "mcp server javascript", "build mcp server javascript", "mcp server tutorial nodejs", "create mcp server for rest api", "how to build mcp server for my api", "mcp server nodejs vs python", "connect mcp server to claude code", "mcp server for ecommerce", "ai agent for ecommerce", "ai inventory management", "intellinode mcp"]
 tags: [{label: "Node.js", permalink: "/nodejs"}, "MCP", "AI Agents", "Tutorial"]
 authors: [intellinode]
 image: /img/articles/build-mcp-server-nodejs.jpg
@@ -12,9 +12,9 @@ date: 2026-10-30T00:00:00Z
 
 import OpenInAI from '@site/src/components/OpenInAI';
 
-Think of a small online shop that sells tees, hoodies and mugs. Every Monday the owner opens the stock system, exports a spreadsheet and works out by hand what is about to sell out and how many to order from each supplier. During the week, the person answering customers keeps asking the same thing in the team chat: do we still have the grey hoodie in medium?
+Think of a small e-commerce business that sells shirts, hoodies and mugs on its own website. Every Monday the owner opens the stock system, exports a spreadsheet and works out by hand what is about to sell out and how many to order from each supplier. During the week, the person answering customers keeps asking the same thing in the team chat: do we still have the grey hoodie in medium?
 
-All of those answers already sit in the shop's inventory system, behind an API. The AI assistant the team uses every day cannot see any of it.
+All of those answers already sit in the store's inventory system, behind an API. The AI assistant the team uses every day cannot see any of it.
 
 MCP fixes that. The Model Context Protocol is an open standard that lets AI apps such as Claude, Cursor and VS Code call your systems as tools. In this guide we build an MCP server in Node.js with IntelliNode, put it in front of the inventory API, connect it to Claude Code, and then use the same server from a small Node script that drafts the Monday purchase orders.
 
@@ -34,7 +34,7 @@ The MCP server is a thin layer that sits in front of the API and describes a few
 
 *The app talks to the MCP server, and only the server talks to your API.*
 
-The real work is picking the tasks. You do not need one tool per endpoint. Our shop gets three: look up one product, list what is running low, and draft a purchase order. The first two only read. The third one writes, and we will spend a whole step on making that safe.
+The real work is picking the tasks. You do not need one tool per endpoint. Our store gets three: look up one product, list what is running low, and draft a purchase order. The first two only read. The third one writes, and we will spend a whole step on making that safe.
 
 :::tip[Get the example first]
 
@@ -84,11 +84,11 @@ const server = new MCPServer({
   version: '1.0.0',
   tools: [{
     name: 'check_stock',
-    description: 'Find a product by SKU, such as TEE-BLK-M, or by words in its name, such as "grey hoodie". ' +
+    description: 'Find a product by SKU, such as SHIRT-BLK-M, or by words in its name, such as "grey hoodie". ' +
       'Returns units in stock, average daily sales, days of stock left and the supplier.',
     inputSchema: {
       type: 'object',
-      properties: { query: { type: 'string', description: 'A SKU like TEE-BLK-M, or words from the product name' } },
+      properties: { query: { type: 'string', description: 'A SKU like SHIRT-BLK-M, or words from the product name' } },
       required: ['query'],
     },
     handler: async ({ query }) => { /* calls GET /products on your API */ },
@@ -98,15 +98,15 @@ const server = new MCPServer({
 
 If you have read the [Python version of this guide](/articles/build-mcp-server-python), this is the main difference. Python builds the schema from type hints. In Node.js you write the JSON Schema yourself, which is more typing, but it also lets you say exactly what is allowed: a `minimum` and `maximum` for a number, or a list of items with their own fields.
 
-The description is written for someone who has never seen your API, and it gives example values. "Such as TEE-BLK-M" saves the model a guess about what a SKU looks like.
+The description is written for someone who has never seen your API, and it gives example values. "Such as SHIRT-BLK-M" saves the model a guess about what a SKU looks like.
 
 What the handler returns matters too. Return a plain object, and IntelliNode sends it to the app as structured data plus a JSON text copy, so both new and older MCP clients can read it. Throw an error, and the app receives it as a failed tool call with your message. We use that on purpose for wrong input:
 
 ```javascript
-if (!matches.length) throw new Error(`No product matches "${query}". Try a SKU such as TEE-BLK-M.`);
+if (!matches.length) throw new Error(`No product matches "${query}". Try a SKU such as SHIRT-BLK-M.`);
 ```
 
-When someone asks about socks, which the shop does not sell, the model reads that sentence and asks for a better product name instead of making something up.
+When someone asks about socks, which the store does not sell, the model reads that sentence and asks for a better product name instead of making something up.
 
 The API key never appears in a tool. Every handler goes through one `callApi` helper that adds the key header, so the key stays on the server and never reaches the model.
 
@@ -124,7 +124,7 @@ quantity: { type: 'integer', minimum: 1, maximum: 1000 }
 
 A model that misreads a number cannot order ten thousand mugs.
 
-There was a third lesson, and we only learned it by running the example. In our first version, the model had to work out how many units to order. It was told to cover 30 days of sales plus the supplier's delivery time, minus the current stock. A small local model got the arithmetic wrong on every product: it suggested 89 black tees when the right number was 198. So we moved the math into the tool. `list_low_stock` now adds a `suggested_quantity` to every product, computed in plain JavaScript:
+There was a third lesson, and we only learned it by running the example. In our first version, the model had to work out how many units to order. It was told to cover 30 days of sales plus the supplier's delivery time, minus the current stock. A small local model got the arithmetic wrong on every product: it suggested 89 black shirts when the right number was 198. So we moved the math into the tool. `list_low_stock` now adds a `suggested_quantity` to every product, computed in plain JavaScript:
 
 ```javascript
 for (const p of products) p.suggested_quantity = Math.max(0, Math.ceil(p.daily_sales * (30 + p.lead_days) - p.stock));
@@ -248,15 +248,28 @@ node reorder_report.js --local
 
 </div>
 
-We ran it with [Qwen2.5 3B](https://ollama.com/library/qwen2.5:3b), a 1.9 GB download, on a laptop. It took about nine seconds and made three tool calls:
+We tried it with [Qwen2.5 3B](https://ollama.com/library/qwen2.5:3b), a 1.9 GB download, on a laptop. Each run took about nine seconds. On a good run it made three tool calls, and every number was right:
 
 ```text
 > list_low_stock {"days":14}
-> draft_purchase_order {"supplier":"Northwind Textiles","items":[{"quantity":198,"sku":"TEE-BLK-M"},{"quantity":79,"sku":"HOOD-GRY-M"}]}
-> draft_purchase_order {"supplier":"Clayworks","items":[{"quantity":125,"sku":"MUG-WHT"}]}
+> draft_purchase_order {"supplier":"Northwind Textiles","items":[{"quantity":198,"sku":"SHIRT-BLK-M"},{"quantity":79,"sku":"HOOD-GRY-M"}]}
+> draft_purchase_order {"supplier":"Clayworks","items":[{"quantity":125,"sku":"MUG-WHT"},{"quantity":105,"sku":"TOTE-NAT"}]}
 ```
 
-The quantities are right, and it grouped the products by supplier into two drafts, PO-1001 and PO-1002. It also missed something. The canvas tote had already sold out, and the model left it off the Clayworks order. That is the honest picture of a 3B model: it follows the steps, and it still drops things now and then. This is exactly why the tool only drafts. Someone reads the two drafts before approving them, and the missing tote is easy to spot. For orders you rely on, use a hosted model or a larger local one such as [Qwen2.5 7B](https://ollama.com/library/qwen2.5:7b).
+It grouped the four products by supplier into two drafts, PO-1001 and PO-1002, with the suggested quantities from the tool.
+
+Good runs were the minority, though. We ran the same script eight times. Only two runs created drafts, and one of those left the sold-out tote off the Clayworks order. In the other six, the model called `list_low_stock` and then stopped. It wrote a tidy report that described the purchase orders and even gave them IDs, but it never called `draft_purchase_order`, so nothing existed in the inventory system.
+
+That is the failure to watch for with any model, and it is why the script does not trust the report. After the run it counts the `draft_purchase_order` calls in `steps`:
+
+```javascript
+const drafts = steps.filter((step) => step.name === 'draft_purchase_order' && !step.isError);
+if (drafts.length === 0) process.exitCode = 1;
+```
+
+When no draft was created, it says so and exits with an error, so a scheduled run that did nothing shows up as a failed job instead of a nice-looking report. Check what the model did, not what it says it did.
+
+A 3B model is fine for trying the example for free. For orders you rely on, use a hosted model or a larger local one such as [Qwen2.5 7B](https://ollama.com/library/qwen2.5:7b), and keep the check either way.
 
 To get the drafts every Monday, run `node reorder_report.js` from cron or whichever scheduler you already use.
 
@@ -272,7 +285,7 @@ The example is ready to try. These habits make it ready for real data:
 
 1. Start with tools that only read. Add tools that write later, and make them create drafts that a person approves.
 2. Put limits in the schema, such as a maximum quantity, so a misread number cannot do much harm.
-3. Do the math in code and give the model the result.
+3. Do the math in code and give the model the result, then check in code that the model really called the tools.
 4. Keep keys in environment variables on the server, never in a tool argument the model fills in.
 5. Return only the fields the task needs. If the model does not need the unit cost, the tool does not have to send it.
 6. Put the HTTP version behind a login. `startHttp` has no login of its own, so run it behind the gateway or reverse proxy you already use for internal services. Claude Code can send a token with `--header "Authorization: Bearer your-token"`, and `MCPClient` takes the same header in `headers`.
