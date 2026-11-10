@@ -12,7 +12,7 @@ date: 2026-11-10T00:00:00Z
 
 import OpenInAI from '@site/src/components/OpenInAI';
 
-Picture a small software company whose product has three AI features. The website has a support chatbot, the sales team has a tool that summarizes their calls, and a job runs every night to write product descriptions. The features were built at different times, so each one calls a model provider directly, with its own API key inside its own code.
+Take a small software company whose product has three AI features. The website has a support chatbot, the sales team has a tool that summarizes their calls, and a job runs every night to write product descriptions. The features were built at different times, so each one calls a model provider directly, with its own API key inside its own code.
 
 This works well until the day one provider has an outage, or starts rejecting requests because of a rate limit. The chatbot stops answering in front of customers, and the only fix is to change its code and deploy it again. Some simple questions are also hard to answer in this setup. Nobody can say how much each feature costs per month, or whether the call summaries, which are full of customer details, should be going to a cloud model at all.
 
