@@ -1,0 +1,17 @@
+{
+  "name": "build-ai-gateway-nodejs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A self-hosted AI gateway in Node.js with IntelliNode, from https://www.intellinode.ai/articles/build-ai-gateway-nodejs",
+  "scripts": {
+    "start": "node gateway.js",
+    "flaky": "node flaky_provider.js",
+    "usage": "node usage_report.js"
+  },
+  "dependencies": {
+    "intellinode": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

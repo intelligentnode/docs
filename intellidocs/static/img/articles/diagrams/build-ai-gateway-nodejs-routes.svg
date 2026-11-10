@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 270" width="760" height="270" role="img" aria-labelledby="t d">
+<title id="t">Where the AI gateway sits</title>
+<desc id="d">Your apps send every request to the AI gateway with a gateway key. The gateway sends it to a cloud model such as OpenAI, Claude or Gemini, or to a local model for private data, and falls back to the next provider when one fails.</desc>
+<defs>
+  <marker id="head" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8A9CC7"/>
+  </marker>
+</defs>
+<rect width="760" height="270" fill="#FFFFFF"/>
+<rect x="20" y="103" width="160" height="64" rx="32" fill="#8B6FE0" fill-opacity="0.09" stroke="#8B6FE0" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="100" y="131" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1B2540" text-anchor="middle">Your apps</text>
+<text x="100" y="153" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">one gateway key each</text>
+<circle cx="350" cy="135" r="78" fill="#2F80ED" fill-opacity="0.09" stroke="#2F80ED" stroke-opacity="0.9" stroke-width="1.5"/>
+<text x="350" y="124" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" font-weight="700" fill="#1B2540" text-anchor="middle">AI gateway</text>
+<text x="350" y="147" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">route, fall back,</text>
+<text x="350" y="165" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">log every call</text>
+<rect x="560" y="40" width="180" height="64" rx="16" fill="#119C88" fill-opacity="0.09" stroke="#119C88" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="650" y="68" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#1B2540" text-anchor="middle">Cloud models</text>
+<text x="650" y="90" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">OpenAI, Claude, Gemini</text>
+<rect x="560" y="166" width="180" height="64" rx="16" fill="#119C88" fill-opacity="0.09" stroke="#119C88" stroke-opacity="0.8" stroke-width="1.5"/>
+<text x="650" y="194" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#1B2540" text-anchor="middle">Local model</text>
+<text x="650" y="216" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5B6680" text-anchor="middle">Ollama, for private data</text>
+<path d="M 182 135 L 268 135" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<path d="M 424 108 L 556 76" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<path d="M 424 162 L 556 194" fill="none" stroke="#8A9CC7" stroke-width="1.8" marker-end="url(#head)"/>
+<text x="490" y="78" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#5B6680" text-anchor="middle">first choice</text>
+<text x="490" y="203" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#5B6680" text-anchor="middle">fallback or private</text>
+</svg>
