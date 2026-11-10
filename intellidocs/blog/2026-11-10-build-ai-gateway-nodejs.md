@@ -12,11 +12,11 @@ date: 2026-11-10T00:00:00Z
 
 import OpenInAI from '@site/src/components/OpenInAI';
 
-A small company runs a help desk tool with an AI reply assistant inside it. One busy Tuesday afternoon, the model provider starts answering "429: rate limit reached", and every agent on the support team sees an error instead of a draft reply. The next morning, finance asks why the AI bill doubled last month and which team spent it. Then legal adds a rule: tickets that contain customer health data may not be sent to a cloud model at all.
+Picture a small software company whose product has three AI features. The website has a support chatbot, the sales team has a tool that summarizes their calls, and a job runs every night to write product descriptions. The features were built at different times, so each one calls a model provider directly, with its own API key inside its own code.
 
-Three different problems, and all three have the same cause. Each app calls one provider directly, with the provider key built into the app, and nothing sits in between to choose, retry or keep count.
+This works well until the day one provider has an outage, or starts rejecting requests because of a rate limit. The chatbot stops answering in front of customers, and the only fix is to change its code and deploy it again. Some simple questions are also hard to answer in this setup. Nobody can say how much each feature costs per month, or whether the call summaries, which are full of customer details, should be going to a cloud model at all.
 
-That missing piece is an AI gateway. In this guide we build a small one in Node.js with IntelliNode. Your apps send every request to one OpenAI-compatible endpoint, the gateway picks the provider, moves to the next one when a provider fails, keeps private requests on a local model, and writes one log line per call so you can see who used what.
+An AI gateway handles all of this in one place. In this guide we build a small one in Node.js with IntelliNode. The three features send their requests to one OpenAI-compatible endpoint. The gateway picks the provider, moves to the next one when a provider fails, keeps private requests on a local model, and writes one log line per call so you can see which feature used what.
 
 ![Thin lines from small dots on the left meet in one rounded gate in the middle, and three lines leave it toward round targets on the right, like apps reaching several AI models through one gateway](/img/articles/build-ai-gateway-nodejs.jpg)
 
@@ -83,7 +83,7 @@ module.exports = {
 };
 ```
 
-Each route is a list of providers, tried from the top. The order is your policy: the help desk drafts go to `fast`, a contract review goes to `smart`, and anything with customer health data goes to `private`.
+Each route is a list of providers, tried from the top. The order is your policy. In our company, the support chatbot uses `fast` because customers are waiting, the nightly product descriptions use `smart` because quality matters more than speed there, and the sales call summaries use `private`.
 
 A provider whose key is not set is skipped, not treated as a failure. That makes it easy to start small. With only Ollama installed, every route that ends in Ollama works today, and the cloud providers join the moment you set their keys.
 
@@ -120,7 +120,7 @@ The answer goes back to the app in OpenAI's shape. An extra `x-gateway-provider`
 
 ## Step 3: Fall back when a provider fails
 
-This is the part that saves the busy Tuesday. When a call fails, the gateway has to decide one thing: would another provider do better, or is the request itself wrong?
+This is the part that keeps the chatbot answering during an outage. When a call fails, the gateway has to decide one thing: would another provider do better, or is the request itself wrong?
 
 ```javascript
 function worthTryingNext(error) {
@@ -144,16 +144,16 @@ To see it happen without breaking a real account, the example has [`flaky_provid
 
 The flaky provider refused after about one second, including its one retry, and the local model answered. The app received a normal reply and never saw the 429. The `fallbacks` list keeps the evidence, so a provider that fails often shows up in the logs long before anyone files a complaint.
 
-When every provider in a route fails, the app gets a `503` that lists what was tried. In our test, the `smart` route had no cloud keys set, and the error said so for each entry: `ANTHROPIC_API_KEY is not set`, `OPENAI_API_KEY is not set`. That is a much better message than a bare "Internal Server Error" at two in the morning.
+When every provider in a route fails, the app gets a `503` that lists what was tried. In our test, the `smart` route had no cloud keys set, and the error said so for each entry: `ANTHROPIC_API_KEY is not set`, `OPENAI_API_KEY is not set`. That is much easier to act on than a bare "Internal Server Error".
 
 ## Step 4: A key per team and a log of every call
 
-The apps no longer hold provider keys. They hold gateway keys, one per team, set in one environment variable:
+The apps no longer hold provider keys. They hold gateway keys, one per feature or team, set in one environment variable:
 
 <div className="terminal">
 
 ```bash
-export GATEWAY_KEYS="support:key-for-support,sales:key-for-sales"
+export GATEWAY_KEYS="chatbot:key-for-chatbot,sales:key-for-sales,catalog:key-for-catalog"
 node gateway.js
 ```
 
@@ -163,7 +163,7 @@ A request with an unknown key gets a `401` before any provider is called. Taking
 
 Every request, whether it succeeded or failed, adds one line to `logs/calls.jsonl`: the time, the team, the route, the provider that answered, the time it took, the token counts and the fallbacks. The gateway does not write prompts or answers to the log, on purpose, because those are often the most sensitive part of the traffic.
 
-[`usage_report.js`](https://www.intellinode.ai/examples/build-ai-gateway-nodejs/usage_report.js) turns the log into the table finance asked for. This is the real output from our test run:
+[`usage_report.js`](https://www.intellinode.ai/examples/build-ai-gateway-nodejs/usage_report.js) turns the log into a table that answers the cost question from the start. This is the real output from our test run, where everything used one key named `demo`:
 
 ```text
 ┌────────────────────────────────────┬───────┬────────┬─────────────────────────────┬────────┐
@@ -180,7 +180,7 @@ The first local call took over two seconds because Ollama was loading the model 
 
 ## Step 5: Keep private data on your own machine
 
-The legal rule from the start is now one word. The help desk sends tickets that contain health data with `model: 'private'`, and that route lists only the local model:
+The sales call summaries are the feature that should not go to a cloud model. With the gateway, that rule is one word. The summary tool sends its requests with `model: 'private'`, and that route lists only the local model:
 
 ```javascript
 private: [
@@ -190,7 +190,7 @@ private: [
 
 There is no fallback to a cloud model in that route, and that is deliberate. If the local model is down, the request fails with a `503` and nothing leaves the network. For private data, an error is the safe outcome, and a silent fallback to the cloud would be the real failure.
 
-A 3B model is fine for testing the route, but for real support drafts you would run a larger local model, or an internal server with vLLM. Only the `model` and the provider name in the route change.
+A 3B model is fine for testing the route, but for real call summaries you would run a larger local model, or an internal server with vLLM. Only the `model` and the provider name in the route change.
 
 ## What this small gateway does not do yet
 

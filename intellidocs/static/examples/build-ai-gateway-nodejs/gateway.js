@@ -8,7 +8,7 @@ const { Chatbot } = require('intellinode');
 const routes = require('./routes');
 
 const PORT = Number(process.env.GATEWAY_PORT || 8787);
-// one key per team, so the log shows who spent what: "support:key-one,sales:key-two"
+// one key per team, so the log shows who spent what: "chatbot:key-one,sales:key-two"
 const TEAMS = Object.fromEntries((process.env.GATEWAY_KEYS || 'demo:demo-key')
   .split(',').map((pair) => pair.split(':').reverse()));
 const LOG = path.join(__dirname, 'logs', 'calls.jsonl');
