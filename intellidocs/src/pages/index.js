@@ -158,6 +158,24 @@ export default function Home() {
         <Header />
         <Details />
         <Features />
+        {/* directory badge, on the home page only: AI Agents Directory lists IntelliNode for free in return */}
+        <section className={styles.featuredOn}>
+          <div className={styles.wrap}>
+            <a
+              href="https://aiagentsdirectory.com/agent/intellinode"
+              target="_blank"
+              rel="noopener"
+              title="Discover IntelliNode on AI Agents Directory">
+              <img
+                src="https://aiagentsdirectory.com/featured-badge.svg?v=2024"
+                alt="IntelliNode - Featured on AI Agents Directory"
+                width="200"
+                height="50"
+                loading="lazy"
+              />
+            </a>
+          </div>
+        </section>
       </main>
       {/* <KickwiseBanner /> */}
     </Layout>
