@@ -564,13 +564,3 @@
     font-size: 19px;
   }
 }
-
-/* directory badge above the footer, home page only */
-.featuredOn {
-  padding: 8px 0 40px;
-}
-
-.featuredOn a {
-  display: inline-block;
-  line-height: 0;
-}

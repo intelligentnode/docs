@@ -86,3 +86,9 @@ Yes. Point a step at Ollama, vLLM or llama.cpp, and the same code runs without a
 ### Can I move from LangGraph or CrewAI step by step?
 
 Yes. Move one agent at a time: write it as an Intelli flow, compare the output with the old version, then switch. IntelliNode doesn't need to own your whole app.
+
+<p style={{marginTop: '2.5rem'}}>
+  <a href="https://aiagentsdirectory.com" target="_blank" rel="noopener" title="Discover AI Agents Directory">
+    <img src="https://aiagentsdirectory.com/featured-badge.svg?v=2024" alt="Featured on AI Agents Directory" width="200" height="50" loading="lazy" />
+  </a>
+</p>
